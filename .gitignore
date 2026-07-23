@@ -1,0 +1,21 @@
+# ----- Data & models
+data/
+outputs/
+checkpoints/
+*.pt
+*.ckpt
+*.safetensors
+
+# --- Experiment tracking and cached work
+wandb/
+.cache/
+
+# ------- Python env 
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# --- OS and Editor
+.DS_Store
+.vscode/
