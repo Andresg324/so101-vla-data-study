@@ -19,28 +19,16 @@ import cv2
 CAMERAS = {"wrist": 0, "overhead": 1}
 WIDTH, HEIGHT = 640, 480 # Same as the recording so that the previews match the experiments
 
-def main():
-    # Open each camera for live preview
-    caps = {}
-    for name, idx in CAMERAS.items():
-        cap = cv2.VideoCapture(idx)
-        cap.set(cv2.CAP_PROP_FRAME_WIDTH, WIDTH)
-        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, HEIGHT)
-        caps[name] = cap
 
-    print("Live feeds up, adjust cameras as needed, then press 'q' to quit.")
-
-    while True:
-        for name, cap in caps.items():
-            ok, frame = cap.read() # Grab one frame
-            if ok:
-                cv2.imshow(name, frame) # one window per camera, titled by the role
-        if cv2.waitKey(1) & 0xFF == ord("q"): # keep the windows live, quit when 'q' is pressed
-            break
-
-    for cap in caps.values():
-        cap.release()
-    cv2.destroyAllWindows()
-
-if __name__ == "__main__":
-    main()
+for name, idx in CAMERAS.items():
+    cap = cv2.VideoCapture(idx)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, WIDTH)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, HEIGHT)
+    for _ in range(10):
+        ok, frame = cap.read()
+    if ok:
+        cv2.imwrite(f"tools/preview_{name}.jpg", frame)
+        print(f"saved tools/preview_{name}.jpeg")
+    else:
+        print(f"could not read from camera index {idx}")
+    cap.release()

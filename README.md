@@ -37,8 +37,10 @@ Evaluate all four on held-out conditions none of them saw, measuring task succes
 3. `scripts/run_inference.sh` — trained policy drives the arm autonomously
 
 ## Tools
-`tools/` holds the hardware bring-up scripts (motor ID scan/repair, camera probe) written
-during assembly and calibration.
+`tools/check_cameras.py` — a headless-safe camera probe that saves a frame from
+each camera (overhead and wrist) so you can verify the framing before recording. 
+Used during camera setup; written because lerobot's OpenCV build is headless and can't
+open a live preview window.
 
 ## Status
 - [x] Hardware assembled and calibrated
