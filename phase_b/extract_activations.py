@@ -29,7 +29,16 @@ def hook(module, inp, out):
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 ds = LeRobotDataset("Andresg324/rollout_cube_<condition>")
 
-X, cond, epi, succ, tfe = [], [], [], [], []
+# ---- OUTPUT CONTRACT: train_probes.py reads these exact keys ----
+# X          : (n_steps, hidden_dim) float  - activations, one row per timestep
+# condition  : (n_steps,) str   - clean / randomized / recovery / color
+# eval_cell  : (n_steps,) str   - in_distribution / new_positions / ...
+# episode    : (n_steps,) int   - episode id (used to GROUP splits; no leakage)
+# success    : (n_steps,) int   - 1/0 episode outcome, repeated for every step in the episode
+# t_from_end : (n_steps,) int   - steps remaining until the episode ends (0 = last step)
+# ------ These are required for the lead-time curve ---------------------
+#
+# X, cond, eval_cell, success, tfe = [], [], [], [], []
 # for each episode in ds:
 #     frames = the episode's ordered observations
 #     for t, obs in enumerate(frames):

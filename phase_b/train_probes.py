@@ -6,7 +6,7 @@ condition, with controls from the deception-probe evaluation protocol:
   - Repeated-split 95% CI on AUROC (small-n uncertainty).
   - De-confound: within-cell vs pooled AUROC. A big pooled>within-cell gap means the probe is
     reading 'which cell' (difficulty), not genuine self-knowledge of failure.
-RUN: python phase_b/train_probes.py phase_b/activations_synthetic.npz --outdir phase_b/out
+RUN: python phase_b/train_probes.py phase_b/out/activations_synthetic.npz --outdir phase_b/out
 """
 
 import argparse, os, csv
@@ -41,7 +41,7 @@ def auroc_with_ci(X, y, groups, n_repeats=100):
     return(float(np.median(vals)), float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5)))
 
 def within_cell_auroc(X, y, cells, groups, n_repeats=40):
-    # De-confound: AUROC inside each cells (control for difficulty), and then averaged
+    # De-confound: AUROC inside each cell (control for difficulty), and then averaged
     per = []
     for cl in np.unique(cells):
         m = cells == cl
@@ -62,7 +62,7 @@ def main():
     X, condition, eval_cell = d["X"], d["condition"], d["eval_cell"]
     episode, success, tfe = d["episode"], d["success"].astype(int), d["t_from_end"]
 
-    print(f"{'condition':12s} {'pooled AURUC [95% CI]':30s} {'within-cell':11s} gap")
+    print(f"{'condition':12s} {'pooled AUROC [95% CI]':30s} {'within-cell':12s} gap")
     results = []
     for c in sorted(set(condition)):
         m = condition == c
@@ -70,9 +70,10 @@ def main():
         wc = within_cell_auroc(X[m], success[m], eval_cell[m], episode[m])
         gap = med - wc if (med == med and wc == wc) else np.nan
         results.append((c, med, lo, hi, wc, gap))
-        print(f"{c:12s} {med:.3f} [{lo:.3f}, {hi:.3f}]  {wc:.3f}  {gap:+.3f}")
+        ci = f"{med:.3f} [{lo:.3f}, {hi:.3f}]"
+        print(f"{c:12s} {ci:30s} {wc:<12.3f}  {gap:+.3f}")
 
-    # Lead-time curve, how early before the final step can the is failure decodable
+    # Lead-time curve, how early is failure decodable
     tr, te = next(GroupShuffleSplit(1, test_size=0.3, random_state=0).split(X, success, episode))
     clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000)).fit(X[tr], success[tr])
     p, yt, bt = clf.predict_proba(X[te])[:, 1], success[te], tfe[te]
