@@ -19,3 +19,8 @@ __pycache__/
 # --- OS and Editor
 .DS_Store
 .vscode/
+
+# generated / synthetic artifacts (regenerable from scripts)
+analysis/out/
+phase_b/out/
+*.npz
