@@ -1,34 +1,66 @@
 #!/usr/bin/env python3
 """
 tools/check_cameras.py
-Live preview of the two STUDY cameras at the exact resolution the dataset
-records (640x480), so you can frame them before recording. What you see here
-is literally what the policy will 'see' — frame accordingly.
+Saves one still frame from each study camera at the resolution the dataset
+records (640x480), and measures the frame rate actually achieved.
 
-Cameras (must match record_dataset.sh):
-  wrist    = index 0  (Seeed, hand-mounted)
-  overhead = index 1  (C270, birds-eye)
+This is a still capture, not a live preview: LeRobot's OpenCV build is
+headless so cv2.imshow does not work. For a live view use
+scripts/check_cameras_live.sh (rerun viewer).
 
-Run:  conda activate lerobot && python tools/check_cameras.py
-Press 'q' in a preview window to quit.
+Run from the repo root:
+    conda activate lerobot && python tools/check_cameras.py
 """
 
 import cv2
+import time
 
 # Role -> OpenCV index; keep this identical to record_dataset.sh
-CAMERAS = {"wrist": 0, "overhead": 1}
-WIDTH, HEIGHT = 640, 480 # Same as the recording so that the previews match the experiments
+CAMERAS = {"overhead": 1, "wrist": 0}
+WIDTH, HEIGHT, FPS = 640, 480, 30 # Same as the recording so that the previews match the experiments
 
+WARMUP_S = 2.0 # Lets camera start streaming before a frame
+MEASURE_S = 3.0 # Sample window for achieved frame rate
 
 for name, idx in CAMERAS.items():
-    cap = cv2.VideoCapture(idx)
+    cap = cv2.VideoCapture(idx, cv2.CAP_AVFOUNDATION)
+    if not cap.isOpened():
+        print(f"{name}: could not open index {idx}")
+        continue
+
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, WIDTH)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, HEIGHT)
-    for _ in range(10):
+    cap.set(cv2.CAP_PROP_FPS, FPS)
+
+    good = None
+    deadline = time.time() + WARMUP_S
+
+    while time.time() < deadline:
         ok, frame = cap.read()
-    if ok:
-        cv2.imwrite(f"tools/preview_{name}.jpg", frame)
-        print(f"saved tools/preview_{name}.jpeg")
-    else:
-        print(f"could not read from camera index {idx}")
+        if ok and frame is not None:
+            good = frame
+        else:
+            time.sleep(0.05)
+
+    if good is None:
+        print(f"{name}: opened index {idx} but never returned a frame")
+        cap.release()
+        continue
+
+    count, start = 0, time.time()
+    while time.time() - start < MEASURE_S:
+        ok, frame = cap.read()
+        if ok and frame is not None:
+            good = frame
+            count += 1
+
+    measured = count / (time.time() - start)
+
+    path = f"tools/preview_{name}.jpg"
+    cv2.imwrite(path, good)
+    h, w = good.shape[:2]
+    claimed = cap.get(cv2.CAP_PROP_FPS)
+    print(f"{name} (index {idx}): saved {path}")
+    print(f" resolution {w} x {h} driver claims {claimed:.1f} fps "
+          f" measured {measured:.1f} fps")
     cap.release()

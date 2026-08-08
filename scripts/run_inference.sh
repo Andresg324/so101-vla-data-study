@@ -20,7 +20,7 @@ lerobot-rollout \
     --robot.type=so101_follower \
     --robot.port=${FOLLOWER_PORT} \
     --robot.id=my_follower_arm \
-    --robot.cameras="{ camera1: {type: opencv, index_or_path: ${WRIST_IDX}, width: 640, height: 480, fps: 30}, camera2: {type: opencv, index_or_path: ${OVERHEAD_IDX}, width: 640, height: 480, fps: 30}}" \
+    --robot.cameras="{ camera1: {type: opencv, index_or_path: ${OVERHEAD_IDX}, width: 640, height: 480, fps: 30}, camera2: {type: opencv, index_or_path: ${WRIST_IDX}, width: 640, height: 480, fps: 30}}" \
     --policy.path=Andresg324/smolvla-cube-clean \
     --policy.device=mps \
     --strategy.type=sentry \

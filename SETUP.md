@@ -2,7 +2,7 @@
 
 ## Environment
 - **Data collection + inference:** macOS (MacBook Air).
-- **Training:** cloud GPU (Google Colab, A100/T4).
+- **Training:** cloud GPU (Google Colab, A100).
 - Python 3.12 via Miniforge/conda.
 
 ```bash
@@ -26,8 +26,16 @@ Power: **leader = 5V, follower = 12V**
 4. **Verify teleoperation + cameras:** `bash scripts/check_cameras_live.sh`
 
 ## Cameras
-- Two USB cameras (overhead + wrist) via a hub.
-- **macOS gotcha:** OpenCV camera indices can shuffle between sessions. Verify which index is which with the rerun viewer (wave test) before every recording/inference run, and update the `_IDX` values in the scripts.
+- Two USB cameras (overhead and wrist) via a hub. Current mapping: **overhead = index 1,
+  wrist = index 0**.
+- **macOS flag:** OpenCV camera indices shuffle between sessions, and **index 2 is the
+  MacBook's own built-in camera** which must not be passed to LeRobot. Run
+  `python tools/check_cameras.py` at the start of every session and confirm that
+  `tools/preview_overhead.jpg` actually shows the board from above. Update the `_IDX` values in
+  `scripts/record_dataset.sh`, `scripts/run_inference.sh`, `scripts/check_cameras_live.sh` and
+  `tools/check_cameras.py` if they have moved. All four must agree.
+- `check_cameras.py` also reports the measured frame rate. Both cameras must sustain 30 fps at
+  640 x 480; a camera that silently drops to 5 or 15 fps corrupts the recorded timing.
 
 ## Data collection
 ```bash
@@ -47,11 +55,14 @@ lerobot-train \
   --policy.push_to_hub=false \
   --dataset.repo_id=<user>/cube-pickup-clean_<timestamp> \
   --rename_map='{"observation.images.overhead":"observation.images.camera1","observation.images.wrist":"observation.images.camera2"}' \
-  --batch_size=16 --steps=10000 --save_freq=2000 \
+  --batch_size=32 --steps=10000 --save_freq=2000 --seed=1000 \
   --output_dir=outputs/train/smolvla_clean \
   --policy.device=cuda --wandb.enable=true
 ```
-Then upload the checkpoint to the Hub.
+
+These hyperparameters are fixed by the protocol (PROTOCOL.md §4) and are identical for all four
+conditions, including the seed. The checkpoint evaluated is the final one at step 10000. Do not
+tune them per condition, as doing so breaks the comparison the study is built on.
 
 ## Inference (autonomous)
 ```bash

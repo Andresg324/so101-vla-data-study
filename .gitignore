@@ -24,3 +24,7 @@ __pycache__/
 analysis/out/
 phase_b/out/
 *.npz
+tools/preview_*.jpg
+tools/probe/
+tools/preview_*.jpg
+tools/probe/

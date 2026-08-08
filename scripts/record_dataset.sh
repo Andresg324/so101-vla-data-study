@@ -3,7 +3,7 @@
 # Usage:  bash scripts/record_dataset.sh <condition> <num_episodes>
 # Example: bash scripts/record_dataset.sh clean 50
 set -e
-CONDITION=${1:-clean} # Conditions are 'clean' | 'randomized' | 'recovery' | 'visual'
+CONDITION=${1:-clean} # Conditions are 'clean' | 'randomized' | 'recovery' | 'color'
 NUM_EPISODES=${2:-5}
 
 # ---- Hardware information ----
@@ -18,7 +18,7 @@ lerobot-record \
     --robot.type=so101_follower \
     --robot.port=${FOLLOWER_PORT} \
     --robot.id=my_follower_arm \
-    --robot.cameras="{ overhead: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}, wrist: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" \
+    --robot.cameras="{ overhead: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}, wrist: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}" \
     --teleop.type=so101_leader \
     --teleop.port=${LEADER_PORT} \
     --teleop.id=my_leader_arm \
@@ -26,6 +26,6 @@ lerobot-record \
     --dataset.single_task="Pick up the cube and place it in the cup" \
     --dataset.num_episodes=${NUM_EPISODES} \
     --dataset.fps=30 \
-    --dataset.episode_time_s=20 \
-    --dataset.reset_time_s=10 \
+    --dataset.episode_time_s=45 \
+    --dataset.reset_time_s=15 \
     --dataset.push_to_hub=true
