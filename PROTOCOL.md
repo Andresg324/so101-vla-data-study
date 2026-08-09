@@ -84,11 +84,13 @@ factors are held identical to the Clean condition.
    blocking prevents drift in teleoperator skill over the session from being confounded with
    position. The Clean position (T6) is one of the 10.
 3. **Recovery:** Conditions held identical to Clean, except 20 of the 50 demos include the robot
-   dropping the cube, recovering it, and then releasing it in the cup. Recovery demos are
-   distributed evenly across the session: within each consecutive group of 5 demos, demos 2 and 4
-   are recovery demos. The drop is performed at approximately the midpoint of the carry between
-   the pick location and the cup, from a height of **4 to 5 inches** above the surface. The robot
-   then re-grasps the cube from wherever it lands and completes the task. Distributing the drops
+   dropping the cube, recovering it, and then releasing it in the cup. Recovery demonstrations use
+   a deliberate gripper release rather than a naturally occurring grasp failure. The recovery behavior
+   is therefore learned from a clean drop, whose dynamics may differ from an unintended slip during a 
+   real failed grasp. These demos are distributed evenly across the session: within each consecutive
+   group of 5 demos, demos 2 and 4 are recovery demos. The drop is performed at approximately the midpoint
+   of the carry between the pick location and the cup, from a height of **4 to 5 inches** above the surface. 
+   The robot then re-grasps the cube from wherever it lands and completes the task. Distributing the drops
    rather than blocking them at the end of the session prevents recovery behavior from being
    confounded with teleoperator fatigue.
 4. **Color-varied:** Only cube color varies. Five colors are used for 10 episodes each: red,
