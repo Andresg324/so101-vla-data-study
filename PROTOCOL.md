@@ -277,7 +277,7 @@ All made **before any training data was collected** on the rebuilt workstation.
     exact test. The original committed only to per-cell Wilson intervals; overlapping intervals
     are not a valid test of a difference between two rates.
 
-## 9. Known limitations (stated up front)
+## 9. Existing Limitations
 
 - Single training seed per condition unless time permits more.
 - Extrapolation held-out positions lie a few inches beyond the training envelope, still within
@@ -313,3 +313,6 @@ All made **before any training data was collected** on the rebuilt workstation.
   over its own data. Episode count was chosen as the fixed budget because it is the quantity an
   experimenter actually controls when deciding how much data to collect. Per-condition frame
   counts are reported alongside the results.
+- At the three right-edge training positions (T8, T9, T10 at x = 20.5), the arm partially exits the 
+  overhead frame during the reach, though the cube remains fully visible at episode start. Any position 
+  effect at those spots is therefore partly a visibility effect.

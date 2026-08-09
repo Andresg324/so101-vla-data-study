@@ -117,7 +117,7 @@ measure. The clean-data policy nails the in-distribution pose and degrades off i
 Training loss (`train/losses_after_rm_padding`) fell from ~0.19 to ~0.045 over 10k steps,
 plateauing around step 6k, the policy converged well within the run.
 
-**Pilot artifacts:** [dataset](https://huggingface.co/datasets/Andresg324/cube-pickup-clean_20260723_151726) · [trained model](https://huggingface.co/Andresg324/smolvla-cube-clean) (superseded; study artifacts will be linked here as they are published)
+**Pilot artifacts:** [dataset](https://huggingface.co/datasets/Andresg324/cube-pickup-clean_20260723_151726) · [trained model](https://huggingface.co/Andresg324/smolvla-cube-clean-pilot) (superseded; study artifacts will be linked here as they are published)
 
 ## Limitations & observed failure modes
 1. **No position generalization:** trained only on the clean (fixed-position) condition, the
