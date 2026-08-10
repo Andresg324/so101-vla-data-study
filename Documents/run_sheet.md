@@ -3,6 +3,8 @@
 Matches PROTOCOL.md as amended August 8, 2026. If this sheet and the protocol ever disagree,
 the protocol wins and this sheet is wrong.
 
+Out of Date, to be updated with collection results
+
 ---
 
 ## Every session, before touching data
@@ -158,3 +160,17 @@ Success is the cube released and resting in the cup, cup upright, within 45 seco
 
 If demo quality is slipping because you are tired and pushing to finish a condition, stop.
 A rushed dataset costs a September redo. A slipped day costs a day.
+
+
+
+# Info from runs (to write in the write spot after)
+
+clean: 
+Andresg324/cube-pickup-clean_20260809_105745    
+50 episodes
+27,947 frames
+
+randomized:
+Andresg324/cube-pickup-randomized_20260809_115825 
+50 episodes
+31,682 frames

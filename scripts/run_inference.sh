@@ -1,34 +1,49 @@
 #!/usr/bin/env bash
 # scripts/run_inference.sh
-# Run the trained SmolVLA policy autonomously and record the result.
-# The recorded video IS your inference footage.
+# Run one trained policy on one evaluation cell and record the rollouts.
 #
-# Camera keys MUST match the policy's training names (from the rename_map):
-#   camera1 = birds-eye (overhead) view
-#   camera2 = wrist (gripper) view
-# Verify which index is which RIGHT NOW (they shuffle) and set below.
-#
-# Run:  conda activate lerobot && bash scripts/run_inference.sh
+# Usage:   bash scripts/run_inference.sh <policy> <cell>
+# Example: bash scripts/run_inference.sh clean in_distribution
+
 set -e
 
-FOLLOWER_PORT=/dev/tty.usbmodem5B415324451   # 12V arm, drives itself
+# Requires argument, print message and exit if missing
+POLICY=${1:?usage: run_inference.sh <policy> <cell>}
+CELL=${2:?usage: run_inference.sh <policy> <cell>}
 
-OVERHEAD_IDX=1 # Index of overhead camera
-WRIST_IDX=0      # Index of wrist camera
+
+# Ensures everything is spelt right before running, by checking policy and cell against options
+case "$CELL" in
+    in_distribution|new_positions|reduced_lighting|different_object|distractors) ;;
+    *) echo "unknown cell '$CELL'"; exit 1 ;;
+esac
+
+case "$POLICY" in
+    clean|randomized|recovery|color|color-slowpace|clean-seed2000|randomized-seed2000|color-seed2000|recovery-seed2000|color-slowpace-seed2000) ;;
+    *) echo "unknown policy '$POLICY'"; exit 1 ;;
+esac
+
+FOLLOWER_PORT=/dev/tty.usbmodem5B415324451   # 12V arm, drives itself
+HF_USER=Andresg324
+
+# Confirm indices prior to running with tools/check_cameras.py
+OVERHEAD_IDX=1
+WRIST_IDX=0 
 
 lerobot-rollout \
     --robot.type=so101_follower \
     --robot.port=${FOLLOWER_PORT} \
     --robot.id=my_follower_arm \
     --robot.cameras="{ camera1: {type: opencv, index_or_path: ${OVERHEAD_IDX}, width: 640, height: 480, fps: 30}, camera2: {type: opencv, index_or_path: ${WRIST_IDX}, width: 640, height: 480, fps: 30}}" \
-    --policy.path=Andresg324/smolvla-cube-clean \
+    --policy.path=${HF_USER}/smolvla-cube-${POLICY} \
     --policy.device=mps \
-    --strategy.type=sentry \
+    --strategy.type=episodic \
+    --strategy.reset_to_initial_position=true \
     --task="Pick up the cube and place it in the cup" \
-    --dataset.repo_id=Andresg324/rollout_cube_clean \
+    --dataset.repo_id=${HF_USER}/rollout_${POLICY}_${CELL} \
     --dataset.single_task="Pick up the cube and place it in the cup" \
-    --dataset.num_episodes=10 \
-    --dataset.episode_time_s=30 \
-    --dataset.reset_time_s=10 \
-    --dataset.push_to_hub=false \
+    --dataset.num_episodes=16 \
+    --dataset.episode_time_s=45 \
+    --dataset.reset_time_s=15 \
+    --dataset.push_to_hub=True \
     --display_data=true

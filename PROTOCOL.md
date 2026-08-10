@@ -136,6 +136,19 @@ re-recorded at the same position or color, so this correspondence is preserved.
     45-second evaluation window defined in §6.7.
 11. **Language instruction:** The instruction string is verbatim identical for every training
     demonstration and every evaluation rollout: "Pick up the cube and place it in the cup".
+12. **Inference settings:** All evaluation rollouts run with identical settings:
+    policy.device=mps, strategy.type=episodic, strategy.reset_to_initial_position=true,
+    chunk_size=50, n_action_steps=50, dataset.fps=30, episode_time_s=45,
+    reset_time_s=15. SmolVLA inference on this hardware takes approximately
+    320 ms per forward pass, so the action-update rate is roughly 3 Hz while
+    frames are recorded at approximately 25 fps. This applies identically to
+    every policy and every cell.
+13. **Warmup episodes:** Each evaluation cell records 16 episodes. Episode index 0
+    is discarded as a warmup and is never scored; the 15 scored episodes are
+    indices 1 through 15. The first policy forward pass in a process incurs a
+    one-off Metal kernel compilation of roughly 15 seconds, which would
+    otherwise systematically penalise the first episode of every cell. The
+    discard is unconditional and independent of the episode's outcome.
 
 Changing any of these mid-study invalidates the comparison. Held-out rule: evaluation instances
 (positions, colors) differ from those seen in any training condition.
@@ -212,11 +225,11 @@ camera.*
    the allotted time. Knocking the cup over is an immediate failure (the policy is not trained to
    correct it). If the cube is knocked outside the testbed or out of the reachable-and-visible
    area such that the task can no longer be completed, the episode is scored a failure and reset.
-8. **Scoring:** episodes are scored live by the experimenter against criterion #6 at the time of
+8. **Scoring:** Episodes are scored live by the experimenter against criterion #6 at the time of
    the rollout. All rollout video is retained; any episode judged ambiguous at the time is flagged
    and re-scored from video before analysis. For New Positions episodes the held-out position
    identifier (E1 to E5) is recorded alongside the score.
-9. **Seeds:** one training seed per condition (seed=1000) is run first and reported. Additional
+9. **Seeds:** One training seed per condition (seed=1000) is run first and reported. Additional
    seeds (up to three per condition) will be added if time permits. The number of seeds actually
    run is reported for every condition. If only one seed is used, this will be stated as a
    limitation: per-cell confidence intervals capture episode-level uncertainty, not training-run
@@ -276,6 +289,8 @@ All made **before any training data was collected** on the rebuilt workstation.
 12. **Matched-axis comparisons** now specify a confidence interval on the difference and a Fisher
     exact test. The original committed only to per-cell Wilson intervals; overlapping intervals
     are not a valid test of a difference between two rates.
+13. A 16th warmup episode per cell was added and pre-committed to be discarded. This changes was
+   made before any evaluation episode was recorded.
 
 ## 9. Existing Limitations
 

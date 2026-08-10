@@ -77,18 +77,29 @@ def main():
     tr, te = next(GroupShuffleSplit(1, test_size=0.3, random_state=0).split(X, success, episode))
     clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000)).fit(X[tr], success[tr])
     p, yt, bt = clf.predict_proba(X[te])[:, 1], success[te], tfe[te]
+
+    # Bin t_from_end instead of using exact values. Activations are captured at
+    # SmolVLA's action-chunk boundaries, so the raw t_from_end values are sparse
+    # and irregular. Grouping by exact value leaves one or two samples per value,
+    # nearly all single-class, and the curve collapses to a few points.
+    
+    BIN = 10 # Steps per bucket (e.g., 1/3 of a second at 30 FPS)
+    MIN_PER_BIN = 20
+
     xs, ys = [], []
-    for b in sorted(set(bt)):
-        mm = bt == b
-        if len(set(yt[mm])) == 2:
-            xs.append(b)
+    buckets = (bt // BIN) * BIN
+    for b in sorted(set(buckets)):
+        mm = buckets == b
+        if mm.sum() >= MIN_PER_BIN and len(set(yt[mm])) == 2:
+            xs.append(b + BIN / 2) # Plot at the center of the bucket
             ys.append(roc_auc_score(yt[mm], p[mm]))
+
     fig, ax = plt.subplots(figsize=(7, 4.5))
     ax.plot(xs, ys, marker="o")
     ax.invert_xaxis()
     ax.axhline(0.5, ls="--", c="grey")
     ax.set_ylim(0.4, 1.0)
-    ax.set_xlabel("Steps before the end of an episode")
+    ax.set_xlabel(f"Steps before end of episode (binned, width {BIN})")
     ax.set_ylabel("Probe AUROC")
     ax.set_title("How early is success or failure decodable from a policy's internal activations?")
     fig.tight_layout(); fig.savefig(os.path.join(args.outdir, "lead_time.png"), dpi=150)
