@@ -302,10 +302,10 @@ and analysed; each is dated and states which data it precedes.*
     are reported per seed, not pooled together. Cells are run in a fixed order decided in advance 
     (In-Distribution, Different Object, Distractors, Reduced Lighting, New Positions), and that order 
     does not depend on any observed outcome. The physical scene is unchanged from the seed 1000 grid: 
-    no marks, objects or fixtures are added to the work surface until the seed 2000 grid is complete (see §8.15) 
+    no marks, objects or fixtures are added to the work surface until the seed 2000 grid is complete (see §8.15). 
     This is stated on August 11th, prior to any seed 2000 data being recorded
 15. **Displacement probe experiment to be exploratory**, stated on August 11th before it was run.
-    The Clean policy at seed 1000 is evaluated at two positions on the line between T6 (15.5, 10.0) and the
+    The Clean policy at seed 1000 and 2000 is evaluated at two positions on the line between T6 (15.5, 10.0) and the
     held-out position E4 (15.5, 6.5): P1 at (15.5, 9.0) and P2 at (15.5, 8.0). Each records 9
     episodes, index 0 discarded as warmup per §4.13, for 8 scored episodes each. The registered
     held-out set places every evaluation position at least 3.5 inches from T6, so the observed
