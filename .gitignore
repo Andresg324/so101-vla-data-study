@@ -28,3 +28,5 @@ tools/preview_*.jpg
 tools/probe/
 tools/preview_*.jpg
 tools/probe/
+
+probing/out_synthetic/
