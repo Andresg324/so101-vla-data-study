@@ -138,7 +138,7 @@ Success is the cube released and resting in the cup, cup upright, within 45 seco
 - [ ] Export the tracker to `results.csv` with columns
       `condition, eval_cell, seed, episode, success`.
 - [ ] Run `python analysis/analyze_results.py results.csv --outdir analysis/out`.
-- [ ] Confirm every rollout dataset is on the Hub. Phase B replays these.
+- [ ] Confirm every rollout dataset is on the Hub. The probing analysis replays these.
 - [ ] Do not delete any rollout dataset.
 - [ ] Leave the bench standing and the gantry mounted.
 

@@ -7,7 +7,7 @@ Encodes a hypothesis (derived by Claude Opus 5, July 2026), not a result
 import numpy as np
 import os
 
-os.makedirs("phase_b/out", exist_ok=True)
+os.makedirs("probing/out", exist_ok=True)
 
 rng = np.random.default_rng(0) # Sets same seed so reruns are the same numbers
 
@@ -38,6 +38,6 @@ for c in conditions:
                 succ.append(outcome); tfe.append(steps_per_episode - 1 - t)
             ep_id += 1
 
-np.savez("phase_b/out/activations_synthetic.npz", X=np.array(X), condition=np.array(cond), eval_cell=np.array(cell_col),
+np.savez("probing/out/activations_synthetic.npz", X=np.array(X), condition=np.array(cond), eval_cell=np.array(cell_col),
          episode=np.array(epi), success=np.array(succ), t_from_end=np.array(tfe))
-print(f"Wrote phase_b/out/activations_synthetic.npz ({len(X)} samples)")
+print(f"Wrote probing/out/activations_synthetic.npz ({len(X)} samples)")

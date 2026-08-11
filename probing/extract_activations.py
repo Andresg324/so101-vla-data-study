@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-phase_b/extract_activations.py
+probing/extract_activations.py
 
 Replay saved evaluation rollouts through a trained SmolVLA policy, capture one
 layer's hidden activations, and write the .npz that train_probes.py consumes.
 
 Three modes:
   1. Find a layer to hook:
-        python phase_b/extract_activations.py --policy clean --list-layers
+        python probing/extract_activations.py --policy clean --list-layers
   2. Extract for one policy across its eval cells:
-        python phase_b/extract_activations.py \
+        python probing/extract_activations.py \
             --policy clean --layer <name from step 1> \
             --results results.csv --device cuda
   3. Merge the four per-condition files into the one train_probes.py reads:
-        python phase_b/extract_activations.py --merge phase_b/out/activations_*.npz
+        python probing/extract_activations.py --merge probing/out/activations_*.npz
 
 Mode 2 to be run in Colab
 """
@@ -212,7 +212,7 @@ def main():
     ap.add_argument("--cells", nargs="*", default=CELLS)
     ap.add_argument("--rollout-repo", help="override the dataset name (gate test)")
     ap.add_argument("--limit-episodes", type=int, help="Stop after N per cell")
-    ap.add_argument("--outdir", default="phase_b/out")
+    ap.add_argument("--outdir", default="probing/out")
     ap.add_argument("--list-layers", action="store_true")
     ap.add_argument("--merge", nargs="*")
     args = ap.parse_args()

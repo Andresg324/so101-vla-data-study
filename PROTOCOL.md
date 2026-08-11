@@ -1,8 +1,9 @@
 # Pre-registered Protocol for SO-101 Experiment
 
-*Amended August 8th, 2026 on the rebuilt workstation, prior to any data collection. All coordinate,
-lighting, and object specifications below were fixed before the first training episode was
-recorded. Changes from the original pre-registration are listed in §8.*
+*Original pre-registration amended August 8, 2026 on the rebuilt workstation, prior to any data
+collection. All specifications in §1 through §7 were fixed before the first training episode was
+recorded. Amendments 1 through 13 in §8 all predate the first training episode. Amendments 14
+onward were made afterwards, each is dated and states which data it precedes.*
 
 ## 1. Apparatus
 
@@ -122,9 +123,12 @@ re-recorded at the same position or color, so this correspondence is preserved.
 5. **Arm home pose** and **baseline lighting** as defined in §1.
 6. **Reset procedure:** Between episodes the cube is replaced by hand onto its marked position.
 7. **Training hyperparameters:** All four conditions are trained with identical settings:
-   batch_size=32, steps=10000, save_freq=2000, seed=1000, LeRobot's default optimizer and
-   learning-rate schedule for SmolVLA, policy.device=cuda, and the same rename_map
-   (observation.images.overhead becomes camera1, observation.images.wrist becomes camera2).
+   batch_size=32, steps=10000, save_freq=2000. LeRobot's default optimizer and learning-rate
+   schedule for SmolVLA, policy.device=cuda, and the same rename_map (observation.images.overhead
+   becomes camera1, observation.images.wrist becomes camera2). The training seed is identical
+   across conditions within a replication and is the only setting varied between replications:
+   seed 1000 for the primary run, seed 2000 for the replication (§6.9, §8.14). Conditions are
+   never compared across seeds.
 8. **Checkpoint selection:** The final checkpoint at step 10000 is the one evaluated, for every
    condition. No best-loss or early-stopped checkpoint is used, so checkpoint selection cannot
    vary across conditions.
@@ -141,8 +145,8 @@ re-recorded at the same position or color, so this correspondence is preserved.
     chunk_size=50, n_action_steps=50, dataset.fps=30, episode_time_s=45,
     reset_time_s=15. SmolVLA inference on this hardware takes approximately
     320 ms per forward pass, so the action-update rate is roughly 3 Hz while
-    frames are recorded at approximately 25 fps. This applies identically to
-    every policy and every cell.
+    frames are recorded at approximately 25 fps, therefore rollout playback shows brief holds. 
+    This applies identically to every policy and every cell.
 13. **Warmup episodes:** Each evaluation cell records 16 episodes. Episode index 0
     is discarded as a warmup and is never scored; the 15 scored episodes are
     indices 1 through 15. The first policy forward pass in a process incurs a
@@ -239,11 +243,13 @@ camera.*
 
 cube-pickup-{clean,randomized,recovery,color}
 
-Rollout datasets are named rollout_{policy}_{cell} and are retained for offline analysis.
+Rollout datasets are named *rollout_{policy}_{cell}_{timestamp}* and are retained for offline analysis.
 
 ## 8. Amendments to the original pre-registration
 
-All made **before any training data was collected** on the rebuilt workstation.
+*Amendments 1-13 were made before any training data was collected on the rebuilt
+workstation. Amendments 14+ were made after the seed 1000 evaluation grid was complete 
+and analysed; each is dated and states which data it precedes.*
 
 1. **Workspace geometry.** The reachable, in-frame region is irregular, bounded by the cup at
    back-left and the arm base at front-center, so a rectangular grid was not achievable.
@@ -289,12 +295,42 @@ All made **before any training data was collected** on the rebuilt workstation.
 12. **Matched-axis comparisons** now specify a confidence interval on the difference and a Fisher
     exact test. The original committed only to per-cell Wilson intervals; overlapping intervals
     are not a valid test of a difference between two rates.
-13. A 16th warmup episode per cell was added and pre-committed to be discarded. This changes was
-   made before any evaluation episode was recorded.
+13. A **16th warmup episode** per cell was added and pre-committed to be discarded. This change was
+    made before any evaluation episode was recorded.
+14. **Seed 2000 evaluation will be taken on August 11, 2026.** The full 20-cell grid is repeated with
+    the seed 2000 policies, which were trained on August 9 with identical settings. Results
+    are reported per seed, not pooled together. Cells are run in a fixed order decided in advance 
+    (In-Distribution, Different Object, Distractors, Reduced Lighting, New Positions), and that order 
+    does not depend on any observed outcome. The physical scene is unchanged from the seed 1000 grid: 
+    no marks, objects or fixtures are added to the work surface until the seed 2000 grid is complete (see §8.15) 
+    This is stated on August 11th, prior to any seed 2000 data being recorded
+15. **Displacement probe experiment to be exploratory**, stated on August 11th before it was run.
+    The Clean policy at seed 1000 is evaluated at two positions on the line between T6 (15.5, 10.0) and the
+    held-out position E4 (15.5, 6.5): P1 at (15.5, 9.0) and P2 at (15.5, 8.0). Each records 9
+    episodes, index 0 discarded as warmup per §4.13, for 8 scored episodes each. The registered
+    held-out set places every evaluation position at least 3.5 inches from T6, so the observed
+    0/60 on New Positions cannot distinguish a near-zero generalization radius from a boundary
+    lying inside that gap. P1 and P2 are marked in erasable pencil only after the seed 2000 grid
+    is complete, and erased immediately afterward; the work surface is photographed before marking
+    and after erasing.
+16. **Demonstration pace probe stated as exploratory** on August 11. The superseded
+    Color-varied collection (cube-pickup-color_20260809_130649, 23.0 s per demonstration,
+    0.2481 deg/step) and its policy smolvla-cube-color-slowpace are evaluated on
+    In-Distribution and Different Object and compared against the retained Color policy
+    (16.6 s, 0.3466 deg/step). The two datasets are separate collection sessions, so pace
+    is the measured and manipulated difference but not the only difference between them. This
+    is a session comparison, outside the pre-registration, exploratory, and the slowpace
+    policy is never pooled into the four-condition grid. This is stated on August 11th before it was run.
+17. **Failure-mode vocabulary updated on August 11** after scoring. Failure modes were
+    recorded live in free text during evaluation and normalised on August 11 against a fixed
+    nine-term vocabulary: success, success_after_recovery, no_departure,
+    contact_no_grasp, grasp_drop, deliberate_drop, cube_out_of_bounds, cup_knocked,
+    timeout_other. Binary success
+    values were fixed at the time of the rollout and no success value was changed during
+    normalisation. timeout_other represents episodes with no grasp, no contact, or don't meet other labels.
 
 ## 9. Existing Limitations
 
-- Single training seed per condition unless time permits more.
 - Extrapolation held-out positions lie a few inches beyond the training envelope, still within
   the arm's reach and camera frame; this is modest extrapolation, not a domain shift.
 - The interpolation/extrapolation split rests on 9 and 6 episodes respectively and is reported as
@@ -328,6 +364,14 @@ All made **before any training data was collected** on the rebuilt workstation.
   over its own data. Episode count was chosen as the fixed budget because it is the quantity an
   experimenter actually controls when deciding how much data to collect. Per-condition frame
   counts are reported alongside the results.
-- At the three right-edge training positions (T8, T9, T10 at x = 20.5), the arm partially exits the 
-  overhead frame during the reach, though the cube remains fully visible at episode start. Any position 
-  effect at those spots is therefore partly a visibility effect.
+- There is partial observability at T1, T8, T9 and T10 when the gripper leaves the overhead camera's 
+  field of view during part of the approach. The wrist camera remains on target. This affects only 
+  the Randomized condition, the only condition using positions other than T6, at four of its ten 
+  positions. It is a property of the fixed camera geometry, which was held constant across all conditions by design.
+- The generalization gap metric is bounded above by the in-distribution success rate. A
+  condition that performs poorly in distribution cannot exhibit a large gap regardless of its
+  held-out performance. In these results the metric ranks Recovery first (0.017) and Clean last
+  (0.333) despite Clean and Color having identical held-out means (0.667). The metric is
+  reported as pre-registered, with per-cell rates and held-out means shown alongside it.
+- Activations for probing are extracted by replaying saved episodes from encoded video rather than live 
+  camera frames; agreement with the recorded actions was verified on a reference frame to within the policy's sampling noise.

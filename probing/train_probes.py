@@ -6,7 +6,7 @@ condition, with controls from the deception-probe evaluation protocol:
   - Repeated-split 95% CI on AUROC (small-n uncertainty).
   - De-confound: within-cell vs pooled AUROC. A big pooled>within-cell gap means the probe is
     reading 'which cell' (difficulty), not genuine self-knowledge of failure.
-RUN: python phase_b/train_probes.py phase_b/out/activations_synthetic.npz --outdir phase_b/out
+RUN: python probing/train_probes.py probing/out/activations_synthetic.npz --outdir probing/out
 """
 
 import argparse, os, csv
@@ -54,7 +54,7 @@ def within_cell_auroc(X, y, cells, groups, n_repeats=40):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("activations"); ap.add_argument("--outdir", default="phase_b/out")
+    ap.add_argument("activations"); ap.add_argument("--outdir", default="probing/out")
     args = ap.parse_args()
     os.makedirs(args.outdir, exist_ok=True)
 
