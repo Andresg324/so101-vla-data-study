@@ -17,18 +17,23 @@ import sys
 
 import pandas as pd
 
-CACHE = os.path.expanduser("~/.cache/huggingface/lerobot/Andresg324")
+CACHE = os.environ.get("LEROBOT_CACHE", os.path.expanduser("~/.cache/huggingface/lerobot/Andresg324"))
+
+if len(sys.argv) < 3:
+    raise SystemExit(__doc__)
 
 name = sys.argv[1]
 ep = int(sys.argv[2])
 cam = sys.argv[3] if len(sys.argv) > 3 else None
 
 root = name if os.path.isdir(name) else os.path.join(CACHE, name)
-files = sorted(glob.glob(os.path.join(root, "meta", "episodes", "*.parquet"), recursive=True))
+files = sorted(glob.glob(os.path.join(root, "meta", "episodes", "**", "*.parquet"), recursive=True))
+
 if not files:
     files = sorted(
-        p for p in glob.glob(os.path.join(root, "meta", "**", "*.parquet"), recursive=True) if "episode in p.lower()"
+        p for p in glob.glob(os.path.join(root, "meta", "**", "*.parquet"), recursive=True) if "episode" in p.lower()
     )
+
 if not files:
     meta = os.path.join(root, "meta")
     raise SystemExit(
@@ -38,13 +43,19 @@ if not files:
     )
 
 df = pd.concat([pd.read_parquet(f) for f in files], ignore_index=True)
-row = df[df.episode_index == ep].iloc[0]
+
+m = df[df.episode_index == ep]
+if m.empty:
+    raise SystemExit(f"episode {ep} not in {name}; available {sorted(df.episode_index.tolist())}")
+row = m.iloc[0]
+
 
 # Demo datasets use overhead/wrist
 # Rollouts use camera1/camera2 after the rename.
 cams = sorted({c.split("/")[1] for c in df.columns if c.startswith("videos/")})
 if cam is None:
-    cam = next(c for c in cams if "overhead" in c or "camera1" in c)
+    cam = next((c for c in cams if "overhead" in c or "camera1" in c), cams[0])
+
 print("available:", cams, "| using", cam)
 
 chunk = int(row[f"videos/{cam}/chunk_index"])

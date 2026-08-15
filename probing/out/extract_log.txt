@@ -1,0 +1,191 @@
+=== recovery ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<03:14,  2.51it/s]Loading weights:  23%|██▎       | 113/489 [00:00<00:01, 286.70it/s]Loading weights:  35%|███▍      | 171/489 [00:00<00:00, 345.13it/s]Loading weights:  46%|████▌     | 225/489 [00:00<00:00, 359.46it/s]Loading weights:  56%|█████▌    | 273/489 [00:00<00:00, 383.59it/s]Loading weights:  68%|██████▊   | 333/489 [00:00<00:00, 440.22it/s]Loading weights:  91%|█████████ | 445/489 [00:01<00:00, 608.23it/s]Loading weights: 100%|██████████| 489/489 [00:01<00:00, 435.38it/s]
+objc[79318]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x1452243a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x1715607a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[79318]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x1452243f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x1715607f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_recovery_in_distribution_20260810_124638
+ 236 activations from 15 episodes
+ Andresg324/rollout_recovery_new_positions_20260810_134854
+ 356 activations from 15 episodes
+ Andresg324/rollout_recovery_reduced_lighting_20260810_165851
+ 264 activations from 15 episodes
+ Andresg324/rollout_recovery_different_object_20260810_150115
+ 241 activations from 15 episodes
+ Andresg324/rollout_recovery_distractors_20260810_160107
+ 186 activations from 15 episodes
+
+wrote probing/out/activations_recovery.npz X = (1283, 720)
+=== recovery-seed2000 ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:21,  6.00it/s]Loading weights:  36%|███▌      | 176/489 [00:00<00:00, 796.07it/s]Loading weights:  56%|█████▋    | 276/489 [00:00<00:00, 534.58it/s]Loading weights:  71%|███████   | 348/489 [00:00<00:00, 572.31it/s]Loading weights:  90%|█████████ | 441/489 [00:00<00:00, 666.69it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 628.94it/s]
+objc[79720]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11d4c83a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x16bee07a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[79720]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11d4c83f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x16bee07f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_recovery-seed2000_in_distribution_20260811_103305
+ 249 activations from 15 episodes
+ Andresg324/rollout_recovery-seed2000_new_positions_20260811_153653
+ 351 activations from 15 episodes
+ Andresg324/rollout_recovery-seed2000_reduced_lighting_20260811_135938
+ 319 activations from 15 episodes
+ Andresg324/rollout_recovery-seed2000_different_object_20260811_114348
+ 321 activations from 15 episodes
+ Andresg324/rollout_recovery-seed2000_distractors_20260811_125939
+ 204 activations from 15 episodes
+
+wrote probing/out/activations_recovery-seed2000.npz X = (1444, 720)
+=== randomized ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:23,  5.84it/s]Loading weights:  35%|███▍      | 169/489 [00:00<00:00, 766.90it/s]Loading weights:  55%|█████▍    | 268/489 [00:00<00:00, 634.78it/s]Loading weights:  71%|███████   | 346/489 [00:00<00:00, 615.33it/s]Loading weights:  85%|████████▌ | 417/489 [00:00<00:00, 587.32it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 611.77it/s]
+objc[80034]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x1539843a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x17a0107a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[80034]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x1539843f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x17a0107f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_randomized_in_distribution_20260810_121255
+ 290 activations from 15 episodes
+ Andresg324/rollout_randomized_new_positions_20260810_132839
+ 349 activations from 15 episodes
+ Andresg324/rollout_randomized_reduced_lighting_20260810_164056
+ 303 activations from 15 episodes
+ Andresg324/rollout_randomized_different_object_20260810_144117
+ 351 activations from 15 episodes
+ Andresg324/rollout_randomized_distractors_20260810_154140
+ 341 activations from 15 episodes
+
+wrote probing/out/activations_randomized.npz X = (1634, 720)
+=== randomized-seed2000 ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:02,  7.85it/s]Loading weights:  30%|███       | 149/489 [00:00<00:00, 767.82it/s]Loading weights:  48%|████▊     | 233/489 [00:00<00:00, 677.01it/s]Loading weights:  63%|██████▎   | 306/489 [00:00<00:00, 606.61it/s]Loading weights:  78%|███████▊  | 383/489 [00:00<00:00, 652.85it/s]Loading weights:  94%|█████████▍| 461/489 [00:00<00:00, 684.89it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 663.10it/s]
+objc[80275]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11b5903a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x143f3c7a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[80275]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11b5903f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x143f3c7f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_randomized-seed2000_in_distribution_20260811_101603
+ 289 activations from 15 episodes
+ Andresg324/rollout_randomized-seed2000_new_positions_20260811_151815
+ 358 activations from 15 episodes
+ Andresg324/rollout_randomized-seed2000_reduced_lighting_20260811_134154
+ 318 activations from 15 episodes
+ Andresg324/rollout_randomized-seed2000_different_object_20260811_112537
+ 338 activations from 15 episodes
+ Andresg324/rollout_randomized-seed2000_distractors_20260811_124023
+ 351 activations from 15 episodes
+
+wrote probing/out/activations_randomized-seed2000.npz X = (1654, 720)
+=== color ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:05,  7.46it/s]Loading weights:  34%|███▍      | 167/489 [00:00<00:00, 828.35it/s]Loading weights:  53%|█████▎    | 259/489 [00:00<00:00, 691.01it/s]Loading weights:  69%|██████▊   | 335/489 [00:00<00:00, 706.96it/s]Loading weights:  91%|█████████ | 445/489 [00:00<00:00, 815.17it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 735.26it/s]
+objc[80473]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x144ad03a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x34dfd47a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[80473]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x144ad03f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x34dfd47f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_color_in_distribution_20260810_123243
+ 161 activations from 15 episodes
+ Andresg324/rollout_color_new_positions_20260810_140805
+ 355 activations from 15 episodes
+ Andresg324/rollout_color_reduced_lighting_20260810_171536
+ 173 activations from 15 episodes
+ Andresg324/rollout_color_different_object_20260810_151625
+ 126 activations from 15 episodes
+ Andresg324/rollout_color_distractors_20260810_161402
+ 162 activations from 15 episodes
+
+wrote probing/out/activations_color.npz X = (977, 720)
+=== color-seed2000 ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:16,  6.41it/s]Loading weights:  34%|███▍      | 167/489 [00:00<00:00, 788.87it/s]Loading weights:  54%|█████▍    | 263/489 [00:00<00:00, 686.01it/s]Loading weights:  70%|███████   | 343/489 [00:00<00:00, 702.31it/s]Loading weights:  94%|█████████▍| 461/489 [00:00<00:00, 815.76it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 749.92it/s]
+objc[80632]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11ce643a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x16fb707a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[80632]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11ce643f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x16fb707f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_color-seed2000_in_distribution_20260811_104851
+ 174 activations from 15 episodes
+ Andresg324/rollout_color-seed2000_new_positions_20260811_155556
+ 353 activations from 15 episodes
+ Andresg324/rollout_color-seed2000_reduced_lighting_20260811_141750
+ 141 activations from 15 episodes
+ Andresg324/rollout_color-seed2000_different_object_20260811_121401
+ 124 activations from 15 episodes
+ Andresg324/rollout_color-seed2000_distractors_20260811_131347
+ 141 activations from 15 episodes
+
+wrote probing/out/activations_color-seed2000.npz X = (933, 720)
+=== clean ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:04,  7.55it/s]Loading weights:  32%|███▏      | 158/489 [00:00<00:00, 786.23it/s]Loading weights:  50%|████▉     | 244/489 [00:00<00:00, 742.64it/s]Loading weights:  66%|██████▌   | 323/489 [00:00<00:00, 736.68it/s]Loading weights:  88%|████████▊ | 429/489 [00:00<00:00, 827.42it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 746.71it/s]
+objc[80737]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x12c5fc3a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x14e7647a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[80737]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x12c5fc3f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x14e7647f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_clean_in_distribution_20260810_120038
+ 163 activations from 15 episodes
+ Andresg324/rollout_clean_new_positions_20260810_130902
+ 342 activations from 15 episodes
+ Andresg324/rollout_clean_reduced_lighting_20260810_162616
+ 235 activations from 15 episodes
+ Andresg324/rollout_clean_different_object_20260810_142829
+ 213 activations from 15 episodes
+ Andresg324/rollout_clean_distractors_20260810_152709
+ 181 activations from 15 episodes
+ Andresg324/rollout_clean_near_1in_20260811_165307
+ 187 activations from 8 episodes
+ Andresg324/rollout_clean_near_2in_20260811_171431
+ 186 activations from 8 episodes
+
+wrote probing/out/activations_clean.npz X = (1507, 720)
+=== clean-seed2000 ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:19,  6.16it/s]Loading weights:  36%|███▋      | 178/489 [00:00<00:00, 830.65it/s]Loading weights:  58%|█████▊    | 282/489 [00:00<00:00, 719.59it/s]Loading weights:  78%|███████▊  | 381/489 [00:00<00:00, 794.52it/s]Loading weights:  98%|█████████▊| 477/489 [00:00<00:00, 819.23it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 757.83it/s]
+objc[81056]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11d4e43a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x1476147a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[81056]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x11d4e43f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x1476147f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_clean-seed2000_in_distribution_20260811_100456
+ 166 activations from 15 episodes
+ Andresg324/rollout_clean-seed2000_new_positions_20260811_145926
+ 357 activations from 15 episodes
+ Andresg324/rollout_clean-seed2000_reduced_lighting_20260811_132543
+ 274 activations from 15 episodes
+ Andresg324/rollout_clean-seed2000_different_object_20260811_110857
+ 289 activations from 15 episodes
+ Andresg324/rollout_clean-seed2000_distractors_20260811_122707
+ 214 activations from 15 episodes
+ Andresg324/rollout_clean-seed2000_near_1in_20260811_170419
+ 149 activations from 8 episodes
+ Andresg324/rollout_clean-seed2000_near_2in_20260811_173531
+ 184 activations from 8 episodes
+
+wrote probing/out/activations_clean-seed2000.npz X = (1633, 720)
+=== color-slowpace ===
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<01:09,  6.98it/s]Loading weights:  32%|███▏      | 158/489 [00:00<00:00, 777.35it/s]Loading weights:  51%|█████     | 249/489 [00:00<00:00, 692.70it/s]Loading weights:  67%|██████▋   | 327/489 [00:00<00:00, 690.20it/s]Loading weights:  88%|████████▊ | 429/489 [00:00<00:00, 746.99it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 707.16it/s]
+objc[79315]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x128c803a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x15dac07a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[79315]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x128c803f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x15dac07f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+Reducing the number of VLM layers to 16 ...
+ Andresg324/rollout_color-slowpace_in_distribution_20260811_161636
+ 257 activations from 15 episodes
+ Andresg324/rollout_color-slowpace_different_object_20260811_163250
+ 216 activations from 15 episodes
+
+wrote probing/out/activations_color-slowpace.npz X = (473, 720)

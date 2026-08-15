@@ -1,0 +1,9 @@
+policy,different_object,distractors,in_distribution,near_1in,near_2in,new_positions,reduced_lighting
+clean,0.25,0.53,0.9,0.73,1.37,0.75,0.58
+clean-seed2000,0.32,0.74,0.71,1.5,1.03,0.76,0.83
+color,1.54,0.96,0.8,,,1.13,1.07
+color-seed2000,0.44,0.61,1.25,,,0.89,0.7
+randomized,4.77,8.4,1.61,,,80.39,5.21
+randomized-seed2000,3.28,8.35,1.71,,,50.84,2.13
+recovery,0.78,1.56,1.21,,,1.67,0.91
+recovery-seed2000,0.85,0.85,1.03,,,1.23,0.84

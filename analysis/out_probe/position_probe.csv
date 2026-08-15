@@ -1,0 +1,5 @@
+policy,episodes,samples,chance_med_deg,probe_by_episode_deg,probe_by_position_deg,probe_mean_deg,control_tfe_med_steps,control_chance_steps
+clean-seed2000,15,357,42.2,10.2,44.9,12.4,175.7,281.4
+clean,15,342,42.1,10.2,37.1,13.8,196.1,289.1
+randomized-seed2000,15,358,42.4,8.2,29.9,13.7,210.0,279.1
+randomized,15,349,42.4,8.0,35.1,10.7,226.4,291.1

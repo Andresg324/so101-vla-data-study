@@ -1,0 +1,663 @@
+policy,cell,episode,success,failure_mode,notes,tail_med,tail_range
+clean,different_object,1,1,success,,1.35,0.55
+clean,different_object,2,1,success,"Bumped cup, almost missed, took a while to move",1.05,0.51
+clean,different_object,3,1,success,,0.74,0.98
+clean,different_object,4,1,success,,1.11,0.48
+clean,different_object,5,1,success,,0.91,0.61
+clean,different_object,6,1,success,,1.06,0.88
+clean,different_object,7,1,success,,1.28,1.05
+clean,different_object,8,1,success,,1.15,0.33
+clean,different_object,9,1,success,,1.26,0.69
+clean,different_object,10,1,success,,1.09,0.74
+clean,different_object,11,1,success,,1.3,0.48
+clean,different_object,12,1,success,,0.94,0.26
+clean,different_object,13,1,success,,1.39,0.75
+clean,different_object,14,1,success,,1.03,0.78
+clean,different_object,15,1,success,,1.46,0.57
+clean,distractors,1,1,success,,1.72,0.69
+clean,distractors,2,1,success,,1.92,0.56
+clean,distractors,3,1,success,,2.12,0.88
+clean,distractors,4,1,success,,2.71,1.12
+clean,distractors,5,1,success,,1.7,0.68
+clean,distractors,6,1,success,,2.32,0.94
+clean,distractors,7,1,success,,1.27,0.52
+clean,distractors,8,0,cube_out_of_bounds,,3.2,7.23
+clean,distractors,9,1,success,,1.27,0.87
+clean,distractors,10,0,contact_no_grasp,Moved cube out of position and did not recover,18.89,1.68
+clean,distractors,11,1,success,,1.65,0.98
+clean,distractors,12,1,success,,1.45,0.78
+clean,distractors,13,1,success,,1.76,0.35
+clean,distractors,14,1,success,,1.94,0.7
+clean,distractors,15,1,success,,1.35,0.47
+clean,in_distribution,1,1,success,,1.43,0.64
+clean,in_distribution,2,1,success,,1.5,0.58
+clean,in_distribution,3,1,success,,1.89,0.42
+clean,in_distribution,4,1,success,,1.56,0.95
+clean,in_distribution,5,1,success,,1.64,0.56
+clean,in_distribution,6,1,success,,1.5,0.59
+clean,in_distribution,7,1,success,,1.46,0.81
+clean,in_distribution,8,1,success,,1.32,0.65
+clean,in_distribution,9,1,success_after_recovery,Missed cube but came back and got it,1.53,0.74
+clean,in_distribution,10,1,success,,1.45,0.48
+clean,in_distribution,11,1,success,,1.58,0.56
+clean,in_distribution,12,1,success,,1.35,0.6
+clean,in_distribution,13,1,success,,1.09,0.61
+clean,in_distribution,14,1,success,,1.23,0.67
+clean,in_distribution,15,1,success,,1.4,0.5
+clean,near_1in,1,0,contact_no_grasp,,29.13,0.94
+clean,near_1in,2,0,contact_no_grasp,,11.35,21.87
+clean,near_1in,3,0,contact_no_grasp,,10.26,15.54
+clean,near_1in,4,0,contact_no_grasp,,20.26,2.35
+clean,near_1in,5,0,timeout_other,"took  40 seconds to move, ran out of time before getting to cube",1.13,7.66
+clean,near_1in,6,0,contact_no_grasp,,2.09,1.99
+clean,near_1in,7,0,no_departure,,0.94,0.45
+clean,near_1in,8,0,contact_no_grasp,,19.94,1.01
+clean,near_2in,1,0,no_departure,,1.17,0.67
+clean,near_2in,2,0,timeout_other,went to t6,26.78,0.71
+clean,near_2in,3,0,timeout_other,went to t6,3.23,11.05
+clean,near_2in,4,0,timeout_other,went to t6,1.68,1.29
+clean,near_2in,5,0,timeout_other,went to t6,1.14,0.79
+clean,near_2in,6,0,timeout_other,went to t6,21.15,3.89
+clean,near_2in,7,0,timeout_other,went to t6,1.58,1.66
+clean,near_2in,8,0,timeout_other,went to t6,24.26,0.95
+clean,new_positions,1,0,timeout_other,,17.54,1.64
+clean,new_positions,2,0,timeout_other,,18.91,2.04
+clean,new_positions,3,0,timeout_other,,12.83,1.77
+clean,new_positions,4,0,no_departure,,0.83,0.67
+clean,new_positions,5,0,timeout_other,,16.05,1.91
+clean,new_positions,6,0,no_departure,,0.93,0.84
+clean,new_positions,7,0,timeout_other,,17.53,1.12
+clean,new_positions,8,0,timeout_other,,15.65,0.91
+clean,new_positions,9,0,timeout_other,Moved at the very end,1.28,0.45
+clean,new_positions,10,0,timeout_other,,26.26,1.54
+clean,new_positions,11,0,timeout_other,,23.42,0.7
+clean,new_positions,12,0,timeout_other,,1.22,1.32
+clean,new_positions,13,0,timeout_other,,17.55,1.53
+clean,new_positions,14,0,timeout_other,,16.15,2.46
+clean,new_positions,15,0,timeout_other,,10.71,2.27
+clean,reduced_lighting,1,1,success,,1.61,0.46
+clean,reduced_lighting,2,1,success,,1.55,0.3
+clean,reduced_lighting,3,1,success,,1.26,0.6
+clean,reduced_lighting,4,1,success,,1.09,0.7
+clean,reduced_lighting,5,1,success,,1.95,0.4
+clean,reduced_lighting,6,0,timeout_other,"Was slow to start, when it eventually moved ran out of time",24.52,2.16
+clean,reduced_lighting,7,1,success,,1.34,0.6
+clean,reduced_lighting,8,1,success,,1.66,0.55
+clean,reduced_lighting,9,1,success,,1.21,0.73
+clean,reduced_lighting,10,0,contact_no_grasp,Bumped cube and couldn't recover,1.39,0.66
+clean,reduced_lighting,11,1,success,,0.76,0.94
+clean,reduced_lighting,12,1,success,,1.31,0.56
+clean,reduced_lighting,13,1,success,,1.16,0.89
+clean,reduced_lighting,14,0,contact_no_grasp,Bumped cube and couldn't recover,1.77,0.79
+clean,reduced_lighting,15,1,success,,1.01,0.76
+clean-seed2000,different_object,1,1,success,,0.91,0.46
+clean-seed2000,different_object,2,1,success,,1.05,0.61
+clean-seed2000,different_object,3,0,no_departure,,0.92,0.64
+clean-seed2000,different_object,4,1,success,"took ~15 seconds to move, barely succeeded",1.07,0.56
+clean-seed2000,different_object,5,1,success,,1.23,0.57
+clean-seed2000,different_object,6,1,success,,1.06,0.55
+clean-seed2000,different_object,7,1,success,"took ~20 seconds to move, barely succeeded, ran out of time returning to neutral pose but did drop the cube so it succeeded",1.07,0.43
+clean-seed2000,different_object,8,1,success,,1.1,1.2
+clean-seed2000,different_object,9,0,no_departure,,0.93,0.8
+clean-seed2000,different_object,10,1,success,took ~10 seconds to move,1.24,0.66
+clean-seed2000,different_object,11,1,success,,1.04,0.44
+clean-seed2000,different_object,12,0,timeout_other,"took ~25 seconds to move, picked up the cube but didn't get it to the cup",4.02,0.52
+clean-seed2000,different_object,13,1,success,"took ~20 seconds to move, it ran out of time returning to neutral but it dropped the cube in cup",1.87,0.69
+clean-seed2000,different_object,14,1,success,took ~10 seconds to move,1.28,0.42
+clean-seed2000,different_object,15,1,success,took ~10 seconds to move,0.77,0.69
+clean-seed2000,distractors,1,0,grasp_drop,"The claw had the cube, it squeezed the bottom and ended up dropping it out of bounds",31.92,1.58
+clean-seed2000,distractors,2,1,success,,2.06,0.55
+clean-seed2000,distractors,3,0,contact_no_grasp,bumped it forward too much,16.64,2.25
+clean-seed2000,distractors,4,0,contact_no_grasp,,23.28,0.86
+clean-seed2000,distractors,5,1,success,,1.13,0.49
+clean-seed2000,distractors,6,1,success,,1.39,0.97
+clean-seed2000,distractors,7,1,success,,1.37,0.92
+clean-seed2000,distractors,8,1,success,,2.23,0.84
+clean-seed2000,distractors,9,1,success,,1.81,0.51
+clean-seed2000,distractors,10,0,contact_no_grasp,,0.68,1.87
+clean-seed2000,distractors,11,1,success,,1.37,0.55
+clean-seed2000,distractors,12,1,success,,2.11,0.6
+clean-seed2000,distractors,13,1,success,,1.63,0.44
+clean-seed2000,distractors,14,1,success,,1.65,0.62
+clean-seed2000,distractors,15,0,contact_no_grasp,Squeezed the edges when grasping and pushed to other location,11.26,17.28
+clean-seed2000,in_distribution,1,1,success,,1.19,0.35
+clean-seed2000,in_distribution,2,1,success,,1.48,0.92
+clean-seed2000,in_distribution,3,1,success,,1.54,0.69
+clean-seed2000,in_distribution,4,1,success,,1.31,0.62
+clean-seed2000,in_distribution,5,1,success,,1.25,0.72
+clean-seed2000,in_distribution,6,1,success,,1.68,0.65
+clean-seed2000,in_distribution,7,1,success,,1.19,0.8
+clean-seed2000,in_distribution,8,1,success,,1.36,0.93
+clean-seed2000,in_distribution,9,1,success,,1.04,0.74
+clean-seed2000,in_distribution,10,1,success,,1.17,0.55
+clean-seed2000,in_distribution,11,1,success,,1.49,0.87
+clean-seed2000,in_distribution,12,1,success,,1.09,0.5
+clean-seed2000,in_distribution,13,1,success,,1.84,0.74
+clean-seed2000,in_distribution,14,1,success,,1.65,0.57
+clean-seed2000,in_distribution,15,1,success,,0.92,0.56
+clean-seed2000,near_1in,1,1,success,,0.78,0.82
+clean-seed2000,near_1in,2,0,contact_no_grasp,,24.5,1.29
+clean-seed2000,near_1in,3,1,success,,1.31,0.58
+clean-seed2000,near_1in,4,0,contact_no_grasp,,14.49,2.22
+clean-seed2000,near_1in,5,0,contact_no_grasp,,11.21,7.49
+clean-seed2000,near_1in,6,1,success,,1.26,0.61
+clean-seed2000,near_1in,7,0,contact_no_grasp,,20.86,1.04
+clean-seed2000,near_1in,8,0,contact_no_grasp,,24.79,1.46
+clean-seed2000,near_2in,1,0,timeout_other,went to t6,0.99,0.51
+clean-seed2000,near_2in,2,0,timeout_other,went to t6,25.92,1.55
+clean-seed2000,near_2in,3,0,timeout_other,went to t6,3.86,27.76
+clean-seed2000,near_2in,4,0,timeout_other,went to t6,1.28,0.79
+clean-seed2000,near_2in,5,0,timeout_other,went to t6,1.31,1.61
+clean-seed2000,near_2in,6,0,timeout_other,went to t6,14.79,3.37
+clean-seed2000,near_2in,7,0,timeout_other,went to t6,24.75,2.09
+clean-seed2000,near_2in,8,0,contact_no_grasp,"went to t6, bumped cube at last second",28.17,1.24
+clean-seed2000,new_positions,1,0,timeout_other,went to t6,1.83,8.21
+clean-seed2000,new_positions,2,0,timeout_other,went to t6,4.82,17.17
+clean-seed2000,new_positions,3,0,timeout_other,went to t6,6.06,20.41
+clean-seed2000,new_positions,4,0,no_departure,,1.01,0.65
+clean-seed2000,new_positions,5,0,no_departure,,1.12,0.77
+clean-seed2000,new_positions,6,0,no_departure,,1.04,0.78
+clean-seed2000,new_positions,7,0,no_departure,,0.87,0.55
+clean-seed2000,new_positions,8,0,timeout_other,went to t6,24.12,1.54
+clean-seed2000,new_positions,9,0,timeout_other,went to t6,31.25,1.39
+clean-seed2000,new_positions,10,0,timeout_other,went to t6,0.78,0.94
+clean-seed2000,new_positions,11,0,timeout_other,went to t6,5.76,0.63
+clean-seed2000,new_positions,12,0,timeout_other,went to t6,20.26,5.24
+clean-seed2000,new_positions,13,0,timeout_other,went to t6,29.81,0.78
+clean-seed2000,new_positions,14,0,timeout_other,went to t6,1.77,0.66
+clean-seed2000,new_positions,15,0,timeout_other,went to t6,1.54,3.61
+clean-seed2000,reduced_lighting,1,0,no_departure,,0.88,0.69
+clean-seed2000,reduced_lighting,2,1,success,,1.08,0.62
+clean-seed2000,reduced_lighting,3,0,contact_no_grasp,,19.39,4.67
+clean-seed2000,reduced_lighting,4,1,success,,1.14,0.34
+clean-seed2000,reduced_lighting,5,0,timeout_other,"Took a long time to move, picked up cube but ran out of time",1.74,0.74
+clean-seed2000,reduced_lighting,6,0,timeout_other,Took a long time to move and ran out of time before grabbing cube,20.23,3.02
+clean-seed2000,reduced_lighting,7,1,success,,1.59,0.84
+clean-seed2000,reduced_lighting,8,1,success,,1.3,0.45
+clean-seed2000,reduced_lighting,9,1,success,,1.02,0.78
+clean-seed2000,reduced_lighting,10,1,success,,1.52,0.74
+clean-seed2000,reduced_lighting,11,0,contact_no_grasp,pushed cube out of place and didn't recover,22.26,1.42
+clean-seed2000,reduced_lighting,12,1,success,,1.37,0.66
+clean-seed2000,reduced_lighting,13,0,contact_no_grasp,pushed cube out of place and didn't recover,27.57,3.02
+clean-seed2000,reduced_lighting,14,1,success,,0.94,0.56
+clean-seed2000,reduced_lighting,15,1,success,,1.34,0.75
+color,different_object,1,1,success,,1.66,0.84
+color,different_object,2,1,success,,1.39,0.43
+color,different_object,3,1,success,,1.51,0.3
+color,different_object,4,1,success,,1.45,0.49
+color,different_object,5,1,success,,1.59,0.9
+color,different_object,6,1,success,,1.28,0.57
+color,different_object,7,1,success,,1.23,0.4
+color,different_object,8,1,success,,1.41,0.56
+color,different_object,9,1,success,,1.19,0.61
+color,different_object,10,1,success,,1.35,0.62
+color,different_object,11,1,success,,1.5,0.48
+color,different_object,12,1,success,,1.23,0.35
+color,different_object,13,1,success,,1.28,0.41
+color,different_object,14,1,success,,1.29,0.86
+color,different_object,15,1,success,,1.15,0.92
+color,distractors,1,1,success,,1.26,0.4
+color,distractors,2,1,success,,1.22,0.64
+color,distractors,3,1,success,,1.2,0.36
+color,distractors,4,1,success,,1.21,0.59
+color,distractors,5,1,success,,1.03,0.79
+color,distractors,6,1,success,,1.09,0.38
+color,distractors,7,1,success,,1.3,0.34
+color,distractors,8,1,success,,1.09,0.35
+color,distractors,9,1,success,,1.11,0.6
+color,distractors,10,1,success,,1.23,0.4
+color,distractors,11,0,contact_no_grasp,Bumped cube and didn't recover,3.02,18.31
+color,distractors,12,1,success,,1.15,0.69
+color,distractors,13,1,success,,1.3,0.79
+color,distractors,14,0,contact_no_grasp,Bumped cube and didn't recover,14.07,13.01
+color,distractors,15,1,success,,0.96,0.49
+color,in_distribution,1,1,success,,0.96,0.46
+color,in_distribution,2,1,success,,0.88,0.51
+color,in_distribution,3,1,success,,1.19,0.44
+color,in_distribution,4,1,success,,1.1,0.38
+color,in_distribution,5,1,success,,0.96,0.5
+color,in_distribution,6,1,success,,1.18,0.39
+color,in_distribution,7,1,success,,1.38,0.88
+color,in_distribution,8,1,success,,3.22,18.32
+color,in_distribution,9,0,contact_no_grasp,,1.25,0.53
+color,in_distribution,10,1,success,,1.43,0.62
+color,in_distribution,11,0,grasp_drop,,16.74,2.54
+color,in_distribution,12,1,success,,1.28,0.36
+color,in_distribution,13,1,success,,1.13,0.39
+color,in_distribution,14,1,success,,0.96,0.44
+color,in_distribution,15,1,success,,1.31,0.32
+color,new_positions,1,0,timeout_other,,19.69,1.09
+color,new_positions,2,0,timeout_other,,15.63,1.72
+color,new_positions,3,0,timeout_other,,7.77,18.41
+color,new_positions,4,0,timeout_other,,24.3,0.84
+color,new_positions,5,0,timeout_other,,20.59,1.11
+color,new_positions,6,0,timeout_other,,17.65,3.39
+color,new_positions,7,0,timeout_other,,18.13,1.41
+color,new_positions,8,0,timeout_other,,17.92,1.98
+color,new_positions,9,0,timeout_other,,14.91,13.01
+color,new_positions,10,0,timeout_other,,19.91,1.93
+color,new_positions,11,0,timeout_other,,17.81,9.42
+color,new_positions,12,0,timeout_other,,21.21,1.49
+color,new_positions,13,0,timeout_other,,10.55,12.73
+color,new_positions,14,0,timeout_other,,2.22,4.68
+color,new_positions,15,0,timeout_other,,9.95,1.92
+color,reduced_lighting,1,1,success,,1.42,0.47
+color,reduced_lighting,2,0,contact_no_grasp,Bumped cube and didn't recover,18.82,3.3
+color,reduced_lighting,3,1,success,,1.16,0.25
+color,reduced_lighting,4,1,success,,1.22,0.48
+color,reduced_lighting,5,0,contact_no_grasp,Bumped cube and didn't recover,5.03,7.97
+color,reduced_lighting,6,1,success,,1.24,0.6
+color,reduced_lighting,7,1,success,,0.93,0.63
+color,reduced_lighting,8,1,success,,1.21,0.41
+color,reduced_lighting,9,1,success,,1.31,0.85
+color,reduced_lighting,10,1,success,,1.27,0.51
+color,reduced_lighting,11,0,contact_no_grasp,Bumped cube and didn't recover,18.91,3.02
+color,reduced_lighting,12,1,success,,1.31,1.21
+color,reduced_lighting,13,1,success_after_recovery,"Had it, released it without picking up, moved a bit, but recovered",1.32,0.57
+color,reduced_lighting,14,1,success,,1.17,0.37
+color,reduced_lighting,15,1,success,,1.05,0.5
+color-seed2000,different_object,1,1,success,,1.3,0.69
+color-seed2000,different_object,2,1,success,,1.33,0.62
+color-seed2000,different_object,3,1,success,,1.32,0.37
+color-seed2000,different_object,4,1,success,,1.43,0.6
+color-seed2000,different_object,5,1,success,,1.38,0.68
+color-seed2000,different_object,6,1,success,,1.74,0.41
+color-seed2000,different_object,7,1,success,,1.08,0.63
+color-seed2000,different_object,8,1,success,,1.5,0.51
+color-seed2000,different_object,9,1,success,,1.71,0.78
+color-seed2000,different_object,10,1,success,,1.41,0.52
+color-seed2000,different_object,11,1,success,,1.78,0.84
+color-seed2000,different_object,12,1,success,,1.23,0.74
+color-seed2000,different_object,13,1,success,,1.51,0.64
+color-seed2000,different_object,14,1,success,,1.75,0.51
+color-seed2000,different_object,15,1,success,,1.45,0.48
+color-seed2000,distractors,1,1,success,,1.5,0.4
+color-seed2000,distractors,2,1,success,,1.25,0.53
+color-seed2000,distractors,3,1,success,,1.32,0.61
+color-seed2000,distractors,4,1,success,,1.11,0.8
+color-seed2000,distractors,5,1,success,,1.32,0.65
+color-seed2000,distractors,6,1,success,,0.92,0.67
+color-seed2000,distractors,7,1,success,,1.21,0.63
+color-seed2000,distractors,8,1,success,,1.25,0.59
+color-seed2000,distractors,9,1,success,,1.35,0.65
+color-seed2000,distractors,10,1,success,,1.51,0.73
+color-seed2000,distractors,11,1,success,,1.29,0.71
+color-seed2000,distractors,12,1,success,,1.28,0.83
+color-seed2000,distractors,13,1,success,,1.45,0.46
+color-seed2000,distractors,14,1,success,,1.29,0.71
+color-seed2000,distractors,15,1,success,,1.5,0.82
+color-seed2000,in_distribution,1,0,timeout_other,"Failed a few times, eventually picked up cube and brought it over the cup but ran out of time before releasing",1.88,0.51
+color-seed2000,in_distribution,2,1,success,,0.97,0.53
+color-seed2000,in_distribution,3,1,success,,1.28,0.52
+color-seed2000,in_distribution,4,1,success,,1.41,0.62
+color-seed2000,in_distribution,5,1,success,,1.44,0.44
+color-seed2000,in_distribution,6,0,contact_no_grasp,while trying to grasp squeezed cube and it landed towards edeg ,19.89,2.45
+color-seed2000,in_distribution,7,1,success,,1.27,0.54
+color-seed2000,in_distribution,8,1,success,,1.35,0.58
+color-seed2000,in_distribution,9,0,contact_no_grasp,,1.89,7.14
+color-seed2000,in_distribution,10,1,success,,1.34,0.34
+color-seed2000,in_distribution,11,1,success,,1.39,0.75
+color-seed2000,in_distribution,12,1,success,,1.42,0.83
+color-seed2000,in_distribution,13,1,success,,1.09,0.31
+color-seed2000,in_distribution,14,1,success,,1.32,0.43
+color-seed2000,in_distribution,15,1,success,,1.38,0.8
+color-seed2000,new_positions,1,0,timeout_other,went to t6,21.06,4.48
+color-seed2000,new_positions,2,0,timeout_other,went to t6,15.74,2.46
+color-seed2000,new_positions,3,0,timeout_other,went to t6,15.39,1.46
+color-seed2000,new_positions,4,0,timeout_other,went to t6,18.23,1.7
+color-seed2000,new_positions,5,0,timeout_other,went to t6,3.61,17.48
+color-seed2000,new_positions,6,0,timeout_other,went to t6,7.74,13.14
+color-seed2000,new_positions,7,0,timeout_other,went to t6,9.79,6.23
+color-seed2000,new_positions,8,0,timeout_other,went to t6,17.94,1.76
+color-seed2000,new_positions,9,0,timeout_other,went to t6,16.7,4.17
+color-seed2000,new_positions,10,0,timeout_other,went to t6,19.14,2.16
+color-seed2000,new_positions,11,0,timeout_other,went to t6,15.72,1.94
+color-seed2000,new_positions,12,0,timeout_other,went to t6,17.32,8.67
+color-seed2000,new_positions,13,0,timeout_other,went to t6,18.02,1.21
+color-seed2000,new_positions,14,0,timeout_other,went to t6,16.35,6.73
+color-seed2000,new_positions,15,0,timeout_other,went to t6,1.65,4.62
+color-seed2000,reduced_lighting,1,0,contact_no_grasp,"On grasp attempt, squeezed cube and pushed it up the cube or firmly have it, didn't lift up so not counting as grasp drop",5.8,20.93
+color-seed2000,reduced_lighting,2,1,success,,1.1,0.58
+color-seed2000,reduced_lighting,3,1,success,,1.25,0.72
+color-seed2000,reduced_lighting,4,1,success,,1.37,0.31
+color-seed2000,reduced_lighting,5,1,success,,1.57,0.44
+color-seed2000,reduced_lighting,6,1,success,,1.57,0.59
+color-seed2000,reduced_lighting,7,1,success,,1.37,0.5
+color-seed2000,reduced_lighting,8,1,success,,1.36,0.68
+color-seed2000,reduced_lighting,9,1,success,,1.19,0.47
+color-seed2000,reduced_lighting,10,1,success,"Pushed cup an inch to the left but everything stayed upright, counting as a success",0.85,0.58
+color-seed2000,reduced_lighting,11,1,success,,1.3,0.69
+color-seed2000,reduced_lighting,12,1,success,,1.59,0.69
+color-seed2000,reduced_lighting,13,1,success,,1.3,0.78
+color-seed2000,reduced_lighting,14,1,success,,1.43,0.57
+color-seed2000,reduced_lighting,15,1,success,,1.19,0.49
+color-slowpace,different_object,1,1,success,,1.38,0.57
+color-slowpace,different_object,2,1,success,,1.21,0.56
+color-slowpace,different_object,3,1,success,,1.27,0.59
+color-slowpace,different_object,4,1,success,barely made it in time,1.32,0.54
+color-slowpace,different_object,5,1,success,,1.46,0.48
+color-slowpace,different_object,6,1,success,,1.51,0.64
+color-slowpace,different_object,7,1,success,,1.58,0.54
+color-slowpace,different_object,8,0,timeout_other,"Took too long to start, had picked up cube but didn't make it to cup",2.22,1.21
+color-slowpace,different_object,9,1,success,,1.42,0.3
+color-slowpace,different_object,10,1,success,,1.36,0.59
+color-slowpace,different_object,11,1,success,,1.43,0.46
+color-slowpace,different_object,12,1,success,,0.88,0.7
+color-slowpace,different_object,13,1,success,,1.32,0.52
+color-slowpace,different_object,14,1,success,,1.29,0.37
+color-slowpace,different_object,15,1,success,,1.55,0.54
+color-slowpace,in_distribution,1,1,success,,1.19,0.68
+color-slowpace,in_distribution,2,1,success,,0.89,0.47
+color-slowpace,in_distribution,3,1,success,,1.39,0.31
+color-slowpace,in_distribution,4,0,no_departure,,1.11,0.5
+color-slowpace,in_distribution,5,1,success,,1.25,0.72
+color-slowpace,in_distribution,6,1,success,,0.81,0.28
+color-slowpace,in_distribution,7,1,success,,1.31,0.77
+color-slowpace,in_distribution,8,0,contact_no_grasp,bumped cube,5.35,18.73
+color-slowpace,in_distribution,9,1,success,,1.1,0.61
+color-slowpace,in_distribution,10,0,timeout_other,"took ~30 seconds to move, didn't have time to pick up cube",26.62,1.48
+color-slowpace,in_distribution,11,1,success,,1.35,0.73
+color-slowpace,in_distribution,12,1,success,,1.39,0.39
+color-slowpace,in_distribution,13,0,no_departure,,0.99,0.51
+color-slowpace,in_distribution,14,1,success,,1.03,0.29
+color-slowpace,in_distribution,15,0,timeout_other,"grabbed cube but took to long to start, didn't have time to put it in the cup",2.77,0.28
+randomized,different_object,1,0,no_departure,,1.04,0.73
+randomized,different_object,2,0,no_departure,,1.05,0.38
+randomized,different_object,3,0,no_departure,,1.01,0.67
+randomized,different_object,4,0,contact_no_grasp,"Went between T10 and T6, fixed itself and touched cube before failing",2.78,2.22
+randomized,different_object,5,0,timeout_other,Went to T6,15.51,8.1
+randomized,different_object,6,0,timeout_other,,5.89,6.04
+randomized,different_object,7,0,timeout_other,,12.92,1.59
+randomized,different_object,8,0,timeout_other,,1.39,3.7
+randomized,different_object,9,0,no_departure,,0.92,0.38
+randomized,different_object,10,0,timeout_other,,6.22,6.68
+randomized,different_object,11,0,grasp_drop,"Had cube and dropped it, then also almost recovered",0.4,0.72
+randomized,different_object,12,0,timeout_other,Went to T8,1.1,0.56
+randomized,different_object,13,0,timeout_other,,2.97,18.14
+randomized,different_object,14,0,timeout_other,,22.99,8.21
+randomized,different_object,15,0,timeout_other,,19.14,1.01
+randomized,distractors,1,0,timeout_other,,20.86,2.15
+randomized,distractors,2,0,contact_no_grasp,touched cube,1.05,11.27
+randomized,distractors,3,0,timeout_other,,24.97,4.27
+randomized,distractors,4,1,success,,1.16,0.4
+randomized,distractors,5,0,timeout_other,,18.89,18.74
+randomized,distractors,6,0,timeout_other,,23.95,2.18
+randomized,distractors,7,0,timeout_other,,23.34,0.88
+randomized,distractors,8,0,grasp_drop,,13.94,5.96
+randomized,distractors,9,0,timeout_other,,13.75,11.58
+randomized,distractors,10,0,timeout_other,,16.3,1.86
+randomized,distractors,11,0,timeout_other,,14.63,2.83
+randomized,distractors,12,0,timeout_other,,19.2,4.72
+randomized,distractors,13,0,timeout_other,,18.5,8.42
+randomized,distractors,14,0,timeout_other,,2.28,6.28
+randomized,distractors,15,0,timeout_other,,20.89,1.88
+randomized,in_distribution,1,1,success,,1.05,0.73
+randomized,in_distribution,2,0,timeout_other,,20.49,2.52
+randomized,in_distribution,3,0,no_departure,,1.2,0.63
+randomized,in_distribution,4,0,timeout_other,,16.48,1.88
+randomized,in_distribution,5,1,success,,0.96,0.64
+randomized,in_distribution,6,1,success,,1.0,0.78
+randomized,in_distribution,7,0,timeout_other,,3.33,5.24
+randomized,in_distribution,8,1,success,,0.97,0.82
+randomized,in_distribution,9,1,success,,1.14,0.59
+randomized,in_distribution,10,0,timeout_other,,2.62,14.93
+randomized,in_distribution,11,0,timeout_other,,6.2,1.47
+randomized,in_distribution,12,1,success,,1.09,0.69
+randomized,in_distribution,13,0,timeout_other,"When it missed the cube, it didn't recover,  and went to top of board",13.22,2.34
+randomized,in_distribution,14,0,timeout_other,,22.0,2.89
+randomized,in_distribution,15,0,timeout_other,"Went above the cube, missed, then went to the top near T3 and T4 spots and kept closing the claw",19.61,1.96
+randomized,new_positions,1,0,no_departure,didn't move,1.08,0.64
+randomized,new_positions,2,0,no_departure,Didn't move,1.05,0.71
+randomized,new_positions,3,0,timeout_other,Started to go to the right place then went to T6 and T4,18.99,18.84
+randomized,new_positions,4,0,timeout_other,Goes to T1,20.25,1.36
+randomized,new_positions,5,0,timeout_other,Goes to T1,20.77,2.12
+randomized,new_positions,6,0,timeout_other,,10.13,1.98
+randomized,new_positions,7,0,no_departure,didn't move,1.18,0.56
+randomized,new_positions,8,0,timeout_other,Went between T6 and T4,17.74,2.46
+randomized,new_positions,9,0,timeout_other,Went between T6 and T4,1.53,9.65
+randomized,new_positions,10,0,timeout_other,,21.3,8.58
+randomized,new_positions,11,0,no_departure,Didn't move,1.12,0.53
+randomized,new_positions,12,0,timeout_other,,15.35,2.05
+randomized,new_positions,13,0,timeout_other,,5.43,6.5
+randomized,new_positions,14,0,no_departure,didn't move,0.97,0.56
+randomized,new_positions,15,0,no_departure,didn't move,1.33,0.75
+randomized,reduced_lighting,1,0,contact_no_grasp,"Missed cube initially, bumped it back",14.64,7.18
+randomized,reduced_lighting,2,0,timeout_other,,12.02,2.08
+randomized,reduced_lighting,3,1,success,,0.97,0.57
+randomized,reduced_lighting,4,1,success,,1.06,0.49
+randomized,reduced_lighting,5,1,success,,1.05,0.73
+randomized,reduced_lighting,6,0,contact_no_grasp,Bumped cube and couldn't recover,3.56,1.72
+randomized,reduced_lighting,7,0,timeout_other,,13.21,5.84
+randomized,reduced_lighting,8,0,timeout_other,,2.53,3.41
+randomized,reduced_lighting,9,1,success,,1.12,0.3
+randomized,reduced_lighting,10,0,contact_no_grasp,Bumped cube forward and couldn't recover,18.67,1.57
+randomized,reduced_lighting,11,0,timeout_other,,17.59,4.63
+randomized,reduced_lighting,12,0,timeout_other,,3.22,1.34
+randomized,reduced_lighting,13,1,success,,1.17,0.56
+randomized,reduced_lighting,14,0,grasp_drop,Bumped cup with cube and dropped it,18.86,19.52
+randomized,reduced_lighting,15,0,timeout_other,,15.44,6.34
+randomized-seed2000,different_object,1,1,success,,1.24,0.44
+randomized-seed2000,different_object,2,0,no_departure,,1.29,0.64
+randomized-seed2000,different_object,3,0,timeout_other,Moved at the last 5 seconds,1.28,0.8
+randomized-seed2000,different_object,4,0,no_departure,,0.91,0.68
+randomized-seed2000,different_object,5,0,no_departure,,1.08,0.48
+randomized-seed2000,different_object,6,0,no_departure,,1.16,0.56
+randomized-seed2000,different_object,7,0,timeout_other,"Moved after 10 seconds, went to T10 then rotated to the lft but missed cube",20.61,3.85
+randomized-seed2000,different_object,8,0,timeout_other,,1.54,0.56
+randomized-seed2000,different_object,9,0,no_departure,,1.18,0.65
+randomized-seed2000,different_object,10,0,no_departure,,1.17,0.84
+randomized-seed2000,different_object,11,1,success,,0.9,0.41
+randomized-seed2000,different_object,12,0,contact_no_grasp,very slight contact at the last 2 seconds,19.36,17.58
+randomized-seed2000,different_object,13,0,timeout_other,,1.49,0.56
+randomized-seed2000,different_object,14,0,no_departure,,0.93,0.84
+randomized-seed2000,different_object,15,0,no_departure,,1.0,0.55
+randomized-seed2000,distractors,1,0,timeout_other,missed cube,16.35,2.04
+randomized-seed2000,distractors,2,0,timeout_other,missed cube,6.2,17.92
+randomized-seed2000,distractors,3,0,timeout_other,missed cube,11.2,3.95
+randomized-seed2000,distractors,4,0,timeout_other,missed cube,19.91,1.68
+randomized-seed2000,distractors,5,0,contact_no_grasp,,5.76,17.07
+randomized-seed2000,distractors,6,0,contact_no_grasp,,13.19,12.24
+randomized-seed2000,distractors,7,0,timeout_other,missed cube,18.48,17.95
+randomized-seed2000,distractors,8,0,contact_no_grasp,,16.4,8.38
+randomized-seed2000,distractors,9,0,contact_no_grasp,,14.79,8.29
+randomized-seed2000,distractors,10,0,contact_no_grasp,,22.04,1.01
+randomized-seed2000,distractors,11,0,timeout_other,missed cube,19.56,3.03
+randomized-seed2000,distractors,12,0,timeout_other,missed cube,14.54,2.39
+randomized-seed2000,distractors,13,0,timeout_other,missed cube,18.86,1.02
+randomized-seed2000,distractors,14,0,timeout_other,missed cube,18.51,4.02
+randomized-seed2000,distractors,15,0,timeout_other,missed cube,8.73,13.53
+randomized-seed2000,in_distribution,1,0,contact_no_grasp,,7.27,10.51
+randomized-seed2000,in_distribution,2,0,contact_no_grasp,,1.81,5.81
+randomized-seed2000,in_distribution,3,1,success,,1.1,0.56
+randomized-seed2000,in_distribution,4,1,success,Moved cup a bit but didn't knock over,1.03,0.78
+randomized-seed2000,in_distribution,5,0,contact_no_grasp,"Claws closed but the pressure pushed cube out before It lifted or actually held it, not counting as grasp",4.59,4.1
+randomized-seed2000,in_distribution,6,0,contact_no_grasp,,3.31,14.99
+randomized-seed2000,in_distribution,7,1,success,,0.79,0.62
+randomized-seed2000,in_distribution,8,1,success,,0.91,0.58
+randomized-seed2000,in_distribution,9,0,contact_no_grasp,,18.14,1.6
+randomized-seed2000,in_distribution,10,0,timeout_other,"No contact, missed from the start",20.57,15.74
+randomized-seed2000,in_distribution,11,0,contact_no_grasp,,20.18,7.02
+randomized-seed2000,in_distribution,12,1,success,,0.82,0.59
+randomized-seed2000,in_distribution,13,0,contact_no_grasp,,9.08,21.07
+randomized-seed2000,in_distribution,14,0,timeout_other,,22.35,1.84
+randomized-seed2000,in_distribution,15,1,success,,1.04,0.41
+randomized-seed2000,new_positions,1,0,timeout_other,went between T2 and E3,16.77,0.98
+randomized-seed2000,new_positions,2,0,no_departure,,0.95,0.59
+randomized-seed2000,new_positions,3,0,no_departure,,1.06,1.0
+randomized-seed2000,new_positions,4,0,no_departure,,1.09,0.29
+randomized-seed2000,new_positions,5,0,timeout_other,went between T1 and E1,19.88,1.0
+randomized-seed2000,new_positions,6,0,timeout_other,went to T1,23.06,1.23
+randomized-seed2000,new_positions,7,0,no_departure,,0.92,0.42
+randomized-seed2000,new_positions,8,0,contact_no_grasp,bumped cube slightly,19.01,4.11
+randomized-seed2000,new_positions,9,0,no_departure,,1.12,0.52
+randomized-seed2000,new_positions,10,0,timeout_other,went to T8,17.74,9.73
+randomized-seed2000,new_positions,11,0,no_departure,,1.04,0.58
+randomized-seed2000,new_positions,12,0,no_departure,moved up slightly but went right back down to neutral,1.09,0.74
+randomized-seed2000,new_positions,13,0,timeout_other,Went to t4,4.75,2.32
+randomized-seed2000,new_positions,14,0,timeout_other,went to t7,12.49,3.87
+randomized-seed2000,new_positions,15,0,no_departure,,1.11,0.41
+randomized-seed2000,reduced_lighting,1,1,success_after_recovery,,0.83,0.38
+randomized-seed2000,reduced_lighting,2,0,contact_no_grasp,,24.38,10.23
+randomized-seed2000,reduced_lighting,3,0,timeout_other,"Went to T9, missed the cube",15.03,5.07
+randomized-seed2000,reduced_lighting,4,0,timeout_other,"Took 35ish seconds to move, got in position to grab cube and ran out of time",28.46,18.57
+randomized-seed2000,reduced_lighting,5,1,success,,0.96,0.33
+randomized-seed2000,reduced_lighting,6,1,success,,1.08,0.5
+randomized-seed2000,reduced_lighting,7,0,no_departure,,0.94,0.54
+randomized-seed2000,reduced_lighting,8,0,contact_no_grasp,,7.95,5.64
+randomized-seed2000,reduced_lighting,9,1,success,,1.13,0.57
+randomized-seed2000,reduced_lighting,10,0,contact_no_grasp,,1.38,7.25
+randomized-seed2000,reduced_lighting,11,1,success,,1.11,0.33
+randomized-seed2000,reduced_lighting,12,0,grasp_drop,,29.65,1.86
+randomized-seed2000,reduced_lighting,13,0,contact_no_grasp,,14.54,10.57
+randomized-seed2000,reduced_lighting,14,0,no_departure,,1.01,0.5
+randomized-seed2000,reduced_lighting,15,0,contact_no_grasp,,8.99,13.66
+recovery,different_object,1,0,deliberate_drop,,10.5,1.6
+recovery,different_object,2,1,success,,1.27,0.34
+recovery,different_object,3,1,success,,1.63,0.9
+recovery,different_object,4,0,deliberate_drop,,18.06,1.84
+recovery,different_object,5,1,success,,1.41,0.82
+recovery,different_object,6,1,success,,1.68,0.61
+recovery,different_object,7,1,success,"Didn't drop cube, held over cup, borught back to beginning, then before time ran out brought it to cup to drop",2.29,1.32
+recovery,different_object,8,1,success,,1.52,0.46
+recovery,different_object,9,1,success,,1.37,0.71
+recovery,different_object,10,1,success,,1.24,0.37
+recovery,different_object,11,1,success,,1.33,1.02
+recovery,different_object,12,1,success,,1.57,0.61
+recovery,different_object,13,0,deliberate_drop,,11.59,1.1
+recovery,different_object,14,0,deliberate_drop,,5.18,13.44
+recovery,different_object,15,1,success,,1.2,0.74
+recovery,distractors,1,1,success,,1.66,0.53
+recovery,distractors,2,1,success,,1.61,0.37
+recovery,distractors,3,1,success,,1.07,0.63
+recovery,distractors,4,1,success,,1.52,0.59
+recovery,distractors,5,1,success,,1.19,0.42
+recovery,distractors,6,0,contact_no_grasp,Bumped cube out of place,16.24,4.57
+recovery,distractors,7,1,success,,1.63,0.56
+recovery,distractors,8,1,success,,1.49,0.44
+recovery,distractors,9,0,contact_no_grasp,Moved cube and can't recover after first grasp attempt,15.88,5.52
+recovery,distractors,10,1,success,,1.55,0.64
+recovery,distractors,11,1,success,"Slow to start, hesitated as if it were gonna drop it, then put it in the cup",1.37,0.69
+recovery,distractors,12,1,success,,1.48,0.43
+recovery,distractors,13,1,success,,1.52,0.7
+recovery,distractors,14,1,success,,1.24,0.31
+recovery,distractors,15,1,success,"Finished, but try to go again",0.73,0.76
+recovery,in_distribution,1,0,deliberate_drop,Dropped cube,1.68,0.59
+recovery,in_distribution,2,1,success,,0.86,0.87
+recovery,in_distribution,3,1,success,,1.1,0.49
+recovery,in_distribution,4,0,deliberate_drop,"Dropped cube, cube landed under arm, tried going back to original spot and then closer to t7",22.32,1.02
+recovery,in_distribution,5,0,deliberate_drop,"Dropped cube, it hit a spot it hasn't been to before, and went to T4 and T3ish (north of board)",15.59,2.79
+recovery,in_distribution,6,0,deliberate_drop,"Dropped cube and missed, looked like it was going to get on third try but timedout",25.66,1.01
+recovery,in_distribution,7,0,grasp_drop,"Dropped cube by hitting the cup on accident, almost recovered it but kept missing",4.93,1.37
+recovery,in_distribution,8,1,success,,1.08,0.35
+recovery,in_distribution,9,1,success,,0.97,0.6
+recovery,in_distribution,10,1,success,,1.44,0.45
+recovery,in_distribution,11,1,success,,1.15,0.68
+recovery,in_distribution,12,0,deliberate_drop,Dropped cube and missed the recovery a few times,1.47,0.78
+recovery,in_distribution,13,0,deliberate_drop,Dropped cube and missed the recovery a few times,6.95,0.58
+recovery,in_distribution,14,1,success,,1.04,0.64
+recovery,in_distribution,15,1,success,,1.01,0.76
+recovery,new_positions,1,0,timeout_other,,16.97,3.0
+recovery,new_positions,2,0,no_departure,,1.48,0.68
+recovery,new_positions,3,0,timeout_other,,2.03,1.25
+recovery,new_positions,4,0,no_departure,,1.61,1.12
+recovery,new_positions,5,0,no_departure,,1.41,0.44
+recovery,new_positions,6,0,timeout_other,,10.33,12.93
+recovery,new_positions,7,0,timeout_other,,22.39,2.88
+recovery,new_positions,8,0,contact_no_grasp,Touched the cube after failing at T6,2.95,7.58
+recovery,new_positions,9,0,contact_no_grasp,Touched the cube after failing at T6,5.81,3.76
+recovery,new_positions,10,0,timeout_other,,20.89,1.88
+recovery,new_positions,11,0,timeout_other,,7.29,3.92
+recovery,new_positions,12,0,timeout_other,,19.15,3.38
+recovery,new_positions,13,0,timeout_other,,19.83,27.69
+recovery,new_positions,14,0,timeout_other,,1.65,0.59
+recovery,new_positions,15,0,timeout_other,,3.64,0.65
+recovery,reduced_lighting,1,0,deliberate_drop,,20.66,2.9
+recovery,reduced_lighting,2,0,deliberate_drop,,18.78,1.11
+recovery,reduced_lighting,3,0,deliberate_drop,,22.77,2.28
+recovery,reduced_lighting,4,0,grasp_drop,Dropped outside of cup (not on purpose),14.69,1.3
+recovery,reduced_lighting,5,1,success,,1.3,0.94
+recovery,reduced_lighting,6,0,deliberate_drop,,15.24,6.88
+recovery,reduced_lighting,7,1,success,,1.09,0.38
+recovery,reduced_lighting,8,1,success,,1.38,0.45
+recovery,reduced_lighting,9,0,deliberate_drop,,9.09,0.97
+recovery,reduced_lighting,10,0,deliberate_drop,,19.9,1.2
+recovery,reduced_lighting,11,1,success,,1.65,0.7
+recovery,reduced_lighting,12,1,success,,1.69,0.56
+recovery,reduced_lighting,13,1,success,,1.28,0.37
+recovery,reduced_lighting,14,0,deliberate_drop,,6.1,0.8
+recovery,reduced_lighting,15,1,success,,1.2,0.61
+recovery-seed2000,different_object,1,0,grasp_drop,Missed the cup when dropping the cube,1.26,0.59
+recovery-seed2000,different_object,2,1,success_after_regrasp,,0.98,0.64
+recovery-seed2000,different_object,3,1,success,,1.25,0.51
+recovery-seed2000,different_object,4,0,grasp_drop,"May be a deliberate drop but it didn't stop like it usually does, taking conservative approach and saying grasp drop",1.65,0.9
+recovery-seed2000,different_object,5,1,success,,1.06,0.76
+recovery-seed2000,different_object,6,1,success,,1.28,0.36
+recovery-seed2000,different_object,7,0,deliberate_drop,,1.97,0.48
+recovery-seed2000,different_object,8,0,deliberate_drop,,19.27,12.39
+recovery-seed2000,different_object,9,0,deliberate_drop,,3.32,1.45
+recovery-seed2000,different_object,10,0,deliberate_drop,,14.62,0.93
+recovery-seed2000,different_object,11,0,deliberate_drop,,17.37,2.07
+recovery-seed2000,different_object,12,0,deliberate_drop,,17.16,1.06
+recovery-seed2000,different_object,13,0,deliberate_drop,,16.02,3.75
+recovery-seed2000,different_object,14,1,success,,1.68,0.76
+recovery-seed2000,different_object,15,0,deliberate_drop,,24.73,7.71
+recovery-seed2000,distractors,1,1,success,,1.44,0.53
+recovery-seed2000,distractors,2,1,success,,1.72,0.64
+recovery-seed2000,distractors,3,1,success,,1.1,0.65
+recovery-seed2000,distractors,4,1,success,arm kept moving after placing the cup,1.35,0.39
+recovery-seed2000,distractors,5,1,success,arm kept moving after placing the cup,1.81,0.53
+recovery-seed2000,distractors,6,0,contact_no_grasp,claw pushed cube as it tried to close,10.78,1.78
+recovery-seed2000,distractors,7,1,success,,1.13,0.42
+recovery-seed2000,distractors,8,0,deliberate_drop,,5.96,1.62
+recovery-seed2000,distractors,9,1,success,,1.38,0.42
+recovery-seed2000,distractors,10,1,success,,1.38,0.71
+recovery-seed2000,distractors,11,1,success,arm kept moving after placing the cup,1.56,0.9
+recovery-seed2000,distractors,12,1,success,,0.97,0.67
+recovery-seed2000,distractors,13,1,success,,1.46,0.52
+recovery-seed2000,distractors,14,1,success,,1.29,0.6
+recovery-seed2000,distractors,15,0,deliberate_drop,"Dropped the cube on purpose, picked it up, held over cup, then pulled back and dropped, then failed to pick up",21.89,1.39
+recovery-seed2000,in_distribution,1,1,success_after_regrasp,"Deliberate drop, cube landed in front of it and it picked it up",0.81,0.64
+recovery-seed2000,in_distribution,2,0,deliberate_drop,,17.17,1.07
+recovery-seed2000,in_distribution,3,1,success_after_recovery,"bumped the cube out of place with first grasp attempt but still got it, no drop",1.56,0.54
+recovery-seed2000,in_distribution,4,1,success,,1.04,0.48
+recovery-seed2000,in_distribution,5,1,success_after_regrasp,"Deliberate drop, cube landed in front of it and it picked it up",1.32,0.62
+recovery-seed2000,in_distribution,6,1,success,,1.4,0.51
+recovery-seed2000,in_distribution,7,1,success,,1.22,0.52
+recovery-seed2000,in_distribution,8,0,deliberate_drop,"Cube landed in front of it but a ~2 inches to the left, it missed on attempt (note on seed one, the drops seemed a bit more erratic)",14.11,2.53
+recovery-seed2000,in_distribution,9,1,success,,1.34,0.8
+recovery-seed2000,in_distribution,10,1,success_after_recovery,"bumped cube out of place a few times but picked it up, no drop",1.22,0.49
+recovery-seed2000,in_distribution,11,0,deliberate_drop,,3.66,7.02
+recovery-seed2000,in_distribution,12,0,deliberate_drop,"Dropped the cube, infront of it but a bit to the left, hit it with the claw twice but didn't grab it",5.46,0.99
+recovery-seed2000,in_distribution,13,0,deliberate_drop,"Cube landed ~4-5 inches to the right of the claw, it went down to where it normally goes then to the right and ended by T5",18.55,8.81
+recovery-seed2000,in_distribution,14,0,deliberate_drop,"Dropped the cube twice, it dropped it, picked it up, then dropped it again",7.58,6.56
+recovery-seed2000,in_distribution,15,1,success,,0.88,0.43
+recovery-seed2000,new_positions,1,0,no_departure,,1.04,0.6
+recovery-seed2000,new_positions,2,0,timeout_other,went to t6,7.94,4.18
+recovery-seed2000,new_positions,3,0,timeout_other,went to t6 and t7,4.91,2.28
+recovery-seed2000,new_positions,4,0,no_departure,,1.08,0.41
+recovery-seed2000,new_positions,5,0,no_departure,,1.01,0.61
+recovery-seed2000,new_positions,6,0,no_departure,,0.92,0.63
+recovery-seed2000,new_positions,7,0,contact_no_grasp,"went to t6 at first then moved back and went to the cube and bumped the cube slightly, cube is in a position as if it fell",22.24,4.62
+recovery-seed2000,new_positions,8,0,timeout_other,"went to t6, then t7 and t4, went up then back to t6 and t7",7.41,3.06
+recovery-seed2000,new_positions,9,0,contact_no_grasp,"Went up towards the table, then back and bumped the cube",1.92,0.36
+recovery-seed2000,new_positions,10,0,timeout_other,went to t6,17.87,12.05
+recovery-seed2000,new_positions,11,0,timeout_other,went to t6,25.26,6.44
+recovery-seed2000,new_positions,12,0,no_departure,,1.29,0.38
+recovery-seed2000,new_positions,13,0,timeout_other,went between t6 and t7,7.89,1.82
+recovery-seed2000,new_positions,14,0,timeout_other,went to t6,19.29,9.13
+recovery-seed2000,new_positions,15,0,timeout_other,went to t6,13.14,4.44
+recovery-seed2000,reduced_lighting,1,1,success_after_recovery,,1.1,1.02
+recovery-seed2000,reduced_lighting,2,1,success,,1.12,0.53
+recovery-seed2000,reduced_lighting,3,0,deliberate_drop,,17.85,1.22
+recovery-seed2000,reduced_lighting,4,0,deliberate_drop,,14.95,1.25
+recovery-seed2000,reduced_lighting,5,1,success_after_regrasp,,1.05,0.56
+recovery-seed2000,reduced_lighting,6,0,deliberate_drop,,4.25,2.56
+recovery-seed2000,reduced_lighting,7,0,deliberate_drop,,14.44,14.59
+recovery-seed2000,reduced_lighting,8,0,deliberate_drop,,14.74,17.41
+recovery-seed2000,reduced_lighting,9,1,success_after_regrasp,,0.89,0.43
+recovery-seed2000,reduced_lighting,10,0,deliberate_drop,,4.83,1.91
+recovery-seed2000,reduced_lighting,11,0,deliberate_drop,"Cube landed next to cup, the arm went back to the netural position after pushing the cube into the cup a little bit",1.28,0.55
+recovery-seed2000,reduced_lighting,12,0,deliberate_drop,"Cube landed next to cup, the arm went back to the netural position after pushing the cube into the cup a little bit",1.38,0.65
+recovery-seed2000,reduced_lighting,13,0,deliberate_drop,,24.76,2.82
+recovery-seed2000,reduced_lighting,14,1,success_after_regrasp,"Placed cube in the cup at the last few seconds, ran out of time as it was returning, but it did place cup",7.28,15.43
+recovery-seed2000,reduced_lighting,15,0,deliberate_drop,,24.91,11.38

@@ -54,13 +54,22 @@ for name, idx in CAMERAS.items():
             good = frame
             count += 1
 
+
+
     measured = count / (time.time() - start)
 
     path = f"tools/preview_{name}.jpg"
-    cv2.imwrite(path, good)
+    if not cv2.imwrite(path, good):
+        print(f"{name}: Failed to write {path} (run from the repo root)")
+        cap.release()
+        continue
+
     h, w = good.shape[:2]
     claimed = cap.get(cv2.CAP_PROP_FPS)
     print(f"{name} (index {idx}): saved {path}")
-    print(f" resolution {w} x {h} driver claims {claimed:.1f} fps "
-          f" measured {measured:.1f} fps")
+    print(f" resolution {w} x {h} driver claims {claimed:.1f} fps, measured {measured:.1f} fps")
+    if measured < 25:
+        print(f" WARNING: {name} is running at {measured:.1f} fps, below the 30 fps the "
+              f"protocol assumes. Do not record until this is fixed.")
+
     cap.release()

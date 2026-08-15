@@ -8,18 +8,19 @@
 set -e
 
 # Requires argument, print message and exit if missing
-POLICY=${1:?usage: run_inference.sh <policy> <cell>}
-CELL=${2:?usage: run_inference.sh <policy> <cell>}
+POLICY=${1:?usage: run_inference.sh <policy> <cell> [n_episodes]}
+CELL=${2:?usage: run_inference.sh <policy> <cell> [n_episodes]}
+NEPS=${3:-16}
 
 
 # Ensures everything is spelt right before running, by checking policy and cell against options
 case "$CELL" in
-    in_distribution|new_positions|reduced_lighting|different_object|distractors) ;;
+    in_distribution|new_positions|reduced_lighting|different_object|distractors|near_1in|near_2in) ;;
     *) echo "unknown cell '$CELL'"; exit 1 ;;
 esac
 
 case "$POLICY" in
-    clean|randomized|recovery|color|color-slowpace|clean-seed2000|randomized-seed2000|color-seed2000|recovery-seed2000|color-slowpace-seed2000) ;;
+    clean|randomized|recovery|color|color-slowpace|clean-seed2000|randomized-seed2000|color-seed2000|recovery-seed2000) ;;
     *) echo "unknown policy '$POLICY'"; exit 1 ;;
 esac
 
@@ -29,6 +30,9 @@ HF_USER=Andresg324
 # Confirm indices prior to running with tools/check_cameras.py
 OVERHEAD_IDX=1
 WRIST_IDX=0 
+
+# chunk_size=50 and n_action_steps=50 (PROTOCOL.md §4.12) are inherited from the trained
+# policy's config, not set here. Verify with: hf download <policy> config.json
 
 lerobot-rollout \
     --robot.type=so101_follower \
@@ -42,7 +46,8 @@ lerobot-rollout \
     --task="Pick up the cube and place it in the cup" \
     --dataset.repo_id=${HF_USER}/rollout_${POLICY}_${CELL} \
     --dataset.single_task="Pick up the cube and place it in the cup" \
-    --dataset.num_episodes=16 \
+    --dataset.fps=30 \
+    --dataset.num_episodes=${NEPS} \
     --dataset.episode_time_s=45 \
     --dataset.reset_time_s=15 \
     --dataset.push_to_hub=True \

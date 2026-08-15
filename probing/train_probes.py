@@ -1,12 +1,31 @@
 """
-Trains linear probes to predict episode success from a policy's hidden activations, per
-condition, with controls from the deception-probe evaluation protocol:
-  - AUROC only (threshold-free). Accuracy is threshold-dependent and misleads (see paper's Qwen-3B exhibit).
-  - Episode-grouped splits (no timestep leakage across train/test).
-  - Repeated-split 95% CI on AUROC (small-n uncertainty).
-  - De-confound: within-cell vs pooled AUROC. A big pooled>within-cell gap means the probe is
-    reading 'which cell' (difficulty), not genuine self-knowledge of failure.
-RUN: python probing/train_probes.py probing/out/activations_synthetic.npz --outdir probing/out
+probing/train_probes.py
+
+Trains linear probes to predict episode success from a policy's hidden activations, one
+probe per condition and training seed.
+
+The evaluation design is carried over from my earlier work on linear probes in language
+models, where the same failure modes appeared:
+
+    Garcia, A. (2026). What Deception Probes Read and How Evaluations of Them Fail.
+    https://doi.org/10.5281/zenodo.21632022
+    https://github.com/Andresg324/truth-probes
+
+Four choices follow from it:
+
+  - AUROC only. Accuracy depends on a decision threshold, so an intervention that shifts the
+    boundary without damaging the representation reads as a large effect. In that paper an
+    ablation dropped Qwen-3B probe accuracy by 0.231 while AUROC moved 0.013, and three such
+    reversals appeared before the pattern was understood.
+  - Episode-grouped splits. Timesteps within an episode are not independent, so an ungrouped
+    split trains and tests on the same episode.
+  - Repeated splits with a percentile interval, since one split at this sample size reports
+    a single draw from a wide distribution.
+  - Within-cell versus pooled AUROC. Evaluation cells differ in difficulty, so a probe can
+    score well by learning which cell it is in rather than anything about the policy's state.
+    A large pooled-minus-within-cell gap is that confound surfacing.
+
+RUN: python probing/train_probes.py probing/out_np/activations_real.npz
 """
 
 import argparse, os, csv
@@ -22,23 +41,31 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 
 warnings.filterwarnings("ignore", message=".*matmul.*")
-np.seterr(all="ignore")
 
 def grouped_auroc(X, y, groups, seed):
-    # One episode=grouped split to test AUROC (nan if a split is degenerate).
+    # One episode-grouped split to test AUROC (nan if a split is degenerate).
     tr, te = next(GroupShuffleSplit(1, test_size=0.3, random_state=seed).split(X, y, groups))
     if len(set(y[tr])) < 2 or len(set(y[te])) < 2:
         return np.nan
-    clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000)).fit(X[tr], y[tr])
-    return roc_auc_score(y[te], clf.predict_proba(X[te])[:, 1])
+    clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000))
+
+    # StandardScaler on near-constant activation dimensions raises FPU flags. Inputs are
+    # finite and the scores are asserted finite below, so the flags are noise. Scoped rather
+    # than global, so an overflow anywhere else still surfaces.
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        clf.fit(X[tr], y[tr])
+        scores = clf.predict_proba(X[te])[:, 1]
+    assert np.isfinite(scores).all(), "probe produced non-finite scores"
+    return roc_auc_score(y[te], scores)
 
 def auroc_with_ci(X, y, groups, n_repeats=100):
-    # Repeat the grouped splits and return the median, 2.5% and 97.5% for a 95% CI
+    # Median and 2.5 / 97.5 percentiles over repeated grouped splits, plus how many
+    # splits were usable. A CI built from a handful of surviving splits is not a CI.
     vals = [grouped_auroc(X, y, groups, s) for s in range(n_repeats)]
     vals = [v for v in vals if v == v]
     if not vals:
-        return(np.nan, np.nan, np.nan)
-    return(float(np.median(vals)), float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5)))
+        return np.nan, np.nan, np.nan, 0
+    return(float(np.median(vals)), float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5)), len(vals))
 
 def within_cell_auroc(X, y, cells, groups, n_repeats=40):
     # De-confound: AUROC inside each cell (control for difficulty), and then averaged
@@ -47,7 +74,7 @@ def within_cell_auroc(X, y, cells, groups, n_repeats=40):
         m = cells == cl
         if len(set(y[m])) < 2:
             continue
-        med, _, _ = auroc_with_ci(X[m], y[m], groups[m], n_repeats)
+        med, _, _, _ = auroc_with_ci(X[m], y[m], groups[m], n_repeats)
         if med == med:
             per.append(med)
     return float(np.mean(per)) if per else np.nan
@@ -59,21 +86,30 @@ def main():
     os.makedirs(args.outdir, exist_ok=True)
 
     d = np.load(args.activations, allow_pickle=True)
+    if len(set(success.tolist())) < 2:
+        raise SystemError(
+            f"{args.activations} contains only success={sorted(set(success.tolist()))}. "
+            "A success probe needs both outcomes; the New Positions cell is 0/15 for every "
+            "policy. Extract activations for a cell with mixed outcomes first."
+        )
+
     X, condition, eval_cell = d["X"], d["condition"], d["eval_cell"]
     episode, success, tfe = d["episode"], d["success"].astype(int), d["t_from_end"]
 
-    print(f"{'condition':12s} {'pooled AUROC [95% CI]':30s} {'within-cell':12s} gap")
+    print(f"{'condition':12s} {'seed':>5s} {'pooled AUROC [95% CI]':30s} {'within-cell':12s} gap")
     results = []
+    seed_arr = d["seed"]
     for c in sorted(set(condition)):
-        m = condition == c
-        med, lo, hi = auroc_with_ci(X[m], success[m], episode[m])
-        wc = within_cell_auroc(X[m], success[m], eval_cell[m], episode[m])
-        gap = med - wc if (med == med and wc == wc) else np.nan
-        results.append((c, med, lo, hi, wc, gap))
-        ci = f"{med:.3f} [{lo:.3f}, {hi:.3f}]"
-        print(f"{c:12s} {ci:30s} {wc:<12.3f}  {gap:+.3f}")
+        for s in sorted(set(seed_arr[condition == c])):
+            m = (condition == c) & (seed_arr == s)
+            med, lo, hi, n_valid = auroc_with_ci(X[m], success[m], episode[m])
+            wc = within_cell_auroc(X[m], success[m], eval_cell[m], episode[m])
+            gap = med - wc if (med == med and wc == wc) else np.nan
+            results.append((c, int(s), med, lo, hi, wc, gap, n_valid))
+            ci = f"{med:.3f} [{lo:.3f}, {hi:.3f}]"
+            print(f"{c:12s} {s:>5d} {ci:30s} {wc:<12.3f}  {gap:+.3f} n={n_valid}")
 
-    # Lead-time curve, how early is failure decodable
+    # Lead time to decodable failure (pooled across conditions and seeds, descriptive)
     tr, te = next(GroupShuffleSplit(1, test_size=0.3, random_state=0).split(X, success, episode))
     clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000)).fit(X[tr], success[tr])
     p, yt, bt = clf.predict_proba(X[te])[:, 1], success[te], tfe[te]
@@ -101,12 +137,12 @@ def main():
     ax.set_ylim(0.4, 1.0)
     ax.set_xlabel(f"Steps before end of episode (binned, width {BIN})")
     ax.set_ylabel("Probe AUROC")
-    ax.set_title("How early is success or failure decodable from a policy's internal activations?")
+    ax.set_title("Lead time to decodable failure (pooled across conditions and seeds, descriptive)")
     fig.tight_layout(); fig.savefig(os.path.join(args.outdir, "lead_time.png"), dpi=150)
 
     with open(os.path.join(args.outdir, "probe_auroc.csv"), "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["condition", "pooled_auroc", "ci_low", "ci_high", "within_cell_auroc", "gap"])
+        w.writerow(["condition", "seed", "pooled_auroc", "ci_low", "ci_high", "within_cell_auroc", "gap", "n_valid_splits"])
         for r in results:
             w.writerow(r)
     print(f"\nSaved probe_auroc.csv and lead_time.png to {args.outdir}/")

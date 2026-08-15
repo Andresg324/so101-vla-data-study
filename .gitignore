@@ -30,3 +30,14 @@ tools/preview_*.jpg
 tools/probe/
 
 probing/out_synthetic/
+
+__pycache__/
+*.pyc
+~$*
+tools/preview_*.jpg
+
+# Synthetic pipeline-test data. The generators are tracked; their outputs never are.
+probing/out_synthetic/
+*_synthetic.npz
+*_synthetic.csv
+*_synthetic.png

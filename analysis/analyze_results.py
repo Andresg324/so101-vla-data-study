@@ -3,8 +3,9 @@ Turns raw eval cell results (one success / fail label per episode) into the pape
 
 Input is a results CSV file, each row is an episode, and the columns are: condition, eval_cell, seed, episode, success
 
-RUN:
-python analysis/analyze_results.py results.csv --outdir analysis/out
+RUN, once per seed (PROTOCOL.md §4.7 forbids pooling):
+    python analysis/analyze_results.py documents/results_seed1000.csv --outdir analysis/out_seed1000
+    python analysis/analyze_results.py documents/results_seed2000.csv --outdir analysis/out_seed2000
 """
 
 import argparse
@@ -14,7 +15,12 @@ import pandas as pd
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-def wilson_ci(successes, n, z=1.96):
+from scipy.stats import fisher_exact, norm
+
+CONF = 0.95 # 95% Confidence Intervals
+Z95 = norm.ppf(1 - (1 - CONF) / 2) # Z-Score
+
+def wilson_ci(successes, n, z=Z95):
     # 95% Wislon score interval for a success rate, it's reliable at a small N / extreme rates
     # Unlike textbook p +/- 1.96*sqrt(p(1-p)/n), z = 1.96 for 95% confidence
     if n == 0:
@@ -23,7 +29,17 @@ def wilson_ci(successes, n, z=1.96):
     denom = 1 + z**2 / n
     center = (p + z**2 / (2 * n)) / denom
     half = (z * np.sqrt(p * (1 - p) / n + z**2 / (4 * n**2))) / denom
-    return (center - half, center + half)
+    return max(0.0, (center - half)), min(1.0, (center + half))
+
+def newcombe_diff(k1, n1, k2, n2, z=Z95):
+    # Newcombe hybrid score interval for p1 - p2
+    p1, p2 = k1 / n1, k2 / n2
+    l1, u1 = wilson_ci(k1, n1, z)
+    l2, u2 = wilson_ci(k2, n2, z)
+    d = p1 - p2
+    lower = d - ((p1 - l1) ** 2 + (u2 - p2) ** 2) ** 0.5
+    upper = d + ((u1 - p1) ** 2 + (p2 - l2) ** 2) ** 0.5
+    return d, max(-1.0, lower), min(1.0, upper)
 
 def load_results(path):
     # Reads the CSV and sanity checks it so a typo doesn't corrupt the analysis, checks columns names and success values
@@ -72,30 +88,39 @@ def generalization_gap(summary, in_dist_cell="in_distribution"):
     return pd.DataFrame(rows).sort_values("generalization_gap").reset_index(drop=True)
 
 def matched_comparisons(summary, pairs, baseline="clean"):
-    # For each pair (cell to matched condition), compare the matched conditions rate vs. basleine (clean)
-    # on that cell and flag whether their Wilson CIs overlap.
-    def rate_and_ci(cond, cell):
+    # For each pair (cell to matched condition), compare the matched conditions rate vs.baseline (clean)
+    # on that cell. Reports the difference in success rate with a Newcombe hybrid score interval on the
+    # difference and a fisher exact test
+    
+    def counts(cond, cell):
         row = summary[(summary["condition"] == cond) & (summary["eval_cell"] == cell)]
         if row.empty:
             return None
         r = row.iloc[0]
-        return (r["success_rate"], r["ci_low"], r["ci_high"])
+        return int(r["successes"]), int(r["n"])
 
     rows = []
     for cell, matched_cond in pairs.items():
-        m = rate_and_ci(matched_cond, cell)
-        b = rate_and_ci(baseline, cell)
+        m = counts(matched_cond, cell)
+        b = counts(baseline, cell)
         if m is None or b is None:
             continue
-        m_rate, m_lo, m_hi = m
-        b_rate, b_lo, b_hi = b
-        overlap = not (m_lo > b_hi or b_lo > m_hi)
+        k1, n1 = m
+        k2, n2 = b
+        d, lo, hi = newcombe_diff(k1, n1, k2, n2)
+        _, p = fisher_exact([[k1, n1-k1], [k2, n2-k2]])
         rows.append({
             "eval_cell": cell,
-            "matched_condition": matched_cond, "matched_rate": m_rate,
-            "baseline": baseline, "baseline_rate": b_rate,
-            "difference": m_rate - b_rate,
-            "cis_overlap": overlap,
+            "matched_condition": matched_cond,
+            "matched": f"{k1}/{n1}",
+            "matched_rate": k1 / n1,
+            "baseline": baseline, 
+            "baseline_counts": f"{k2}/{n2}",
+            "baseline_rate": k2 / n2,
+            "difference": d,
+            "diff_ci_low": lo,
+            "diff_ci_high": hi,
+            "fisher_p": p,
         })
     return pd.DataFrame(rows)
 
@@ -108,7 +133,7 @@ def plot_success(summary, path):
     for i, cond in enumerate(conditions):
         g = summary[summary["condition"]==cond].set_index("eval_cell").reindex(cells)
         rates = g["success_rate"].values
-        err = [rates - g["ci_low"].values, g["ci_high"].values - rates]
+        err = np.clip([rates - g["ci_low"].values, g["ci_high"].values - rates], 0, None)
         ax.bar(x + i * w, rates, w, yerr = err, capsize=3, label=cond)
     ax.set_xticks(x + w * (len(conditions) - 1) /2)
     ax.set_xticklabels(cells, rotation=20, ha="right")
@@ -133,10 +158,28 @@ def main():
     os.makedirs(args.outdir, exist_ok=True)
 
     df = load_results(args.results)
+    seeds = sorted(df["seed"].unique())
+    if len(seeds) > 1:
+        raise SystemExit(
+            f"{args.results} contains seeds {seeds}. PROTOCOL.md §4.7 and §8.14 forbid\n"
+            f"pooling seeds. Run once per seed:\n"
+            f" python analysis/analyze_results.py documents/results_seed1000.csv "
+            f"--outdir analysis/out_seed1000\n"
+            f" python analysis/analyze_results.py documents/results_seed2000.csv "
+            f"--outdir analysis/out_seed2000"
+        )
+    print(f"seed {seeds[0]}, {len(df)} episodes\n")
+
     summary = summarize(df)
     gap = generalization_gap(summary)
     pairs = {"new_positions": "randomized", "different_object": "color"}
     matched = matched_comparisons(summary, pairs)
+
+    summary.insert(0, "seed", seeds[0])
+    gap.insert(0, "seed", seeds[0])
+    if not matched.empty:
+        matched.insert(0, "seed", seeds[0])
+
 
     summary.to_csv(os.path.join(args.outdir, "success_by_cell.csv"), index=False)
     gap.to_csv(os.path.join(args.outdir, "generalization_gap.csv"), index=False)
