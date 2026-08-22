@@ -40,6 +40,7 @@ from matplotlib.lines import Line2D
 
 sys.path.insert(0, "tools")
 from calibrate_pose import BASE_X, T          # the ten training positions
+from matplotlib.lines import Line2D
 
 OUT = "figures"
 
@@ -663,6 +664,118 @@ def fig_loss():
     title(ax, "Randomized fits best and performs worst")
     save(fig, "fig_loss")
 
+# ----------------------------------------------------------------------------
+# Fig 9  By condition
+# ----------------------------------------------------------------------------
+
+def fig_by_condition():
+    """Four metrics per condition on one row each: success, execution, aim, training loss."""
+    print("By condition")
+    CONDS = ["clean", "color", "recovery", "randomized"]
+    LABEL = {"clean": "Clean", "color": "Color",
+             "recovery": "Recovery", "randomized": "Randomized"}
+    SAME = ["in_distribution", "reduced_lighting", "different_object", "distractors"]
+    REG = SAME + ["new_positions"]
+
+    def policy(cond, seed):
+        return cond if seed == 1000 else f"{cond}-seed{seed}"
+
+    # 1. success rate per condition per seed
+    sv = pd.read_csv(need("analysis/out_seed_variance/seed_variance.csv"))
+    sv = sv[sv.condition != "ALL"].set_index("condition")
+
+    # 2. never-departed fraction, registered cells only so every denominator is 75.
+    #    rollout_motion_by_condition pools in the displacement probe, which gives Clean 91.
+    me = pd.read_csv(need("analysis/out_motion/rollout_motion_episodes.csv"))
+    me = me[me.cell.isin(REG) & me.condition.isin(CONDS)]
+    nd = me.groupby(["condition", "seed"]).apply(
+        lambda g: float((~g.departed.astype(bool)).mean()), include_groups=False)
+
+    # 3. spread of cell medians across the same-target cells
+    aim = pd.read_csv(need("analysis/out_azimuth/aim_by_cell.csv"), index_col=0)
+    same = [c for c in SAME if c in aim.columns]
+    spread = aim[same].max(axis=1) - aim[same].min(axis=1)
+
+    # 4. final training loss, 3-point smoothed to match fig_loss
+    tl = pd.read_csv(need("documents/training_loss.csv"))
+    c_step = pick(tl, "_step", "step")
+    c_loss = pick(tl, "train/losses_after_rm_padding", "train_loss", "loss")
+    last = (tl.sort_values(c_step).groupby("run")[c_loss]
+              .apply(lambda s: s.rolling(3, min_periods=1).mean().iloc[-1]))
+
+    rows = []
+    for cond in CONDS:
+        for seed in (1000, 2000):
+            pol = policy(cond, seed)
+            rows.append({
+                "condition": cond,
+                "seed": seed,
+                "success": float(sv.loc[cond, f"rate{seed}"]),
+                "no_depart": float(nd.get((cond, seed), np.nan)),
+                "aim": float(spread.get(pol, np.nan)),
+                "loss": float(last.get(pol, np.nan)),
+            })
+    d = pd.DataFrame(rows)
+
+    PANELS = [
+        ("success",   "Success rate",                  (0, 1.0)),
+        ("no_depart", "Never departed",                (-0.02, 0.30)),
+        ("aim",       "Aim spread across cells (deg)", (-0.4, 9.0)),
+        ("loss",      "Final training loss",           (0.030, 0.060)),
+    ]
+
+    fig, axes = plt.subplots(1, 4, figsize=(5.5, 2.05), sharey=True)
+    ypos = {c: len(CONDS) - 1 - i for i, c in enumerate(CONDS)}   # Clean at the top
+
+    for ax, (col, xlabel, xlim) in zip(axes, PANELS):
+        # thin connector so the two seeds read as one condition
+        for cond in CONDS:
+            g = d[d.condition == cond]
+            hi = cond == "randomized"
+            ax.plot(g[col], [ypos[cond]] * len(g), lw=1.0,
+                    color=ORANGE if hi else NEUTRAL,
+                    alpha=1.0 if hi else 0.45, zorder=2)
+        for _, r in d.iterrows():
+            hi = r.condition == "randomized"
+            ax.plot(r[col], ypos[r.condition],
+                    marker="o" if r.seed == 1000 else "D",
+                    ms=4.5 if hi else 3.6,
+                    mfc=ORANGE if hi else "white",
+                    mec=ORANGE if hi else NEUTRAL,
+                    mew=1.1, ls="none",
+                    zorder=4 if hi else 3)
+        ax.set_xlim(*xlim)
+        ax.set_xlabel(xlabel, fontsize=6.5, labelpad=2)
+        ax.tick_params(axis="x", labelsize=6, pad=1)
+        ax.tick_params(axis="y", length=0)
+        ax.grid(axis="x", lw=0.4, alpha=0.25)
+        ax.set_axisbelow(True)
+        for side in ("top", "right", "left"):
+            ax.spines[side].set_visible(False)
+
+    axes[0].set_ylim(-0.6, len(CONDS) + 0.15)
+    axes[0].set_yticks([ypos[c] for c in CONDS])
+    axes[0].set_yticklabels([LABEL[c] for c in CONDS], fontsize=7)
+    axes[0].tick_params(axis="y", length=0, pad=2)
+
+    handles = [
+        Line2D([], [], marker="o", ls="none", ms=3.6, mfc="white",
+               mec=NEUTRAL, mew=1.1, label="Seed 1000"),
+        Line2D([], [], marker="D", ls="none", ms=3.6, mfc="white",
+               mec=NEUTRAL, mew=1.1, label="Seed 2000"),
+    ]
+    axes[-1].legend(handles=handles, loc="upper left", fontsize=6,
+                    frameon=False, handletextpad=0.4, labelspacing=0.3,
+                    borderpad=0.1, borderaxespad=0.2)
+
+    if SHOW_TITLES:
+        fig.suptitle("Randomized: worst success, most no-motion, most aim drift, lowest loss",
+                     fontsize=8)
+
+    fig.tight_layout(pad=0.4, w_pad=0.9)
+    save(fig, "fig_by_condition")
+
+
 if __name__ == "__main__":
     table1()
     table2()
@@ -675,4 +788,5 @@ if __name__ == "__main__":
     fig_release()
     fig_success_sweep()
     fig_loss()
+    fig_by_condition()
     print(f"\nall outputs in {OUT}/")

@@ -12,8 +12,8 @@ NUM_EPISODES=${2:?usage: record_dataset.sh <condition> <num_episodes>}
 # exists and was evaluated; it should not be recorded on purpose.
 
 case "$CONDITION" in
-    clean|randomized|recovery|color) ;;
-    *) echo "unknown condition '$CONDITION' (clean|randomized|recovery|color)"; exit 1;;
+    clean|randomized|recovery|color|density) ;;
+    *) echo "unknown condition '$CONDITION' (clean|randomized|recovery|color|density)"; exit 1;;
 esac
 
 # ---- Hardware information ----

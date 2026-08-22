@@ -164,8 +164,9 @@ extraction matches the same cells inside a full run. The activations behind the 
 seeded run rather than corrected, since nothing was wrong with them.
 
 `probe_success.py` skips any policy with too few episodes in the minority outcome, so the sweep
-covers six of the eight: Clean at seed 1000 has 5 failures and Color at seed 2000 has 4, and
-both are skipped rather than fitted. Of the six, only Randomized at seed 1000 clears its
+covers six of the eight: Clean at seed 1000 has 5 episodes in the 
+minority outcome and Color at seed 2000 has 4, so both are skipped 
+rather than fitted. Of the six, only Randomized at seed 1000 clears ts
 permutation null before the grasp (p = 0.046), and it does not replicate at seed 2000
 (p = 0.176).
 

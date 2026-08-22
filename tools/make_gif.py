@@ -93,6 +93,8 @@ def main():
     ap.add_argument("--width", type=int, default=600)
     ap.add_argument("--start", type=float, default=0.0)
     ap.add_argument("--dur", type=float, default=0.0)
+    ap.add_argument("--colors", type=int, default=128, help="palette size, 32 to 256. Lower is smaller.")
+    ap.add_argument("--dither", default="bayer", choices=["bayer", "none"], help="none is much smaller: dither noise defeats inter-frame compression.")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
 
@@ -122,17 +124,17 @@ def main():
     vf = (f"setpts=PTS/{a.speed},fps={a.fps},"
           f"scale={a.width}:-1:flags=lanczos")
 
-    print(f"source   {os.path.relpath(path, root)}")
-    print(f"episode  {a.episode}:  {t0:.2f}s to {t0 + length:.2f}s  ({length:.1f}s)")
-    print(f"output   {out}  at {a.speed}x, {a.fps} fps, {a.width}px "
-          f"({length / a.speed:.1f}s of gif)")
+    dither = "dither=bayer:bayer_scale=3" if a.dither == "bayer" else "dither=none"
 
     base = ["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t0:.3f}", "-t", f"{length:.3f}",
             "-i", path]
     try:
-        subprocess.run(base + ["-vf", vf + ",palettegen=stats_mode=diff", palette], check=True)
         subprocess.run(
-            base + ["-i", palette, "-lavfi", vf + " [x]; [x][1:v] paletteuse=dither=bayer",
+            base + ["-vf", vf + f",palettegen=stats_mode=diff:max_colors={a.colors}", palette],
+            check=True)
+        subprocess.run(
+            base + ["-i", palette,
+                    "-lavfi", vf + f" [x]; [x][1:v] paletteuse={dither}:diff_mode=rectangle",
                     "-loop", "0", out],
             check=True,
         )

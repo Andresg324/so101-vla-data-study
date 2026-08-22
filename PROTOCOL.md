@@ -2,7 +2,8 @@
 
 *Original pre-registration amended August 8, 2026 on the rebuilt workstation, before any data
 collection. §1 through §7 were fixed before the first training episode was recorded. Amendments
-1 to 13 predate that episode; 14 onward are dated and state which data they precede.*
+1 to 13 predate that episode; 14 onward are dated and state which data they precede. Supporting 
+measurements are in `analysis/README.md`.*
 
 ## 1. Apparatus
 
@@ -221,7 +222,8 @@ retained dataset is named in §8.
 ## 8. Amendments
 
 *1 to 13 predate all data collection. 14 to 17 fall between the seed 1000 and seed 2000 grids.
-18 to 29 are analysis-stage. Supporting measurements are in `analysis/README.md`.*
+18 to 29 are analysis-stage. 30 precedes the data it describes. Supporting measurements are in
+`analysis/README.md`.*
 
 ### Before any data was collected (August 8, 2026)
 
@@ -386,6 +388,19 @@ retained dataset is named in §8.
       annealed. This applies identically to all nine runs and is disclosed rather than corrected,
       since correcting it afterwards would break the comparison §4.7 protects.
 
+30. **Sampling density probe, exploratory (August 22).** A fifth collection condition and a
+    tenth policy: 50 new demonstrations at two positions, 25 at T6 (15.5, 10.0) and 25 at T2
+    (6.5, 7.5), alternating by index (odd episodes at T6, even at T2; re-records reuse the
+    position). T2 was chosen because it lies on the opposite side of the arm from T6, roughly
+    −30 against +24 degrees of base bearing, so no fixed sweep can succeed at both positions and
+    the policy must condition on the image to choose a direction. Training settings are identical
+    to §4.7 at seed 1000. Evaluation is three cells at 16 episodes each, 48 rollouts: In-Distribution
+    at T6, the same scene with the cube at T2, and New Positions over the five held-out positions.
+    E3 lies about one inch off the T2–T6 chord, so the two trained-position cells are the primary
+    read and E3 is a weaker interpolation test. The question is whether 25 demonstrations per
+    position recovers Clean-level execution where 5 did not, which would place the floor price
+    discussed in §6 between 5 and 25 per position. The §8.23 bearing analyses apply unchanged,
+
 ## 9. Known limitations
 
 - **Power.** A single cell of 15 episodes carries a Wilson interval roughly ±25 points wide.
@@ -397,9 +412,13 @@ retained dataset is named in §8.
   training-run variance loosely at best; per-cell intervals capture episode-level uncertainty only.
 - **The generalization gap is bounded above by the in-distribution rate**, so a condition that
   performs poorly in distribution cannot show a large gap. Per-cell rates are reported alongside.
-- **Extrapolation is modest.** The held-out positions lie a few inches beyond the training
-  envelope, still within reach and frame. The interpolation split rests on 9 and 6 episodes per
-  seed and is descriptive rather than a test.
+- **Extrapolation is modest.** The held-out positions lie a few     
+  inches beyond the training envelope, still within reach and frame. 
+  The success split rests on 9 interpolation and 6 extrapolation 
+  episodes per seed, all of them zero; the aiming comparison rests on 
+  7 and 5 episodes in total across both seeds, since only episodes 
+  with a detectable grasp yield a bearing. Both are descriptive 
+  rather than formal tests.
 - **The effective window is shorter than the nominal one.** 45 s wall clock, about 38 s of motion,
   identically for every policy and cell (§4.12).
 - **Every policy executes the full 50-action chunk before re-observing**, the least reactive
