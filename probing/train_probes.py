@@ -86,15 +86,14 @@ def main():
     os.makedirs(args.outdir, exist_ok=True)
 
     d = np.load(args.activations, allow_pickle=True)
+    X, condition, eval_cell = d["X"], d["condition"], d["eval_cell"]
+    episode, success, tfe = d["episode"], d["success"].astype(int), d["t_from_end"]
     if len(set(success.tolist())) < 2:
-        raise SystemError(
+        raise SystemExit(
             f"{args.activations} contains only success={sorted(set(success.tolist()))}. "
             "A success probe needs both outcomes; the New Positions cell is 0/15 for every "
             "policy. Extract activations for a cell with mixed outcomes first."
         )
-
-    X, condition, eval_cell = d["X"], d["condition"], d["eval_cell"]
-    episode, success, tfe = d["episode"], d["success"].astype(int), d["t_from_end"]
 
     print(f"{'condition':12s} {'seed':>5s} {'pooled AUROC [95% CI]':30s} {'within-cell':12s} gap")
     results = []

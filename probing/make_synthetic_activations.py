@@ -1,7 +1,18 @@
 #!/usr/bin/env python3
 """
-Fake 'activations' to build and test the probe before the real data.
-Encodes a hypothesis (derived by Claude Opus 5, July 2026), not a result
+probing/make_synthetic_activations.py
+
+Fake activations used to build and test the probe before any real data existed. The
+numbers encode a hypothesis, not a result, and nothing here appears in the paper.
+
+Kept for provenance: this file predates extraction, which is why its cells are the
+pre-final ones and dim is 64 rather than the 720 the action expert actually produces.
+Do not update them; the mismatch is the evidence. This file writes to probing/out while
+the real pipeline uses probing/out_np/.
+
+Hypothesised decodability was drafted with an LLM in July 2026.
+
+RUN: python probing/make_synthetic_activations.py
 """
 
 import numpy as np
@@ -15,7 +26,7 @@ conditions = ["clean", "randomized", "recovery", "color"]
 cells = ["in_distribution", "new_positions", "new_lighting", "different_object", "distractors"]
 episodes_per_cell = 15
 steps_per_episode = 30
-dim = 64 # assuming the hidden actvations are a 64-dimensional vector, to validate once data is collected
+dim = 64 # assuming the hidden activations are a 64-dimensional vector, to validate once data is collected
 
 decodability = {"clean": 0.10, "randomized": 0.16, "recovery": 0.3, "color": 0.13}
 cell_base_rate = {"in_distribution": 0.85, "new_positions": 0.30, "new_lighting": 0.45,

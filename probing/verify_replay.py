@@ -32,7 +32,6 @@ def main():
         dataset_stats=None,
         preprocessor_overrides={"device_processor": {"device": DEVICE}},
     )
-    print("processors built")
 
     ds = LeRobotDataset(REPO)
     frame = ds[0]

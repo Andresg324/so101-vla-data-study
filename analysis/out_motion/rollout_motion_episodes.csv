@@ -368,7 +368,7 @@ randomized,randomized,1000,different_object,4,1151,38.33333206176758,137.63,True
 randomized,randomized,1000,different_object,5,1151,38.33333206176758,151.34,True,19.27,0.7759,10.63,19.07,0,timeout_other,,-
 randomized,randomized,1000,different_object,6,1150,38.29999923706055,157.73,True,1.97,0.8093,8.302,36.33,0,timeout_other,,-
 randomized,randomized,1000,different_object,7,1151,38.33333206176758,156.44,True,2.03,0.8312,9.731,36.3,0,timeout_other,,-
-randomized,randomized,1000,different_object,8,1143,38.06666564941406,158.29,True,6.43,0.8669,13.557,31.63,0,timeout_other,,-
+randomized,randomized,1000,different_object,8,1143,38.06666564941406,158.29,True,6.43,0.8669,13.557,31.63,0,contact_no_grasp,,-
 randomized,randomized,1000,different_object,9,1140,37.96666717529297,7.52,False,,,,,0,no_departure,,-
 randomized,randomized,1000,different_object,10,1142,38.03333282470703,157.27,True,12.47,0.7996,8.04,25.57,0,timeout_other,,-
 randomized,randomized,1000,different_object,11,1140,37.96666717529297,171.37,True,2.37,0.864,9.649,35.6,0,grasp_drop,,-
@@ -382,7 +382,7 @@ randomized,randomized,1000,distractors,3,1151,38.33333206176758,181.94,True,3.0,
 randomized,randomized,1000,distractors,4,701,23.33333396911621,127.22,True,7.53,0.8456,8.081,15.8,1,success,,-
 randomized,randomized,1000,distractors,5,1151,38.33333206176758,168.88,True,4.57,0.8322,9.138,33.77,0,timeout_other,,-
 randomized,randomized,1000,distractors,6,1149,38.266666412353516,182.18,True,3.03,0.7723,9.606,35.23,0,timeout_other,,-
-randomized,randomized,1000,distractors,7,1147,38.20000076293945,178.73,True,1.1,0.7447,10.758,37.1,0,timeout_other,,-
+randomized,randomized,1000,distractors,7,1147,38.20000076293945,178.73,True,1.1,0.7447,10.758,37.1,0,contact_no_grasp,,-
 randomized,randomized,1000,distractors,8,1146,38.16666793823242,176.82,True,1.8,0.8114,11.959,36.37,0,grasp_drop,,-
 randomized,randomized,1000,distractors,9,1150,38.29999923706055,183.83,True,2.37,0.7645,9.447,35.93,0,timeout_other,,-
 randomized,randomized,1000,distractors,10,1148,38.233333587646484,186.26,True,1.53,0.823,8.781,36.7,0,timeout_other,,-
@@ -392,15 +392,15 @@ randomized,randomized,1000,distractors,13,1126,37.5,184.45,True,9.6,0.7611,9.904
 randomized,randomized,1000,distractors,14,1117,37.20000076293945,189.76,True,7.3,0.7972,10.358,29.9,0,timeout_other,,-
 randomized,randomized,1000,distractors,15,1109,36.93333435058594,182.94,True,5.4,0.7689,7.418,31.53,0,timeout_other,,-
 randomized,randomized,1000,in_distribution,1,714,23.766666412353516,123.88,True,9.37,0.8667,7.481,14.4,1,success,,-
-randomized,randomized,1000,in_distribution,2,1144,38.099998474121094,175.32,True,5.63,0.8699,8.099,32.47,0,timeout_other,,-
+randomized,randomized,1000,in_distribution,2,1144,38.099998474121094,175.32,True,5.63,0.8699,8.099,32.47,0,contact_no_grasp,,-
 randomized,randomized,1000,in_distribution,3,1142,38.03333282470703,4.97,False,,,,,0,no_departure,,-
-randomized,randomized,1000,in_distribution,4,1142,38.03333282470703,188.63,True,9.37,0.8927,8.774,28.67,0,timeout_other,,-
+randomized,randomized,1000,in_distribution,4,1142,38.03333282470703,188.63,True,9.37,0.8927,8.774,28.67,0,contact_no_grasp,,-
 randomized,randomized,1000,in_distribution,5,559,18.600000381469727,127.72,True,2.87,0.8876,9.469,15.73,1,success,,-
 randomized,randomized,1000,in_distribution,6,856,28.5,122.08,True,12.37,0.8456,7.689,16.13,1,success,,-
-randomized,randomized,1000,in_distribution,7,1145,38.13333511352539,185.46,True,6.0,0.832,9.213,32.13,0,timeout_other,,-
+randomized,randomized,1000,in_distribution,7,1145,38.13333511352539,185.46,True,6.0,0.832,9.213,32.13,0,contact_no_grasp,,-
 randomized,randomized,1000,in_distribution,8,537,17.866666793823242,119.51,True,4.37,0.9015,7.828,13.5,1,success,,-
 randomized,randomized,1000,in_distribution,9,816,27.16666603088379,124.18,True,12.3,0.9853,8.605,14.87,1,success,,-
-randomized,randomized,1000,in_distribution,10,1145,38.13333511352539,175.3,True,7.6,0.8367,6.606,30.53,0,timeout_other,,-
+randomized,randomized,1000,in_distribution,10,1145,38.13333511352539,175.3,True,7.6,0.8367,6.606,30.53,0,contact_no_grasp,,-
 randomized,randomized,1000,in_distribution,11,1144,38.099998474121094,149.54,True,4.7,0.8873,11.952,33.4,0,timeout_other,,-
 randomized,randomized,1000,in_distribution,12,489,16.266666412353516,126.25,True,2.57,1.0051,7.768,13.7,1,success,,-
 randomized,randomized,1000,in_distribution,13,1142,38.03333282470703,182.98,True,1.83,0.882,9.367,36.2,0,timeout_other,,-
@@ -431,7 +431,7 @@ randomized,randomized,1000,reduced_lighting,7,1151,38.33333206176758,182.33,True
 randomized,randomized,1000,reduced_lighting,8,1151,38.33333206176758,163.49,True,4.77,0.8778,10.653,33.57,0,timeout_other,,-
 randomized,randomized,1000,reduced_lighting,9,483,16.066667556762695,122.69,True,2.5,0.8739,9.265,13.57,1,success,,-
 randomized,randomized,1000,reduced_lighting,10,1151,38.33333206176758,189.2,True,10.63,0.9051,8.344,27.7,0,contact_no_grasp,,-
-randomized,randomized,1000,reduced_lighting,11,1149,38.266666412353516,170.7,True,11.53,0.782,9.489,26.73,0,timeout_other,,-
+randomized,randomized,1000,reduced_lighting,11,1149,38.266666412353516,170.7,True,11.53,0.782,9.489,26.73,0,contact_no_grasp,,-
 randomized,randomized,1000,reduced_lighting,12,1147,38.20000076293945,170.61,True,7.17,0.8248,10.387,31.03,0,timeout_other,,-
 randomized,randomized,1000,reduced_lighting,13,564,18.766666412353516,121.51,True,2.53,0.864,7.441,16.23,1,success,,-
 randomized,randomized,1000,reduced_lighting,14,1150,38.29999923706055,171.9,True,3.17,0.7568,12.084,35.13,0,grasp_drop,,-

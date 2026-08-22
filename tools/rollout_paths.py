@@ -18,14 +18,21 @@ def parse_policy(policy):
 
 def discover():
     # {(Policy, cell): path} for the latest dataset for each pair
-    found = {}
+    found, unmatched = {}, []
     for path in glob.glob(os.path.join(CACHE, "rollout_*")):
+        if not os.path.isdir(path):
+            continue
         m = PATTERN.match(os.path.basename(path))
-        if not m or not os.path.isdir(path):
+        if not m:
+            unmatched.append(os.path.basename(path))
             continue
         key = (m["policy"], m["cell"])
         if key not in found or m["stamp"] > found[key][0]:
             found[key] = (m["stamp"], path)
+    if unmatched:
+        print(f" note: {len(unmatched)} rollout_* directories did not match the naming pattern "
+              f"and were ignored: {sorted(unmatched)[:5]}"
+              + (" ..." if len(unmatched) > 5 else ""))
     return {k: v[1] for k, v in sorted(found.items())}
 
 def resolve(policy, cell):

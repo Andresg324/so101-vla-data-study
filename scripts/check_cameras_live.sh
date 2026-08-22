@@ -11,8 +11,8 @@
 set -e
 
 # ---- Hardware information ----
-FOLLOWER_PORT=/dev/tty.usbmodem5B415324451   # 12V arm that executes
-LEADER_PORT=/dev/tty.usbmodem5B415328441     # 5V arm - moved manually
+FOLLOWER_PORT=${FOLLOWER_PORT:-/dev/tty.usbmodem5B415324451}   # 12V arm that executes
+LEADER_PORT=${LEADER_PORT:-/dev/tty.usbmodem5B415328441}       # 5V arm - moved manually
 
 # Confirm indices with tools/check_cameras.py before every session
 OVERHEAD_IDX=1

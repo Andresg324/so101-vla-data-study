@@ -8,6 +8,14 @@ This script does the one comparison that is legitimate: the same condition again
 seed 1000 versus seed 2000, which bounds what a single-seed version of this study could
 have concluded.
 
+The calculated difference is seed 2000 - seed 1000, so a negative value indicates that
+seed 2000 performed worse than the seed 1000.
+
+Intervals here treat episodes as independent, but they are not: episodes within a cell share a
+scene. These intervals are therefore narrower than the cluster-corrected ones used for the
+registered comparisons, and this script is a bound on seed sensitivity rather than a
+reportable test.
+
 RUN: python analysis/seed_variance.py
 """
 
@@ -73,11 +81,12 @@ def main():
     print(t.to_string(index=False))
 
     w = t[t.condition != "ALL"]
+    per = int(d[d.seed == 1000].groupby("condition").size().iloc[0])
     print(f"\nlargest within-condition swing: {w.difference.abs().max():.3f} "
           f"({w.loc[w.difference.abs().idxmax(), 'condition']}), "
-          f"on {na // 4} rollouts per condition per seed")
-    print(f"\nsaved to {OUTDIR}/")
+          f"on {per} rollouts per condition per seed")
 
+    print(f"\nsaved to {OUTDIR}/")
 
 if __name__ == "__main__":
     main()

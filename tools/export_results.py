@@ -51,7 +51,7 @@ def load(sheet):
     df = pd.read_excel(XL, sheet_name=sheet)
     df = df.loc[:, ~df.columns.str.startswith("Unnamed")]
     if "failure_mode" in df:
-        n = int(df.failure_mode.isin(LABEL_RENAMES).sum())
+        n = int(df.failure_mode.isin(LABEL_RENAMES.keys()).sum())
         if n:
             print(f" renamed {n} legacy failure_mode labels in sheet '{sheet}' (per §8.21)")
         df["failure_mode"] = df["failure_mode"].replace(LABEL_RENAMES)
@@ -82,6 +82,12 @@ def validate_registered(df):
                   str(set(df.success.unique())))
     good &= check("episodes 1-15", set(df.episode.unique()) == set(range(1, 16)),
                   str(sorted(set(df.episode.unique()))))
+    dup = df[df.duplicated(["condition", "eval_cell", "seed", "episode"], keep=False)]
+
+    good &= check("no duplicate (condition, cell, seed, episode)", len(dup) == 0, f"{len(dup)} rows")
+
+    if len(dup):
+        print(dup[["condition", "eval_cell", "seed", "episode"]].to_string(index=False))
 
     if "failure_mode" in df:
         bad = set(df.failure_mode.dropna()) - VOCAB
@@ -119,6 +125,16 @@ def validate_exploratory(df):
     good &= check("cell sizes", counts == expected, f"got {counts}")
     good &= check("success is 0/1", set(df.success.unique()) <= {0, 1},
                   str(set(df.success.unique())))
+    if "failure_mode" in df:
+        bad = set(df.failure_mode.dropna()) - VOCAB
+        good &= check("failure_mode vocabulary", not bad, f"unknown: {bad}")
+        mism = df[(df.success == 1) != df.failure_mode.isin(SUCCESS_LABELS)]
+        good &= check("success agrees with failure_mode", len(mism) == 0,
+                      f"{len(mism)} disagreements")
+        if len(mism):
+            print(mism[["condition", "eval_cell", "seed", "episode",
+                        "success", "failure_mode"]].to_string(index=False))
+            
     return good
 
 
@@ -139,7 +155,7 @@ def main():
     for s in sorted(SEEDS):
         reg[reg.seed == s][FIVE].to_csv(f"{OUT}/results_seed{s}.csv", index=False)
     exp.to_csv(f"{OUT}/exploratory.csv", index=False)
-    pd.concat([reg, exp], ignore_index=True).to_csv(f"{OUT}/results_all.csv", index=False)
+    pd.concat([reg.assign(source="registered"), exp.assign(source="exploratory")], ignore_index=True).to_csv(f"{OUT}/results_all.csv", index=False)
 
     print("\nwrote results_full.csv, results.csv, results_seed1000.csv, "
           "results_seed2000.csv, exploratory.csv, results_all.csv")

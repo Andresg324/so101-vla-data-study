@@ -14,11 +14,11 @@ from sklearn.model_selection import LeaveOneOut, cross_val_predict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from calibrate_pose import azimuth_fit, BASE_X
+from calibrate_pose import azimuth_fit, azimuth, BASE_X
+from rollout_paths import resolve
 
 # ------------------------ Set up ---------------------------------------
 
-CACHE = os.environ.get("LEROBOT_CACHE", os.path.expanduser("~/.cache/huggingface/lerobot/Andresg324"))
 OUTDIR = "analysis/out_azimuth"
 
 POS = {"E1": (2.0, 7.5), "E2": (6.5, 2.5), "E3": (12.0, 10.0), "E4": (15.5, 6.5), "E5": (19.5, 13.5)}
@@ -26,17 +26,10 @@ CELL_POS = {"in_distribution": (15.5, 10.0), "near_1in": (15.5, 9.0), "near_2in"
 INTERP = {"E2", "E3", "E4"}
 CLEAN = ("clean", "clean-seed2000")
 
-def azimuth(x, y):
-    return np.degrees(np.arctan2(x - BASE_X, y))
-
 def rollout_actions(policy, cell):
     # Episode indices and the action array for the newest rollout of this pair
-    dirs = sorted(glob.glob(os.path.join(CACHE, f"rollout_{policy}_{cell}_*")))
-    if not dirs:
-        raise FileNotFoundError(f"rollout_{policy}_{cell}")
-    if len(dirs) > 1:
-        print(f" warning: {len(dirs)} datasets match rollout_{policy}_{cell}, using {os.path.basename(dirs[-1])}")
-    files = sorted(glob.glob(os.path.join(dirs[-1], "data", "**", "*.parquet"), recursive=True))
+    root = resolve(policy, cell)
+    files = sorted(glob.glob(os.path.join(root, "data", "**", "*.parquet"), recursive=True))
     df = pd.concat([pd.read_parquet(f) for f in files], ignore_index=True)
     df = df[df.episode_index != 0].sort_values(["episode_index", "frame_index"], kind="stable")
     return df.episode_index.to_numpy(), np.stack(df["action"].to_numpy()).astype(float)
@@ -120,7 +113,12 @@ for pol in CLEAN:
 # ----------------------- Randomized Aiming ----------------------------
 
 r = ends[ends.policy.str.startswith("randomized") & (ends.cell == "new_positions")].copy()
+n_all = len(r)
 r = r[r.instance.isin(POS)]
+if len(r) < n_all:
+    print(f"dropped {n_all - len(r)} new_positions rows with no recognized instance: "
+          f"{sorted(set(ends.loc[ends.cell == 'new_positions', 'instance']) - set(POS))}")
+    
 r["true_az"] = [azimuth(*POS[i]) for i in r.instance]
 r["err"] = r["az"] - r["true_az"]
 r["split"] = np.where(r.instance.isin(INTERP), "interpolation", "extrapolation")
@@ -158,7 +156,7 @@ iqr = ends.pivot_table(index="policy", columns="cell", values="az", aggfunc=lamb
 same = [c for c in SAME_TARGET if c in med.columns]
 allc = [c for c in REGISTERED if c in med.columns]
 
-print("\n--- Commanded Azimuth by Cell (cube at T6 = 24.23 except new_positions) ---")
+print(f"\n--- Commanded Azimuth by Cell (cube at T6 = {azimuth(15.5, 10.0):.2f} except new_positions) ---")
 print(med[allc].round(1).to_string())
 
 print("\nspread of cell medians within each policy, same-target cells only (deg)")
@@ -171,6 +169,6 @@ print("\nIQR width of commanded azimuth, same-target cells only (deg)")
 print(iqr[same].round(1).to_string())
 
 med[allc].round(2).to_csv(os.path.join(OUTDIR, "aim_by_cell.csv"))
-iqr.round(2).to_csv(os.path.join(OUTDIR, "aim_iqr_by_cell.csv"))
+iqr[allc].round(2).to_csv(os.path.join(OUTDIR, "aim_iqr_by_cell.csv"))
 
 print(f"\nSaved to {OUTDIR}/")

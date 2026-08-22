@@ -3,26 +3,37 @@
 probing/extract_activations.py
 
 Replay saved evaluation rollouts through a trained SmolVLA policy, capture one
-layer's hidden activations, and write the .npz that train_probes.py consumes.
+layer's hidden activations, and write the .npz that probe_position.py and
+probe_success.py consume.
 
 Three modes:
   1. Find a layer to hook:
         python probing/extract_activations.py --policy clean --list-layers
   2. Extract for one policy across its eval cells:
-        python probing/extract_activations.py \
-            --policy clean --layer <name from step 1> \
-            --results results.csv --device cuda
-  3. Merge the four per-condition files into the one train_probes.py reads:
-        python probing/extract_activations.py --merge probing/out/activations_*.npz
+        python probing/extract_activations.py --policy clean \
+            --layer model.vlm_with_expert.lm_expert.norm --device mps --seed 0
+  3. Merge the per-policy files into one:
+        python probing/extract_activations.py --merge probing/out_np/activations_*.npz
 
-Mode 2 runs in Colab, where tools/ is not importable.
 CELLS and PATTERN must be kept in sync with tools/rollout_paths.py by hand.
+
+The layer behind every reported result is model.vlm_with_expert.lm_expert.norm, the
+action expert's final RMSNorm, 720 wide. Hook that module, never a LlamaDecoderLayer:
+LeRobot's SmolVLA runs a custom interleaved forward that calls each layer's submodules
+directly, so a hook on lm_expert.layers.N never fires, and neither --list-layers nor
+get_module warns you, because the module does exist. The symptom is "0 activations".
+
+SmolVLA samples action noise, so a hidden state is one draw rather than a fixed
+function of the input. Two extractions of the same episode correlate at 0.998 on the
+same device and 0.997 across CUDA and MPS, so device choice is irrelevant next to the
+sampling. --seed seeds per (cell, episode) so a rerun reproduces, and so extracting a
+subset of cells matches the same cells inside a full run. It cannot reproduce any run
+made before seeding existed.
 """
 
 import argparse
 import glob
 import os
-import sys
 import numpy as np
 import pandas as pd
 import torch
@@ -108,7 +119,7 @@ def hook_fn(module, inputs, output):
     tensor = output[0] if isinstance(output, (tuple, list)) else output
     tensor = tensor.detach().float()
     if tensor.ndim == 3:
-        # (batch, tokens, hidden), these are averaged over tokesn to get one vector
+        # (batch, tokens, hidden), these are averaged over tokens to get one vector
         tensor = tensor.mean(dim=1)
     elif tensor.ndim > 3:
         tensor = tensor.flatten(2).mean(dim=2)
@@ -177,7 +188,7 @@ def resolve_repo(policy_slug, cell):
         raise FileNotFoundError(f"No local dataset for rollout_{policy_slug}_{cell}_*")
     return f"{HF_USER}/{os.path.basename(path)}"
 
-def extract_cell(policy, pre, policy_slug, condition, seed, cell, labels, device, repo_override=None, limit_episodes=None, next_uid=0):
+def extract_cell(policy, pre, policy_slug, condition, seed, cell, labels, device, repo_override=None, limit_episodes=None, next_uid=0, torch_seed=0):
     #Replays one (policy, cell) rollout dataset and returns parallel lists.
 
     #repo = repo_override or f"{HF_USER}/rollout_{condition}_{cell}"
@@ -188,7 +199,7 @@ def extract_cell(policy, pre, policy_slug, condition, seed, cell, labels, device
     ep_col = episode_index_columns(ds)
 
     out = {"X": [], "episode": [], "ep_true": [], "success": [], "t_from_end": []}
-    episodes = [e for e in sorted({int(e) for e in ep_col}) if e != 0] #Not including the warmpu episode used
+    episodes = [e for e in sorted({int(e) for e in ep_col}) if e != 0] #Not including the warm-up episode used
     if limit_episodes:
         episodes = episodes[:limit_episodes]
 
@@ -204,6 +215,14 @@ def extract_cell(policy, pre, policy_slug, condition, seed, cell, labels, device
         y = labels[key]
 
         policy.reset() # Clears the action queue so episodes don't bleed
+
+        # Order is load-bearing: extract_cell() seeds on CELLS.index(cell), so reordering this
+        # list changes every draw and breaks reproducibility against prior extractions.     
+        
+        # SmolVLA samples action noise, so hidden states are not reproducible without
+        # this. Seed per (cell, episode) rather than once per run, so a draw does not
+        # depend on which cells were extracted, or in what order.
+        torch.manual_seed(torch_seed + 1000 * CELLS.index(cell) + ep)
 
         for t, row in enumerate(rows):
             obs = build_observation(ds[int(row)], device)
@@ -231,11 +250,30 @@ def extract_cell(policy, pre, policy_slug, condition, seed, cell, labels, device
     return out, next_uid
 
 def merge(paths, out_path):
-    keys = ["X", "condition", "seed", "eval_cell", "episode", "ep_true", "success", "t_from_end"]
+    keys = ["X", "condition", "seed", "eval_cell", "ep_true", "success", "t_from_end"]
     parts = [np.load(p, allow_pickle=True) for p in paths]
     merged = {k: np.concatenate([p[k] for p in parts]) for k in keys}
+
+    seeds = sorted({int(p["torch_seed"][0]) for p in parts if "torch_seed" in p})
+    if seeds:
+        merged["torch_seed"] = np.array(seeds)
+
+    offset, eps = 0, []
+    for p in parts:
+        e = p["episode"].astype(int)
+        eps.append(e + offset)
+        offset += int(e.max()) + 1
+
+    merged["episode"] = np.concatenate(eps)
+
+    layers = sorted({str(p["layer"][0]) for p in parts if "layer" in p})
+    if len(layers) > 1:
+        raise SystemExit(f"refusing to merge across layer: {layers}")
+    if layers:
+        merged["layer"] = np.array(layers)
+
     np.savez(out_path, **merged)
-    print(f"merged {len(paths)} files to {out_path} ({len(merged['X'])} rows)")
+    print(f"merged {len(paths)} files to {out_path} ({len(merged['X'])} rows), layer {layers[0] if layers else 'unknown'}")
 
 # ----------------------------------------
 
@@ -251,18 +289,23 @@ def main():
     ap.add_argument("--outdir", default="probing/out_np")
     ap.add_argument("--list-layers", action="store_true")
     ap.add_argument("--merge", nargs="*")
+    ap.add_argument("--seed", type=int, default=0, help="torch seed for the policy's action-noise sampling")
     args = ap.parse_args()
 
     if args.merge:
         os.makedirs(args.outdir, exist_ok=True)
         paths = [p for pat in args.merge for p in glob.glob(pat)]
-        merge(sorted(paths), os.path.join(args.outdir, "activations_real.npz"))
+        out = os.path.join(args.outdir, "activations_real.npz")
+        paths = sorted(p for p in paths if os.path.abspath(p) != os.path.abspath(out))
+        if not paths:
+            raise SystemExit("no input files after excluding the merge target")
+        merge(paths, out)
         return
 
     if not args.policy:
         ap.error("--policy is required unless --merge is given")
 
-    policy, pre, post = load_policy(args.policy, args.device)
+    policy, pre, _ = load_policy(args.policy, args.device)
 
     if args.list_layers:
         list_layers(policy)
@@ -270,13 +313,14 @@ def main():
 
     condition, seed = parse_policy(args.policy)
     get_module(policy, args.layer).register_forward_hook(hook_fn)
+    print(f"hooking layer: {args.layer}")
     labels = load_labels(args.results)
 
     X, cond, cells, eps, eptrue, succ, tfe = [], [], [], [], [], [], []
     uid = 0
     for cell in args.cells:
         try:
-            part, uid = extract_cell(policy, pre, args.policy, condition, seed, cell, labels, args.device, args.rollout_repo, args.limit_episodes, uid)
+            part, uid = extract_cell(policy, pre, args.policy, condition, seed, cell, labels, args.device, args.rollout_repo, args.limit_episodes, uid, args.seed)
         except FileNotFoundError as e:
             print(f" skipping: {e}")
             continue
@@ -303,6 +347,8 @@ def main():
         ep_true=np.array(eptrue, dtype=int),
         success=np.array(succ, dtype=int),
         t_from_end=np.array(tfe, dtype=int),
+        layer=np.array([args.layer]),
+        torch_seed=np.array([args.seed]),
     )
 
     print(f"\nwrote {out_path} X = {np.stack(X).shape}")

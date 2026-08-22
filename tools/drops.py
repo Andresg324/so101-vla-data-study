@@ -5,10 +5,10 @@ tools/drops.py
 This code addresses the question where and when does a policy release the cube?
 
 A release is any sustained gripper opening after the approach-open. In a successful
-episode the final release is the delivery into the cup and every earlier one is a drop;
-in a failed episode nothing reached the cup, so every release is a drop. Where several
-drops are detected in one episode the first is taken as the drop, since anything later
-is a failed re-grasp or the return to home.
+episode a release inside the cup's angular half-width is the delivery and every other
+release is a drop; in a failed episode nothing reached the cup, so every release is a
+drop. Where several drops are detected in one episode the first is taken as the drop,
+since anything later is a failed re-grasp or the return to home.
 
 Release thresholds (12 deg sustained 5 frames) were calibrated against the recovery
 demonstrations, where 20 episodes were performed with a deliberate drop and 30 without.
@@ -147,7 +147,7 @@ def main():
 
             bounds = [a_end - 1] + [e - 1 for _, e in rel[:-1]]
             success = int(m.success.iloc[0])
-            events = [{"frame": int(s), "az": float(az[s]), "is_final": k == len(rel) - 1} for k, (s, _e) in enumerate(rel) if abs(az[s] - az[bounds[k]]) >= MIN_TRAVEL]
+            events = [{"frame": int(s), "az": float(az[s])} for k, (s, _e) in enumerate(rel) if abs(az[s] - az[bounds[k]]) >= MIN_TRAVEL]
 
             if not events:
                 skips["below_travel"] += 1

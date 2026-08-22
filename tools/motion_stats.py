@@ -54,6 +54,8 @@ def load_actions(root):
     return actions, episodes
 
 def main():
+    if len(sys.argv) < 2:
+        raise SystemExit(__doc__)
     os.makedirs(OUTDIR, exist_ok=True)
     rows = []
     for name in sys.argv[1:]:
@@ -61,6 +63,8 @@ def main():
         actions, episodes = load_actions(root)
         fps = dataset_fps(root)
 
+        # Episode 0 is kept. The warm-up convention applies to rollouts only; in a training
+        # dataset episode 0 is demonstration T1, which calibrate_pose.py maps by index.
         per_step, durations = [], []
         for ep in np.unique(episodes):
             a = actions[episodes == ep]
@@ -87,6 +91,8 @@ def main():
     base = t.loc[t.dataset.str.contains("clean_2026"), "sec_per_ep"]
     if len(base):
         t["vs_clean_pct"] = (t.sec_per_ep / float(base.iloc[0]) - 1) * 100
+    else:
+        print(" note: no 'clean' dataset in this run, vs_clean_pct omitted from pace.csv")
     t.round(4).to_csv(os.path.join(OUTDIR, "pace.csv"), index=False)
     print(t.round(3).to_string(index=False))
     print(f"\nsaved to {OUTDIR}/pace.csv")

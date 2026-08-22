@@ -36,19 +36,20 @@ def main():
     ap.add_argument("--cells", nargs="+", required=True)
     ap.add_argument("--per-episode", action="store_true")
     ap.add_argument("--shift-from", help="cell to use as the comparison baseline; "
-                                          "only meaningful when all cells share one cube position")
+                                          "requires every cell to hold the cube at a single fixed position")
     args = ap.parse_args()
 
     condition, seed = parse_policy(args.policy)
     runs = discover()
     lab = pd.concat([pd.read_csv(p) for p in TRACKERS], ignore_index=True)
 
-    rows, no_grasp = [], []
+    rows, no_grasp, multi, seen = [], [], [], []
     for cell in args.cells:
         root = runs.get((args.policy, cell))
         if root is None:
             print(f"skipping {cell}: no local dataset found")
             continue
+        seen.append(cell)
         df = actions(root)
         for ep, g in df.groupby("episode_index"):
             if ep == 0:
@@ -66,11 +67,13 @@ def main():
                 (lab.eval_cell == cell) & 
                 (lab.episode == ep)
             ]
+            if len(m) > 1:
+                multi.append((cell, int(ep), len(m)))
             row = {
                 "cell": cell,
                 "episode": int(ep),
                 "frame": idx,
-                "success": int(m.success.iloc[0]) if len(m) else -1,
+                "success": int(m.success.iloc[0]) if len(m) and pd.notna(m.success.iloc[0]) else -1,
                 "instance": m.instance.iloc[0] if len(m) else "-",
                 "released": released
             }
@@ -79,9 +82,13 @@ def main():
     if no_grasp:
         print(f"no grasp detected in {len(no_grasp)} episodes: {no_grasp}")
 
+    if multi:
+        print(f"WARNING: {len(multi)} episodes matched more than one tracker row "
+              f"(results_full.csv and exploratory.csv overlap): {multi}")
+
     ep_df = pd.DataFrame(rows)
     if ep_df.empty:
-        raise SystemExit("No grasp events found")
+        raise SystemExit("No grasp events found" + ("" if seen else f", no local dataset for any of {args.cells}"))
 
     unmatched = int((ep_df.success == -1).sum())
     if unmatched:
@@ -92,7 +99,7 @@ def main():
     out = f"analysis/out_endpoints/endpoints_{args.policy}.csv"
     if os.path.exists(out):
         prev = pd.read_csv(out)
-        prev = prev[~prev.cell.isin(args.cells)]        # Replaces only regenerated cells
+        prev = prev[~prev.cell.isin(seen)]        # Replaces only regenerated cells
 
         # calibrate_pose.py --apply writes these back in; drop them so the merged
         # file is not half-populated. Re-run --apply after this.
@@ -114,7 +121,7 @@ def main():
     q = ep_df.groupby("cell")[JOINTS].quantile([0.25, 0.75]).round(2)
     print(q.to_string())
 
-    if len(args.cells) > 1:
+    if ep_df.cell.nunique() > 1:
         med = ep_df.groupby("cell")[JOINTS].median()                
         q1 = ep_df.groupby("cell")[JOINTS].quantile(0.25)
         q3 = ep_df.groupby("cell")[JOINTS].quantile(0.75)                

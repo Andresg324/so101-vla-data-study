@@ -1,8 +1,8 @@
 # Collection and Evaluation Run Sheet
 
-Companion to PROTOCOL.md (PROTOCOL.md is the source of truth if there are any disagreements)
+Companion to PROTOCOL.md. PROTOCOL.md is the source of truth if the two disagree.
 
-**Status: closed.** This sheet began as a forward-looking checklist and is retained as the
+**Status: closed.** This sheet began as a forward looking checklist and is retained as the
 as-run record. Everything below is what actually happened, with deviations marked. Deviations
 that affect interpretation are also logged as numbered amendments in PROTOCOL.md §8; this sheet
 is the operational log, not the pre-registration.
@@ -24,7 +24,7 @@ Run every item at the start of every collection and evaluation session.
 - [x] Continuity Camera off on the iPhone.
 - [x] Wave test via `bash scripts/check_cameras_live.sh`. Confirm which index is overhead and
       which is wrist.
-- [x] Set `OVERHEAD_IDX` and `WRIST_IDX` in `record_dataset.sh`, `run_inference.sh`,
+- [x] Set `OVERHEAD_IDX` and `WRIST_IDX` for `record_dataset.sh`, `run_inference.sh`,
       `check_cameras_live.sh` and `check_cameras.py`. All four must agree.
 - [x] Confirm both cameras sustain 30 fps at 640 x 480. A camera that silently drops to 5 or
       15 fps corrupts the recorded timing and invalidates every pace and rate figure.
@@ -34,7 +34,7 @@ Run every item at the start of every collection and evaluation session.
       frame is a re-record trigger under PROTOCOL.md §8.20.
 - [x] Arm returns to home pose: fully retracted, base forward, joints folded, gripper visible
       in the overhead frame.
-- [x] `hf auth whoami` returns correct username. Write token active.
+- [x] `hf auth whoami` returns the correct username. Write token active.
 - [x] Laptop plugged in, sleep disabled, disk space checked.
 
 ---
@@ -44,12 +44,12 @@ Run every item at the start of every collection and evaluation session.
 Command: `bash scripts/record_dataset.sh <condition> 50`
 
 The episode window is a ceiling of **45 seconds** (PROTOCOL.md §4.10), not a target. End each
-demo with the right arrow as soon as the cube is resting in the cup.
+demonstration with the right arrow as soon as the cube is resting in the cup.
 
-Every demo is a first try clean success. Anything less, redo it with the left arrow.
-**When you redo a demo, redo it at the same position or color**, so that episode index still
-maps to factor level. Re-record only for the reasons listed in PROTOCOL.md §8.20, never on the
-basis of task outcome.
+Every demonstration is a first try clean success. Anything less, redo it with the left arrow.
+**When you redo a demonstration, redo it at the same position or color**, so that the episode
+index still maps to the factor level. Re-record only for the reasons listed in
+PROTOCOL.md §8.20, never on the basis of task outcome.
 
 | # | Condition | Cube | Position | Instruction | Done |
 |---|---|---|---|---|---|
@@ -62,10 +62,11 @@ basis of task outcome.
 T5 (15.5, 2.5), T6 (15.5, 10.0), T7 (15.5, 14.25), T8 (20.5, 2.5), T9 (20.5, 6.5),
 T10 (20.5, 10.0). Repeat five times.
 
-**Recovery drop pattern:** demos 2, 4, 7, 9, 12, 14, 17, 19, 22, 24, 27, 29, 32, 34, 37, 39,
-42, 44, 47, 49. Twenty total. Drop during the carry from 4 to 5 inches above the surface, then
-re-grasp from wherever it lands and complete the task. (Specified as "approximately the
-midpoint"; measured post hoc at roughly 65% of the carry, PROTOCOL.md §8.24.)
+**Recovery drop pattern:** demonstrations 2, 4, 7, 9, 12, 14, 17, 19, 22, 24, 27, 29, 32, 34,
+37, 39, 42, 44, 47, 49. Twenty in total. Drop during the carry from 4 to 5 inches above the
+surface, then re-grasp from wherever it lands and complete the task. Specified as
+"approximately the midpoint"; measured post hoc at roughly 65% of the carry
+(PROTOCOL.md §8.24).
 
 **Color cycle order:** red, orange, yellow, blue, purple. Repeat ten times.
 
@@ -81,6 +82,9 @@ midpoint"; measured post hoc at roughly 65% of the carry, PROTOCOL.md §8.24.)
 
 Regenerate the table, with deg/step and epochs, using `python tools/motion_stats.py <dataset> [...]`.
 
+Note that both Color collections keep the `cube-pickup-color_` prefix. The timestamp is the
+only thing distinguishing them, and anything matching that prefix by glob picks up both.
+
 The frames per condition are not equal by design; the budget is fixed in episodes, not frames
 (PROTOCOL.md §9). Recovery is the longest condition and is therefore trained for the fewest
 passes over its own data at a fixed 10,000 steps.
@@ -89,17 +93,20 @@ passes over its own data at a fixed 10,000 steps.
 
 1. **Randomized session crashed after the 41st recorded episode** (August 10) and was resumed
    at the next index with the cube at T2, environment unchanged. Logged as PROTOCOL.md §8.19.
-   Verification: the index to position mapping was confirmed downstream, since the azimuth
+   Verification: the video recordings were reviewed and the index to position mapping was confirmed downstream, since the azimuth
    calibration groups all 50 grasps by derived position and finds a within-position base
    rotation spread of 0.38 to 1.93 degrees at all ten positions. A one-step offset after the
    resume would have scattered the last nine grasps across positions tens of degrees apart, so
-   the tight clustering rules it out.
-2. **Demonstrations re-recorded.** §3 requires every demonstration to be a first-try clean
-   success, so a demonstration judged not clean at the time was discarded and re-recorded; 
+   the tight clustering rules it out. `tools/calibrate_pose.py` prints that table on every run.
+2. **Demonstrations re-recorded.** §3 requires every demonstration to be a first try clean
+   success, so a demonstration judged not clean at the time was discarded and re-recorded.
    Logged as PROTOCOL.md §8.20.
 3. **Color-varied re-collected** after the first collection came out 23% slower per
-   demonstration than Clean. Logged as PROTOCOL.md §8.18; the superseded dataset was retained
-   and reused as the slowpace probe (§8.16).
+   demonstration than Clean. Logged as PROTOCOL.md §8.18. The superseded dataset was retained
+   and reused as the slow pace probe (§8.16). It was never a designed condition: the pace
+   difference was unintentional as the teleoperator was trying to match clean's pace and accidentally moved slower. The re-collected version was done naturally, without accounting for clock, and comes out faster due to more experience (this was collected last). The slower collection was
+   repurposed after the fact, which is why it is exploratory and why
+   `scripts/record_dataset.sh` deliberately refuses `color-slowpace` as a condition.
 
 ### After each condition finished
 
@@ -120,6 +127,12 @@ tuned per condition.
 evaluated checkpoint is the final one at step 10000. The seed is the only setting that varies
 between replications.
 
+The resolved configuration for each run is committed at
+`configs/train_config_<condition>.json`. Diffing the nine shows that only `output_dir`, `seed`,
+`dataset.repo_id`, `job_name` and `wandb.run_id` differ. The default schedule is a cosine decay
+with 1000 warmup steps and `scheduler_decay_steps: 30000`, so at 10,000 steps the final
+checkpoint sits near 79% of peak learning rate rather than fully annealed.
+
 ### Seed 1000 (primary), trained August 9
 
 - [x] `Andresg324/smolvla-cube-clean`
@@ -127,7 +140,7 @@ between replications.
 - [x] `Andresg324/smolvla-cube-recovery`
 - [x] `Andresg324/smolvla-cube-color`
 
-### Seed 2000 (replication), trained August 9
+### Seed 2000 (replication), trained August 9 to 10
 
 - [x] `Andresg324/smolvla-cube-clean-seed2000`
 - [x] `Andresg324/smolvla-cube-randomized-seed2000`
@@ -136,11 +149,12 @@ between replications.
 
 ### Exploratory, outside the grid
 
-- [x] `Andresg324/smolvla-cube-color-slowpace` (trained on the superseded color collection,
-      seed 1000, otherwise identical settings)
+- [x] `Andresg324/smolvla-cube-color-slowpace`, trained on the superseded color collection,
+      seed 1000, otherwise identical settings.
 
-Nine policies total. Sanity check before committing 75 rollouts to any policy: 3 rollouts, and
-if the arm flails or scores 0 for 3 that is a training problem, not an evaluation result.
+Nine policies in total. The W&B project holds ten runs; the tenth is the pilot from the old
+bench and is not part of the study. Its curve is the one in `media/loss_curve.png`, which is
+therefore not one of the nine.
 
 ---
 
@@ -160,7 +174,8 @@ live. Batched by cell across policies so each scene is configured once.
 | distractors | red | T6 | baseline, both LEDs | four objects, see below |
 
 **Held-out positions:** E1 (2.0, 7.5), E2 (6.5, 2.5), E3 (12.0, 10.0), E4 (15.5, 6.5),
-E5 (19.5, 13.5). Three episodes at each. The position identifier is recorded per episode.
+E5 (19.5, 13.5). Three episodes at each. The position identifier is recorded per episode. E2,
+E3 and E4 fall inside the convex hull of the ten training positions; E1 and E5 fall outside it.
 
 **Distractor placement, identical for all 15 episodes:** crumpled paper at T2 (6.5, 7.5),
 penny at T4 (12.0, 14.0), battery at E4 (15.5, 6.5), screw at T8 (20.5, 2.5).
@@ -177,7 +192,7 @@ penny at T4 (12.0, 14.0), battery at E4 (15.5, 6.5), screw at T8 (20.5, 2.5).
 ### Progress grid, seed 2000 (August 11)
 
 Cell order fixed in advance per PROTOCOL.md §8.14: In-Distribution, Different Object,
-Distractors, Reduced Lighting, New Positions. Order did not depend on any observed outcome.
+Distractors, Reduced Lighting, New Positions. The order did not depend on any observed outcome.
 
 | Policy | in_distribution | different_object | distractors | reduced_lighting | new_positions |
 |---|---|---|---|---|---|
@@ -195,40 +210,41 @@ Success is the cube released and resting in the cup, cup upright, within 45 seco
 
 - If the cube misses the cup, the arm may retry inside the window.
 - Knocking the cup over is an immediate failure.
-- Cube knocked out of the reachable and visible area is a failure.
+- A cube knocked out of the reachable and visible area is a failure.
 - Score 1 or 0 live, into the tracker, at the time of the rollout.
 - Flag anything ambiguous and re-score it from video before analysis.
 
 ### Deviations during evaluation
 
-**Approximately five rollouts were re-recorded**, fewer than ten; the exact count was not logged
-and is not recoverable, since a re-record replaces the discarded take. One was because a pencil
-had been left in the overhead frame, so the scene did not match the cell specification. One
-(randomized, seed 1000, in_distribution, episode 2) was re-recorded because the arm did not
+**Approximately five rollouts were re-recorded**, fewer than ten. The exact count was not
+logged and is not recoverable, since a re-record replaces the discarded take. One was because a
+pencil had been left in the overhead frame, so the scene did not match the cell specification.
+One (randomized, seed 1000, in_distribution, episode 2) was re-recorded because the arm did not
 depart and the experimenter was unsure whether that counted as an episode; that one was not
-outcome-independent and is logged separately as PROTOCOL.md §8.26. The rest were control
-misfires: a right-arrow press as an episode ended made the harness prompt for a recording and a
+outcome independent and is logged separately as PROTOCOL.md §8.26. The rest were control
+misfires: a right arrow press as an episode ended made the harness prompt for a recording and a
 reset at once, so the next episode never started, no inference ran, and the arm was completely
 inert. That inertness is how a misfire is told apart at the time from a scored `no_departure`
 episode, in which the policy runs and the arm vibrates slightly without departing.
 
-**One transposed label pair was found and corrected** during the August 14 audit: color /
-in_distribution / seed 1000 / episodes 8 and 9 had each other's labels. Both were re-scored from
-video, episodes 10 and 11 were checked and match, and because the swap exchanges one success for
-another inside the same cell no reported rate changed. Logged as PROTOCOL.md §8.27.
+**One transposed label pair was found and corrected** during an audit: color /
+in_distribution / seed 1000 / episodes 8 and 9 carried each other's labels. Both were re-scored
+from video, episodes 10 and 11 were checked and match, and because the swap exchanges one
+success for another inside the same cell no reported rate changed. Logged as
+PROTOCOL.md §8.27.
 
 ---
 
 ## Part C: exploratory probes (August 11, after the seed 2000 grid closed)
 
-Both were declared exploratory in writing before they were run. Neither is pooled into the
-four-condition grid.
+Both were declared exploratory in writing before they were run. Neither is pooled into the four
+condition grid.
 
 ### C1. Demonstration pace probe (PROTOCOL.md §8.16)
 
 `smolvla-cube-color-slowpace` evaluated on In-Distribution and Different Object, 15 scored
 episodes each, **30 rollouts**, compared against the retained Color policy at 16.6 s and
-0.3466 deg/step against the slowpace 23.0 s and 0.2481 deg/step. The two datasets are separate
+0.3466 deg/step against the slow pace 23.0 s and 0.2481 deg/step. The two datasets are separate
 collection sessions, so pace is the measured and manipulated difference but not the only
 difference between them.
 
@@ -243,9 +259,11 @@ Clean at both seeds evaluated at P1 (15.5, 9.0) and P2 (15.5, 8.0), on the line 
 - [x] clean seed 1000 at P1, P2
 - [x] clean seed 2000 at P1, P2
 - [x] P1 and P2 marked in erasable pencil only after all 600 registered rollouts and the 30
-      slowpace rollouts were complete
-- [ ] **Not done:** marks erased and the board photographed afterward. Logged as a deviation in
-      PROTOCOL.md §8.15. No registered episode was recorded with the marks present.
+      slow pace rollouts were complete
+- [x] Marks erased afterward so the surface matches its prior state. No registered episode was
+      recorded with the marks present, and the marks are not visible in the appendix figure.
+- [x] Board photographed before marking, while marked, and after erasing:
+      `media/before_marking.jpg`, `media/marked_board.jpg`, `media/overhead_marks_erased.jpg`.
 
 **Exploratory total: 62 rollouts.** Grand total recorded and scored: 662.
 
@@ -255,13 +273,26 @@ Clean at both seeds evaluated at P1 (15.5, 9.0) and P2 (15.5, 8.0), on the line 
 
 - [x] Tracker exported to `documents/results_raw_two_seeds.xlsx` and to the derived CSVs, with
       columns `condition, eval_cell, seed, episode, instance, success, flagged, failure_mode, notes`.
-- [x] Failure modes normalised against the fixed vocabulary (PROTOCOL.md §8.17, §8.21, §8.28).
+- [x] Failure modes normalized against the fixed vocabulary (PROTOCOL.md §8.17, §8.21, §8.28).
+      `tools/export_results.py` canonicalizes the two legacy labels and refuses to write
+      anything if the vocabulary, the cell sizes or the success and label agreement fail.
 - [x] Ambiguous episodes re-scored from retained video.
 - [x] All 662 scored episodes screened by `tools/audit_labels.py` against two independent
       telemetry criteria; one transposed pair found and corrected (§8.27).
+- [x] All 94 seed 1000 `timeout_other` episodes audited, since that code was assigned
+      retrospectively at seed 1000 and covers a larger share of failures there than at
+      seed 2000. Every one ran to the recording ceiling with substantial joint motion,
+      confirming the timeout label; 85 were re-scored from video and **seven were recoded as
+      `contact_no_grasp`**. The derived CSVs were regenerated afterward.
+- [x] Departure labels checked against telemetry in all 662 episodes, zero disagreements. The
+      20 degree threshold separates the two label groups completely: the largest maximum joint
+      deviation among `no_departure` episodes is 15.9 degrees and the smallest among departing
+      episodes is 59.5 degrees.
 - [x] Release detector re-calibrated against the recovery demonstrations as part of
       `tools/drops.py` on every run.
 - [x] Every rollout dataset confirmed present on the Hub. The probing analysis replays these.
+      46 rollout datasets in total: 4 conditions x 5 cells x 2 seeds, plus Clean at
+      `near_1in` and `near_2in` at both seeds, plus the two slow pace cells.
 - [x] No rollout dataset deleted.
 - [x] Bench left standing and the gantry mounted.
 
@@ -271,15 +302,15 @@ Regenerate every derived CSV and every reported number from the workbook:
 python tools/export_results.py                 # rebuild the derived CSVs; refuses to write on validation failure
 python tools/audit_labels.py                   # label screens, recording-window measurement
 
-# analyze_results refuses multi-seed input: PROTOCOL.md §4.7 doesn't allow pooling seeds
+# analyze_results refuses multi-seed input: PROTOCOL.md §4.7 does not allow pooling seeds
 python analysis/analyze_results.py documents/results_seed1000.csv --outdir analysis/out_seed1000
 python analysis/analyze_results.py documents/results_seed2000.csv --outdir analysis/out_seed2000
-python analysis/analyze_exploratory.py         # displacement and demonstration-pace probes
+python analysis/analyze_exploratory.py         # displacement and demonstration pace probes
 python analysis/seed_variance.py               # the same condition compared across seeds
 
 # grasp poses, once per policy, then board coordinates onto the endpoint files
 python tools/endpoints.py --policy clean --cells in_distribution new_positions \
-    reduced_lighting different_object distractors
+    reduced_lighting different_object distractors near_1in near_2in
 python tools/calibrate_pose.py --apply
 
 python tools/rollout_motion.py                 # latency, velocity, no_departure validation
@@ -287,7 +318,7 @@ python tools/drops.py                          # detector calibration, release e
 python tools/azimuth_analysis.py               # calibration, envelope, aiming error, aim invariance
 python tools/motion_stats.py <dataset> [...]   # demonstration pace, frame counts, epochs
 
-python analysis/make_figures.py                # writes figures/
+python analysis/make_figures.py                # writes figures/, run last
 ```
 
 ---
@@ -301,8 +332,10 @@ python analysis/make_figures.py                # writes figures/
 - [x] `media/overhead_baseline_lighting.jpg` and `media/overhead_reduced_lighting.jpg`
 - [x] `media/wrist_view.jpg`
 - [x] `media/overhead_all_colors.jpg`: all six cubes on the gray primer
-- [x] `media/loss_curve.png`
+- [x] `media/before_marking.jpg`, `media/marked_board.jpg`,
+      `media/overhead_marks_erased.jpg`: the displacement probe marks before, during and after
+- [x] `media/loss_curve.png`: the pilot run on the old bench, not one of the nine study runs.
+      The nine are in `documents/training_loss.csv` and in the training loss figure.
 - [x] `media/overhead_demo.gif`: a successful autonomous rollout (Color policy, seed 1000,
       in-distribution, recorded on the study bench)
-- [ ] **Not yet captured:** wide shot of the bench showing both LEDs and the gantry
-- [ ] **Not yet captured:** board photographed after erasing the P1 and P2 pencil marks (§8.15)
+- [x] `media/bench_wide.jpeg` wide shot of the bench showing both LEDs and the gantry

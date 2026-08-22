@@ -368,7 +368,7 @@ randomized,randomized,1000,different_object,4,0,contact_no_grasp,1151,38.333,2,0
 randomized,randomized,1000,different_object,5,0,timeout_other,1151,38.333,0,0,,
 randomized,randomized,1000,different_object,6,0,timeout_other,1150,38.3,3,0,40.587314326305915,3.3778365805348116
 randomized,randomized,1000,different_object,7,0,timeout_other,1151,38.333,4,0,46.06173682096403,1.7903695558096473
-randomized,randomized,1000,different_object,8,0,timeout_other,1143,38.067,0,0,,
+randomized,randomized,1000,different_object,8,0,contact_no_grasp,1143,38.067,0,0,,
 randomized,randomized,1000,different_object,9,0,no_departure,1140,37.967,0,0,,
 randomized,randomized,1000,different_object,10,0,timeout_other,1142,38.033,2,0,45.46177666409362,1.6708996568326953
 randomized,randomized,1000,different_object,11,0,grasp_drop,1140,37.967,6,1,18.409812221064513,26.20995403732548
@@ -382,7 +382,7 @@ randomized,randomized,1000,distractors,3,0,timeout_other,1151,38.333,8,1,31.0342
 randomized,randomized,1000,distractors,4,1,success,701,23.333,1,1,3.1055462890138905,48.200977895731484
 randomized,randomized,1000,distractors,5,0,timeout_other,1151,38.333,6,0,44.087503750983416,1.3227227417389642
 randomized,randomized,1000,distractors,6,0,timeout_other,1149,38.267,8,0,32.48251803632259,2.994325269106268
-randomized,randomized,1000,distractors,7,0,timeout_other,1147,38.2,7,0,34.52667021563234,1.7117222327472206
+randomized,randomized,1000,distractors,7,0,contact_no_grasp,1147,38.2,7,0,34.52667021563234,1.7117222327472206
 randomized,randomized,1000,distractors,8,0,grasp_drop,1146,38.167,4,0,31.674220313760845,6.580071315614912
 randomized,randomized,1000,distractors,9,0,timeout_other,1150,38.3,6,0,32.68048170331273,0.9048019826521028
 randomized,randomized,1000,distractors,10,0,timeout_other,1148,38.233,6,0,33.15532954813079,3.075582801856717
@@ -392,15 +392,15 @@ randomized,randomized,1000,distractors,13,0,timeout_other,1126,37.5,5,0,33.87113
 randomized,randomized,1000,distractors,14,0,timeout_other,1117,37.2,6,0,31.6923029473118,3.036085910328884
 randomized,randomized,1000,distractors,15,0,timeout_other,1109,36.933,6,0,29.795879884385123,2.173184328870561
 randomized,randomized,1000,in_distribution,1,1,success,714,23.767,1,1,1.8009371632143107,48.1215471931543
-randomized,randomized,1000,in_distribution,2,0,timeout_other,1144,38.1,6,1,18.60976577152762,23.19352543478579
+randomized,randomized,1000,in_distribution,2,0,contact_no_grasp,1144,38.1,6,1,18.60976577152762,23.19352543478579
 randomized,randomized,1000,in_distribution,3,0,no_departure,1142,38.033,0,0,,
-randomized,randomized,1000,in_distribution,4,0,timeout_other,1142,38.033,6,1,28.86528605276607,15.927197833825776
+randomized,randomized,1000,in_distribution,4,0,contact_no_grasp,1142,38.033,6,1,28.86528605276607,15.927197833825776
 randomized,randomized,1000,in_distribution,5,1,success,559,18.6,1,1,2.8838100841450576,47.928227944494004
 randomized,randomized,1000,in_distribution,6,1,success,856,28.5,1,1,1.329295656375539,47.733738149537984
-randomized,randomized,1000,in_distribution,7,0,timeout_other,1145,38.133,6,1,21.91206457528405,18.899748929107083
+randomized,randomized,1000,in_distribution,7,0,contact_no_grasp,1145,38.133,6,1,21.91206457528405,18.899748929107083
 randomized,randomized,1000,in_distribution,8,1,success,537,17.867,1,1,1.9115311732780889,46.23230175457207
 randomized,randomized,1000,in_distribution,9,1,success,816,27.167,1,1,1.8054800407236762,48.43521017983457
-randomized,randomized,1000,in_distribution,10,0,timeout_other,1145,38.133,6,1,23.059406192817274,10.234144157606453
+randomized,randomized,1000,in_distribution,10,0,contact_no_grasp,1145,38.133,6,1,23.059406192817274,10.234144157606453
 randomized,randomized,1000,in_distribution,11,0,timeout_other,1144,38.1,4,0,47.852321670450934,4.293415459086525
 randomized,randomized,1000,in_distribution,12,1,success,489,16.267,2,1,1.0189814814315703,48.92771889065305
 randomized,randomized,1000,in_distribution,13,0,timeout_other,1142,38.033,7,1,27.697749826114375,22.165449164621233
@@ -431,7 +431,7 @@ randomized,randomized,1000,reduced_lighting,7,0,timeout_other,1151,38.333,5,0,36
 randomized,randomized,1000,reduced_lighting,8,0,timeout_other,1151,38.333,4,0,43.96595056907057,4.300710115445657
 randomized,randomized,1000,reduced_lighting,9,1,success,483,16.067,1,1,3.578293211288038,46.74111489076467
 randomized,randomized,1000,reduced_lighting,10,0,contact_no_grasp,1151,38.333,8,1,23.626545823643298,28.21565300191474
-randomized,randomized,1000,reduced_lighting,11,0,timeout_other,1149,38.267,5,0,41.05003742825324,3.2015544794275677
+randomized,randomized,1000,reduced_lighting,11,0,contact_no_grasp,1149,38.267,5,0,41.05003742825324,3.2015544794275677
 randomized,randomized,1000,reduced_lighting,12,0,timeout_other,1147,38.2,5,0,39.76009993334263,5.457211664810789
 randomized,randomized,1000,reduced_lighting,13,1,success,564,18.767,1,1,1.526835746624588,48.417029623844265
 randomized,randomized,1000,reduced_lighting,14,0,grasp_drop,1150,38.3,4,2,9.484211274141796,41.977811030497115

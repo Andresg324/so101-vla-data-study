@@ -12,6 +12,7 @@ Usage:
 
 import glob
 import os
+import shutil
 import subprocess
 import sys
 
@@ -22,6 +23,8 @@ CACHE = os.environ.get("LEROBOT_CACHE", os.path.expanduser("~/.cache/huggingface
 if len(sys.argv) < 3:
     raise SystemExit(__doc__)
 
+if not shutil.which("ffplay"):
+    raise SystemExit("ffplay not found. Install with: conda install -c conda-forge ffmpeg")
 name = sys.argv[1]
 ep = int(sys.argv[2])
 cam = sys.argv[3] if len(sys.argv) > 3 else None

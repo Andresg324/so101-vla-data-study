@@ -35,6 +35,10 @@ T = {1: (2.0, 2.5), 2: (6.5, 7.5), 3: (8.5, 15.0), 4: (12.0, 14.0), 5: (15.5, 2.
 
 BASE_X = 11.0
 
+def azimuth(x, y):
+    """Bearing in degrees from the arm base to a board point. 0 is straight ahead."""
+    return np.degrees(np.arctan2(np.asarray(x, float) - BASE_X, np.asarray(y, float)))
+
 def load_training():
     root = os.path.join(CACHE, TRAIN)
     files = sorted(glob.glob(os.path.join(root, "data", "**", "*.parquet"), recursive=True))
@@ -66,7 +70,7 @@ def azimuth_fit():
     true bearings. Re-reads the training parquet, so call it once per script.
     """
     X, Y, _ = load_training()
-    az = np.degrees(np.arctan2(Y[:, 0] - BASE_X, Y[:, 1]))
+    az = azimuth(Y[:, 0], Y[:, 1])
     fit = LinearRegression().fit(X[:, [0]], az)
     return fit, X, az
 
@@ -77,7 +81,9 @@ def main():
     args = ap.parse_args()
 
     X, Y, eps = load_training()
-    print("finite:", np.isfinite(X).all(), " shape:", X.shape)
+    if not np.isfinite(X).all():
+        raise SystemExit("non-finite joint values in the training grasps")
+    print("shape:", X.shape)
     print(pd.DataFrame(X, columns=JOINTS).describe().round(2).to_string())
     g = pd.DataFrame(X, columns=JOINTS)
     g["pos"] = [f"{a}, {b}" for a, b in Y]
@@ -98,8 +104,10 @@ def main():
     )
     pred = cross_val_predict(model, X, Y, cv=LeaveOneOut())
     err = np.linalg.norm(pred - Y, axis=1)
-    print(f"leave-one-out error: median {np.median(err):.2f} in, "
+    print(f"leave-one-out error (degree {args.degree}): median {np.median(err):.2f} in, "
           f"mean {err.mean():.2f} in, 90th percentile {np.percentile(err, 90):.2f} in")
+    print("(this is the xy model used by --apply; the bearing calibration the paper "
+          "reports is azimuth_fit(), whose LOO is printed by azimuth_analysis.py)")
     print("per-axis MAE: x %.2f in, y %.2f in"
           % tuple(np.abs(pred - Y).mean(axis=0)))
 

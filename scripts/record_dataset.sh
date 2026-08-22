@@ -6,14 +6,20 @@ set -e
 CONDITION=${1:-clean} # Conditions are 'clean' | 'randomized' | 'recovery' | 'color'
 NUM_EPISODES=${2:?usage: record_dataset.sh <condition> <num_episodes>}
 
+# color-slowpace is deliberately absent. It was not a designed condition: it came from a
+# recording session that unintentionally ran at a slower pace, was renamed afterwards, and is
+# analyzed as exploratory only. run_inference.sh accepts it because the policy
+# exists and was evaluated; it should not be recorded on purpose.
+
 case "$CONDITION" in
     clean|randomized|recovery|color) ;;
     *) echo "unknown condition '$CONDITION' (clean|randomized|recovery|color)"; exit 1;;
 esac
+
 # ---- Hardware information ----
-FOLLOWER_PORT=/dev/tty.usbmodem5B415324451   # 12V arm that executes
-LEADER_PORT=/dev/tty.usbmodem5B415328441     # 5V arm - moved manually
-HF_USER=Andresg324
+FOLLOWER_PORT=${FOLLOWER_PORT:-/dev/tty.usbmodem5B415324451}   # 12V arm that executes
+LEADER_PORT=${LEADER_PORT:-/dev/tty.usbmodem5B415328441}       # 5V arm - moved manually
+HF_USER=${HF_USER:-Andresg324}
 
 # Confirm indices with tools/check_cameras.py before every session
 OVERHEAD_IDX=1
@@ -36,4 +42,4 @@ lerobot-record \
     --dataset.fps=30 \
     --dataset.episode_time_s=45 \
     --dataset.reset_time_s=15 \
-    --dataset.push_to_hub=true
+    --dataset.push_to_hub=${PUSH:-true}

@@ -2,9 +2,17 @@
 """
 tools/rollout_motion.py
 
-Motion statistics for rollout datasets: initiation latency, execution velocity,
-and an objective check on the no_departure label.
+Motion statistics for rollout datasets: initiation latency, execution velocity, episode
+duration, and an objective check on the no_departure label. Departure is defined as any
+arm joint (gripper excluded) deviating more than --min-dev degrees from its first frame.
 
+Writes to analysis/out_motion/:
+    rollout_motion_episodes.csv        one row per scored episode
+    rollout_motion_summary.csv         by condition, seed and cell
+    rollout_motion_by_condition.csv    pooled over cells, feeds Table 2
+    no_departure_disagreements.csv     label against telemetry; empty is the pass condition
+
+RUN: python tools/rollout_motion.py
 """
 
 import argparse
@@ -87,7 +95,7 @@ def main():
     ap.add_argument("--policy", nargs="*", help="policy slugs, e.g. clean clean-seed2000")
     ap.add_argument("--cell", nargs="*", help="eval_cells")
     ap.add_argument("--seed", nargs="*", type=int)
-    ap.add_argument("--min-dev", type=float, default=20.0, help="degrees of arm-joint deviation, gripper excluded (default 20, chosen by sweep, see analysis/README.md)")
+    ap.add_argument("--min-dev", type=float, default=20.0, help="degrees of arm-joint deviation, gripper excluded (default 20, chosen by sweep)")
     ap.add_argument("--per-episode", action="store_true", help="print every episode")
     args = ap.parse_args()
     os.makedirs(OUTDIR, exist_ok=True)

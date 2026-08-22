@@ -1,9 +1,11 @@
-"""Shared grasp-event detection for rollout and demonstration action streams."""
+"""
+Shared grasp-event detection for rollout and demonstration action streams.
+"""
 
 import numpy as np
 
-GRIPPER = 5
-OPEN_THR = 15.0
+GRIPPER = 5                 # index of the gripper in the 6-dim commanded action vector
+OPEN_THR = 15.0             # gripper command above this means the jaw is open
 
 def _runs(mask):
     # Gives (start, end) index pairs for each contiguous True run
@@ -28,6 +30,8 @@ def grasp_pose(A, min_run=5, max_gap=3):
     Robust to the gripper stalling on the cube rather than reaching the fully
     closed threshold. Returns (pose, frame, released), where released is True
     if a second sustained open follows, i.e. the policy let go of something.
+
+    min_run=5 translates to roughly 167 ms at 30fps, and max_gap = 3 is 100ms
     """
 
     g = A[:, GRIPPER]
@@ -36,5 +40,9 @@ def grasp_pose(A, min_run=5, max_gap=3):
     if not opens:
         return None, None, None
 
-    i = int(opens[0][1]) - 1       # last frame of the approach is still open
+    start, end = opens[0]
+    if end >= len(g):
+        return None, None, None         # Still open on the last frame (e.g., no close event)
+
+    i = int(end) - 1                    # last frame of the approach is still open
     return A[i, :GRIPPER], i, len(opens) >= 2

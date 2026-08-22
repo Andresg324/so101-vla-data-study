@@ -74,6 +74,8 @@ def collect(to_az):
                 near, max_travel, n_rel, n_kept = np.nan, np.nan, 0, 0
             else:
                 bounds = [a_end - 1] + [e - 1 for _, e in rel[:-1]]
+                # Deliberately not travel-filtered, unlike drops.py: the audit wants every
+                # opening the detector can see, including ones drops.py would suppress.
                 cup_d = [abs(float(az[s]) - CUP_AZ) for s, _ in rel]
                 travel = [abs(float(az[s]) - float(az[bounds[k]]))
                           for k, (s, _e) in enumerate(rel)]
@@ -112,7 +114,7 @@ def window(ep):
     print(f"longest episode      {ceil_f} frames = {ceil_s:.2f} s of recorded motion at {FPS} fps")
     print(f"chunks of {CHUNK}         {chunks:.2f}")
     print(f"episodes at ceiling  {int((ep.frames == ceil_f).sum())} of {len(ep)}")
-    if abs(chunks - round(chunks)) < 0.02:
+    if abs(chunks - round(chunks)) < 0.05:
         print(f"inference time       {inference:.2f} s over {chunks:.0f} passes = "
               f"{inference / chunks * 1000:.0f} ms each")
     print(f"action-update rate   {CHUNK / FPS:.3f} s recorded ({FPS / CHUNK:.3f} Hz), "
@@ -199,7 +201,7 @@ def main():
     flagged.to_csv(os.path.join(OUTDIR, "flagged_episodes.csv"), index=False)
     md.to_csv(os.path.join(OUTDIR, "detector_misses.csv"), index=False)
 
-    print(f"\n=== review queue: episodes flagged by more than one screen ===")
+    print("\n=== review queue: episodes flagged by more than one screen ===")
     both = (flagged.groupby(["policy", "cell", "episode"]).size()
             .rename("n_screens").reset_index().query("n_screens > 1"))
     print(both.to_string(index=False) if len(both) else "none")

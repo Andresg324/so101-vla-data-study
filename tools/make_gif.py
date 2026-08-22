@@ -77,7 +77,7 @@ def resolve_video(root, df, row, cam):
     # fallback: derive the offset from cumulative episode lengths within this file
     info = json.load(open(os.path.join(root, "meta", "info.json")))
     fps = float(info["fps"])
-    same = df[df[fk] == row[fk]].sort_values("episode_index")
+    same = df[(df[fk] == row[fk]) & (df[ck] == row[ck])].sort_values("episode_index")
     before = same[same.episode_index < row.episode_index]["length"].sum()
     t0 = float(before) / fps
     return path, t0, t0 + float(row["length"]) / fps
@@ -129,13 +129,16 @@ def main():
 
     base = ["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t0:.3f}", "-t", f"{length:.3f}",
             "-i", path]
-    subprocess.run(base + ["-vf", vf + ",palettegen=stats_mode=diff", palette], check=True)
-    subprocess.run(
-        base + ["-i", palette, "-lavfi", vf + " [x]; [x][1:v] paletteuse=dither=bayer",
-                "-loop", "0", out],
-        check=True,
-    )
-    os.remove(palette)
+    try:
+        subprocess.run(base + ["-vf", vf + ",palettegen=stats_mode=diff", palette], check=True)
+        subprocess.run(
+            base + ["-i", palette, "-lavfi", vf + " [x]; [x][1:v] paletteuse=dither=bayer",
+                    "-loop", "0", out],
+            check=True,
+        )
+    finally:
+        if os.path.exists(palette):
+            os.remove(palette)
 
     mb = os.path.getsize(out) / 1e6
     print(f"\nwrote {out}  ({mb:.1f} MB)")

@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
 """ 
-Turns raw eval cell results (one success / fail label per episode) into the papers tables and plots
+Turns raw eval cell results (one success / fail label per episode) into the paper's tables and plots
 
 Input is a results CSV file, each row is an episode, and the columns are: condition, eval_cell, seed, episode, success
+
+The two PNGs written here are diagnostics for reading the CSVs at a glance; the paper's figures are built separately by analysis/make_figures.py
 
 RUN, once per seed (PROTOCOL.md §4.7 forbids pooling):
     python analysis/analyze_results.py documents/results_seed1000.csv --outdir analysis/out_seed1000
@@ -21,7 +24,7 @@ CONF = 0.95 # 95% Confidence Intervals
 Z95 = norm.ppf(1 - (1 - CONF) / 2) # Z-Score
 
 def wilson_ci(successes, n, z=Z95):
-    # 95% Wislon score interval for a success rate, it's reliable at a small N / extreme rates
+    # 95% Wilson score interval for a success rate, it's reliable at a small N / extreme rates
     # Unlike textbook p +/- 1.96*sqrt(p(1-p)/n), z = 1.96 for 95% confidence
     if n == 0:
         return (np.nan, np.nan)
@@ -71,8 +74,10 @@ def summarize(df):
     return pd.DataFrame(rows).sort_values(["condition", "eval_cell"]).reset_index(drop=True)
 
 def generalization_gap(summary, in_dist_cell="in_distribution"):
-    # Per condition: in-distribution rate minus held-out rate
-    # Smaller means it generalizes better
+    # Per condition: in-distribution rate minus held-out rate, smaller means it generalizes better
+    # Unweighted mean of the four held-out cell rates. Equal to the pooled rate
+    # because every cell has the same n; revisit if n ever changes.
+
     rows = []
     for cond, g in summary.groupby("condition"):
         in_dist = g.loc[g["eval_cell"] == in_dist_cell, "success_rate"]
@@ -88,7 +93,7 @@ def generalization_gap(summary, in_dist_cell="in_distribution"):
     return pd.DataFrame(rows).sort_values("generalization_gap").reset_index(drop=True)
 
 def matched_comparisons(summary, pairs, baseline="clean"):
-    # For each pair (cell to matched condition), compare the matched conditions rate vs.baseline (clean)
+    # For each pair (cell to matched condition), compare the matched conditions rate vs. baseline (clean)
     # on that cell. Reports the difference in success rate with a Newcombe hybrid score interval on the
     # difference and a fisher exact test
     
