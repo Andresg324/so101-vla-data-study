@@ -21,3 +21,7 @@ keywords:
   - demonstration data
   - policy evaluation
   - pre-registration
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22072348
+    description: "Concept DOI, all versions"

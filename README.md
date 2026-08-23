@@ -1,7 +1,11 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22072348.svg)](https://doi.org/10.5281/zenodo.22072348)
+
 # SO-101 × SmolVLA: How Demonstration-Collection Strategy Shapes Generalization
 
 A controlled empirical study on a self-built low-cost robot arm (Seeed SO-ARM101,
 LeRobot platform) using the SmolVLA vision-language-action model.
+
+**Paper:** [Demonstration Diversity Is Not Free at a Fifty-Episode Adaptation Budget](paper/Garcia_2026_Demonstration_Diversity_is_Not_Free.pdf) · [doi:10.5281/zenodo.22072348](https://doi.org/10.5281/zenodo.22072348)
 
 <p align="center">
   <img src="media/overhead_demo.gif" width="520" alt="Autonomous cube pick-and-place">
