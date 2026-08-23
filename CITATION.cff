@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Demonstration Diversity Is Not Free at a Fifty-Episode Adaptation Budget"
+abstract: >
+  A pre-registered comparison of four demonstration collection strategies for
+  adapting a vision-language-action model at a fifty-episode budget, with 707
+  scored rollouts on a low-cost SO-ARM101, released telemetry tools and full
+  analysis code.
+authors:
+  - family-names: Garcia
+    given-names: Andres
+    orcid: "https://orcid.org/0009-0001-8135-8092"
+version: 1.0.0
+date-released: 2026-08-23
+license: MIT
+repository-code: "https://github.com/Andresg324/so101-vla-data-study"
+keywords:
+  - vision-language-action models
+  - imitation learning
+  - robot learning
+  - demonstration data
+  - policy evaluation
+  - pre-registration
