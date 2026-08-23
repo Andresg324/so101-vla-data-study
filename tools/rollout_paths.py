@@ -7,7 +7,7 @@ import re
 
 CACHE = os.environ.get("LEROBOT_CACHE", os.path.expanduser("~/.cache/huggingface/lerobot/Andresg324"))
 CELLS = ["in_distribution", "new_positions", "reduced_lighting",
-         "different_object", "distractors", "near_1in", "near_2in"]
+         "different_object", "distractors", "near_1in", "near_2in", "trained_t2"]
 PATTERN = re.compile(r"^rollout_(?P<policy>.+?)_(?P<cell>" + "|".join(CELLS) + r")_(?P<stamp>\d{8}_\d{6})$")
 
 def parse_policy(policy):

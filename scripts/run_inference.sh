@@ -15,12 +15,12 @@ NEPS=${3:-16}           # 15 scored episodes plus episode 0, the warm-up discard
 
 # Ensures everything is spelt right before running, by checking policy and cell against options
 case "$CELL" in
-    in_distribution|new_positions|reduced_lighting|different_object|distractors|near_1in|near_2in) ;;
+    in_distribution|new_positions|reduced_lighting|different_object|distractors|near_1in|near_2in|trained_t2) ;;
     *) echo "unknown cell '$CELL'"; exit 1 ;;
 esac
 
 case "$POLICY" in
-    clean|randomized|recovery|color|color-slowpace|clean-seed2000|randomized-seed2000|color-seed2000|recovery-seed2000) ;;
+    clean|randomized|recovery|color|color-slowpace|density|clean-seed2000|randomized-seed2000|color-seed2000|recovery-seed2000) ;;
     *) echo "unknown policy '$POLICY'"; exit 1 ;;
 esac
 

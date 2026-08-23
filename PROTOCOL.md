@@ -2,8 +2,7 @@
 
 *Original pre-registration amended August 8, 2026 on the rebuilt workstation, before any data
 collection. §1 through §7 were fixed before the first training episode was recorded. Amendments
-1 to 13 predate that episode; 14 onward are dated and state which data they precede. Supporting 
-measurements are in `analysis/README.md`.*
+1 to 13 predate that episode; 14 onward are dated and state which data they precede.*
 
 ## 1. Apparatus
 
@@ -365,7 +364,8 @@ retained dataset is named in §8.
     `contact_no_grasp` failure and 9 is a success. Episodes 10 and 11 were also reviewed and match,
     ruling out a wider offset. Because the swap exchanges one success for another inside the same
     cell, no rate, interval or test statistic changed. No other episode in the 662 was flagged by
-    both screens. This supersedes the statements in §8.17 and §8.21 that no binary success value
+    both screens, and none of the 45 density episodes added on August 22nd were flagged either.
+    This supersedes the statements in §8.17 and §8.21 that no binary success value
     was ever changed: two were, both found by telemetry rather than by inspecting outcomes.
 28. **Vocabulary precedence rule, August 14.** An episode is labeled by its first decisive event.
     A cube that was held and then released is `grasp_drop` regardless of where it came to rest,
@@ -373,33 +373,43 @@ retained dataset is named in §8.
     without ever having been held.
 29. **Training configuration verified from the resolved configs, August 14.** §4.7 fixed the
     hyperparameters by naming LeRobot's defaults rather than enumerating them. The nine resolved
-    configurations were diffed afterwards and are released with the code. Three things they
+    configurations were diffed afterwards and are released with the code; a tenth, for the density
+    probe in §8.30, was added August 22 and differs in the same fields. Four things they
     establish, none of which changes any setting:
     - They differ only in `output_dir`, `seed`, `dataset.repo_id`, `job_name` and `wandb.run_id`,
       which is the machine-checkable form of the claim in §4.7.
     - **Only the action expert is trained.** The SmolVLA defaults set `freeze_vision_encoder: true`
       and `train_expert_only: true`, and LeRobot's `set_requires_grad()` places the whole
       vision-language backbone in eval mode with `requires_grad=False`. Roughly 100M of 450M
-      parameters are trainable, so all eight policies share an identical perceptual front end and
+      parameters are trainable, so all policies share an identical perceptual front end and
       every behavioral difference is attributable to the action expert.
     - **The learning-rate schedule was configured for longer than the run.** The default cosine
       decay carries `scheduler_decay_steps: 30000` with 1000 warmup steps against a 10000 step
       run, so the evaluated checkpoint sits near 79% of peak learning rate rather than fully
-      annealed. This applies identically to all nine runs and is disclosed rather than corrected,
+      annealed. This applies identically to all runs and is disclosed rather than corrected,
       since correcting it afterwards would break the comparison §4.7 protects.
+    - **The policy carries a third image slot that no dataset fills.** `input_features` lists
+      `camera1`, `camera2` and `camera3`, inherited from the `smolvla_base` configuration. Every
+      dataset in the study provides two cameras, `overhead` and `wrist`, which the `rename_map`
+      sends to `camera1` and `camera2`; no recorded camera populates the third. Identical across
+      all runs, so no comparison is affected. *Noted August 22, 2026.*
 
-30. **Sampling density probe, exploratory (August 22).** A fifth collection condition and a
-    tenth policy: 50 new demonstrations at two positions, 25 at T6 (15.5, 10.0) and 25 at T2
-    (6.5, 7.5), alternating by index (odd episodes at T6, even at T2; re-records reuse the
-    position). T2 was chosen because it lies on the opposite side of the arm from T6, roughly
-    −30 against +24 degrees of base bearing, so no fixed sweep can succeed at both positions and
-    the policy must condition on the image to choose a direction. Training settings are identical
-    to §4.7 at seed 1000. Evaluation is three cells at 16 episodes each, 48 rollouts: In-Distribution
-    at T6, the same scene with the cube at T2, and New Positions over the five held-out positions.
-    E3 lies about one inch off the T2–T6 chord, so the two trained-position cells are the primary
-    read and E3 is a weaker interpolation test. The question is whether 25 demonstrations per
-    position recovers Clean-level execution where 5 did not, which would place the floor price
-    discussed in §6 between 5 and 25 per position. The §8.23 bearing analyses apply unchanged,
+### New data (August 22, 2026)
+
+30. **Sampling density probe, exploratory.** A fifth collection condition and a tenth policy:
+    50 demonstrations at two positions, 25 at T6 (15.5, 10.0) and 25 at T2 (6.5, 7.5), alternating
+    by zero-based index, even at T2 and odd at T6, so the assignment is recoverable from the index
+    as in §3. T2 sits on the opposite side of the arm from T6, about −31.0 against +24.2 degrees
+    of base bearing, so no fixed sweep succeeds at both and the policy must use the image to
+    choose a direction. Everything else matches Clean, including the §4.7 training settings at
+    seed 1000. Named `cube-pickup-density_{timestamp}` and `smolvla-cube-density` per §7.
+    Evaluation is three cells at 16 episodes each, 48 rollouts, in this order fixed in advance per
+    §8.14: In-Distribution at T6, the same scene at T2, and New Positions over the five held-out
+    positions. The question is whether 25 demonstrations at a position recovers Clean-level
+    execution where 5 did not, placing the floor price in §6 between 5 and 25 per position.
+    Confounds: a separate session two weeks later with a more practiced teleoperator, and a single
+    seed. Outside the pre-registration, never pooled into the grid, compared to Clean
+    descriptively. Stated before any demonstration was recorded.
 
 ## 9. Known limitations
 
@@ -412,13 +422,11 @@ retained dataset is named in §8.
   training-run variance loosely at best; per-cell intervals capture episode-level uncertainty only.
 - **The generalization gap is bounded above by the in-distribution rate**, so a condition that
   performs poorly in distribution cannot show a large gap. Per-cell rates are reported alongside.
-- **Extrapolation is modest.** The held-out positions lie a few     
-  inches beyond the training envelope, still within reach and frame. 
-  The success split rests on 9 interpolation and 6 extrapolation 
-  episodes per seed, all of them zero; the aiming comparison rests on 
-  7 and 5 episodes in total across both seeds, since only episodes 
-  with a detectable grasp yield a bearing. Both are descriptive 
-  rather than formal tests.
+- **Extrapolation is modest.** The held-out positions lie a few inches beyond the training
+  envelope, still within reach and frame. The success split rests on 9 interpolation and 6
+  extrapolation episodes per seed, all of them zero; the aiming comparison rests on 7 and 5
+  episodes in total across both seeds, since only episodes with a detectable grasp yield a
+  bearing. Both are descriptive rather than formal tests.
 - **The effective window is shorter than the nominal one.** 45 s wall clock, about 38 s of motion,
   identically for every policy and cell (§4.12).
 - **Every policy executes the full 50-action chunk before re-observing**, the least reactive
@@ -438,7 +446,7 @@ retained dataset is named in §8.
 - **Scoring is not blinded and demonstrator and evaluator were not separated.** Mitigations: the
   criterion is binary and was fixed before collection, cells ran in a pre-registered order, all
   video is retained, and three label families were validated against telemetry including a full
-  audit of all 662 episodes (§8.22, §8.27). Neither was feasible for a single-operator study.
+  audit of every scored episode (§8.22, §8.27). Neither was feasible for a single-operator study.
 - **The budget is fixed in episodes, not frames.** Frame counts differ by 29%, so each condition
   sees between 9.9 and 12.9 passes over its own data at 10,000 steps. Episode count was chosen
   because it is what an experimenter controls.
@@ -457,6 +465,18 @@ retained dataset is named in §8.
   than cube releases, so on rollouts it fires on openings with no cube in hand. The release
   analysis is restricted to episodes independently labeled as drops, so those events do not enter
   it. Recall and the four verified misses are in `analysis/README.md`.
+- **At T2 the cube and the cup are angularly indistinguishable from the base.** The cup sits at
+  −25.6 degrees and T2 at −31.0, a separation of 5.4 degrees inside the cup's 7.2 degree
+  half-width. For the density probe's `trained_t2` cell the release screens in §8.22 therefore
+  cannot separate a delivery into the cup from a gripper opening at the cube, and the same 5.4
+  degree traverse falls below the 10 degree travel filter used by the release detector. Those
+  successes rest on visual scoring under §6.6 alone, without the telemetry corroboration every
+  other cell receives.
+- **The density probe's held-out cell is not a clean interpolation test.** E3 lies about one inch
+  off the chord between the two trained positions, so it is the only held-out position that could
+  be reached by interpolating between them, and the remaining four sit well off it. The probe's
+  held-out result is therefore about extrapolation from two positions rather than about
+  interpolation between them.
 - **The azimuth analyses (§8.23) are post hoc** and exploratory; no pre-registered claim depends
   on them.
 - **Probing activations are replayed from encoded video** rather than live frames; agreement with

@@ -94,6 +94,9 @@ def main():
     ap.add_argument("--start", type=float, default=0.0)
     ap.add_argument("--dur", type=float, default=0.0)
     ap.add_argument("--colors", type=int, default=128, help="palette size, 32 to 256. Lower is smaller.")
+    ap.add_argument("--stats", default="diff", choices=["diff", "full"],
+                    help="palettegen stats_mode. full samples whole frames, better when a small "
+                         "colored object sits on a large static background.")
     ap.add_argument("--dither", default="bayer", choices=["bayer", "none"], help="none is much smaller: dither noise defeats inter-frame compression.")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
@@ -130,7 +133,7 @@ def main():
             "-i", path]
     try:
         subprocess.run(
-            base + ["-vf", vf + f",palettegen=stats_mode=diff:max_colors={a.colors}", palette],
+            base + ["-vf", vf + f",palettegen=stats_mode={a.stats}:max_colors={a.colors}", palette],
             check=True)
         subprocess.run(
             base + ["-i", palette,

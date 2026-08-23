@@ -3,9 +3,11 @@
 Companion to PROTOCOL.md. PROTOCOL.md is the source of truth if the two disagree.
 
 **Status: closed.** This sheet began as a forward looking checklist and is retained as the
-as-run record. Everything below is what actually happened, with deviations marked. Deviations
-that affect interpretation are also logged as numbered amendments in PROTOCOL.md §8; this sheet
-is the operational log, not the pre-registration.
+as-run record. It was closed on August 14 and reopened on August 22 for the sampling density
+probe (PROTOCOL.md §8.30, Part D below), then closed again. Everything below is what actually
+happened, with deviations marked. Deviations that affect interpretation are also logged as
+numbered amendments in PROTOCOL.md §8; this sheet is the operational log, not the
+pre-registration.
 
 - Collection: August 9 to 10, 2026
 - Training: August 9 (seed 1000) and August 9 to 10 (seed 2000), single A100 per run
@@ -13,6 +15,8 @@ is the operational log, not the pre-registration.
 - Seed 2000 evaluation grid: August 11, 2026
 - Exploratory probes: August 11, 2026
 - Analysis closed: August 14, 2026
+- Sampling density probe, collected, trained and evaluated: August 22, 2026
+- Analysis reclosed: August 22, 2026
 
 ---
 
@@ -79,6 +83,7 @@ surface, then re-grasp from wherever it lands and complete the task. Specified a
 | recovery | `Andresg324/cube-pickup-recovery_20260809_141725` | 50 | 32,170 | 643.4 | 21.4 | retained |
 | color (superseded) | `Andresg324/cube-pickup-color_20260809_130649` | 50 | 34,511 | 690.2 | 23.0 | superseded, §8.18 |
 | color (retained) | `Andresg324/cube-pickup-color_20260809_183224` | 50 | 24,847 | 496.9 | 16.6 | retained |
+| density (exploratory, §8.30) | `Andresg324/cube-pickup-density_20260822_194111` | 50 | 26,349 | 527.0 | 17.6 | retained, Part D |
 
 Regenerate the table, with deg/step and epochs, using `python tools/motion_stats.py <dataset> [...]`.
 
@@ -128,7 +133,7 @@ evaluated checkpoint is the final one at step 10000. The seed is the only settin
 between replications.
 
 The resolved configuration for each run is committed at
-`configs/train_config_<condition>.json`. Diffing the nine shows that only `output_dir`, `seed`,
+`configs/train_config_<condition>.json`. Diffing them shows that only `output_dir`, `seed`,
 `dataset.repo_id`, `job_name` and `wandb.run_id` differ. The default schedule is a cosine decay
 with 1000 warmup steps and `scheduler_decay_steps: 30000`, so at 10,000 steps the final
 checkpoint sits near 79% of peak learning rate rather than fully annealed.
@@ -151,10 +156,13 @@ checkpoint sits near 79% of peak learning rate rather than fully annealed.
 
 - [x] `Andresg324/smolvla-cube-color-slowpace`, trained on the superseded color collection,
       seed 1000, otherwise identical settings.
+- [x] `Andresg324/smolvla-cube-density`, trained August 22 on the two-position collection,
+      seed 1000, otherwise identical settings. See Part D.
 
-Nine policies in total. The W&B project holds ten runs; the tenth is the pilot from the old
-bench and is not part of the study. Its curve is the one in `media/loss_curve.png`, which is
-therefore not one of the nine.
+Ten policies in total, nine of them trained in August 9 to 10 and the tenth on August 22. The
+W&B project holds eleven runs: these ten plus the pilot from the old bench, which is not part of
+the study. The pilot's curve is the one in `media/loss_curve.png`, which is therefore not one of
+the ten.
 
 ---
 
@@ -265,11 +273,65 @@ Clean at both seeds evaluated at P1 (15.5, 9.0) and P2 (15.5, 8.0), on the line 
 - [x] Board photographed before marking, while marked, and after erasing:
       `media/before_marking.jpg`, `media/marked_board.jpg`, `media/overhead_marks_erased.jpg`.
 
-**Exploratory total: 62 rollouts.** Grand total recorded and scored: 662.
+**Part C total: 62 rollouts.**
 
 ---
 
-## After Part B and C
+## Part D: sampling density probe (August 22, PROTOCOL.md §8.30)
+
+Declared in writing before any demonstration was recorded. A fifth collection condition and a
+tenth policy, exploratory, single seed, never pooled into the four condition grid.
+
+### Bench
+
+Unchanged from Parts A to C. Camera framing verified against
+`media/overhead_baseline_lighting.jpg` before the first episode. One USB device node had changed
+since the August grid and the port strings in `scripts/record_dataset.sh` and
+`scripts/run_inference.sh` were updated to match; no change to arms, cameras, lighting or work
+surface.
+
+### D1. Collection
+
+`Andresg324/cube-pickup-density_20260822_194111`, 50 demonstrations at two positions, 25 at
+T6 (15.5, 10.0) and 25 at T2 (6.5, 7.5), alternating by zero-based index, even at T2 and odd at
+T6. Baseline lighting, red cube, every demonstration a first try clean success. 26,349 frames,
+17.57 s per demonstration, inside the 16.6 to 21.4 s range the four registered collections span,
+and 12.15 passes over its own data at 10,000 steps, inside the 9.9 to 12.9 span.
+
+- [x] `scripts/record_dataset.sh` extended to accept `density`
+- [x] 50 episodes recorded, position parity checked at episode 24
+- [x] Uploaded to the Hub and episode count confirmed
+
+**Deviation:** two aborted starts at 19:37 and 19:38 created empty dataset directories with no
+episodes. Both were deleted locally and neither reached the Hub, so the retained collection
+begins at episode index 0 as declared.
+
+### D2. Training
+
+`Andresg324/smolvla-cube-density`, seed 1000, settings identical to §4.7 apart from
+`dataset.repo_id`, `output_dir` and `job_name`. Final training loss 0.0559 at step 9800, the highest of the ten runs, against Randomized's
+0.0357 at the bottom. See `figures/table_loss.md`.
+
+### D3. Evaluation
+
+Three cells at 16 episodes each, index 0 discarded, **45 scored rollouts**. Cell order fixed by
+§8.30 in advance and unchanged.
+
+| Cell | Cube | Position | Result |
+|---|---|---|---|
+| in_distribution | red | T6 | [x] 15/15 |
+| trained_t2 | red | T2 (6.5, 7.5) | [x] 15/15 |
+| new_positions | red | E1 to E5, 3 episodes each, in order | [x] 0/15 |
+
+All fifteen held-out failures scored `timeout_other`; none reached the cube. At four of the five
+held-out positions the arm settled within 1.4 to 3.2 degrees of one of the two trained bearings
+while 22 to 64 degrees from the target.
+
+**Part D total: 45 rollouts. Grand total recorded and scored: 707.**
+
+---
+
+## After Parts B, C and D
 
 - [x] Tracker exported to `documents/results_raw_two_seeds.xlsx` and to the derived CSVs, with
       columns `condition, eval_cell, seed, episode, instance, success, flagged, failure_mode, notes`.
@@ -277,22 +339,24 @@ Clean at both seeds evaluated at P1 (15.5, 9.0) and P2 (15.5, 8.0), on the line 
       `tools/export_results.py` canonicalizes the two legacy labels and refuses to write
       anything if the vocabulary, the cell sizes or the success and label agreement fail.
 - [x] Ambiguous episodes re-scored from retained video.
-- [x] All 662 scored episodes screened by `tools/audit_labels.py` against two independent
-      telemetry criteria; one transposed pair found and corrected (§8.27).
+- [x] All 707 scored episodes screened by `tools/audit_labels.py` against two independent
+      telemetry criteria; one transposed pair found and corrected (§8.27). The screens ran over
+      662 episodes on August 14 and were extended to 707 when Part D closed.
 - [x] All 94 seed 1000 `timeout_other` episodes audited, since that code was assigned
       retrospectively at seed 1000 and covers a larger share of failures there than at
       seed 2000. Every one ran to the recording ceiling with substantial joint motion,
       confirming the timeout label; 85 were re-scored from video and **seven were recoded as
       `contact_no_grasp`**. The derived CSVs were regenerated afterward.
-- [x] Departure labels checked against telemetry in all 662 episodes, zero disagreements. The
+- [x] Departure labels checked against telemetry in all 707 episodes, zero disagreements. The
       20 degree threshold separates the two label groups completely: the largest maximum joint
       deviation among `no_departure` episodes is 15.9 degrees and the smallest among departing
       episodes is 59.5 degrees.
 - [x] Release detector re-calibrated against the recovery demonstrations as part of
       `tools/drops.py` on every run.
 - [x] Every rollout dataset confirmed present on the Hub. The probing analysis replays these.
-      46 rollout datasets in total: 4 conditions x 5 cells x 2 seeds, plus Clean at
-      `near_1in` and `near_2in` at both seeds, plus the two slow pace cells.
+      49 rollout datasets in total: 4 conditions x 5 cells x 2 seeds, plus Clean at
+      `near_1in` and `near_2in` at both seeds, plus the two slow pace cells, plus the three
+      density cells.
 - [x] No rollout dataset deleted.
 - [x] Bench left standing and the gantry mounted.
 
@@ -305,20 +369,42 @@ python tools/audit_labels.py                   # label screens, recording-window
 # analyze_results refuses multi-seed input: PROTOCOL.md §4.7 does not allow pooling seeds
 python analysis/analyze_results.py documents/results_seed1000.csv --outdir analysis/out_seed1000
 python analysis/analyze_results.py documents/results_seed2000.csv --outdir analysis/out_seed2000
-python analysis/analyze_exploratory.py         # displacement and demonstration pace probes
+python analysis/analyze_exploratory.py         # displacement, demonstration pace and sampling density probes
 python analysis/seed_variance.py               # the same condition compared across seeds
 
 # grasp poses, once per policy, then board coordinates onto the endpoint files
+for p in clean-seed2000 color color-seed2000 randomized randomized-seed2000 \
+         recovery recovery-seed2000; do
+  python tools/endpoints.py --policy "$p" --cells in_distribution new_positions \
+      reduced_lighting different_object distractors
+done
 python tools/endpoints.py --policy clean --cells in_distribution new_positions \
     reduced_lighting different_object distractors near_1in near_2in
+python tools/endpoints.py --policy density --cells in_distribution trained_t2 new_positions
 python tools/calibrate_pose.py --apply
 
 python tools/rollout_motion.py                 # latency, velocity, no_departure validation
 python tools/drops.py                          # detector calibration, release events, drop locations
-python tools/azimuth_analysis.py               # calibration, envelope, aiming error, aim invariance
-python tools/motion_stats.py <dataset> [...]   # demonstration pace, frame counts, epochs
+python tools/azimuth_analysis.py               # calibration, envelope, aiming error, aim invariance, density bearings
+python tools/motion_stats.py \
+  cube-pickup-clean_20260809_105745 \
+  cube-pickup-randomized_20260809_115825 \
+  cube-pickup-recovery_20260809_141725 \
+  cube-pickup-color_20260809_183224 \
+  cube-pickup-color_20260809_130649 \
+  cube-pickup-density_20260822_194111
 
-python analysis/make_figures.py                # writes figures/, run last
+# activations and probes; the slowest stage, and unchanged by the density probe
+for p in clean clean-seed2000 color color-seed2000 \
+         randomized randomized-seed2000 recovery recovery-seed2000; do
+  python probing/extract_activations.py --policy "$p" \
+    --layer model.vlm_with_expert.lm_expert.norm --device mps --seed 0
+done
+python probing/probe_position.py
+python probing/probe_success.py --sweep
+
+python tools/annotate_bench.py media/bench_wide.jpeg   # manual, only when the photo changes
+python analysis/make_figures.py                        # last: reads everything above
 ```
 
 ---
@@ -334,8 +420,21 @@ python analysis/make_figures.py                # writes figures/, run last
 - [x] `media/overhead_all_colors.jpg`: all six cubes on the gray primer
 - [x] `media/before_marking.jpg`, `media/marked_board.jpg`,
       `media/overhead_marks_erased.jpg`: the displacement probe marks before, during and after
-- [x] `media/loss_curve.png`: the pilot run on the old bench, not one of the nine study runs.
-      The nine are in `documents/training_loss.csv` and in the training loss figure.
+- [x] `media/loss_curve.png`: the pilot run on the old bench, not one of the ten study runs.
+      The ten are in `documents/training_loss.csv` and in the training loss figure.
 - [x] `media/overhead_demo.gif`: a successful autonomous rollout (Color policy, seed 1000,
       in-distribution, recorded on the study bench)
 - [x] `media/bench_wide.jpeg` wide shot of the bench showing both LEDs and the gantry
+
+### Failure mode clips (August 22, for the README)
+
+Cut from the retained rollout video with `tools/make_gif.py`, overhead camera, real time unless
+noted. Each is one scored episode.
+
+- [x] `media/clip1_clean_success.gif`: clean, in_distribution, episode 9
+- [x] `media/clip2_offset_2in.gif`: clean, near_2in, episode 5
+- [x] `media/clip3_no_motion.gif`: randomized-seed2000, different_object, episode 6, trimmed to 15 s
+- [x] `media/clip4_drop_no_recovery.gif`: recovery-seed2000, in_distribution, episode 14
+- [x] `media/clip5_rare_regrasp.gif`: recovery-seed2000, in_distribution, episode 5
+- [x] `media/clip6_correct_aim_no_grasp.gif`: randomized-seed2000, new_positions, episode 8
+- [x] `media/clip7_density_selector.gif`: density, new_positions, episode 12 (E4)

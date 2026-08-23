@@ -7,7 +7,6 @@ produces, and records the validation of the measuring instruments the study depe
 The only file edited by hand is `documents/results_raw_two_seeds.xlsx`, one row per scored
 episode. Everything else regenerates from it.
 
-
 ## Run order
 
 ```bash
@@ -16,11 +15,17 @@ python tools/audit_labels.py               # label screens, recording-window mea
 
 python analysis/analyze_results.py documents/results_seed1000.csv --outdir analysis/out_seed1000
 python analysis/analyze_results.py documents/results_seed2000.csv --outdir analysis/out_seed2000
-python analysis/analyze_exploratory.py
+python analysis/analyze_exploratory.py     # displacement, demonstration pace and sampling density probes
 python analysis/seed_variance.py
 
+for p in clean-seed2000 color color-seed2000 randomized randomized-seed2000 \
+         recovery recovery-seed2000; do
+  python tools/endpoints.py --policy "$p" --cells in_distribution new_positions \
+      reduced_lighting different_object distractors
+done
 python tools/endpoints.py --policy clean --cells in_distribution new_positions \
     reduced_lighting different_object distractors near_1in near_2in
+python tools/endpoints.py --policy density --cells in_distribution trained_t2 new_positions
 python tools/calibrate_pose.py --apply
 
 python tools/rollout_motion.py
@@ -31,7 +36,8 @@ python tools/motion_stats.py \
   cube-pickup-randomized_20260809_115825 \
   cube-pickup-recovery_20260809_141725 \
   cube-pickup-color_20260809_183224 \
-  cube-pickup-color_20260809_130649
+  cube-pickup-color_20260809_130649 \
+  cube-pickup-density_20260822_194111
 
 for p in clean clean-seed2000 color color-seed2000 \
          randomized randomized-seed2000 recovery recovery-seed2000; do
@@ -53,17 +59,24 @@ before `azimuth_analysis.py`, and `make_figures.py` last. Everything else is ind
 PROTOCOL.md §4.7 and §8.14 forbid pooling seeds, so the guard is a hard exit rather than a
 warning.
 
-`endpoints.py` rebuilds only the cells named on the command line and keeps the rest of the file
-untouched, so regenerate every cell of every policy after any change to the grasp detector.
-`near_1in` and `near_2in` exist for the Clean policies only.
+`endpoints.py` requires `--policy` and rebuilds only the cells named on the command line,
+keeping the rest of the file untouched, so regenerate every cell of every policy after any
+change to the grasp detector. There are nine endpoint files: the eight registered policies plus
+`density`. `near_1in` and `near_2in` exist for the Clean policies only, `trained_t2` for
+`density` only, and `color-slowpace` has no endpoint file because no azimuth analysis uses it.
+
+The density probe (PROTOCOL.md §8.30) is exploratory and single-seed. It is deliberately absent
+from the probing loop: `probe_position.py` maps activations to the ten training positions and
+density has two, so it is not comparable to the registered eight.
 
 ### One input that does not regenerate from the spreadsheet
 
 `documents/training_loss.csv` is exported once from Weights and Biases and committed. It is
 fetched **by run id**, not by run name, because the display names are ambiguous: three runs are
 called `smolvla_clean` and two `smolvla_color`. The run id for each condition is in
-`configs/train_config_<condition>.json` under `wandb.run_id`. The W&B project also holds a tenth
-run, the pilot from the old bench, which is not part of the study and is not exported.
+`configs/train_config_<condition>.json` under `wandb.run_id`. The W&B project holds eleven runs:
+the ten study policies and the pilot from the old bench, which is not part of the study and is
+not exported.
 
 ```bash
 python - <<'EOF'
@@ -82,9 +95,13 @@ pd.concat(rows).to_csv("documents/training_loss.csv", index=False)
 EOF
 ```
 
-W&B marks all nine runs "crashed" at step 9,800. That is a Colab artifact: the session ended
-without a clean `wandb.finish()`, and 9,800 is the last logged point at a 200 step interval.
-Training ran to 10,000 and the checkpoints exist.
+W&B marks every run "crashed" at step 9,800. That is a Colab artifact: the session ended without
+a clean `wandb.finish()`, and 9,800 is the last logged point at a 200 step interval. Training ran
+to 10,000 and the checkpoints exist.
+
+Two definitions of "final loss" are in circulation and they differ by about 0.001. `table_loss`
+reports the last logged value at step 9,800; `fig_loss` draws a three-point rolling mean. The
+figure annotation is taken from the raw last value so the table and the figure agree.
 
 ## Script to number map
 
@@ -94,12 +111,12 @@ Training ran to 10,000 and the checkpoints exist.
 | `tools/audit_labels.py` | `analysis/out_audit/` | the three label screens; the recording window measurement (1151 frames, 38.4 s, 23 chunks, 288 ms per forward pass) |
 | `analysis/analyze_results.py` | `analysis/out_seed1000/`, `analysis/out_seed2000/` | per cell success rates, Wilson intervals, the two matched comparisons (Newcombe interval plus Fisher exact), generalization gap |
 | `analysis/seed_variance.py` | `analysis/out_seed_variance/` | the same condition compared across seeds |
-| `analysis/analyze_exploratory.py` | `analysis/out_exploratory/` | displacement curve, pace comparison, failure mode breakdowns for both probes |
+| `analysis/analyze_exploratory.py` | `analysis/out_exploratory/` | displacement curve, pace comparison, density probe rates against Clean seed 1000, and failure mode breakdowns for all three probes |
 | `tools/endpoints.py` | `analysis/out_endpoints/endpoints_<policy>.csv` | grasp pose per policy per cell, and the count of episodes with no close event |
 | `tools/calibrate_pose.py` | stdout; `--apply` adds `grasp_x` and `grasp_y` to the endpoint CSVs | the joint to board coordinate model and its leave-one-out error, and the within-position spread table behind §8.19 |
 | `tools/rollout_motion.py` | `analysis/out_motion/` | departure latency, deg/step, episode duration, `no_departure` validation |
 | `tools/drops.py` | `analysis/out_drops/` | detector calibration on demonstrations, release events, drop locations, demonstrated release point |
-| `tools/azimuth_analysis.py` | `analysis/out_azimuth/` | the pan to bearing calibration and its leave-one-out error, aim by cell, aim IQR by cell, the clean trajectory envelope, Randomized's aiming error |
+| `tools/azimuth_analysis.py` | `analysis/out_azimuth/` | the pan to bearing calibration and its leave-one-out error, aim by cell, aim IQR by cell, the clean trajectory envelope, Randomized's aiming error, and for the density probe `density_aim.csv` and `settled_new_positions.csv` |
 | `tools/motion_stats.py` | `analysis/out_pace/pace.csv` | demonstration pace, frame counts, epochs at 10k steps |
 | `probing/extract_activations.py` | `probing/out_np/` (gitignored for size) | action expert hidden states from `lm_expert.norm`, one row per forward pass |
 | `probing/probe_position.py` | `analysis/out_probe/position_probe.csv` | bearing decoding, by episode and leave-one-position-out, with cluster bootstrap intervals |
@@ -107,7 +124,7 @@ Training ran to 10,000 and the checkpoints exist.
 | `probing/verify_replay.py` | stdout | the replay fidelity check behind PROTOCOL.md §9 |
 | `analysis/make_synthetic_results.py` | `analysis/out/` | synthetic scores used to exercise the analysis path before real data existed. Not a study output. |
 | `probing/make_synthetic_activations.py` | `probing/out_synthetic/` (gitignored) | synthetic activations used to exercise the probe path. Not a study output. |
-| `analysis/make_figures.py` | `figures/` | Tables 1 and 2, the training loss table, and the charts, all read from the CSVs above |
+| `analysis/make_figures.py` | `figures/` | Tables 1 and 2, the training loss table, and Figures 1 to 10, all read from the CSVs above |
 | `tools/annotate_bench.py` | `figures/figure_A1_annotated.png` | the labeled apparatus photo for Figure A1. Manual and outside the pipeline: run it, look at the output, nudge the fractional label positions, repeat. `make_figures.py` does **not** regenerate it, so a clean of `figures/` loses it until this is re-run. |
 
 `calibrate_pose.py` reports a leave-one-out error of
@@ -126,6 +143,16 @@ The last point on the displacement curve of `analysis/analyze_exploratory.py` is
 `new_positions` spans E1 to E5 at 3.5 to 14 inches from T6, plotted as one point. Read the
 curve as three measured displacements plus a far field bound, not as four equally spaced steps.
 
+`aim_by_cell.csv` is written to three decimals rather than two so that a difference taken from
+it and then rounded for display matches the value computed at full precision. Rounding twice
+moved one figure annotation by 0.1 degrees before this was fixed.
+
+The `density` row of `aim_by_cell.csv` is partial: that policy ran three cells, none of them
+`reduced_lighting`, `different_object` or `distractors`, so its same-target spread is computed
+from a single value and comes out as 0.0, and its all-cell spread of about 52 degrees is just
+the T6 to T2 separation. Neither number is meaningful and neither belongs in a table. The same
+caveat already applies to `color-slowpace`, which ran two of the four same-target cells.
+
 ### Label vocabulary
 
 `export_results.py` canonicalizes two labels written at scoring time:
@@ -139,7 +166,7 @@ The spreadsheet deliberately keeps the as-scored vocabulary; the derived CSVs ca
 canonical one. Do not rewrite the spreadsheet to match, and expect the two to differ when
 comparing them directly.
 
-`results_all.csv` concatenates the 600 registered and 62 exploratory rows and carries a
+`results_all.csv` concatenates the 600 registered and 107 exploratory rows and carries a
 `source` column marking which is which. Filter on it before treating that file as the grid.
 
 ## Instrument validation
@@ -164,10 +191,9 @@ extraction matches the same cells inside a full run. The activations behind the 
 seeded run rather than corrected, since nothing was wrong with them.
 
 `probe_success.py` skips any policy with too few episodes in the minority outcome, so the sweep
-covers six of the eight: Clean at seed 1000 has 5 episodes in the 
-minority outcome and Color at seed 2000 has 4, so both are skipped 
-rather than fitted. Of the six, only Randomized at seed 1000 clears ts
-permutation null before the grasp (p = 0.046), and it does not replicate at seed 2000
+covers six of the eight: Clean at seed 1000 has 5 episodes in the minority outcome and Color at
+seed 2000 has 4, so both are skipped rather than fitted. Of the six, only Randomized at seed 1000
+clears its permutation null before the grasp (p = 0.046), and it does not replicate at seed 2000
 (p = 0.176).
 
 **Hook the norm, not a decoder layer.** LeRobot's SmolVLA runs a custom interleaved forward that
@@ -177,7 +203,7 @@ exists; the only symptom is "0 activations from N episodes".
 
 **Only the action expert is trained.** `train_config.json` records `freeze_vision_encoder: true`
 and `train_expert_only: true`, and LeRobot's `set_requires_grad()` puts the whole VLM in eval
-mode with `requires_grad=False`. All eight policies therefore share an identical perceptual
+mode with `requires_grad=False`. All ten policies therefore share an identical perceptual
 backbone; the probed module is the only part fine-tuning modifies.
 
 ### Pan to bearing calibration
@@ -188,7 +214,10 @@ cube location is known from the recorded start position.
 - Leave-one-out median absolute error **0.86 deg**, 90th percentile 2.22, R2 0.9990.
 - Validated at two independent known locations that were not used to fit it. T6 has a true
   bearing of 24.23 and Clean grasps at 23.32 and 24.27. The cup has a true bearing of −25.64 and
-  all 332 successes release at a median 2.6 deg from its center, IQR 1.9 to 3.3.
+  every success releases at a median 2.6 deg from its center, IQR 2.0 to 3.3.
+- The density probe adds a third check at a bearing far from either: T2 has a true bearing of
+  −30.96 and density grasps there at a median −32.55, an error of 1.6 deg on the opposite side
+  of the arm from every position used to fit the model.
 
 The cup half width used to separate a delivery from a drop, 7.2 deg, is derived from the cup's
 physical radius and its distance from the arm base. It is not a tuned threshold.
@@ -224,6 +253,15 @@ a different threshold from the grasp event detector above, calibrated for a diff
   travel among them is 6.6 deg against the 10 deg threshold, and all four were confirmed as
   genuine drops on video.
 
+**The screen is uninformative for the density probe's `trained_t2` cell.** T2 sits at a bearing
+of −31.0 degrees and the cup at −25.6, a separation of 5.4 degrees that falls inside the cup's
+7.2 degree half-width, so every gripper opening at the cube registers as a cup release. That is
+also why ten `density` / `new_positions` rows appear in the audit's failures-with-a-release list:
+those are openings near T2, not near-misses at the cup. The same 5.4 degrees is below the 10
+degree `MIN_TRAVEL` filter, which is why `drops.py` reports no density events at all. Density's
+successes at T2 rest on visual scoring under PROTOCOL.md §6.6 alone, without the telemetry
+corroboration every other cell receives.
+
 **The detector finds gripper openings, not cube releases.** It was calibrated on demonstrations,
 where the teleoperator always has the cube in hand. On rollouts a policy can close on nothing and
 open again. Of the episodes with at least one detected drop, 55 carry a drop consistent label
@@ -247,31 +285,34 @@ read with that bias in mind.
 ### `no_departure` label
 
 50 episodes carry the label. Scored against a 20 degree arm joint departure threshold computed
-independently from telemetry, there are **0 disagreements across all 662 episodes**
+independently from telemetry, there are **0 disagreements across all 707 episodes**
 (`analysis/out_motion/no_departure_disagreements.csv` is empty).
 
 The threshold was chosen by sweeping candidate values against the labels. The two groups do not
 overlap: the largest maximum joint deviation among `no_departure` episodes is 15.9 degrees and
 the smallest among departing episodes is 59.5 degrees, so every threshold from 16 to 59 degrees
-reproduces all 662 labels exactly. 20 is the conservative end of that band, and the `departed`
+reproduces every label exactly. 20 is the conservative end of that band, and the `departed`
 column in `rollout_motion_episodes.csv` is exactly `max_dev_deg > 20`.
 
 ### Label audit
 
-Three independent telemetry screens over all 662 scored episodes. Each looks for a specific
-kind of mislabel, and every flagged episode was reviewed on video.
+Three independent telemetry screens over all 707 scored episodes: 662 on August 14, extended to
+707 when the density probe closed on August 22. Each looks for a specific kind of mislabel, and
+every flagged episode was reviewed on video.
 
 - **Duration.** A success that runs to the recording ceiling, or a failure that ends early,
   contradicts the usual shape of each outcome. Ten successes and two failures were flagged;
   all twelve were reviewed and explained, and no label changed.
 - **Cup release in successes.** A success claims the cube ended in the cup, so the gripper
-  must have opened while pointing at the cup at some point in the episode. All **332**
+  must have opened while pointing at the cup at some point in the episode. All **362**
   successes contain such an opening.
 - **Cup release in failures.** The mirror check: a failure containing an opening at the cup
-  looks, from telemetry alone, like a delivery scored wrong. Nineteen do. None is a misscore.
-  The detector sees the gripper open, not the cube leave, so an empty gripper opening over the
-  cup produces the same signature; and all nineteen ran the full window, meaning the arm kept
-  working after that opening rather than stopping.
+  looks, from telemetry alone, like a delivery scored wrong. Twenty-seven do. None is a
+  misscore. The detector sees the gripper open, not the cube leave, so an empty gripper opening
+  over the cup produces the same signature; all twenty-seven ran the full window, meaning the
+  arm kept working after that opening rather than stopping; and ten of them are density episodes
+  at held-out positions where the arm parked near T2, which is angularly indistinguishable from
+  the cup (see the release detector above).
 - **Review queue after the audit: none.** No episode was flagged by more than one screen, and
   every singly flagged episode was reviewed on video and explained.
 
@@ -293,17 +334,20 @@ failures against 41.3% at seed 2000. All 94 seed 1000 `timeout_other` episodes w
   scoring convention that contact was recorded at the time.
 - The remaining 9 carry contemporaneous notes identifying the failure and were not re-watched.
 
-Failure mode distribution across 662 episodes, after the seven recodes: success 320,
-timeout_other 156, contact_no_grasp 70, no_departure 50, deliberate_drop 43, grasp_drop 10,
-success_after_drop 6, success_after_missed_grasp 6, cube_out_of_bounds 1, cup_knocked 0.
-Regenerate this line from `analysis/out_audit/`.
+Failure mode distribution across all 707 episodes, after the seven recodes: success 350,
+timeout_other 171, contact_no_grasp 70, no_departure 50, deliberate_drop 43, grasp_drop 10,
+success_after_drop 6, success_after_missed_grasp 6, cube_out_of_bounds 1, cup_knocked 0. The
+density probe contributes 30 successes and 15 timeouts to that total; the pre-density census over
+662 episodes was success 320 and timeout_other 156, with every other count unchanged. Regenerate
+this line from `documents/results_all.csv`.
 
 ### Local dataset census
 
-`tools/rollout_paths.discover()` finds 46 rollout datasets, which is exactly 4 conditions x
+`tools/rollout_paths.discover()` finds 49 rollout datasets, which is exactly 4 conditions x
 5 cells x 2 seeds (40), plus Clean at `near_1in` and `near_2in` at both seeds (4), plus the two
-slow pace cells (2). It warns about any `rollout_*` directory that fails the naming pattern
-rather than skipping it silently, since a name missing its timestamp is invisible to every tool.
+slow pace cells (2), plus the three density cells (3). It warns about any `rollout_*` directory
+that fails the naming pattern rather than skipping it silently, since a name missing its
+timestamp is invisible to every tool.
 
 ## What is in the repository but not reportable
 
@@ -321,6 +365,8 @@ rather than skipping it silently, since a name missing its timestamp is invisibl
 - **The grasp pose comparison across displacement cells,** retired as phase confounded: the
   gripper closes around frame 215 in distribution and around frame 470 when the cube is
   displaced. The trajectory envelope replaces it.
+- **The density probe's same-target aim spread**, for the reason given under the script map: it
+  ran one of the four cells that metric is defined over.
 
 ## Conventions worth knowing before editing anything here
 
@@ -328,7 +374,9 @@ rather than skipping it silently, since a name missing its timestamp is invisibl
   `observation.images.wrist`; rollout datasets use `observation.images.camera1` and
   `observation.images.camera2`, where camera1 is the overhead gantry and camera2 the wrist. The
   rename happens at training time via `--rename_map`. Code that picks a camera by the substring
-  `overhead` or `camera1` resolves to the overhead view in both.
+  `overhead` or `camera1` resolves to the overhead view in both. The policy config also declares
+  a third slot, `camera3`, inherited from `smolvla_base` and filled by no dataset in the study
+  (PROTOCOL.md §8.29).
 - PROTOCOL.md §3 numbers demonstration passes from 1. Dataset `episode_index` is 0 indexed. The
   two do not line up and have caused errors before.
 - Rollout readers drop episode 0 as the protocol warmup; training readers keep it, because in a
@@ -339,7 +387,10 @@ rather than skipping it silently, since a name missing its timestamp is invisibl
   or the merge key silently degrades and matches across cells.
 - Two datasets share the `cube-pickup-color_` prefix: `_20260809_130649` is the superseded slow
   pace collection and `_20260809_183224` is the registered Color condition. Never select
-  either by prefix.
+  either by prefix. The same trap applies to condition names: `"color-slowpace".startswith("color")`
+  is true, so match conditions exactly.
+- `trained_t2` is a cell that exists only for the density policy. Any allowlist of evaluation
+  cells has to include it, and any code that assumes five cells per policy does not hold.
 - Durations computed from recorded data are execution time, not elapsed time. Frames are recorded
   only while an action chunk executes, so 45 s of wall clock is at most 38.4 s of recorded motion.
   The policy executes the full 50 action chunk before re-observing, an open loop chunk rather

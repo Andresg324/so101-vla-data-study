@@ -9,5 +9,6 @@
 | randomized | 1000 | 11/75 | 5.57 | 0.899 | 21.6 |
 | randomized | 2000 | 18/75 | 8.13 | 0.903 | 23.1 |
 | color-slowpace | 1000 | 2/30 | 5.17 | 0.829 | 22.4 |
+| density | 1000 | 0/45 | 0.63 | 0.943 | 13.4 |
 
 Clean is out of 91 rather than 75 because the 16 displacement-probe episodes per seed were run on the Clean policy and are pooled here.

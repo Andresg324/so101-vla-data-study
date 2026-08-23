@@ -25,6 +25,9 @@ color,2000,new_positions,15.0,0.0,2.27,4.048,0.61,,,0.0
 color,2000,reduced_lighting,15.0,0.0,1.23,2.53,0.872,0.892,12.974,14.0
 color-slowpace,1000,different_object,15.0,0.0,4.23,17.412,0.839,0.837,22.079,14.0
 color-slowpace,1000,in_distribution,15.0,2.0,7.43,26.502,0.83,0.817,22.79,10.0
+density,1000,in_distribution,15.0,0.0,0.47,0.67,0.938,0.938,13.5,15.0
+density,1000,new_positions,15.0,0.0,0.97,2.188,0.881,,,0.0
+density,1000,trained_t2,15.0,0.0,0.6,0.718,0.948,0.948,13.222,15.0
 randomized,1000,different_object,15.0,4.0,5.8,12.47,0.827,,,0.0
 randomized,1000,distractors,15.0,0.0,4.5,8.772,0.786,0.846,23.333,1.0
 randomized,1000,in_distribution,15.0,1.0,6.235,11.421,0.889,0.915,22.028,6.0

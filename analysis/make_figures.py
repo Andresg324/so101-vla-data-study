@@ -2,7 +2,7 @@
 """
 analysis/make_figures.py
 
-Builds Tables 1 and 2, the training-loss table, and Figures 1 to 8, from the derived
+Builds Tables 1 and 2, the training-loss table, and Figures 1 to 10, from the derived
 CSVs. Nothing here recomputes a result: every number is read from analysis/out_*/ or
 documents/ so the figures and the text cannot drift apart. Run the analysis pipeline
 first (see analysis/README.md).
@@ -19,6 +19,8 @@ first (see analysis/README.md).
     Fig 6   Release point
     Fig 7   When the outcome becomes readable
     Fig 8   Training loss
+    Fig 9   Four metrics by condition
+    Fig 10  Bearing selection at the held-out positions
 
 Requires scipy (ConvexHull, in fig_positions) alongside pandas and matplotlib. Must be
 run from the repository root: it imports tools/calibrate_pose.py for the position table.
@@ -248,7 +250,7 @@ def table_loss():
 
     md.append("")
     md.append(f"Final loss is the last logged value (step {int(d[c_step].max())}). "
-              "Color-slowpace is exploratory and outside the registered grid.")
+              "Color-slowpace and density are exploratory and outside the registered grid.")
 
     os.makedirs(OUT, exist_ok=True)
     open(os.path.join(OUT, "table_loss.md"), "w").write("\n".join(md) + "\n")
@@ -635,8 +637,8 @@ def fig_loss():
         ax.plot(g[c_step], y, lw=1.6 if hi else 0.9,
                 color=ORANGE if hi else NEUTRAL,
                 alpha=1.0 if hi else 0.75, zorder=4 if hi else 3)
-        last[run] = float(y.iloc[-1])
-
+        last[run] = float(g[c_loss].iloc[-1])
+        
     # Log y: the runs separate by a factor the linear scale hides.
     ax.set_yscale("log")
     ax.set_ylim(0.030, 0.40)
@@ -764,7 +766,7 @@ def fig_by_condition():
         Line2D([], [], marker="D", ls="none", ms=3.6, mfc="white",
                mec=NEUTRAL, mew=1.1, label="Seed 2000"),
     ]
-    axes[-1].legend(handles=handles, loc="upper left", fontsize=6,
+    axes[-1].legend(handles=handles, loc="upper right", fontsize=6,
                     frameon=False, handletextpad=0.4, labelspacing=0.3,
                     borderpad=0.1, borderaxespad=0.2)
 
@@ -774,6 +776,59 @@ def fig_by_condition():
 
     fig.tight_layout(pad=0.4, w_pad=0.9)
     save(fig, "fig_by_condition")
+
+# ----------------------------------------------------------------------------
+# Fig 10  Bearing selection
+# ----------------------------------------------------------------------------
+
+def fig_bearing_selection():
+    """Commanded bearing against required bearing at the five held-out positions."""
+    print("Bearing selection")
+    sn = pd.read_csv(need("analysis/out_azimuth/settled_new_positions.csv"))
+
+    BASE_X = 11.0
+    bear = lambda x, y: np.degrees(np.arctan2(x - BASE_X, y))
+    T6, T2 = bear(15.5, 10.0), bear(6.5, 7.5)
+
+    PANELS = [
+        ("Randomized, 10 trained positions", ["randomized", "randomized-seed2000"], ORANGE),
+        ("Density, 2 trained positions",     ["density"],                           BLUE),
+    ]
+    LO, HI = -78, 55
+
+    fig, axes = plt.subplots(1, 2, figsize=(5.5, 2.6), sharex=True, sharey=True)
+
+    for ax, (title, pols, color) in zip(axes, PANELS):
+        g = sn[sn.policy.isin(pols)]
+        ax.plot([LO, HI], [LO, HI], lw=0.8, color=MUTED, alpha=0.55, zorder=1)
+        if pols == ["density"]:
+            for y, lab in ((T6, "T6"), (T2, "T2")):
+                ax.axhline(y, lw=0.8, ls=(0, (3, 2)), color=color, alpha=0.7, zorder=2)
+                ax.text(HI - 1, y + 1.8, f"trained {lab}", fontsize=6,
+                        color=color, ha="right", va="bottom")
+        ax.plot(g.true_az, g.settled_az, marker="o", ls="none", ms=4,
+                mfc="white", mec=color, mew=1.1, zorder=3)
+        ax.set_title(title, fontsize=7.5, pad=4)
+        ax.set_xlabel("Required bearing (deg)", fontsize=6.5, labelpad=2)
+        ax.set_xlim(LO, HI)
+        ax.set_ylim(LO, HI)
+        ax.set_aspect("equal", adjustable="box")
+        ax.tick_params(labelsize=6, pad=1)
+        ax.grid(lw=0.4, alpha=0.2)
+        ax.set_axisbelow(True)
+        for side in ("top", "right"):
+            ax.spines[side].set_visible(False)
+
+    axes[0].set_ylabel("Commanded bearing (deg)", fontsize=6.5, labelpad=2)
+    axes[0].text(-24, -23, "identity", fontsize=6, color=MUTED, rotation=45,
+                 rotation_mode="anchor")
+
+    if SHOW_TITLES:
+        fig.suptitle("Randomized tracks the target; Density selects between two trained bearings",
+                     fontsize=8)
+
+    fig.tight_layout(pad=0.4, w_pad=0.8)
+    save(fig, "fig_bearing_selection")
 
 
 if __name__ == "__main__":
@@ -789,4 +844,5 @@ if __name__ == "__main__":
     fig_success_sweep()
     fig_loss()
     fig_by_condition()
+    fig_bearing_selection()
     print(f"\nall outputs in {OUT}/")

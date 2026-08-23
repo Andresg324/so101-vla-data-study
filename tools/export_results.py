@@ -11,8 +11,8 @@ that ends in .csv is produced here.
     │                                -> results.csv          600 rows, 5 columns
     │                                -> results_seed1000.csv
     │                                -> results_seed2000.csv
-    └── sheet "exploratory results"  -> exploratory.csv       62 rows
-                                     -> results_all.csv      662 rows, both concatenated
+    └── sheet "exploratory results"  -> exploratory.csv      107 rows
+                                     -> results_all.csv      707 rows, both concatenated
 
 Validation runs before anything is written. If a check fails nothing is
 overwritten, so a bad hand edit cannot propagate.
@@ -112,7 +112,7 @@ def validate_exploratory(df):
     good = True
     for k, g in df.groupby(["condition", "eval_cell", "seed"]):
         good &= check(f"episodes contiguous {k}", sorted(g.episode) == list(range(1, len(g) + 1)), str(sorted(g.episode)))
-    good &= check("62 rows", len(df) == 62, f"got {len(df)}")
+    good &= check("107 rows", len(df) == 107, f"got {len(df)}")
     counts = df.groupby(["condition", "eval_cell", "seed"]).size().to_dict()
 
     # NOTE: "color-slowpace".startswith("color") is True. Any downstream filter that
@@ -121,7 +121,10 @@ def validate_exploratory(df):
     expected = {("color-slowpace", "in_distribution", 1000): 15,
                 ("color-slowpace", "different_object", 1000): 15,
                 ("clean", "near_1in", 1000): 8, ("clean", "near_1in", 2000): 8,
-                ("clean", "near_2in", 1000): 8, ("clean", "near_2in", 2000): 8}
+                ("clean", "near_2in", 1000): 8, ("clean", "near_2in", 2000): 8,
+                ("density", "in_distribution", 1000): 15,
+                ("density", "trained_t2", 1000): 15,
+                ("density", "new_positions", 1000): 15}
     good &= check("cell sizes", counts == expected, f"got {counts}")
     good &= check("success is 0/1", set(df.success.unique()) <= {0, 1},
                   str(set(df.success.unique())))

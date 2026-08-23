@@ -9,7 +9,8 @@ NUM_EPISODES=${2:?usage: record_dataset.sh <condition> <num_episodes>}
 # color-slowpace is deliberately absent. It was not a designed condition: it came from a
 # recording session that unintentionally ran at a slower pace, was renamed afterwards, and is
 # analyzed as exploratory only. run_inference.sh accepts it because the policy
-# exists and was evaluated; it should not be recorded on purpose.
+# exists and was evaluated; it should not be recorded on purpose. density is different: it is
+# an exploratory condition that was deliberately designed and recorded (PROTOCOL.md §8.30).
 
 case "$CONDITION" in
     clean|randomized|recovery|color|density) ;;

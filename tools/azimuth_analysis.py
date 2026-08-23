@@ -15,7 +15,7 @@ from sklearn.model_selection import LeaveOneOut, cross_val_predict
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from calibrate_pose import azimuth_fit, azimuth, BASE_X
-from rollout_paths import resolve
+from rollout_paths import resolve, parse_policy
 
 # ------------------------ Set up ---------------------------------------
 
@@ -168,7 +168,78 @@ print((med[allc].max(axis=1) - med[allc].min(axis=1)).round(1).to_string())
 print("\nIQR width of commanded azimuth, same-target cells only (deg)")
 print(iqr[same].round(1).to_string())
 
-med[allc].round(2).to_csv(os.path.join(OUTDIR, "aim_by_cell.csv"))
-iqr[allc].round(2).to_csv(os.path.join(OUTDIR, "aim_iqr_by_cell.csv"))
+med[allc].round(3).to_csv(os.path.join(OUTDIR, "aim_by_cell.csv"))
+iqr[allc].round(3).to_csv(os.path.join(OUTDIR, "aim_iqr_by_cell.csv"))
+
+# ------------------------- Density Probe (PROTOCOL.md §8.30) ----------------------
+# Amendment 30 chose T2 because it sits on the opposite side of the arm from T6, so one
+# fixed sweep cannot succeed at both. Two questions: does it aim correctly at each
+# trained position, and what does it do at a position it never saw.
+
+T6_AZ_D, T2_AZ_D = azimuth(15.5, 10.0), azimuth(6.5, 7.5)
+DENS_POS = {"in_distribution": (15.5, 10.0), "trained_t2": (6.5, 7.5)}
+
+d_ends = ends[ends.policy == "density"]
+if len(d_ends):
+    rows = []
+    for cell, xy in DENS_POS.items():
+        g = d_ends[d_ends.cell == cell]
+        if not len(g):
+            continue
+        true_az = azimuth(*xy)
+        rows.append({"cell": cell, "n": len(g), "true_az": true_az,
+                     "median_az": g.az.median(), "err": g.az.median() - true_az})
+    if rows:
+        dens = pd.DataFrame(rows).round(2)
+        print("\n--- Density: grasp azimuth at the two trained positions ---")
+        print(dens.to_string(index=False))
+        dens.to_csv(os.path.join(OUTDIR, "density_aim.csv"), index=False)
+
+# ---- Settled bearing at the held-out positions, same measure for every policy ----
+# Almost nothing grasps at a held-out position, so the endpoint table is too thin to
+# compare policies. Use the bearing the arm settles on instead: the median commanded
+# azimuth over the last quarter of the episode, after it has committed to a direction.
+
+LAB = pd.concat([pd.read_csv("documents/results_full.csv"),
+                 pd.read_csv("documents/exploratory.csv")], ignore_index=True)
+
+def settled_new_positions(policy):
+    ep_idx, A = rollout_actions(policy, "new_positions")
+    s = pd.Series(to_az(A[:, 0]), index=ep_idx)
+    s.index.name = "episode"
+    settled = s.groupby(level=0).apply(lambda g: g.iloc[int(len(g) * 0.75):].median())
+    cond, seed = parse_policy(policy)
+    inst = (LAB[(LAB.condition == cond) & (LAB.seed == seed)
+                & (LAB.eval_cell == "new_positions")]
+            .set_index("episode")["instance"])
+    d = pd.DataFrame({"settled_az": settled}).join(inst)
+    d["policy"] = policy
+    d["true_az"] = [azimuth(*POS[i]) if i in POS else np.nan for i in d.instance]
+    return d.reset_index()
+
+frames = []
+for pol in ["randomized", "randomized-seed2000", "density"]:
+    try:
+        frames.append(settled_new_positions(pol))
+    except FileNotFoundError:
+        print(f" no new_positions rollout for {pol}, skipped")
+
+if frames:
+    sn = pd.concat(frames, ignore_index=True)
+    sn["err"] = sn.settled_az - sn.true_az
+    sn["to_T6"] = (sn.settled_az - T6_AZ_D).abs()
+    sn["to_T2"] = (sn.settled_az - T2_AZ_D).abs()
+    sn["nearest_trained"] = np.where(sn.to_T6 <= sn.to_T2, "T6", "T2")
+    sn.round(2).to_csv(os.path.join(OUTDIR, "settled_new_positions.csv"), index=False)
+
+    print(f"\n--- Settled bearing at held-out positions "
+          f"(density trained at T6 {T6_AZ_D:.1f} deg and T2 {T2_AZ_D:.1f} deg) ---")
+    print(sn.groupby(["policy", "instance"]).agg(
+        n=("settled_az", "size"),
+        settled=("settled_az", "median"),
+        true=("true_az", "first"),
+        miss_vs_true=("err", lambda s: s.abs().median()),
+        picked=("nearest_trained", lambda s: s.mode().iat[0]),
+    ).round(1).to_string())
 
 print(f"\nSaved to {OUTDIR}/")

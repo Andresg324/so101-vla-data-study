@@ -9,5 +9,6 @@
 | color | 1000 | 0.0518 | 53/75 |
 | recovery | 2000 | 0.0529 | 31/75 |
 | recovery | 1000 | 0.0538 | 39/75 |
+| density | 1000 | 0.0559 | n/a |
 
-Final loss is the last logged value (step 9800). Color-slowpace is exploratory and outside the registered grid.
+Final loss is the last logged value (step 9800). Color-slowpace and density are exploratory and outside the registered grid.
