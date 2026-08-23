@@ -117,14 +117,14 @@ figure annotation is taken from the raw last value so the table and the figure a
 | `tools/rollout_motion.py` | `analysis/out_motion/` | departure latency, deg/step, episode duration, `no_departure` validation |
 | `tools/drops.py` | `analysis/out_drops/` | detector calibration on demonstrations, release events, drop locations, demonstrated release point |
 | `tools/azimuth_analysis.py` | `analysis/out_azimuth/` | the pan to bearing calibration and its leave-one-out error, aim by cell, aim IQR by cell, the clean trajectory envelope, Randomized's aiming error, and for the density probe `density_aim.csv` and `settled_new_positions.csv` |
-| `tools/motion_stats.py` | `analysis/out_pace/pace.csv` | demonstration pace, frame counts, epochs at 10k steps |
+| `tools/motion_stats.py` | `analysis/out_pace/pace.csv` | demonstration pace, frame counts, epochs at 10k steps for six datasets; the paper's velocity to completion-time rank correlation (n = 5) uses the five registered datasets, since density was collected after the grid and is never pooled with it |
 | `probing/extract_activations.py` | `probing/out_np/` (gitignored for size) | action expert hidden states from `lm_expert.norm`, one row per forward pass |
 | `probing/probe_position.py` | `analysis/out_probe/position_probe.csv` | bearing decoding, by episode and leave-one-position-out, with cluster bootstrap intervals |
 | `probing/probe_success.py` | `analysis/out_probe/success_probe.csv`, `success_sweep.csv` | outcome decoding at an information cutoff swept across the episode, with a full episode control and a within cell permutation null |
 | `probing/verify_replay.py` | stdout | the replay fidelity check behind PROTOCOL.md §9 |
 | `analysis/make_synthetic_results.py` | `analysis/out/` | synthetic scores used to exercise the analysis path before real data existed. Not a study output. |
 | `probing/make_synthetic_activations.py` | `probing/out_synthetic/` (gitignored) | synthetic activations used to exercise the probe path. Not a study output. |
-| `analysis/make_figures.py` | `figures/` | Tables 1 and 2, the training loss table, and Figures 1 to 10, all read from the CSVs above |
+| `analysis/make_figures.py` | `figures/` | the grid and matched-comparison tables, the training loss table, and the nine figure PDFs in `figures/`, all read from the CSVs above |
 | `tools/annotate_bench.py` | `figures/figure_A1_annotated.png` | the labeled apparatus photo for Figure A1. Manual and outside the pipeline: run it, look at the output, nudge the fractional label positions, repeat. `make_figures.py` does **not** regenerate it, so a clean of `figures/` loses it until this is re-run. |
 
 `calibrate_pose.py` reports a leave-one-out error of
@@ -193,7 +193,8 @@ seeded run rather than corrected, since nothing was wrong with them.
 `probe_success.py` skips any policy with too few episodes in the minority outcome, so the sweep
 covers six of the eight: Clean at seed 1000 has 5 episodes in the minority outcome and Color at
 seed 2000 has 4, so both are skipped rather than fitted. Of the six, only Randomized at seed 1000
-clears its permutation null before the grasp (p = 0.046), and it does not replicate at seed 2000
+clears its permutation null before the grasp (p = 0.046), which does not survive Bonferroni
+correction for six tests (α = 0.0083), and it does not replicate at seed 2000 (p = 0.176).
 (p = 0.176).
 
 **Hook the norm, not a decoder layer.** LeRobot's SmolVLA runs a custom interleaved forward that
@@ -215,9 +216,10 @@ cube location is known from the recorded start position.
 - Validated at two independent known locations that were not used to fit it. T6 has a true
   bearing of 24.23 and Clean grasps at 23.32 and 24.27. The cup has a true bearing of −25.64 and
   every success releases at a median 2.6 deg from its center, IQR 2.0 to 3.3.
-- The density probe adds a third check at a bearing far from either: T2 has a true bearing of
-  −30.96 and density grasps there at a median −32.55, an error of 1.6 deg on the opposite side
-  of the arm from every position used to fit the model.
+- The density probe grasps at T2 at a median −32.55 against a true −30.96. T2 is one of the ten
+  positions the fit was made on, so this is a consistency check rather than independent
+  validation, but it confirms the model holds 55 degrees away from T6 for a policy that never
+  saw the fitting data.
 
 The cup half width used to separate a delivery from a drop, 7.2 deg, is derived from the cup's
 physical radius and its distance from the arm base. It is not a tuned threshold.
@@ -256,11 +258,11 @@ a different threshold from the grasp event detector above, calibrated for a diff
 **The screen is uninformative for the density probe's `trained_t2` cell.** T2 sits at a bearing
 of −31.0 degrees and the cup at −25.6, a separation of 5.4 degrees that falls inside the cup's
 7.2 degree half-width, so every gripper opening at the cube registers as a cup release. That is
-also why ten `density` / `new_positions` rows appear in the audit's failures-with-a-release list:
-those are openings near T2, not near-misses at the cup. The same 5.4 degrees is below the 10
-degree `MIN_TRAVEL` filter, which is why `drops.py` reports no density events at all. Density's
-successes at T2 rest on visual scoring under PROTOCOL.md §6.6 alone, without the telemetry
-corroboration every other cell receives.
+also why eight `density` / `new_positions` rows appear in the audit's failures-with-a-release
+list: those are openings near T2, not near-misses at the cup. The same 5.4 degrees is below the
+10 degree `MIN_TRAVEL` filter, which is why `drops.py` reports no density events at all.
+Density's successes at T2 rest on visual scoring under PROTOCOL.md §6.6 alone, without the
+telemetry corroboration every other cell receives.
 
 **The detector finds gripper openings, not cube releases.** It was calibrated on demonstrations,
 where the teleoperator always has the cube in hand. On rollouts a policy can close on nothing and
@@ -310,9 +312,9 @@ every flagged episode was reviewed on video.
   looks, from telemetry alone, like a delivery scored wrong. Twenty-seven do. None is a
   misscore. The detector sees the gripper open, not the cube leave, so an empty gripper opening
   over the cup produces the same signature; all twenty-seven ran the full window, meaning the
-  arm kept working after that opening rather than stopping; and ten of them are density episodes
-  at held-out positions where the arm parked near T2, which is angularly indistinguishable from
-  the cup (see the release detector above).
+  arm kept working after that opening rather than stopping; and eight of them are density
+  episodes at held-out positions where the arm parked near T2, which is angularly
+  indistinguishable from the cup (see the release detector above).
 - **Review queue after the audit: none.** No episode was flagged by more than one screen, and
   every singly flagged episode was reviewed on video and explained.
 
