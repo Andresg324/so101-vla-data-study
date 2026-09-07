@@ -105,17 +105,25 @@ position or color, so the correspondence holds.
 
 1. **Model:** SmolVLA, fine-tuned from `lerobot/smolvla_base`.
 2. **Task:** pick up the cube and place it in the cup.
-3. **Budget:** 50 training episodes per condition; 15 scored evaluation episodes per cell.
+3. **Budget:** 50 training episodes per condition for the original four conditions; additional
+   episodes for the density sweep as described in §8.32. 15 scored evaluation episodes per cell
+   for the original grid; the density sweep evaluation is specified in §8.32.
 4. **Hardware:** camera position and framing, gripper, control frequency.
 5. **Arm home pose** and **baseline lighting** as in §1.
 6. **Reset:** the cube is replaced by hand onto its marked position between episodes.
 7. **Training hyperparameters:** identical across conditions. `batch_size=32`, `steps=10000`,
-   `save_freq=2000`, LeRobot's default optimizer and learning-rate schedule for SmolVLA,
-   `policy.device=cuda`, and the same `rename_map` (`overhead` to `camera1`, `wrist` to
-   `camera2`). The seed is identical across conditions within a replication and is the only
-   setting varied between them: 1000 primary, 2000 replication (§6.9, §8.14). Conditions are never
-   compared across seeds. The resolved config for each run is released with the code; §8.29
-   records what the defaults turned out to be.
+   `save_freq=2000`, `policy.device=cuda`, and the same `rename_map` (`overhead` to `camera1`,
+   `wrist` to `camera2`). Optimizer AdamW, `lr=1e-4`, betas (0.9, 0.95), eps 1e-8, weight decay
+   1e-10, grad clip norm 10.0. Scheduler `cosine_decay_with_warmup`, configured
+   `scheduler_warmup_steps=1000` and `scheduler_decay_steps=30000`, auto-scaled at construction to
+   333 and 10000 (§8.29), `scheduler_decay_lr=2.5e-6`. Policy `n_obs_steps=1`, `chunk_size=50`,
+   `n_action_steps=50`, `num_steps=10`, `num_expert_layers=0`, `expert_width_multiplier=0.75`,
+   `freeze_vision_encoder=true`, `train_expert_only=true`. LeRobot 0.5.2, Python 3.12.13, dataset
+   `CODEBASE_VERSION` v3.0. The seed is identical across conditions within a replication and is the
+   only setting varied between them: 1000 primary, 2000 replication (§6.9, §8.14). Conditions are
+   never compared across seeds. The resolved config for each run is released with the code; §8.29
+   records what the defaults turned out to be and where the resolved config is not sufficient to
+   establish them.
 8. **Checkpoint:** the final checkpoint at step 10000, for every condition. No best-loss or
    early-stopped selection.
 9. **Compute:** a single A100 per run.
@@ -134,7 +142,8 @@ position or color, so the correspondence holds.
     clock, but frames are recorded only while a chunk executes, so a full-length episode is 1151
     frames, 38.4 s of motion in 23 chunks, and every duration computed from recorded data is
     execution time rather than elapsed time. The 6.6 s residual over 23 chunks puts the forward
-    pass at **288 ms**.
+    pass at **288 ms**. Flow-matching inference draws `num_steps = 10` sampling steps per forward pass, so inference is
+    stochastic at fixed weights and fixed observation.
 13. **Warmup episodes:** each cell records 16; index 0 is discarded unscored, so the 15 scored
     episodes are indices 1 to 15. The first forward pass in a process pays a one-off Metal kernel
     compilation cost that later passes do not, which would otherwise penalize the first episode of
@@ -209,9 +218,13 @@ All four policies are evaluated on five cells: one in-distribution reference and
 
 ## 7. Naming (locked)
 
-- **Training datasets:** `cube-pickup-{clean,randomized,recovery,color}_{YYYYMMDD_HHMMSS}`.
+- **Training datasets:** `cube-pickup-{clean,randomized,recovery,color,density}_{YYYYMMDD_HHMMSS}`
+  for the original conditions and the density probe, and `cube-pickup-density{N}_{YYYYMMDD_HHMMSS}` 
+  for the density sweep collection in §8.32, where N is the per-position demonstration count.
 - **Policies:** `smolvla-cube-{condition}` at seed 1000, `smolvla-cube-{condition}-seed2000` at
   seed 2000. Exploratory policies carry a descriptive suffix (`smolvla-cube-color-slowpace`).
+- **Sweep policies:** `smolvla-cube-density{N}` at seed 1000 and `smolvla-cube-density{N}-seed2000`
+  at seed 2000. Fixed-step control runs carry the suffix `-fixedstep`.
 - **Rollout datasets:** `rollout_{policy}_{cell}_{timestamp}`, retained for offline analysis.
 
 LeRobot appends the timestamp itself in both cases; the analysis tooling requires exactly one.
@@ -383,11 +396,18 @@ retained dataset is named in §8.
       vision-language backbone in eval mode with `requires_grad=False`. Roughly 100M of 450M
       parameters are trainable, so all policies share an identical perceptual front end and
       every behavioral difference is attributable to the action expert.
-    - **The learning-rate schedule was configured for longer than the run.** The default cosine
-      decay carries `scheduler_decay_steps: 30000` with 1000 warmup steps against a 10000 step
-      run, so the evaluated checkpoint sits near 79% of peak learning rate rather than fully
-      annealed. This applies identically to all runs and is disclosed rather than corrected,
-      since correcting it afterwards would break the comparison §4.7 protects.
+    - **The learning-rate schedule was auto-scaled to the run   length**  The resolved configs carry 
+      `scheduler_decay_steps: 30000` and `scheduler_warmup_steps: 1000` against a 10000 step run, which 
+      was originally read as leaving the checkpoint near 79% of peak learning rate, which was wrong.
+      `CosineDecayWithWarmupSchedulerConfig` scales warmup and decay steps when the number of
+      training steps is below `num_decay_steps`, and the scaling happens when the scheduler is
+      constructed rather than when the config is resolved, so the config file cannot show it. The
+      effective schedule was 333 warmup and 10000 decay steps. The `train/lr` series in Weights and
+      Biases confirms this, as the final logged learning rate is 2.7236e-6 against `decay_lr` of 2.5e-6,
+      where an unscaled 30000 step horizon would have put step 9800 near 7.9e-5, a factor of 30
+      apart. Every evaluated checkpoint is therefore fully annealed. No setting changed and no
+      result changes; this corrects the description only, and supersedes the 79% figure wherever it
+      appears. *Corrected September 7, 2026.*
     - **The policy carries a third image slot that no dataset fills.** `input_features` lists
       `camera1`, `camera2` and `camera3`, inherited from the `smolvla_base` configuration. Every
       dataset in the study provides two cameras, `overhead` and `wrist`, which the `rename_map`
@@ -410,6 +430,241 @@ retained dataset is named in §8.
     Confounds: a separate session two weeks later with a more practiced teleoperator, and a single
     seed. Outside the pre-registration, never pooled into the grid, compared to Clean
     descriptively. Stated before any demonstration was recorded.
+
+### Follow-on Experiments (September 6, 2026)
+
+31. **Loss landscape, exploratory.** Using training logs from Weights and Biases and the ten
+    fine-tuned checkpoints on Hugging Face, an exploratory analysis will test whether training
+    loss carries any information about deployment success. The Randomized policy reached the
+    lowest final training loss and performed worst at its trained position. Note that training
+    loss is computed on each policy's own dataset, so the six conditions are not scored against
+    a common target and the numbers are not directly comparable across conditions. Within a
+    single run, lower loss indicates a better fit; across runs trained on different data, the
+    quantity being fit changes with the condition. This asks what the observed ordering is
+    actually measuring. Three current hypotheses described below:
+
+      - *Randomized has a lower irreducible floor.* With only 5 demonstrations per location,
+        there is less accumulated operator disagreement across near-identical observations than
+        with 50 at one location. Since the model emits one distribution and cannot score below
+        the entropy of the target, a lower floor produces a lower loss without a better solution.
+      - *Dataset difficulty rather than solution quality.* Randomized's advantage may be a
+        property of what it was asked to fit rather than what it learned. Scoring all ten
+        checkpoints on all six datasets separates the two: if every policy scores low on
+        Randomized's data, the advantage is a property of that dataset. If Randomized scores low
+        on every dataset, it found a broadly good per-frame fit and the failure lies outside what
+        the loss can see.
+      - *Sharp versus flat solution.* Deployment differs from training in two ways the loss does
+        not capture: action chunks execute open loop for 50 steps, and flow-matching inference is
+        stochastic. A solution in a narrow basin degrades faster under both. Measured as the loss
+        increase along random directions at matched step size. This is exploratory, with no directional
+        prediction. Sharpness is not invariant to reparametrization, so this is interpretable only
+        because all ten checkpoints share architecture, initialization, and training config.
+
+    This experiment is run post-hoc on artifacts that already exist and is not pre-registered in the sense
+    used elsewhere in this protocol. The decision rules below are fixed before any numbers are
+    computed and analyzed.
+
+      - *Determinism.* The flow-matching loss is stochastic in both the sampled timestep and the
+        noise draw. Both are fixed and identical across all checkpoint-by-dataset cells, with N
+        draws per cell and the standard error across draws reported. Two identical calls must
+        return identical values before any result is used.
+      - *Which loss.* Table 7 reports `train/losses_after_rm_padding`, the per-frame flow-matching
+        loss with padded frames masked out. The deterministic harness computes the same masked
+        quantity. A harness that averaged over padded frames would fail the diagonal check for
+        reasons unrelated to any hypothesis here. Each Weights and Biases series is resolved to a run
+        ID before use, since the run names displayed in the project include two series rendering as
+        `smolvla_clean` and three as `smolvla_color`, one of of which is the slowpace probe
+        (§8.16) and is excluded from the diagonal.
+      - *Normalization.* Normalization statistics are per dataset. When scoring checkpoint A on
+        dataset B, A's own statistics apply, since the policy including its normalizer is the
+        artifact under test. A subset of cells is rescored using B's statistics as a control, to
+        bound how much off-diagonal structure is normalizer mismatch rather than fit quality.
+      - *Diagonal validity criterion.* The diagonal must reproduce the Table 7 ordering at the
+        condition level, with seeds pooled, and match within 10% on magnitude. Exact rank identity
+        between adjacent seeds is not required: seed pairs within a condition differ by 2% or under
+        for Clean, Color and Recovery, and 4.8% for Randomized. The ordering the diagonal must
+        reproduce is Randomized lowest, then Clean, then Color, then Recovery, then Density.
+      - *Off-diagonal criterion.* A change of 10% or more relative to the diagonal will be considered
+        support for the dataset-difficulty hypothesis. No literature anchors this threshold, and this is
+        stated here in advance.
+      - *Update norms.* Per parameter group, the norm of the difference between each checkpoint
+        and the SmolVLA base, relative to the base norm of that group. Normalization buffers are
+        excluded by name. The tolerance is set at dtype round-trip precision rather than exact
+        zero. If parameter groups outside the expected trainable set moved, the frozen-backbone
+        claim in the paper is corrected regardless of anything else in this item.
+      - *Scope limit.* All four measurements operate on the per-frame conditional loss. None of
+        them can explain a rollout failure, since per-frame loss says nothing about how error
+        compounds across a 50-step chunk. The available conclusion is whether the loss ordering
+        reflects the data or the solution.
+
+32. **Density sweep, pre-registered.** Following the density probe, where training consisted of 2
+    locations with 25 episodes each, the policy performed perfectly (15/15 at T6 and at T2) on its
+    trained positions but did not aim at new positions (E1-E5), instead selecting between the
+    positions it was trained on. Randomized performed poorly on execution but did aim at varied
+    positions. This raises the question of whether a SmolVLA policy can both aim at new positions
+    and execute, and at what number of episodes and training positions. Training demonstrations
+    will cover the 10 training positions at 5, 10, 25, and 50 episodes per location, yielding 4
+    density levels.
+
+      - *Collection.* 52 passes are recorded across the 10 training locations T1-T10, cycled in the
+        same manner as Randomized, by the same teleoperator, for 520 demonstrations. Collection may
+        span several sessions to limit operator fatigue. Pass index, session boundary, and
+        timestamp are logged.
+      - *Held-out set.* Passes 10 and 30 of 52 are held out in full, 20 demonstrations, 2 per
+        position, and excluded from every training subset. The two passes are named here before
+        collection begins rather than taken from the end of the sequence. 500 demonstrations remain
+        available for training.
+      - *Subsampling.* Subsets are nested and stratified within position: 5 ⊂ 10 ⊂ 25 ⊂ 50 per
+        location, drawn across all 50 available passes for seeds 1000 and 2000. Contiguous blocks are explicitly not used,
+        because the earliest passes are the least practiced and a contiguous rule would confound
+        density with operator practice in the same direction as the registered prediction. Any
+        exploratory budgets (15, 20, 30, 40) will follow the same method.
+      - *Bench rebuild.* The workbench was disassembled and rebuilt, so camera pose and workspace
+        geometry may differ from the original by a small margin. Before any collection,
+        `smolvla-cube-clean` at seed 1000 is run on the In-Distribution cell at T6, 16 recorded and
+        15 scored per §4.13, and compared against the August cell. Clean is used because it scores
+        15/15 at both seeds, so a drop is easily observed, and because it executes a fixed sweep to a single
+        position, which makes its commanded bearing distribution tight enough for a shift to show.
+        If success falls outside the Wilson interval of the August cell,
+        or if mean commanded bearing shifts by more than the joint-to-bearing calibration residual
+        reported in `analysis/README.md`, the bench is recalibrated before collection begins and the
+        measured shift is reported. If both hold, the rebuild is recorded as within tolerance. A
+        reference overhead frame is compared against an August frame for the pixel positions of the
+        marks and the cup, and a photograph of the rebuilt bench is included alongside the
+        original.
+      - *Training.* Steps scale with dataset size to hold epochs constant. Since
+        `CosineDecayWithWarmupSchedulerConfig` scales warmup and decay to the run length whenever
+        steps fall below `num_decay_steps` (§8.29), setting a horizon longer than the run has no
+        effect and setting one shorter would truncate the schedule. Decay steps are therefore set
+        equal to the step count in every cell, and warmup is set to the same 1/30 ratio the August
+        runs resolved to. This reproduces the August schedule exactly at the 5/position cell.
+
+        | Density | Demos | Steps | Warmup | Decay |
+        |---|---|---|---|---|
+        | 5/position | 50 | 10,000 | 333 | 10,000 |
+        | 10/position | 100 | 20,000 | 667 | 20,000 |
+        | 25/position | 250 | 50,000 | 1,667 | 50,000 |
+        | 50/position | 500 | 100,000 | 3,333 | 100,000 |
+
+        All other settings are the §4.7 values, unchanged. `scheduler_decay_steps` and
+        `scheduler_warmup_steps` are the only fields deliberately overridden relative to prior runs,
+        and the override is required by the epoch-matched design rather than being a drift in
+        configuration. Two seeds each, 8 runs. The 5/position cell is identical to the existing
+        configuration, so it doubles as a replication check against the August Randomized policies.
+        Realized epochs per cell are computed from the recorded frame counts and reported after
+        collection rather than assumed equal.
+      - *Training confound, stated.* At fixed steps, larger datasets receive fewer passes over each 
+        demonstration. At fixed epochs, larger datasets receive more gradient steps, so data quantity 
+        is confounded with optimization amount. Fixed epochs was chosen because the question is about 
+        per-position density, and a low-density cell that appeared to win because it was 
+        trained harder per demonstration would not answer it. This is a stated limitation.
+      - *Fixed-step controls.* The 250 and 500 demonstration cells are additionally trained at
+        10,000 steps with warmup 333 and decay 10,000, identical to the August configuration, one
+        seed each, 2 extra runs. This makes the epoch confound measurable as well.
+      - *Validation on held-out demonstrations.* The 20 held-out demonstrations are never trained
+        on. For every checkpoint, the deterministic loss defined in item 31, with fixed timestep
+        and noise draws, is computed on those 20. A validation loss still falling at the
+        checkpoint indicates undertraining; one that has turned upward indicates overtraining.
+        This is the instrument for whether the chosen step count was appropriate, and is separate
+        from the fixed-step controls above.
+      - *Evaluation.* Four cells will be evaluated per policy. *In-Distribution:* 15 episodes at T6. 
+        *New Positions:* 25 episodes, 5 scored at each of position from E1 to E5. *Distactors:*
+        15 episodes with the same eact layout described in in §5.5. *Trained-position spot check:*
+        6 episodes, 2 at each of T1, T3 and T10, 6 scored. One additional warmup episode is recorded 
+        and discarded per cell per §4.13, so 65 recorded and 61 scored per policy, 520 recorded and 488
+        scored across the 8 primary runs. Trained-position success is measured at T6 and the spot check 
+        is descriptive only, carrying no claim: T1 and T10 are two of the four partial-observability positions 
+        in §9, where the gripper leaves the overhead frame during part of the approach, so a low rate there is
+        confounded with camera geometry. T3 is the furthest trained position from T6 and is not affected by that
+        geometry. Per-cell rates at n=5 and below are descriptive; claims rest on the 15-episode 
+        cells and on the 25-episode New Positions aggregate.
+      - *Cross-condition comparison.* Comparison against Clean, Randomized and Density is made at T6
+        with 15 scored episodes, matching the existing In-Distribution cells exactly, with a
+        Newcombe hybrid score interval on the difference. For E1-E5 the prior conditions have 3
+        episodes per position against 5 here, so the comparison uses their first 3 and the asymmetry is
+        stated with the result.
+      - *Seeds.* 2 seeds for the primary analysis, with a possible third depending on timing.
+      - *Analysis.* Primary test is a Cochran-Armitage trend test across the four ordered density
+        levels, testing whether success rises monotonically with density, using one degree of
+        freedom rather than pairwise comparisons. Fisher exact tests are used for pairwise
+        contrasts named in advance, with Holm correction across that family. Wilson intervals are
+        reported per cell. Seeds are not pooled, consistent with prior analyses in this project;
+        two seeds cannot support a between-seed variance estimate, so agreement between them is
+        treated as a qualitative replication check rather than as a confidence interval on seed
+        variation. Beyond success rate, results pass through the same analyses as prior policies:
+        commanded bearing against cube position at new positions, and linear probing for cube
+        position from policy activations. The loss landscape analysis in item 31 is extended to
+        these checkpoints.
+      - *Registered prediction.* At 25 episodes per location across 10 locations, policies will
+        both aim at new positions and execute, shown by commanded bearing tracking cube position
+        and by success rate. The mechanism predicted is per-position density: the density probe
+        showed 25 episodes at a single location was sufficient for execution at that location
+        (15/15 at both T6 and T2), so 25 at each of 10 locations should supply both execution and
+        the positional coverage that Randomized had. Additionally, all policies at 10 or more
+        episodes per location are expected to aim correctly.
+      - *Confound in the prediction, stated.* Per-position density and total budget are perfectly
+        collinear across the four cells, so a positive result cannot separate them by itself. The
+        prediction above is explicitly about per-position density, not total budget. The existing
+        Clean, Density, and Randomized policies form an iso-budget slice at 50 total
+        demonstrations across 1, 2, and 10 positions and provide the only available leverage on
+        the distinction.
+      - *Contrary prior, pre-registered.* Emukpere et al. (arXiv 2602.24143) scaled from 10,000 to
+        100,000 demonstrations under full workspace randomization and observed no meaningful
+        improvement for SmolVLA on instruction-conditioned success. That result concerns
+        language-to-instance binding in a multi-object scene, whereas this study concerns spatial
+        interpolation with a single object and a fixed instruction, so it is a relevant prior
+        rather than a direct prediction against this hypothesis.
+
+33. **Recreation on a larger VLA model.** An existing limitation of this project is that all
+    results come from SmolVLA, with 450M parameters and roughly 100M trainable under the freeze
+    configuration used here, so the observed behavior may be specific to that model. A follow-on
+    training and evaluation of the Clean and Randomized conditions at 50 demonstrations will be
+    run on π0.5, 2 seeds, 4 runs. Recovery and Color are excluded: Color was a ceiling null
+    expected to carry over, and Recovery adds cost without changing what the result checks. Extending 
+    this to the density sweep cells would be a second full experiment and is deferred to a separate item.
+      - *Model choice.* π0.5 shares SmolVLA's flow-matching action expert and is a first-class
+        LeRobot policy, so the training and evaluation regime transfers with minimal change.
+        Emukpere et al. (arXiv 2602.24143) run lerobot/pi05_base and lerobot/smolvla_base side by
+        side under freeze_vision_encoder=true and train_expert_only=true, the same freeze
+        configuration used here, at 3.6B against 0.45B parameters, establishing that the freeze
+        flags port between the two.
+      - *Training parameters.* Following that precedent: dtype=bfloat16,
+        gradient_checkpointing=true, freeze_vision_encoder=true, train_expert_only=true. Confirm
+        before committing that chunk_size and n_action_steps of 50 are supported, since their grid
+        search topped out at 32, and the 50-step open-loop chunk is what makes multi-second
+        inference tolerable on local hardware.
+      - *Evaluation.* Same protocol as the corresponding SmolVLA runs, scored on no-departure rate
+        and the fixed-sweep displacement behavior, which are the two measures that carried the
+        original result.
+      - *Conclusion constraint.* π0.5 differs from SmolVLA in pretraining corpus as well as in
+        parameter count, and the two are confounded here. A failure to replicate supports the
+        claim that the effect does not replicate at π0.5. It does not support the claim that the
+        effect is an artifact of small models.
+
+34. **Inspect Robots evaluation.** Inspect Robots is a third-party evaluation harness for
+    physical AI. Its `inspect-robots-so101` plugin provides a `so_arm` embodiment for
+    SO-ARM followers and a `lerobot` policy wrapper that loads any LeRobot checkpoint, including 
+    the SmolVLA checkpoints used in this project. This is exploratory, a first pass to establish 
+    whether the harness runs on this bench and what it captures. Design and code will be maintained 
+    in `inspect/` in this repository.
+
+      - *Reproduction check.* `Andresg324/smolvla-cube-clean`, seed 1000, In-Distribution
+        cell only, 15 scored episodes plus a warmup at index 0. In-Distribution is chosen
+        because it scores 15/15 at both seeds, so harness-induced degradation is clear. 
+        Success is recorded by the harness rather than by the original labeling, so this is 
+        not a like-for-like comparison. Two or more failures will be recorded as a discrepancy 
+        and looked into. These are new rollouts, using a gantry that was rebuilt and through a 
+        different control loop, so a discrepancy has several possible causes and this is not a 
+        test of the original result.
+
+      - *Scorer port.* Settled bearing error and the no-departure flag are implemented as
+        Inspect Robots scorers over the recorded `TrialRecord`. Validated offline against
+        `rollout_clean_in_distribution_20260810_120038`, independent of the hardware run.
+        A successful path is if it agree with `tools/azimuth_analysis.py` and `tools/rollout_motion.py`
+        on the same episodes to within 0.1 degrees.
+
+      - *Versions.* Package versions and git revision are recorded in each `EvalLog`.
+
 
 ## 9. Known limitations
 
@@ -481,3 +736,14 @@ retained dataset is named in §8.
   on them.
 - **Probing activations are replayed from encoded video** rather than live frames; agreement with
   the recorded actions was verified against the policy's own sampling noise.
+- **The workbench was disassembled and rebuilt** between the original grid and the density sweep.
+  The PVC frame joints are not fully rigid and the rebuild is not measured photometrically or
+  dimensionally; equivalence rests on the single-cell comparison in §8.32 and on a pixel comparison
+  of the overhead frame. Any residual shift is common to every sweep policy but not to the August
+  policies, so cross-study comparisons carry it.
+- **Trained-position success in the density sweep is measured at T6 only** and generalized to ten
+  trained positions. The 2-episode spot checks at T1, T3 and T10 are descriptive and cannot detect
+  a moderate per-position difference.
+- **Frames per demonstration vary by condition**, 633.6 for Randomized against the range implied by
+  the 29% spread above, so the epoch counts in the density sweep are computed from realized frame
+  counts after collection rather than assumed equal across cells.
