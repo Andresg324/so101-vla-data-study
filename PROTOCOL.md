@@ -219,8 +219,10 @@ All four policies are evaluated on five cells: one in-distribution reference and
 ## 7. Naming (locked)
 
 - **Training datasets:** `cube-pickup-{clean,randomized,recovery,color,density}_{YYYYMMDD_HHMMSS}`
-  for the original conditions and the density probe, and `cube-pickup-density{N}_{YYYYMMDD_HHMMSS}` 
-  for the density sweep collection in §8.32, where N is the per-position demonstration count.
+  for the original conditions and the density probe. The density sweep in §8.32 records one pool,
+  `cube-pickup-densitypool_{YYYYMMDD_HHMMSS}`; the four training budgets are subsets of that pool
+  selected by the §8.32 rule and are not separately recorded datasets. An interrupted session
+  resumes into the same repository, so exactly one pool dataset exists.
 - **Policies:** `smolvla-cube-{condition}` at seed 1000, `smolvla-cube-{condition}-seed2000` at
   seed 2000. Exploratory policies carry a descriptive suffix (`smolvla-cube-color-slowpace`).
 - **Sweep policies:** `smolvla-cube-density{N}` at seed 1000 and `smolvla-cube-density{N}-seed2000`
@@ -506,32 +508,63 @@ retained dataset is named in §8.
     will cover the 10 training positions at 5, 10, 25, and 50 episodes per location, yielding 4
     density levels.
 
-      - *Collection.* 52 passes are recorded across the 10 training locations T1-T10, cycled in the
-        same manner as Randomized, by the same teleoperator, for 520 demonstrations. Collection may
-        span several sessions to limit operator fatigue. Pass index, session boundary, and
-        timestamp are logged.
+      - *Collection.* 52 passes are recorded across the 10 training locations T1-T10, cycled in
+        the same manner as Randomized, by the same teleoperator, for 520 demonstrations.
+        Collection may span multiple sessions to limit operator fatigue. Pass index, session
+        boundary, and timestamp are logged. If a session is interrupted, recording resumes at
+        the next index with the cube at the position the cycle assigns, following §8.19. The
+        index-to-position mapping is verified after collection by `tools/calibrate_pose.py`,
+        which groups all demonstrations by position derived from index and reports
+        within-position base rotation spread. The position last recorded will be noted before 
+        the session is stopped.
       - *Held-out set.* Passes 10 and 30 of 52 are held out in full, 20 demonstrations, 2 per
         position, and excluded from every training subset. The two passes are named here before
         collection begins rather than taken from the end of the sequence. 500 demonstrations remain
         available for training.
       - *Subsampling.* Subsets are nested and stratified within position: 5 ⊂ 10 ⊂ 25 ⊂ 50 per
-        location, drawn across all 50 available passes for seeds 1000 and 2000. Contiguous blocks are explicitly not used,
-        because the earliest passes are the least practiced and a contiguous rule would confound
-        density with operator practice in the same direction as the registered prediction. Any
-        exploratory budgets (15, 20, 30, 40) will follow the same method.
-      - *Bench rebuild.* The workbench was disassembled and rebuilt, so camera pose and workspace
-        geometry may differ from the original by a small margin. Before any collection,
-        `smolvla-cube-clean` at seed 1000 is run on the In-Distribution cell at T6, 16 recorded and
-        15 scored per §4.13, and compared against the August cell. Clean is used because it scores
-        15/15 at both seeds, so a drop is easily observed, and because it executes a fixed sweep to a single
-        position, which makes its commanded bearing distribution tight enough for a shift to show.
-        If success falls outside the Wilson interval of the August cell,
-        or if mean commanded bearing shifts by more than the joint-to-bearing calibration residual
-        reported in `analysis/README.md`, the bench is recalibrated before collection begins and the
-        measured shift is reported. If both hold, the rebuild is recorded as within tolerance. A
-        reference overhead frame is compared against an August frame for the pixel positions of the
-        marks and the cup, and a photograph of the rebuilt bench is included alongside the
-        original.
+        location, drawn by shuffling the 50 available passes at each position under
+        `numpy.random.default_rng(1000)` and taking the first k, so each budget is a subset of
+        the next. This seed governs data selection only and is distinct from the training seeds
+        1000 and 2000, which vary initialization; all eight runs train on the same four
+        subsampled datasets. Contiguous blocks are explicitly not used, because the earliest
+        passes are the least practiced and a contiguous rule would confound density with
+        operator practice in the same direction as the registered prediction. Any exploratory
+        budgets (15, 20, 30, 40) extend the same draw.
+      - *Bench rebuild.* The workbench was disassembled and rebuilt. An overhead frame captured
+        through `tools/check_cameras.py` was compared against the August reference by
+        `tools/bench_compare.py`, reading geometry from three permanent surface marks (T1, T3,
+        T8) rather than from placed objects. Mean apparent shift 0.05 in in x and 0.03 in in y,
+        below the 0.06 to 0.07 in disagreement between marks, so no displacement above roughly
+        0.1 in is resolvable; T1-to-T3 pixel distance changed 0.1%, so camera height and angle
+        are unchanged. Frame mean luminosity 144.8 to 144.5, against the 144.8 to 101.0 drop
+        that defines Reduced Lighting (§5.3), with a +1.3% / −3.7% redistribution consistent
+        with a higher ceiling. This is the recorded image, not a photometric measurement (§9).
+        The base clamp was measured against the front edge by the same method used in August and
+        reads unchanged, though that method is too coarse to constrain bearing at the scale
+        discussed below. Frames retained in `media/bench_rebuild/`.
+      - *Calibration stability.* The §8.23 pan-to-bearing fit was not refit after the rebuild.
+        Two checks were run through it, neither a validation of the fit itself: the furthest
+        commanded bearing reached at T6, and the median base bearing at the gripper release.
+        Both shifted about half a degree (0.35 and 0.53) in the same direction. That pattern rules 
+        out a change in the fit's slope, since the two targets sit on opposite sides of the arm, but 
+        it is consistent with a small constant offset in the mapping, which base translation, base
+        rotation and ordinary session variation would all produce identically. Nothing measured
+        here separates them. The rebuilt bench is therefore not exactly the same as the August
+        bench; it carries an unresolved constant bearing offset of roughly half a degree, small
+        relative to the 2.9 deg the cube subtends at T6 and to the episode-to-episode spread of
+        either statistic, so no claim in this protocol depends on resolving it.
+      - *Bench confirmation.* `smolvla-cube-clean` seed 1000 on In-Distribution, 16 recorded and
+        15 scored. Median furthest commanded bearing 26.70 deg against 27.04 in August, a margin
+        of 2.47 over the 24.23 required at T6 against 2.81. The reference for that shift is the
+        episode-level dispersion of the same statistic, sd 0.88 in August and 1.06 now, giving a
+        standard error on the difference of about 0.35 deg, so the shift is one standard error.
+        An earlier draft used the 0.86 deg leave-one-out residual as the threshold; that
+        measures the fit's prediction error, not the policy's aim variation, and was the wrong
+        reference. Success was 15/15 with 0 of 15 no-departures, matching August, but §5.2 shows
+        T6 success sits at a ceiling until the sweep stops covering the cube, so it is a sanity
+        check rather than the evidence. Settled bearing is not the aiming statistic, since that
+        window is dominated by cup delivery, and is noted only for completeness at 2.23 deg
+        against 2.88. Rollout retained as `rollout_clean_in_distribution_20260908_110904`.
       - *Training.* Steps scale with dataset size to hold epochs constant. Since
         `CosineDecayWithWarmupSchedulerConfig` scales warmup and decay to the run length whenever
         steps fall below `num_decay_steps` (§8.29), setting a horizon longer than the run has no
@@ -657,11 +690,15 @@ retained dataset is named in §8.
         different control loop, so a discrepancy has several possible causes and this is not a 
         test of the original result.
 
-      - *Scorer port.* Settled bearing error and the no-departure flag are implemented as
-        Inspect Robots scorers over the recorded `TrialRecord`. Validated offline against
-        `rollout_clean_in_distribution_20260810_120038`, independent of the hardware run.
-        A successful path is if it agree with `tools/azimuth_analysis.py` and `tools/rollout_motion.py`
-        on the same episodes to within 0.1 degrees.
+      - *Scorer port.* Two measures are implemented as Inspect Robots scorers over the recorded
+        `TrialRecord`: the no-departure flag, and the furthest commanded bearing reached against
+        the bearing the cube requires, which is the statistic §5.2 uses. An earlier draft
+        specified settled bearing over the last quarter of the episode; that window is dominated
+        by delivery to the cup rather than aim at the cube and is not a statistic this paper
+        uses. Validated offline against `rollout_clean_in_distribution_20260810_120038` and
+        required to agree with `tools/azimuth_analysis.py` and `tools/rollout_motion.py` to
+        within floating-point precision, since both read the same `action` column and a larger
+        discrepancy is a reimplementation error rather than a tolerance.
 
       - *Versions.* Package versions and git revision are recorded in each `EvalLog`.
 
@@ -747,3 +784,13 @@ retained dataset is named in §8.
 - **Frames per demonstration vary by condition**, 633.6 for Randomized against the range implied by
   the 29% spread above, so the epoch counts in the density sweep are computed from realized frame
   counts after collection rather than assumed equal across cells.
+- **The bench rebuild comparison rests on one session per bench.** It bounds a shift but cannot
+  separate a bench change from ordinary session-to-session variation, since no second session
+  exists at either bench to estimate that variation.
+- **A common-mode bearing offset of ~0.5 degrees between the August and rebuilt bench is unresolved.** 
+  Two stability checks through the August pan-to-bearing fit both shifted the
+  same direction by about that amount, which excludes a slope change but is observationally
+  identical to a base rotation or a shift in the fit's intercept. The clamp measurement
+  constrains translation only. The bound is below the episode-level dispersion of either
+  statistic and no claim depends on resolving it, but density sweep bearings carry it relative
+  to the August policies.
