@@ -11,10 +11,13 @@ NUM_EPISODES=${2:?usage: record_dataset.sh <condition> <num_episodes>}
 # analyzed as exploratory only. run_inference.sh accepts it because the policy
 # exists and was evaluated; it should not be recorded on purpose. density is different: it is
 # an exploratory condition that was deliberately designed and recorded (PROTOCOL.md §8.30).
+# PROTOCOL.md §8.32 introduces a new density sweep test, which will use the condition
+# densitypool. It will consist of 520 demonstrations at 10 different training positions, and
+# may be recorded in sessions, which will be paused and resumed rather than individually pushed.
 
 case "$CONDITION" in
-    clean|randomized|recovery|color|density) ;;
-    *) echo "unknown condition '$CONDITION' (clean|randomized|recovery|color|density)"; exit 1;;
+    clean|randomized|recovery|color|density|densitypool) ;;
+    *) echo "unknown condition '$CONDITION' (clean|randomized|recovery|color|density|densitypool)"; exit 1;;
 esac
 
 # ---- Hardware information ----
@@ -43,4 +46,5 @@ lerobot-record \
     --dataset.fps=30 \
     --dataset.episode_time_s=45 \
     --dataset.reset_time_s=15 \
-    --dataset.push_to_hub=${PUSH:-true}
+    --dataset.push_to_hub=${PUSH:-false} \
+    --resume=${RESUME:-false}
