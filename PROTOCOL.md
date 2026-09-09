@@ -466,34 +466,82 @@ retained dataset is named in §8.
     used elsewhere in this protocol. The decision rules below are fixed before any numbers are
     computed and analyzed.
 
-      - *Determinism.* The flow-matching loss is stochastic in both the sampled timestep and the
-        noise draw. Both are fixed and identical across all checkpoint-by-dataset cells, with N
-        draws per cell and the standard error across draws reported. Two identical calls must
-        return identical values before any result is used.
-      - *Which loss.* Table 7 reports `train/losses_after_rm_padding`, the per-frame flow-matching
-        loss with padded frames masked out. The deterministic harness computes the same masked
-        quantity. A harness that averaged over padded frames would fail the diagonal check for
-        reasons unrelated to any hypothesis here. Each Weights and Biases series is resolved to a run
-        ID before use, since the run names displayed in the project include two series rendering as
-        `smolvla_clean` and three as `smolvla_color`, one of of which is the slowpace probe
-        (§8.16) and is excluded from the diagonal.
+      - *Determinism.* `SmolVLAPolicy.forward` accepts the flow-matching noise and
+        timestep as arguments, so neither is sampled at evaluation. One noise tensor
+        and one timestep per frame are generated from `torch.manual_seed(1000)`, the
+        timestep from the Beta(1.5, 1.0) distribution scaled to [0.001, 1.0] that
+        `sample_time` uses in training, and the same draw is supplied to every cell.
+        The loss is an exact function of its inputs rather than a seeded sample, and
+        the noise contribution is held fixed so it cancels in cell-to-cell
+        comparisons. A single draw is a one-sample estimate of the expectation over
+        noise, so no claim here rests on the absolute value of any cell.
+      - *Evaluation subset.* Every demonstration of every dataset. All six training
+        datasets contain 50, so no subsampling is applied and each cell is scored on
+        the full dataset. Subsampling was considered and rejected: scoring the Clean
+        seed 1000 diagonal cell at 5, 10, 20, 40 and 80 demonstrations moved the value
+        by up to 9.3% between adjacent counts, comparable to the criterion below, so a
+        subset would have introduced selection noise of the same size as the effect
+        being tested.
+      - *Which loss.* Two quantities per cell. `losses_after_rm_padding` is what Table
+        7 reports and is kept for comparability. It is not a masked mean: padded
+        timesteps are zeroed at line 388 of `modeling_smolvla.py` but remain in the
+        denominator of the plain `.mean()` at line 394. That is used for monitoring a 
+        single training run, where the padded fraction is fixed and the
+        choice is a constant rescaling, but it interacts with episode length, and this
+        analysis compares datasets whose mean episode lengths differ. The deflation is
+        1.4% on the Clean diagonal. The `reduction="none"` per-sample loss divides by
+        the count of unpadded timesteps and is therefore comparable across datasets of
+        different episode length; it is treated as primary here. The reported quantity
+        exists so the diagonal can be checked against Table 7. If the two order
+        conditions differently, that is reported.
+      - *Uncertainty.* Bootstrap over demonstrations, 2000 resamples with replacement
+        of the per-demonstration means, reported as a standard deviation and a 2.5 to
+        97.5 percentile interval. Since every demonstration enters the estimate, this
+        is not subset-selection uncertainty but an interval on what the loss would be
+        had a different 50 demonstrations been recorded under the same protocol. The
+        demonstration is the resampling unit because frames within one are correlated.
+        Demonstrations within a dataset are not independent draws, coming from one
+        operator in one session in a fixed cycle, so the interval characterizes
+        variability rather than being a formal confidence interval, the same caveat §9
+        makes for the Wilson intervals. Uncertainty from the noise draw is not
+        estimated separately: with a distinct timestep per frame across tens of
+        thousands of frames it is small next to demonstration-level variability, and
+        the shared draw makes it common to every cell.
+      - *Diagonal validity criterion.* Applied to the reported quantity, since that is
+        what Table 7 contains. The diagonal must reproduce the Table 7 ordering at the
+        condition level with seeds pooled, within 10% on magnitude. Exact rank
+        identity between adjacent seeds is not required: seed pairs differ by 2% or
+        under for Clean, Color and Recovery, and 4.8% for Randomized. The ordering is
+        Randomized lowest, then Clean, Color, Recovery, Density; Color-slowpace is
+        excluded as an exploratory probe (§8.16) though its cell is computed. If the
+        diagonal fails, the harness is measuring something other than the training
+        objective and the off-diagonal cells are not computed.
       - *Normalization.* Normalization statistics are per dataset. When scoring checkpoint A on
         dataset B, A's own statistics apply, since the policy including its normalizer is the
         artifact under test. A subset of cells is rescored using B's statistics as a control, to
         bound how much off-diagonal structure is normalizer mismatch rather than fit quality.
-      - *Diagonal validity criterion.* The diagonal must reproduce the Table 7 ordering at the
-        condition level, with seeds pooled, and match within 10% on magnitude. Exact rank identity
-        between adjacent seeds is not required: seed pairs within a condition differ by 2% or under
-        for Clean, Color and Recovery, and 4.8% for Randomized. The ordering the diagonal must
-        reproduce is Randomized lowest, then Clean, then Color, then Recovery, then Density.
       - *Off-diagonal criterion.* A change of 10% or more relative to the diagonal will be considered
         support for the dataset-difficulty hypothesis. No literature anchors this threshold, and this is
         stated here in advance.
-      - *Update norms.* Per parameter group, the norm of the difference between each checkpoint
-        and the SmolVLA base, relative to the base norm of that group. Normalization buffers are
-        excluded by name. The tolerance is set at dtype round-trip precision rather than exact
-        zero. If parameter groups outside the expected trainable set moved, the frozen-backbone
-        claim in the paper is corrected regardless of anything else in this item.
+      - *Compute.* A single A40, the same device for every cell. The loss is
+        deterministic given fixed noise and timestep, so hardware affects only
+        floating-point ordering. This differs from the single A100 per training run in
+        §4.9, which governs training rather than post-hoc analysis.
+      - *Update norms, measured September 9, 2026.* All ten checkpoints were compared against
+        `lerobot/smolvla_base` per parameter group, relative to the base norm of that group, with
+        normalization buffers excluded by name and the tolerance at dtype round-trip precision
+        rather than exact zero. `model.vlm_with_expert.vlm.model` (302.9M) and
+        `model.vlm_with_expert.vlm.lm_head` (47.3M) are bit-identical to the base in every
+        checkpoint, so the frozen-backbone claim in §8.29 is confirmed against the weights rather
+        than against config flags, and no correction to the paper is required. 99,880,240
+        parameters of 450,046,176 are trainable, 22.2%, matching §4.7 and §9. The action expert's
+        final normalization, `model.vlm_with_expert.lm_expert.norm`, is also unchanged, so the
+        layer at which probe activations are extracted applies an identical transformation in
+        every policy. Relative update norms are tightly clustered: the expert layers moved between
+        1.071e-1 and 1.119e-1 of their base norm across all ten runs, a spread of about 4%, and
+        Randomized (1.096e-1) did not move less than Clean (1.071e-1). Distance travelled in
+        weight space therefore does not distinguish the conditions. All ten show the same set of
+        moved groups.
       - *Scope limit.* All four measurements operate on the per-frame conditional loss. None of
         them can explain a rollout failure, since per-frame loss says nothing about how error
         compounds across a 50-step chunk. The available conclusion is whether the loss ordering

@@ -2,42 +2,38 @@
 """
 tools/deterministic_loss.py
 
-PROTOCOL.md §8.31 step 2: scores every fine-tuned checkpoint on every training
-dataset, to separate a property of each condition's target distribution from a
-property of its solution.
+PROTOCOL.md §8.31. Scores every fine-tuned checkpoint on every training dataset.
+Training loss is computed on each policy's own data, so the conditions aren't scored
+against a common target. The matrix separates a property of the target from a
+property of the solution.
 
-Determinism is exact rather than seeded. SmolVLAPolicy.forward accepts the
-flow-matching noise and timestep as arguments, so both are generated once per
-frame from a fixed seed and reused across every checkpoint-by-dataset cell. Two
-identical calls therefore return bit-identical values, and the noise contribution
-cancels in any cell-to-cell comparison.
+Determinism is exact, not seeded. forward() takes the flow-matching noise and
+timestep as arguments, so both are drawn once from a fixed seed and reused in every
+cell. Identical calls return identical values, and the noise contribution cancels
+when cells are compared.
 
-Two loss quantities are recorded per call:
+Every cell uses the full dataset. All six have 50 demonstrations. Subsampling was
+rejected: during calibration the Clean diagonal moved up to 9.3% between adjacent
+episode counts, about the size of the §8.31 criterion.
 
-  reported   loss_dict["losses_after_rm_padding"], the key W&B logs and Table 7
-             reports. Padded timesteps are zeroed but remain in the denominator,
-             so this is deflated in proportion to how much padding a dataset
-             produces: with chunk_size 50, an episode of length L pads 24.5/L of
-             its chunk-step pairs, about 4% at these episode lengths. Kept for
-             comparability with Table 7, not because it is the right number.
+Two quantities per cell:
 
-  masked     the reduction="none" per-sample loss, which divides by the count of
-             unpadded timesteps. This is the correct masked mean.
+  reported  losses_after_rm_padding, what Table 7 reports. Not a masked mean: padded
+            timesteps are zeroed at line 388 of modeling_smolvla.py but stay in the
+            denominator at line 394. Fine for monitoring one run, where the padded
+            fraction is fixed, but it moves with episode length and these datasets
+            differ there. Kept for comparability.
 
-Uncertainty is a bootstrap over episodes, not over noise draws. Frames within an
-episode are correlated, so the episode is the sampling unit; and with tens of
-thousands of frames each carrying its own timestep draw, the Monte Carlo error in
-the noise expectation is already negligible next to the error from evaluating a
-subset of episodes.
+  masked    the reduction="none" per-sample loss, divided by the count of unpadded
+            timesteps. Comparable across episode lengths. Primary.
+
+Uncertainty is a bootstrap over demonstrations, 2000 resamples. Since every
+demonstration is used, this isn't subset uncertainty; it's an interval on what the
+loss would be had a different 50 been recorded.
 
 usage:
-    # how many episodes are enough
     python tools/deterministic_loss.py --calibrate --policy clean_s1000
-
-    # one cell
     python tools/deterministic_loss.py --policy clean_s1000 --dataset clean
-
-    # the full matrix
     python tools/deterministic_loss.py --all
 """
 
@@ -80,21 +76,19 @@ DATASETS = {
 }
 
 NOISE_SEED   = 1000        # fixed across every cell; see the module docstring
-EPISODE_SEED = 1000        # which episodes form the fixed evaluation subset
-N_EPISODES = 40            # set from the --calibrate run before any cell is scored
+N_EPISODES = 50            # set from the --calibrate run before any cell is scored
 BATCH_SIZE = 16
 N_BOOTSTRAP = 2000
 OUTDIR = "analysis/out_loss"
 
 
-def pick_episodes(repo_id, n, seed=EPISODE_SEED):
-    """A fixed subset of complete episodes. Complete rather than loose frames,
-    because frames within an episode are correlated and the episode is the unit
-    the bootstrap resamples."""
+def pick_episodes(repo_id, n):
+    """Every episode of every dataset. All six contain 50, so n=50 selects the full
+    dataset and no subsampling is applied. The function is kept so the calibration
+    path, which does subsample, still works."""
     meta = LeRobotDatasetMetadata(repo_id)
-    rng = np.random.default_rng(seed)
-    eps = rng.permutation(meta.total_episodes)[:n]
-    return sorted(int(e) for e in eps), meta
+    n = min(n, meta.total_episodes)
+    return list(range(n)), meta
 
 
 def make_noise(n_frames, chunk, dim, device, seed=NOISE_SEED):
