@@ -1,10 +1,29 @@
 #!/usr/bin/env python3
-"""Density sweep, sequential. PROTOCOL.md §8.32."""
+"""
+tools/run_sweep.py
+
+Density sweep training runs (PROTOCOL.md §8.32). Trains four per-position budgets
+at two seeds each, sequentially, both seeds of a budget before moving to the next.
+
+Subsets are episode index lists from analysis/subsets.json, passed to
+--dataset.episodes, so no physical dataset copies are made. Steps scale with
+dataset size to hold epochs constant, and decay steps equal the step count in
+every cell, because CosineDecayWithWarmupSchedulerConfig rescales warmup and
+decay whenever training steps fall below the configured decay (§8.29). Warmup is
+the 1/30 ratio the August runs resolved to.
+
+The resolved config is checked after each run and before upload: a silently
+dropped scheduler override would train every cell on the wrong schedule shape,
+so the chain stops rather than propagating it.
+
+Run from the repository root:
+    python tools/run_sweep.py 2>&1 | tee sweep.log
+"""
 
 import json
 import os
+import shutil
 import subprocess
-import sys
 
 from huggingface_hub import HfApi
 
@@ -13,7 +32,7 @@ POOL = f"{HF_USER}/cube-pickup-densitypool_20260908_125700"
 RENAME = ('{"observation.images.overhead": "observation.images.camera1", '
           '"observation.images.wrist": "observation.images.camera2"}')
 
-with open("subsets.json") as f:
+with open("analysis/subsets.json") as f:
     SUBSETS = json.load(f)["subsets"]
 
 # (per-position budget, steps, warmup, save_freq)
@@ -30,12 +49,19 @@ for budget, steps, warmup, save_freq in CELLS:
     for seed in SEEDS:
         name = f"smolvla_density{budget}_seed{seed}"
         outdir = f"outputs/train/{name}"
+        final = f"{outdir}/checkpoints/{steps:06d}/pretrained_model"
         suffix = "" if seed == 1000 else f"-seed{seed}"
         modelrepo = f"{HF_USER}/smolvla-cube-density{budget}{suffix}"
 
-        if os.path.isdir(f"{outdir}/checkpoints/{steps:06d}/pretrained_model"):
-            print(f"skip {name}, already complete")
+        if os.path.isdir(final):
+            print(f"skip {name}, already complete", flush=True)
             continue
+        if os.path.isdir(outdir):
+            # Partial run from an interrupted attempt. lerobot-train refuses to
+            # write into an existing output dir unless --resume is set, and a
+            # partial run is not worth resuming at these step counts.
+            print(f"clearing partial {outdir}", flush=True)
+            shutil.rmtree(outdir)
 
         cmd = (
             "lerobot-train"
@@ -59,17 +85,20 @@ for budget, steps, warmup, save_freq in CELLS:
         print(f"\n=== {name} ===\n{cmd}\n", flush=True)
         subprocess.run(cmd, shell=True, check=True)
 
-        ckpt = f"{outdir}/checkpoints/{steps:06d}/pretrained_model"
-        assert os.path.isdir(ckpt), f"no step-{steps} checkpoint at {ckpt}"
+        assert os.path.isdir(final), f"no step-{steps} checkpoint at {final}"
 
-        # Verify the schedule landed before uploading anything.
-        c = json.load(open(f"{ckpt}/train_config.json"))
-        assert c["policy"]["scheduler_warmup_steps"] == warmup, c["policy"]["scheduler_warmup_steps"]
-        assert c["policy"]["scheduler_decay_steps"] == steps, c["policy"]["scheduler_decay_steps"]
-        assert len(c["dataset"]["episodes"]) == budget * 10, len(c["dataset"]["episodes"])
+        c = json.load(open(f"{final}/train_config.json"))
+        assert c["policy"]["scheduler_warmup_steps"] == warmup, \
+            f"warmup {c['policy']['scheduler_warmup_steps']} != {warmup}"
+        assert c["policy"]["scheduler_decay_steps"] == steps, \
+            f"decay {c['policy']['scheduler_decay_steps']} != {steps}"
+        assert c["steps"] == steps, f"steps {c['steps']} != {steps}"
+        assert len(c["dataset"]["episodes"]) == budget * 10, \
+            f"{len(c['dataset']['episodes'])} episodes != {budget * 10}"
+        assert c["seed"] == seed, f"seed {c['seed']} != {seed}"
 
         api.create_repo(modelrepo, repo_type="model", exist_ok=True)
-        api.upload_folder(folder_path=ckpt, repo_id=modelrepo, repo_type="model")
+        api.upload_folder(folder_path=final, repo_id=modelrepo, repo_type="model")
         print(f"uploaded {modelrepo}", flush=True)
 
-print("\nall cells complete")
+print("\nall cells complete", flush=True)
