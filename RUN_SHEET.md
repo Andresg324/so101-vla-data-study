@@ -2,12 +2,7 @@
 
 Companion to PROTOCOL.md. PROTOCOL.md is the source of truth if the two disagree.
 
-**Status: closed.** This sheet began as a forward looking checklist and is retained as the
-as-run record. It was closed on August 14 and reopened on August 22 for the sampling density
-probe (PROTOCOL.md §8.30, Part D below), then closed again. Everything below is what actually
-happened, with deviations marked. Deviations that affect interpretation are also logged as
-numbered amendments in PROTOCOL.md §8; this sheet is the operational log, not the
-pre-registration.
+**Status: reopened September 8, 2026** for the density sweep (PROTOCOL.md §8.32, Part E below).
 
 - Collection: August 9 to 10, 2026
 - Training: August 9 (seed 1000) and August 9 to 10 (seed 2000), single A100 per run
@@ -17,6 +12,10 @@ pre-registration.
 - Analysis closed: August 14, 2026
 - Sampling density probe, collected, trained and evaluated: August 22, 2026
 - Analysis reclosed: August 22, 2026
+- Bench rebuild and verification: September 8, 2026
+- Density sweep collection: September 8, 2026
+- Density sweep training: September 9, 2026, single A100 per run
+- Loss matrix: September 9, 2026, single A40
 
 ---
 
@@ -406,6 +405,193 @@ python probing/probe_success.py --sweep
 python tools/annotate_bench.py media/bench_wide.jpeg   # manual, only when the photo changes
 python analysis/make_figures.py                        # last: reads everything above
 ```
+
+---
+
+## Part E: density sweep (September 8, PROTOCOL.md §8.32)
+
+Registered before any demonstration was recorded. One pool of 520 demonstrations, subsampled
+into four per-position budgets, two seeds each.
+
+### Bench rebuild
+
+The workbench was disassembled and rebuilt between the August grid and this collection, in a
+different room with a higher ceiling. Three checks before the first demonstration, all logged
+in PROTOCOL.md §8.32.
+
+| Check | August | Rebuilt | Verdict |
+|---|---|---|---|
+| Geometry, mean shift from T1/T3/T8 | reference | 0.05 in x, 0.03 in y | below the 0.06 to 0.07 in clicking precision |
+| T1-to-T3 pixel distance | reference | −0.1% | camera height and angle unchanged |
+| Frame mean luminosity | 144.8 | 144.5 | −0.2%, against the 144.8 to 101.0 that defines Reduced Lighting |
+| Patch luminosity | reference | +1.3% upper right, −3.7% mid left | redistribution consistent with a higher ceiling |
+| Furthest commanded bearing at T6 | 27.04 deg | 26.70 deg | shift is one standard error (0.35 deg); episode sd 0.88 and 1.06 |
+| Median bearing at gripper release | −23.00 deg | −22.47 deg | 0.53 deg, no standard error quoted |
+| In-distribution success | 15/15 | 15/15 | 0 of 15 no-departures both |
+
+Geometry read from three permanent surface marks rather than the cup or cube, which carry
+placement and center-estimation error. An earlier attempt using cup center, cube center and
+gripper base gave a T1-to-T3 equivalent of −0.9%, all of it estimation error.
+
+- [x] `tools/bench_compare.py` written and run, frames archived to `media/bench_rebuild/`
+- [x] Base clamp measured against the front edge by the August method, reads unchanged
+- [x] `rollout_clean_in_distribution_20260908_110904` recorded and retained
+
+An unresolved common-mode bearing offset of roughly half a degree remains, logged in
+PROTOCOL.md §9. Both stability checks moved the same direction by about that amount, which
+excludes a slope change in the pan-to-bearing fit but not a constant offset.
+
+### E1. Collection
+
+Command: `bash scripts/record_dataset.sh densitypool <cumulative total>`
+
+52 passes of T1 through T10, cycled in fixed order, 520 demonstrations. Position is recoverable
+from episode index by the §3 rule. Passes 10 and 30 held out in full and named in advance.
+
+`--dataset.root` is mandatory: resume in LeRobot 0.5.2 refuses to write into the Hub snapshot
+cache, so the root must be set on the first session as well as on resumes.
+
+| Field | Value |
+|---|---|
+| Hub slug | `Andresg324/cube-pickup-densitypool_20260908_125700` |
+| Demonstrations | 520 |
+| Frames | 298,201 |
+| Frames per demonstration | 573.5 |
+| Seconds per demonstration | 19.1 |
+
+573.5 frames per demonstration is 9.5% shorter than Randomized at 633.6 and shorter than every
+August condition except the retained Color, consistent with a more practiced teleoperator. The
+realized epoch count per sweep cell is computed from this rather than from the August figures.
+
+- [x] `scripts/record_dataset.sh` extended to accept `densitypool` and to pass `--dataset.root`
+- [x] Resume tested on a throwaway dataset before the first real session
+- [x] 520 demonstrations recorded, all ten positions at exactly 52
+- [x] `tools/verify_pool_mapping.py` run: pan spread 0.75 to 2.10 degrees, largest at T3, against
+      August's 0.38 to 1.93 on 5 demonstrations per position. Mean bearing at every position
+      matches its true bearing through the August fit to within 2.3 degrees.
+- [x] Uploaded to the Hub, 2.35 GB, episode and frame counts confirmed
+
+**Deviation: five documented interruptions**, at episodes 2, 35, 128, 207 and 369, from a lost
+teleoperation link, an accidental disconnection, and operator use of the escape key. A small
+number of further interruptions may have gone undocumented where recording resumed immediately;
+but the total was below eight. Each resumed at the next index with the cube at the position the
+cycle assigns. Verified two ways: the within-position pan spread above, which a one-step offset
+would have blown up, and a frame-length check at every boundary. Episodes at the five boundaries
+run 518 to 669 frames against a pool mean of 573.5, all inside the interquartile range, and the
+ten shortest demonstrations in the pool (442 to 471) include none at a boundary, so nothing was
+truncated.
+
+**Deviation: position error at episodes 367 and 368.** Two demonstrations were recorded at
+previously used positions rather than the T8 and T9 the cycle assigns, from a misread column in
+the position list. Caught at episode 369. The session was stopped and episodes 367, 368 and 369
+deleted with `delete_episodes` from `lerobot.datasets.dataset_tools`, which writes a new dataset
+rather than mutating the source. Recording resumed at index 367 with the cube at T8. Confirmed
+by overhead video at the recorded timestamps; episodes 2, 35, 128 and 418 were also checked and
+match the cycle. 369 was a correct T10 but was deleted too for a clean restart at 367.
+
+**Deviation: recording continued past 520.** The operator let the session run into episode 520,
+the 521st, to confirm the 520th had been written, and left the cube in the cup for it. That
+episode was deleted the same way.
+
+**Deviation: 610 orphaned action frames at episode 129.** The pool as first written held 298,811
+parquet rows against a `total_frames` of 298,201. The excess was 610 action rows carried under
+episode index 129 with no video segment and no episode metadata, at the boundary of the
+documented resume at episode 128. Both the orphaned block and the retained episode grasp at
+T10, the position the cycle assigns, so the interrupted demonstration was re-recorded at the
+same position and no demonstration was lost; position counts stayed at 52 everywhere.
+
+Present in all four pre-deletion backups, so it originated at recording rather than in
+`delete_episodes`. Found only because the episode-subset sampler raised `KeyError: 168053`
+during the first training run: the sampler reads absolute row offsets from
+`dataset_from_index` and `dataset_to_index`, so the orphaned rows pushed every later episode's
+offsets out of alignment.
+
+Repaired with `tools/repair_pool.py`: the 610 rows dropped, `index` renumbered contiguously,
+and every episode's offsets rebuilt from the per-episode frame counts. Video files and
+timestamps unchanged and untouched. Re-verified for frame counts, offset chaining and
+index-to-position mapping, and a five-episode subset loaded successfully through
+`LeRobotDataset(episodes=[...])` before the corrected pool was pushed.
+
+### E2. Subsampling
+
+`tools/make_subsets.py`, written and run before the first demonstration. 5 ⊂ 10 ⊂ 25 ⊂ 50 per
+position, drawn by shuffling the 50 available passes at each position under
+`numpy.random.default_rng(1000)` and taking the first k. Realized lists committed to
+`analysis/subsets.json`.
+
+| Budget | Demonstrations | Passes spanned | Mean pass index |
+|---|---|---|---|
+| 5/position | 50 | 2 to 51 | 24.8 |
+| 10/position | 100 | 1 to 52 | 26.0 |
+| 25/position | 250 | 1 to 52 | 26.3 |
+| 50/position | 500 | 1 to 52 | 26.8 |
+
+Mean pass index near the midpoint of 26.5 at every budget, so no budget is drawn
+disproportionately from the least practiced passes.
+
+- [x] Nesting verified: each budget is a subset of the next
+- [x] No held-out pass leaked into any budget
+- [x] Every position at exactly k demonstrations in every budget
+
+### E3. Training
+
+`tools/run_sweep.py`, sequential, both seeds of a budget before the next. Trained on RunPod
+rather than Colab, single A100 per run. `--dataset.episodes` takes the subset index lists
+directly, so no physical dataset copies were made.
+
+Environment differs from the August grid and is recorded because it is not reproducible from
+the resolved configs alone: LeRobot at commit `6a788fbd`, the same build as August, but torch
+2.8.0 and torchcodec 0.7.0 against Colab's unrecorded versions. The container needed
+`apt-get install ffmpeg`, a torchcodec downgrade to match torch 2.8, and a one-line patch to
+`wandb_utils.py` line 122 replacing `wandb.run.get_url()` with `wandb.run.url`, which recent
+wandb removed.
+
+| Cell | Steps | Warmup | Decay | Final loss (s1000) | Final lr |
+|---|---|---|---|---|---|
+| 5/position | 10,000 | 333 | 10,000 | 0.0434 | 2.5318e-6 |
+| 10/position | 20,000 | 667 | 20,000 | 0.0279 | 2.508e-6 |
+| 25/position | 50,000 | 1,667 | 50,000 | 0.0470 | 2.5013e-6 |
+| 50/position | 100,000 | 3,333 | 100,000 | | |
+
+Every run anneals to `decay_lr` of 2.5e-6, matching August, and no auto-scaling line appeared,
+so decay equalled steps in every cell as intended. The script asserts warmup, decay, steps,
+episode count and seed against the resolved config before uploading each checkpoint, so a
+silently dropped override would stop the chain rather than propagate.
+
+Loss is not monotone in density. Each cell fits a different dataset, so the losses are scored
+against different targets, which is the confound §8.31 exists to untangle.
+
+- [x] Smoke test at 20 steps confirmed `--dataset.episodes` reaches the resolved config
+- [x] 5/position, both seeds
+- [x] 10/position, both seeds
+- [x] 25/position, both seeds
+- [ ] 50/position, both seeds
+- [ ] Fixed-step controls at 250 and 500 demonstrations, one seed each
+
+### E4. Loss matrix (PROTOCOL.md §8.31)
+
+`tools/deterministic_loss.py` on a single A40, separate pod, concurrent with training.
+
+- [x] `tools/norm_sweep.py`: frozen-backbone claim confirmed at the weights. `vlm.model` and
+      `vlm.lm_head` bit-identical to base in all ten checkpoints, 99,880,240 of 450,046,176
+      trainable at 22.2%, expert layers moved 1.071e-1 to 1.119e-1 of base norm across all ten.
+- [x] Determinism verified: two identical calls on the Clean diagonal returned
+      0.048411693423986435 both times, bit-identical through the dataloader.
+- [x] Calibration: the Clean diagonal moved up to 9.3% between adjacent episode counts, so
+      subsampling was rejected and every cell uses all 50 demonstrations.
+- [x] Clean diagonal reproduces Table 7: reported 0.04755 against 0.0482, a 1.3% gap between
+      two different estimators of the same quantity.
+- [ ] Ten diagonal cells, the validity gate
+- [ ] Full 60-cell matrix
+- [ ] Normalization control on a subset of cells
+- [ ] Validation loss on the 20 held-out demonstrations, per sweep checkpoint
+
+### E5. Evaluation
+
+Not yet run. Four cells per policy per §8.32: 15 at T6, 5 at each of E1 to E5, 15 with
+distractors, and 2 each at T1, T3 and T10 as a descriptive spot check. One warmup discarded per
+cell, so 65 recorded and 61 scored per policy, 520 recorded and 488 scored across the eight
+primary runs.
 
 ---
 

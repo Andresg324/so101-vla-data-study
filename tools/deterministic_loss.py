@@ -64,6 +64,14 @@ POLICIES = {
     "color_s2000":      "smolvla-cube-color-seed2000",
     "color_slowpace":   "smolvla-cube-color-slowpace",
     "density":          "smolvla-cube-density",
+    "density5_s1000":   "smolvla-cube-density5",
+    "density5_s2000":   "smolvla-cube-density5-seed2000",
+    "density10_s1000":  "smolvla-cube-density10",
+    "density10_s2000":  "smolvla-cube-density10-seed2000",
+    "density25_s1000":  "smolvla-cube-density25",
+    "density25_s2000":  "smolvla-cube-density25-seed2000",
+    "density50_s1000":  "smolvla-cube-density50",
+    "density50_s2000":  "smolvla-cube-density50-seed2000",
 }
 
 DATASETS = {
@@ -73,7 +81,15 @@ DATASETS = {
     "color":      "cube-pickup-color_20260809_183224",
     "slowpace":   "cube-pickup-color_20260809_130649",
     "density":    "cube-pickup-density_20260822_194111",
+    "pool":       "cube-pickup-densitypool_20260908_125700",
 }
+
+MATRIX_POLICIES = ["clean_s1000", "clean_s2000", "randomized_s1000", "randomized_s2000",
+                   "recovery_s1000", "recovery_s2000", "color_s1000", "color_s2000",
+                   "color_slowpace", "density"]
+MATRIX_DATASETS = ["clean", "randomized", "recovery", "color", "slowpace", "density"]
+SWEEP_POLICIES = ["density5_s1000", "density5_s2000", "density10_s1000", "density10_s2000",
+                  "density25_s1000", "density25_s2000", "density50_s1000", "density50_s2000"]
 
 NOISE_SEED   = 1000        # fixed across every cell; see the module docstring
 N_EPISODES = 50            # set from the --calibrate run before any cell is scored
@@ -101,9 +117,8 @@ def make_noise(n_frames, chunk, dim, device, seed=NOISE_SEED):
     time = beta.sample((n_frames,)) * 0.999 + 0.001
     return noise.to(device), time.to(device)
 
-
 def score(policy_key, dataset_key, device, n_episodes=N_EPISODES,
-          norm_from=None, verbose=True):
+          norm_from=None, verbose=True, episodes=None):
     """One cell of the matrix. norm_from names the dataset whose normalization
     statistics to use; None means the checkpoint's own, which is the primary
     condition in §8.31."""
@@ -123,7 +138,10 @@ def score(policy_key, dataset_key, device, n_episodes=N_EPISODES,
         preprocessor_overrides={"device_processor": {"device": device}},
     )
 
-    episodes, meta = pick_episodes(drepo, n_episodes)
+    if episodes is None:
+        episodes, meta = pick_episodes(drepo, n_episodes)
+    else:
+        meta = LeRobotDatasetMetadata(drepo)
     delta = {"action": [i / meta.fps for i in policy.config.action_delta_indices]}
     ds = LeRobotDataset(drepo, delta_timestamps=delta, episodes=episodes)
 
@@ -188,6 +206,20 @@ def score(policy_key, dataset_key, device, n_episodes=N_EPISODES,
     del policy
     return out
 
+def held_out(device):
+    """Validation loss for every sweep checkpoint on the 20 demonstrations held out of
+    every training subset (§8.32). These never entered any budget, so this measures fit
+    to data the policy has not seen and is the instrument for whether the step count was
+    appropriate."""
+    with open("analysis/subsets.json") as f:
+        eps = json.load(f)["held_out_episodes"]
+    print(f"{len(eps)} held-out demonstrations\n")
+    results = []
+    for p in SWEEP_POLICIES:
+        results.append(score(p, "pool", device, episodes=eps))
+        with open(f"{OUTDIR}/held_out.json", "w") as f:
+            json.dump(results, f, indent=1)
+    print(f"\nwrote {OUTDIR}/held_out.json")
 
 def calibrate(policy_key, device):
     """How many episodes are enough. Runs the diagonal cell at increasing episode
@@ -218,9 +250,15 @@ def main():
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--episodes", type=int, default=N_EPISODES)
+    ap.add_argument("--held-out", action="store_true")
     args = ap.parse_args()
 
     os.makedirs(OUTDIR, exist_ok=True)
+
+    if args.held_out:
+        held_out(args.device)
+        return
+
 
     if args.calibrate:
         calibrate(args.policy or "clean_s1000", args.device)
@@ -228,7 +266,7 @@ def main():
 
     if args.all:
         results = []
-        for p, d in itertools.product(POLICIES, DATASETS):
+        for p, d in itertools.product(MATRIX_POLICIES, MATRIX_DATASETS):
             results.append(score(p, d, args.device, args.episodes))
             with open(f"{OUTDIR}/loss_matrix.json", "w") as f:
                 json.dump(results, f, indent=1)

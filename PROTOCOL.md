@@ -118,12 +118,11 @@ position or color, so the correspondence holds.
    `scheduler_warmup_steps=1000` and `scheduler_decay_steps=30000`, auto-scaled at construction to
    333 and 10000 (§8.29), `scheduler_decay_lr=2.5e-6`. Policy `n_obs_steps=1`, `chunk_size=50`,
    `n_action_steps=50`, `num_steps=10`, `num_expert_layers=0`, `expert_width_multiplier=0.75`,
-   `freeze_vision_encoder=true`, `train_expert_only=true`. LeRobot 0.5.2, Python 3.12.13, dataset
-   `CODEBASE_VERSION` v3.0. The seed is identical across conditions within a replication and is the
-   only setting varied between them: 1000 primary, 2000 replication (§6.9, §8.14). Conditions are
-   never compared across seeds. The resolved config for each run is released with the code; §8.29
-   records what the defaults turned out to be and where the resolved config is not sufficient to
-   establish them.
+   `freeze_vision_encoder=true`, `train_expert_only=true`. The seed is identical across conditions
+   within a replication and is the only setting varied between them: 1000 primary, 2000
+   replication (§6.9, §8.14). Conditions are never compared across seeds. The resolved config for
+   each run is released with the code; §8.29 records what the defaults turned out to be and where
+   the resolved config is not sufficient to establish them. Software environment in §4.14.
 8. **Checkpoint:** the final checkpoint at step 10000, for every condition. No best-loss or
    early-stopped selection.
 9. **Compute:** a single A100 per run.
@@ -149,6 +148,11 @@ position or color, so the correspondence holds.
     compilation cost that later passes do not, which would otherwise penalize the first episode of
     every cell. The rule is pre-committed (§8.13), unconditional and outcome-independent, so it
     stands whatever that cost was on a given run.
+14. **Software environment.** LeRobot at commit `6a788fbdb02cabfae60f7408636945df0b1eafa0`,
+    version string 0.5.2 but 150 commits past the v0.5.1 tag, so the version alone does not
+    identify the build. Python 3.12.13, dataset `CODEBASE_VERSION` v3.0. The August grid trained
+    on Colab with an unrecorded torch and torchcodec; the density sweep trained on RunPod with
+    torch 2.8.0 and torchcodec 0.7.0, same commit and same decoder family (§9).
 
 Changing any of these mid-study invalidates the comparison. Held-out rule: evaluation instances
 differ from anything seen in any training condition.
@@ -475,6 +479,9 @@ retained dataset is named in §8.
         the noise contribution is held fixed so it cancels in cell-to-cell
         comparisons. A single draw is a one-sample estimate of the expectation over
         noise, so no claim here rests on the absolute value of any cell.
+        *Verified:* two identical calls on the Clean diagonal cell returned
+        0.048411693423986435 both times, bit-identical through the full path
+        including the dataloader.
       - *Evaluation subset.* Every demonstration of every dataset. All six training
         datasets contain 50, so no subsampling is applied and each cell is scored on
         the full dataset. Subsampling was considered and rejected: scoring the Clean
@@ -489,11 +496,11 @@ retained dataset is named in §8.
         single training run, where the padded fraction is fixed and the
         choice is a constant rescaling, but it interacts with episode length, and this
         analysis compares datasets whose mean episode lengths differ. The deflation is
-        1.4% on the Clean diagonal. The `reduction="none"` per-sample loss divides by
-        the count of unpadded timesteps and is therefore comparable across datasets of
-        different episode length; it is treated as primary here. The reported quantity
-        exists so the diagonal can be checked against Table 7. If the two order
-        conditions differently, that is reported.
+        1.8% on the Clean diagonal, 0.04841 masked against 0.04755 reported. 
+        The `reduction="none"` per-sample loss divides by the count of unpadded timesteps 
+        and is therefore comparable across datasets of different episode length; it is treated 
+        as primary here. The reported quantity exists so the diagonal can be checked against 
+        Table 7. If the two order conditions differently, that is reported.
       - *Uncertainty.* Bootstrap over demonstrations, 2000 resamples with replacement
         of the per-demonstration means, reported as a standard deviation and a 2.5 to
         97.5 percentile interval. Since every demonstration enters the estimate, this
@@ -649,8 +656,8 @@ retained dataset is named in §8.
         This is the instrument for whether the chosen step count was appropriate, and is separate
         from the fixed-step controls above.
       - *Evaluation.* Four cells will be evaluated per policy. *In-Distribution:* 15 episodes at T6. 
-        *New Positions:* 25 episodes, 5 scored at each of position from E1 to E5. *Distactors:*
-        15 episodes with the same eact layout described in in §5.5. *Trained-position spot check:*
+        *New Positions:* 25 episodes, 5 scored at each of position from E1 to E5. *Distractors:*
+        15 episodes with the same exact layout described in in §5.5. *Trained-position spot check:*
         6 episodes, 2 at each of T1, T3 and T10, 6 scored. One additional warmup episode is recorded 
         and discarded per cell per §4.13, so 65 recorded and 61 scored per policy, 520 recorded and 488
         scored across the 8 primary runs. Trained-position success is measured at T6 and the spot check 
@@ -658,7 +665,9 @@ retained dataset is named in §8.
         in §9, where the gripper leaves the overhead frame during part of the approach, so a low rate there is
         confounded with camera geometry. T3 is the furthest trained position from T6 and is not affected by that
         geometry. Per-cell rates at n=5 and below are descriptive; claims rest on the 15-episode 
-        cells and on the 25-episode New Positions aggregate.
+        cells and on the 25-episode New Positions aggregate. Evaluations will be by cell, for each policy in seed 1000
+        in the order: In-Distribution at T6, Distractors, Trained-position spot check, New Positions. After all
+        of seed 1000 policies ran, seed 2000's will be run.
       - *Cross-condition comparison.* Comparison against Clean, Randomized and Density is made at T6
         with 15 scored episodes, matching the existing In-Distribution cells exactly, with a
         Newcombe hybrid score interval on the difference. For E1-E5 the prior conditions have 3
@@ -695,6 +704,14 @@ retained dataset is named in §8.
         language-to-instance binding in a multi-object scene, whereas this study concerns spatial
         interpolation with a single object and a fixed instruction, so it is a relevant prior
         rather than a direct prediction against this hypothesis.
+      - *Orphaned action frames, repaired September 9, 2026.* 610 action rows with no video
+        segment and no episode metadata were carried under one episode index, at the boundary of
+        a documented resume. Both the orphaned block and the retained episode grasp at the
+        position the cycle assigns, so no demonstration was lost and position counts remain 52
+        everywhere. The defect broke the episode-subset sampler, which reads absolute row offsets
+        from the episode metadata. Repaired with `tools/repair_pool.py`, then re-verified for
+        frame counts, offset chaining and index-to-position mapping before any training run. The
+        run sheet has the diagnosis and the repair.
 
 33. **Recreation on a larger VLA model.** An existing limitation of this project is that all
     results come from SmolVLA, with 450M parameters and roughly 100M trainable under the freeze
@@ -842,3 +859,8 @@ retained dataset is named in §8.
   constrains translation only. The bound is below the episode-level dispersion of either
   statistic and no claim depends on resolving it, but density sweep bearings carry it relative
   to the August policies.
+- **The August grid and the density sweep were trained in different environments.** The grid ran
+  on Colab with a torch and torchcodec version that was not recorded; the sweep ran on RunPod
+  with torch 2.8.0 and torchcodec 0.7.0. The LeRobot commit and the video decoder family are the
+  same in both. Frame decoding differences at this level are far below the resolution of any
+  measure reported here, but the environments are not identical.
