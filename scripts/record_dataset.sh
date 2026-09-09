@@ -5,6 +5,7 @@
 set -e
 CONDITION=${1:-clean} # Conditions are 'clean' | 'randomized' | 'recovery' | 'color'
 NUM_EPISODES=${2:?usage: record_dataset.sh <condition> <num_episodes>}
+DATASET_ROOT=${DATASET_ROOT:-$HOME/lerobot_data/cube-pickup-${CONDITION}}
 
 # color-slowpace is deliberately absent. It was not a designed condition: it came from a
 # recording session that unintentionally ran at a slower pace, was renamed afterwards, and is
@@ -43,6 +44,7 @@ lerobot-record \
     --dataset.repo_id=${HF_USER}/cube-pickup-${CONDITION} \
     --dataset.single_task="Pick up the cube and place it in the cup" \
     --dataset.num_episodes=${NUM_EPISODES} \
+    --dataset.root=${DATASET_ROOT} \
     --dataset.fps=30 \
     --dataset.episode_time_s=45 \
     --dataset.reset_time_s=15 \
