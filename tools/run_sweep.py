@@ -53,9 +53,12 @@ for budget, steps, warmup, save_freq in CELLS:
         suffix = "" if seed == 1000 else f"-seed{seed}"
         modelrepo = f"{HF_USER}/smolvla-cube-density{budget}{suffix}"
 
-        if os.path.isdir(final):
-            print(f"skip {name}, already complete", flush=True)
+        try:
+            api.repo_info(modelrepo, repo_type="model")
+            print(f"skip {name}, already on Hub", flush=True)
             continue
+        except Exception:
+            pass
         if os.path.isdir(outdir):
             # Partial run from an interrupted attempt. lerobot-train refuses to
             # write into an existing output dir unless --resume is set, and a
