@@ -1,0 +1,484 @@
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s1000/clean:   0%|          | 1/1747 [00:02<1:01:42,  2.12s/it]
+clean_s1000/clean:   0%|          | 2/1747 [00:02<31:12,  1.07s/it]  
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s1000/clean:   0%|          | 1/1747 [00:01<50:36,  1.74s/it]
+       clean_s1000 on clean       masked 0.04841 ± 0.00088   reported 0.04755   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+       clean_s1000 on randomized  masked 1.58005 ± 0.23964   reported 1.57752   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+       clean_s1000 on recovery    masked 1.22837 ± 0.07175   reported 1.22603   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+       clean_s1000 on color       masked 1.03388 ± 0.09489   reported 1.03131   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s1000/slowpace:   0%|          | 1/2157 [00:01<35:59,  1.00s/it]
+       clean_s1000 on slowpace    masked 0.67706 ± 0.08538   reported 0.67594   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:20,  1.03s/it]
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s1000/density:   0%|          | 1/1647 [00:01<34:32,  1.26s/it]
+       clean_s1000 on density     masked 6.85526 ± 0.75159   reported 6.85155   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s2000/clean:   0%|          | 1/1747 [00:01<37:04,  1.27s/it]
+       clean_s2000 on clean       masked 0.04823 ± 0.00086   reported 0.04738   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s2000/randomized:   0%|          | 1/1981 [00:01<39:57,  1.21s/it]
+       clean_s2000 on randomized  masked 1.55714 ± 0.23770   reported 1.55468   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s2000/recovery:   0%|          | 1/2011 [00:01<33:49,  1.01s/it]
+       clean_s2000 on recovery    masked 1.22004 ± 0.07126   reported 1.21777   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:46,  1.08s/it]
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s2000/color:   0%|          | 1/1553 [00:01<30:11,  1.17s/it]
+       clean_s2000 on color       masked 1.03961 ± 0.09444   reported 1.03709   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s2000/slowpace:   0%|          | 1/2157 [00:01<44:14,  1.23s/it]
+       clean_s2000 on slowpace    masked 0.67312 ± 0.08569   reported 0.67201   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+clean_s2000/density:   0%|          | 1/1647 [00:01<33:35,  1.22s/it]
+       clean_s2000 on density     masked 6.83069 ± 0.74868   reported 6.82689   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s1000/clean:   0%|          | 1/1747 [00:01<37:53,  1.30s/it]
+  randomized_s1000 on clean       masked 0.19424 ± 0.00738   reported 0.19297   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+  randomized_s1000 on randomized  masked 0.03700 ± 0.00069   reported 0.03654   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s1000/recovery:   0%|          | 1/2011 [00:01<42:43,  1.28s/it]
+  randomized_s1000 on recovery    masked 0.35778 ± 0.01755   reported 0.35685   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s1000/color:   0%|          | 1/1553 [00:01<31:08,  1.20s/it]
+  randomized_s1000 on color       masked 0.32866 ± 0.01159   reported 0.32760   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:17,  1.02s/it]
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s1000/slowpace:   0%|          | 1/2157 [00:01<41:47,  1.16s/it]
+  randomized_s1000 on slowpace    masked 0.22434 ± 0.01309   reported 0.22370   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s1000/density:   0%|          | 1/1647 [00:01<34:39,  1.26s/it]
+  randomized_s1000 on density     masked 0.39233 ± 0.01340   reported 0.39085   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s2000/clean:   0%|          | 1/1747 [00:01<33:15,  1.14s/it]
+  randomized_s2000 on clean       masked 0.19571 ± 0.00751   reported 0.19440   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s2000/randomized:   0%|          | 1/1981 [00:01<42:30,  1.29s/it]
+  randomized_s2000 on randomized  masked 0.03683 ± 0.00070   reported 0.03637   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s2000/recovery:   0%|          | 1/2011 [00:01<40:20,  1.20s/it]
+  randomized_s2000 on recovery    masked 0.35074 ± 0.01678   reported 0.34982   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:46,  1.08s/it]
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s2000/color:   0%|          | 1/1553 [00:01<32:51,  1.27s/it]
+  randomized_s2000 on color       masked 0.32245 ± 0.01111   reported 0.32139   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s2000/slowpace:   0%|          | 1/2157 [00:01<41:26,  1.15s/it]
+  randomized_s2000 on slowpace    masked 0.22225 ± 0.01223   reported 0.22163   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+randomized_s2000/density:   0%|          | 1/1647 [00:01<32:29,  1.18s/it]
+  randomized_s2000 on density     masked 0.37385 ± 0.01228   reported 0.37240   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s1000/clean:   0%|          | 1/1747 [00:01<36:18,  1.25s/it]
+    recovery_s1000 on clean       masked 0.21734 ± 0.00594   reported 0.21536   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s1000/randomized:   0%|          | 1/1981 [00:01<41:06,  1.25s/it]
+    recovery_s1000 on randomized  masked 0.53719 ± 0.04205   reported 0.53611   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s1000/recovery:   0%|          | 1/2011 [00:01<35:21,  1.06s/it]
+    recovery_s1000 on recovery    masked 0.05419 ± 0.00107   reported 0.05367   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s1000/color:   0%|          | 1/1553 [00:01<34:34,  1.34s/it]
+    recovery_s1000 on color       masked 0.19183 ± 0.00649   reported 0.19096   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s1000/slowpace:   0%|          | 1/2157 [00:01<40:16,  1.12s/it]
+    recovery_s1000 on slowpace    masked 0.18173 ± 0.00756   reported 0.18107   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s1000/density:   0%|          | 1/1647 [00:01<30:56,  1.13s/it]
+    recovery_s1000 on density     masked 0.60621 ± 0.06370   reported 0.60505   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s2000/clean:   0%|          | 1/1747 [00:01<36:51,  1.27s/it]
+    recovery_s2000 on clean       masked 0.22600 ± 0.00634   reported 0.22414   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s2000/randomized:   0%|          | 1/1981 [00:01<39:19,  1.19s/it]
+    recovery_s2000 on randomized  masked 0.53087 ± 0.04146   reported 0.52981   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+    recovery_s2000 on recovery    masked 0.05380 ± 0.00105   reported 0.05328   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s2000/color:   0%|          | 1/1553 [00:01<27:34,  1.07s/it]
+    recovery_s2000 on color       masked 0.19254 ± 0.00647   reported 0.19172   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s2000/slowpace:   0%|          | 1/2157 [00:01<45:18,  1.26s/it]
+    recovery_s2000 on slowpace    masked 0.18628 ± 0.00772   reported 0.18565   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+recovery_s2000/density:   0%|          | 1/1647 [00:01<31:15,  1.14s/it]
+    recovery_s2000 on density     masked 0.60386 ± 0.06267   reported 0.60271   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s1000/clean:   0%|          | 1/1747 [00:01<36:36,  1.26s/it]
+       color_s1000 on clean       masked 0.48456 ± 0.01522   reported 0.47865   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s1000/randomized:   0%|          | 1/1981 [00:01<41:39,  1.26s/it]
+       color_s1000 on randomized  masked 1.23655 ± 0.10114   reported 1.23431   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s1000/recovery:   0%|          | 1/2011 [00:01<36:34,  1.09s/it]
+       color_s1000 on recovery    masked 0.58940 ± 0.09485   reported 0.58790   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s1000/color:   0%|          | 1/1553 [00:01<35:30,  1.37s/it]
+       color_s1000 on color       masked 0.05159 ± 0.00082   reported 0.05099   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s1000/slowpace:   0%|          | 1/2157 [00:01<45:14,  1.26s/it]
+       color_s1000 on slowpace    masked 0.35845 ± 0.01371   reported 0.35693   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s1000/density:   0%|          | 1/1647 [00:01<29:04,  1.06s/it]
+       color_s1000 on density     masked 1.38190 ± 0.16124   reported 1.38001   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s2000/clean:   0%|          | 1/1747 [00:01<37:38,  1.29s/it]
+       color_s2000 on clean       masked 0.47672 ± 0.01476   reported 0.47176   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:26,  1.04s/it]
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s2000/randomized:   0%|          | 1/1981 [00:01<40:43,  1.23s/it]
+       color_s2000 on randomized  masked 1.24938 ± 0.10172   reported 1.24735   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+       color_s2000 on recovery    masked 0.59383 ± 0.09390   reported 0.59235   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+       color_s2000 on color       masked 0.05151 ± 0.00081   reported 0.05089   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s2000/slowpace:   0%|          | 1/2157 [00:01<44:27,  1.24s/it]
+       color_s2000 on slowpace    masked 0.36359 ± 0.01387   reported 0.36216   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_s2000/density:   0%|          | 1/1647 [00:01<35:13,  1.28s/it]
+       color_s2000 on density     masked 1.36216 ± 0.15826   reported 1.36021   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_slowpace/clean:   0%|          | 1/1747 [00:01<35:57,  1.24s/it]
+    color_slowpace on clean       masked 0.27175 ± 0.01078   reported 0.26919   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_slowpace/randomized:   0%|          | 1/1981 [00:01<41:04,  1.24s/it]
+    color_slowpace on randomized  masked 0.91428 ± 0.08676   reported 0.91300   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:02,  1.11s/it]
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_slowpace/recovery:   0%|          | 1/2011 [00:01<36:00,  1.07s/it]
+    color_slowpace on recovery    masked 0.43873 ± 0.05104   reported 0.43767   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+color_slowpace/color:   0%|          | 1/1553 [00:01<27:04,  1.05s/it]
+    color_slowpace on color       masked 0.28662 ± 0.00880   reported 0.28545   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+    color_slowpace on slowpace    masked 0.04703 ± 0.00095   reported 0.04668   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+    color_slowpace on density     masked 1.43701 ± 0.16878   reported 1.43538   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+density/clean:   0%|          | 1/1747 [00:01<31:15,  1.07s/it]
+           density on clean       masked 0.49744 ± 0.02326   reported 0.49174   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+           density on randomized  masked 1.01709 ± 0.09421   reported 1.01462   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:02<19:08,  2.35s/it]
+Reducing the number of VLM layers to 16 ...
+
+
+
+density/recovery:   0%|          | 1/2011 [00:01<35:16,  1.05s/it]
+           density on recovery    masked 0.55520 ± 0.14401   reported 0.55344   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+           density on color       masked 0.24724 ± 0.01126   reported 0.24577   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+density/slowpace:   0%|          | 1/2157 [00:01<38:25,  1.07s/it]
+           density on slowpace    masked 0.29146 ± 0.01543   reported 0.29013   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+           density on density     masked 0.05705 ± 0.00091   reported 0.05615   (50 eps, 26349 frames)
+
+wrote analysis/out_loss/loss_matrix.json (60 cells)

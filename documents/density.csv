@@ -1,0 +1,611 @@
+condition,eval_cell,seed,episode,instance,success,flagged,failure_mode,regrasp,notes
+density5,in_distribution,1000,1,-,1,,success,,"Failed grasp and moved towards E4, near top middle of the board"
+density5,in_distribution,1000,2,-,1,,success,,
+density5,in_distribution,1000,3,-,0,,contact_no_grasp,,
+density5,in_distribution,1000,4,-,1,,success,,
+density5,in_distribution,1000,5,-,1,,success,,
+density5,in_distribution,1000,6,-,1,,success,,
+density5,in_distribution,1000,7,-,1,,success,,
+density5,in_distribution,1000,8,-,1,,success,,
+density5,in_distribution,1000,9,-,1,,success,,
+density5,in_distribution,1000,10,-,1,,success,,
+density5,in_distribution,1000,11,-,1,,success,,
+density5,in_distribution,1000,12,-,1,,success,,
+density5,in_distribution,1000,13,-,1,,success,,
+density5,in_distribution,1000,14,-,0,,timeout_other,,"Missed getting aligned, and then went to the top"
+density5,in_distribution,1000,15,-,1,,success,,
+density5,distractors,1000,1,-,1,,success,,"hit corner of cup with cube but got it in wihtout knocking over, it then didn't go back ot home, but was moving around as if tring to gtab something"
+density5,distractors,1000,2,-,0,,contact_no_grasp,,missed and went towa
+density5,distractors,1000,3,-,0,review,timeout_other,,believe it missed th cube entierely and went to the top 
+density5,distractors,1000,4,-,0,,contact_no_grasp,,
+density5,distractors,1000,5,-,1,,success,,took a few seconds to get back to prose position
+density5,distractors,1000,6,-,0,,contact_no_grasp,,
+density5,distractors,1000,7,-,0,,timeout_other,,didn't close on the cube
+density5,distractors,1000,8,-,0,,grasp_drop,,bumped into cube but then dropped cube not on top of cup and couldn't recover
+density5,distractors,1000,9,-,0,,timeout_other,,didn't make contact
+density5,distractors,1000,10,-,0,,contact_no_grasp,,
+density5,distractors,1000,11,-,0,"accidental key press, after failure happened",grasp_drop,,"Dropp[ed cube next to cup, accidentally ended episode early"
+density5,distractors,1000,12,-,1,,success,,
+density5,distractors,1000,13,-,0,,contact_no_grasp,,
+density5,distractors,1000,14,-,1,,success,,
+density5,distractors,1000,15,-,0,,timeout_other,,missed cube and went to the top of board
+density5,spot_check,1000,1,T1,1,,success,,
+density5,spot_check,1000,2,T1,1,,success,,
+density5,spot_check,1000,3,T3,1,,success_after_missed_grasp,,
+density5,spot_check,1000,4,T3,1,,success,,
+density5,spot_check,1000,5,T10,0,,contact_no_grasp,,"failed grasp, then shifted left a bit"
+density5,spot_check,1000,6,T10,0,,contact_no_grasp,,"failed grasp, then shifted left a bit"
+density5,new_positions,1000,1,E1,0,,timeout_other,,went to t2 then center
+density5,new_positions,1000,2,E1,0,,timeout_other,,went to t2 then center
+density5,new_positions,1000,3,E1,0,,timeout_other,,went to t2 to t3 and bumped cup
+density5,new_positions,1000,4,E1,0,,timeout_other,,went to t3 after hesitating
+density5,new_positions,1000,5,E1,0,,timeout_other,,"started aim closer to cup moved to prose, then towards t3"
+density5,new_positions,1000,6,E2,0,,timeout_other,,went to t1
+density5,new_positions,1000,7,E2,0,,timeout_other,,went to t1
+density5,new_positions,1000,8,E2,0,,timeout_other,,went to t1
+density5,new_positions,1000,9,E2,0,,timeout_other,,went to t1
+density5,new_positions,1000,10,E2,0,,timeout_other,,went to t1
+density5,new_positions,1000,11,E3,0,,timeout_other,,"aimed to the left of the cube, then T3"
+density5,new_positions,1000,12,E3,0,,timeout_other,,went to T3 and T4 (between them)
+density5,new_positions,1000,13,E3,0,,timeout_other,,"aimed to the right of the cube, then went up by T3 "
+density5,new_positions,1000,14,E3,0,,timeout_other,,went to center of T3
+density5,new_positions,1000,15,E3,0,,timeout_other,,went to center of T3
+density5,new_positions,1000,16,E4,0,,timeout_other,,"went to t9, then t10"
+density5,new_positions,1000,17,E4,0,,timeout_other,,"went to t9, then t10"
+density5,new_positions,1000,18,E4,0,,timeout_other,,"went to t9, then t10"
+density5,new_positions,1000,19,E4,0,,timeout_other,,"went to between E4 and t9, then t10"
+density5,new_positions,1000,20,E4,0,,timeout_other,,"went to between E4 and t9, then t10"
+density5,new_positions,1000,21,E5,0,,timeout_other,,went to t7
+density5,new_positions,1000,22,E5,0,,timeout_other,,"aimed correctly at E5 but didn't go all the way, barely missed"
+density5,new_positions,1000,23,E5,0,,timeout_other,,went to t7
+density5,new_positions,1000,24,E5,0,,timeout_other,,went to t7
+density5,new_positions,1000,25,E5,0,,timeout_other,,went to t7
+density10,in_distribution,1000,1,-,1,,success_after_missed_grasp,,"Hit the cube then went u, but quickly went back and got it, confirm this is success after recovery"
+density10,in_distribution,1000,2,-,1,,success,,
+density10,in_distribution,1000,3,-,1,,success,,
+density10,in_distribution,1000,4,-,0,,contact_no_grasp,,Touched top of cube
+density10,in_distribution,1000,5,-,1,,success,,
+density10,in_distribution,1000,6,-,1,,success,,
+density10,in_distribution,1000,7,-,1,,success,,
+density10,in_distribution,1000,8,-,1,,success,,
+density10,in_distribution,1000,9,-,1,,success,,
+density10,in_distribution,1000,10,-,1,,success,,
+density10,in_distribution,1000,11,-,1,,success,,
+density10,in_distribution,1000,12,-,1,,success,,
+density10,in_distribution,1000,13,-,1,,success,,
+density10,in_distribution,1000,14,-,0,,contact_no_grasp,,Went to T3 after moving
+density10,in_distribution,1000,15,-,1,,success,,
+density10,distractors,1000,1,-,0,,contact_no_grasp,,"closed too high, only touched top of cube, then went to top of board"
+density10,distractors,1000,2,-,1,,success,,
+density10,distractors,1000,3,-,1,,success,,
+density10,distractors,1000,4,-,1,,success,,
+density10,distractors,1000,5,-,0,,contact_no_grasp,,bumped into the cube then went to top of board by T3 and T4
+density10,distractors,1000,6,-,1,,success,,"took a bit to go back to prose position, went back to E3"
+density10,distractors,1000,7,-,0,,contact_no_grasp,,Bumped cube and went up towards middle 
+density10,distractors,1000,8,-,1,,success,,
+density10,distractors,1000,9,-,0,confirm didn't touch cube,timeout_other,,missed the cube went to top of board
+density10,distractors,1000,10,-,1,,success,,"took a bit to go back to prose, aimed toowards battery at E4 after,, then back to middle. Aslo dropped cube on edge of cup but it rolled int"
+density10,distractors,1000,11,-,1,,success_after_missed_grasp,,"bumped cube, went to cup, then went back and got the cube, it fell on the edge and rolled int"
+density10,distractors,1000,12,-,1,,success,,
+density10,distractors,1000,13,-,0,"check recording, rerecorded because of doube right click",contact_no_grasp,,went towards t4 after bumping cube
+density10,distractors,1000,14,-,1,,success,,
+density10,distractors,1000,15,-,0,,contact_no_grasp,,bumped cube went it went to T4
+density10,spot_check,1000,1,T1,1,,success,,
+density10,spot_check,1000,2,T1,1,,success,,
+density10,spot_check,1000,3,T3,1,,success,,
+density10,spot_check,1000,4,T3,1,,success,,
+density10,spot_check,1000,5,T10,1,,success_after_missed_grasp,,
+density10,spot_check,1000,6,T10,1,,success_after_missed_grasp,,
+density10,new_positions,1000,1,E1,0,,timeout_other,,went to t1
+density10,new_positions,1000,2,E1,0,,timeout_other,,Went towards center of the board (near T3)
+density10,new_positions,1000,3,E1,0,,timeout_other,,went to t1
+density10,new_positions,1000,4,E1,0,,contact_no_grasp,,"went to t2,then towards cube, bumped it"
+density10,new_positions,1000,5,E1,0,,timeout_other,,"went to t2, slightly to cube but then T1, no contact"
+density10,new_positions,1000,6,E2,0,,timeout_other,,went to t1
+density10,new_positions,1000,7,E2,0,,timeout_other,,went to t1
+density10,new_positions,1000,8,E2,0,,timeout_other,,went to t1
+density10,new_positions,1000,9,E2,0,,timeout_other,,went to t1
+density10,new_positions,1000,10,E2,0,,timeout_other,,went to t1
+density10,new_positions,1000,11,E3,0,,timeout_other,,went between t4 and e3 then to t3
+density10,new_positions,1000,12,E3,0,,timeout_other,,went between t4 and e3 then to t3
+density10,new_positions,1000,13,E3,0,,timeout_other,,"went between t4 and e3, almost bumped cube, then to t3"
+density10,new_positions,1000,14,E3,0,,contact_no_grasp,,"Touched center of cube, but bumped it out of place then went to T3"
+density10,new_positions,1000,15,E3,0,,timeout_other,,went between t4 and e3 then to t3
+density10,new_positions,1000,16,E4,0,,timeout_other,,"went to between E4 and t9, then t10"
+density10,new_positions,1000,17,E4,0,,timeout_other,,went near t6 and t7
+density10,new_positions,1000,18,E4,0,,timeout_other,,"went to between E4 and t9, then t10"
+density10,new_positions,1000,19,E4,0,,timeout_other,,"went to t6, then t7"
+density10,new_positions,1000,20,E4,0,cvonfirm,timeout_other,,"went to t9, then rotated counter clockwise"
+density10,new_positions,1000,21,E5,0,,timeout_other,,went between e5 and t7
+density10,new_positions,1000,22,E5,0,,timeout_other,,went to t7
+density10,new_positions,1000,23,E5,0,,timeout_other,,went between e5 and t7
+density10,new_positions,1000,24,E5,0,,timeout_other,,went between e5 and t7
+density10,new_positions,1000,25,E5,0,,timeout_other,,went between e5 and t7
+density25,in_distribution,1000,1,-,1,,success,,
+density25,in_distribution,1000,2,-,1,,success,,
+density25,in_distribution,1000,3,-,1,,success,,
+density25,in_distribution,1000,4,-,1,,success,,
+density25,in_distribution,1000,5,-,1,,success,,
+density25,in_distribution,1000,6,-,1,,success,,
+density25,in_distribution,1000,7,-,1,,success,,
+density25,in_distribution,1000,8,-,1,,success,,
+density25,in_distribution,1000,9,-,1,,success,,
+density25,in_distribution,1000,10,-,1,,success,,
+density25,in_distribution,1000,11,-,1,,success,,
+density25,in_distribution,1000,12,-,1,,success,,
+density25,in_distribution,1000,13,-,1,,success,,
+density25,in_distribution,1000,14,-,1,,success,,
+density25,in_distribution,1000,15,-,1,,success,,
+density25,distractors,1000,1,-,1,,success,,Hesitated to drop cube
+density25,distractors,1000,2,-,0,,contact_no_grasp,,Bumped cube and went to t4
+density25,distractors,1000,3,-,1,,success,,
+density25,distractors,1000,4,-,1,,success,,
+density25,distractors,1000,5,-,0,,contact_no_grasp,,Bumped cube and went to T4 and center of table
+density25,distractors,1000,6,-,0,,contact_no_grasp,,Bumped cube and went to T4 and center of table
+density25,distractors,1000,7,-,0,confrim contact,contact_no_grasp,,Bumped cube and went to T4 and center of table
+density25,distractors,1000,8,-,0,,contact_no_grasp,,"bumped cube, moved as if it went to the cup, then to T4 and cneter"
+density25,distractors,1000,9,-,0,,timeout_other,,"Went to the left of the cube, missed it then T4"
+density25,distractors,1000,10,-,0,,contact_no_grasp,,"bumped cube, moved as if it went to the cup, then to T4 and cneter"
+density25,distractors,1000,11,-,1,,success,,
+density25,distractors,1000,12,-,0,,contact_no_grasp,,"bumped cube, moved as if it went to the cup, then to T4 and cneter"
+density25,distractors,1000,13,-,1,,success,,
+density25,distractors,1000,14,-,0,,timeout_other,,"went to towards middle, then to t4"
+density25,distractors,1000,15,-,0,,contact_no_grasp,,"bumped cube, moved as if it went to the cup, then to T4 and cneter"
+density25,spot_check,1000,1,T1,1,,success,,
+density25,spot_check,1000,2,T1,1,,success,,
+density25,spot_check,1000,3,T3,1,,success,,
+density25,spot_check,1000,4,T3,1,,success,,
+density25,spot_check,1000,5,T10,1,,success,,
+density25,spot_check,1000,6,T10,1,,success,,
+density25,new_positions,1000,1,E1,0,,contact_no_grasp,,"Went to T2 then rotated to the cube and t1, numped cube"
+density25,new_positions,1000,2,E1,0,,timeout_other,,Went to T2 and stayed around that area
+density25,new_positions,1000,3,E1,0,,timeout_other,,Went to T2 then rotated to T1
+density25,new_positions,1000,4,E1,0,,timeout_other,,Went to T2 then rotated to T1
+density25,new_positions,1000,5,E1,0,,timeout_other,,Went to T2 then rotated to T1
+density25,new_positions,1000,6,E2,0,,timeout_other,,went to t1
+density25,new_positions,1000,7,E2,0,,timeout_other,,went to t1
+density25,new_positions,1000,8,E2,0,,timeout_other,,went to t1
+density25,new_positions,1000,9,E2,0,,timeout_other,,went to t1
+density25,new_positions,1000,10,E2,0,,timeout_other,,went to t1
+density25,new_positions,1000,11,E3,0,,timeout_other,,went between t4 and e3 then to t3
+density25,new_positions,1000,12,E3,0,,timeout_other,,went past cube to t3/t4
+density25,new_positions,1000,13,E3,0,,timeout_other,,went between t4 and e3 then to t3
+density25,new_positions,1000,14,E3,0,,timeout_other,,went between t4 and e3 then to t3
+density25,new_positions,1000,15,E3,0,,timeout_other,,went between t4 and e3 then to t3
+density25,new_positions,1000,16,E4,0,,timeout_other,,"went towards cube a bit but overshot, then to T7"
+density25,new_positions,1000,17,E4,0,,timeout_other,,"rotated towards cup, then between T6 and T7, stayed at t7"
+density25,new_positions,1000,18,E4,0,,timeout_other,,went towards T10
+density25,new_positions,1000,19,E4,0,,timeout_other,,went towards T10
+density25,new_positions,1000,20,E4,0,,timeout_other,,"took a bit to depart, then went to t10 and t9"
+density25,new_positions,1000,21,E5,0,,timeout_other,,"aimed between E5 and T7, then stayed at t7"
+density25,new_positions,1000,22,E5,0,,timeout_other,,"aimed between E5 and T7, then stayed at t7"
+density25,new_positions,1000,23,E5,0,,timeout_other,,"aimed between E5 and T7, then stayed at t7"
+density25,new_positions,1000,24,E5,0,,timeout_other,,"aimed between E5 and T7, then stayed at t7"
+density25,new_positions,1000,25,E5,0,,timeout_other,,"aimed between E5 and T7, then stayed at t7"
+density50,in_distribution,1000,1,-,1,,success,,
+density50,in_distribution,1000,2,-,1,,success,,
+density50,in_distribution,1000,3,-,0,,contact_no_grasp,,"Failed to grab it, went to the cup, then moved towards T4"
+density50,in_distribution,1000,4,-,1,,success,,
+density50,in_distribution,1000,5,-,1,,success,,Took long to depart
+density50,in_distribution,1000,6,-,1,,success,,
+density50,in_distribution,1000,7,-,1,,success,,
+density50,in_distribution,1000,8,-,1,,success,,Took long to depart
+density50,in_distribution,1000,9,-,1,,success,,
+density50,in_distribution,1000,10,-,1,,success,,Took long to depart
+density50,in_distribution,1000,11,-,1,,success,,
+density50,in_distribution,1000,12,-,1,,success,,
+density50,in_distribution,1000,13,-,1,,success,,
+density50,in_distribution,1000,14,-,1,,success,,
+density50,in_distribution,1000,15,-,1,,success,,
+density50,distractors,1000,1,-,1,,success,,
+density50,distractors,1000,2,-,1,,success,,
+density50,distractors,1000,3,-,1,,success,,
+density50,distractors,1000,4,-,1,,success,,
+density50,distractors,1000,5,-,1,,success,,
+density50,distractors,1000,6,-,1,,success,,
+density50,distractors,1000,7,-,1,,success,,
+density50,distractors,1000,8,-,1,,success,,
+density50,distractors,1000,9,-,1,,success,,"took long to get into prose, moved to T3 after putting the cup in"
+density50,distractors,1000,10,-,0,,contact_no_grasp,,"rotated a different way, bumped cube then went to T3"
+density50,distractors,1000,11,-,0,,timeout_other,,went to the top of board by T3 from the start
+density50,distractors,1000,12,-,0,,contact_no_grasp,,Bumped cube and went to T4 and center of table
+density50,distractors,1000,13,-,1,,success,,
+density50,distractors,1000,14,-,1,,success,,dind't go back to prose went towards T3 after putting the cup in
+density50,distractors,1000,15,-,0,,contact_no_grasp,,"went towrads cube, didn’t close on it and then towards T4"
+density50,spot_check,1000,1,T1,1,,success,,took a long time to depart 
+density50,spot_check,1000,2,T1,1,,success,,
+density50,spot_check,1000,3,T3,1,,success,,
+density50,spot_check,1000,4,T3,1,,success,,
+density50,spot_check,1000,5,T10,1,,success,,
+density50,spot_check,1000,6,T10,1,,success,,took a few seconds to move
+density50,new_positions,1000,1,E1,0,,timeout_other,,Went to T7
+density50,new_positions,1000,2,E1,0,,timeout_other,,Went to T7
+density50,new_positions,1000,3,E1,0,,timeout_other,,moved a bit then went to t7
+density50,new_positions,1000,4,E1,0,,timeout_other,,"went to t2, then t6"
+density50,new_positions,1000,5,E1,0,,timeout_other,,Went to T7
+density50,new_positions,1000,6,E2,0,,timeout_other,,went to t1
+density50,new_positions,1000,7,E2,0,,timeout_other,,went to t1
+density50,new_positions,1000,8,E2,0,,timeout_other,,went to t1
+density50,new_positions,1000,9,E2,0,,timeout_other,,went to t1
+density50,new_positions,1000,10,E2,0,,timeout_other,,went to t1
+density50,new_positions,1000,11,E3,0,,timeout_other,,"Went between E3 and t4, then towards top of board"
+density50,new_positions,1000,12,E3,0,,timeout_other,,"Went between E3 and t4, then towards top of board"
+density50,new_positions,1000,13,E3,0,,timeout_other,,"Went between E3 and t4, then towards top of board"
+density50,new_positions,1000,14,E3,0,,timeout_other,,"aimed to the right of the cube, then to T3"
+density50,new_positions,1000,15,E3,0,,timeout_other,,went straight to T4
+density50,new_positions,1000,16,E4,0,,timeout_other,,"went between T9 and t10, then ended at t7"
+density50,new_positions,1000,17,E4,0,,timeout_other,,"went between E4 and T9, then  t10, then ended at t7"
+density50,new_positions,1000,18,E4,0,,timeout_other,,"went to T9, then ended at t7"
+density50,new_positions,1000,19,E4,0,,timeout_other,,"went between T9 and t10, then ended at t7"
+density50,new_positions,1000,20,E4,0,,timeout_other,,"went between T9 and t10, then ended at t7"
+density50,new_positions,1000,21,E5,0,,contact_no_grasp,,aimed at cube but not far enough
+density50,new_positions,1000,22,E5,0,,contact_no_grasp,,aimed at cube but not far enough
+density50,new_positions,1000,23,E5,0,,contact_no_grasp,,aimed at cube but not far enough
+density50,new_positions,1000,24,E5,0,,contact_no_grasp,,aimed at cube but not far enough
+density50,new_positions,1000,25,E5,0,,contact_no_grasp,,aimed at cube but not far enough
+density5,in_distribution,2000,1,-,1,,success,,
+density5,in_distribution,2000,2,-,1,,success,,
+density5,in_distribution,2000,3,-,1,,success,,
+density5,in_distribution,2000,4,-,1,,success,,
+density5,in_distribution,2000,5,-,1,,success,,
+density5,in_distribution,2000,6,-,1,,success,,
+density5,in_distribution,2000,7,-,1,,success,,
+density5,in_distribution,2000,8,-,1,,success,,
+density5,in_distribution,2000,9,-,1,,success,,
+density5,in_distribution,2000,10,-,1,,success_after_missed_grasp,,
+density5,in_distribution,2000,11,-,1,,success,,
+density5,in_distribution,2000,12,-,1,,success,,
+density5,in_distribution,2000,13,-,1,,success_after_missed_grasp,,bumped cube but got it
+density5,in_distribution,2000,14,-,1,,success,,
+density5,in_distribution,2000,15,-,1,,success,,
+density5,distractors,2000,1,-,0,,timeout_other,,
+density5,distractors,2000,2,-,0,,contact_no_grasp,,
+density5,distractors,2000,3,-,1,,success,,Put the cube on a cup
+density5,distractors,2000,4,-,1,,success,,Put the cube in the cup but doesn't return to prose
+density5,distractors,2000,5,-,0,,contact_no_grasp,,
+density5,distractors,2000,6,-,0,,contact_no_grasp,,aimed to the left
+density5,distractors,2000,7,-,0,confirm contact,contact_no_grasp,,"likely aimed at cube, ended at T3, to confirm intiial motion and contact"
+density5,distractors,2000,8,-,0,,contact_no_grasp,,
+density5,distractors,2000,9,-,1,,success,,
+density5,distractors,2000,10,-,0,,timeout_other,,"missed cube, went to top of space"
+density5,distractors,2000,11,-,0,,contact_no_grasp,,"aimed left of cube, grazed it, then went to top"
+density5,distractors,2000,12,-,0,,contact_no_grasp,,"aimed left of cube, grazed it, then went to top"
+density5,distractors,2000,13,-,0,,contact_no_grasp,,"aimed left of cube, grazed it, then went to top"
+density5,distractors,2000,14,-,0,,contact_no_grasp,,"aimed left of cube, grazed it, then went to top"
+density5,distractors,2000,15,-,1,,success,,"Worked, but didn't go to prone"
+density5,spot_check,2000,1,T1,1,,success,,
+density5,spot_check,2000,2,T1,1,,success,,
+density5,spot_check,2000,3,T3,1,,success,,
+density5,spot_check,2000,4,T3,1,,success,,
+density5,spot_check,2000,5,T10,0,,contact_no_grasp,,doesn't go far enough to the right
+density5,spot_check,2000,6,T10,0,,timeout_other,,didn't go far enough
+density5,new_positions,2000,1,E1,0,,timeout_other,,"went to T2, bumped into cup, almost knocked it over"
+density5,new_positions,2000,2,E1,0,,timeout_other,,went to t2 then up
+density5,new_positions,2000,3,E1,0,,timeout_other,,"went to t2 then up, bumped cup a bit"
+density5,new_positions,2000,4,E1,0,,timeout_other,,went to t2 then up
+density5,new_positions,2000,5,E1,0,,timeout_other,,"went to t2 then up, bumped cup a bit"
+density5,new_positions,2000,6,E2,0,,timeout_other,,went to t1
+density5,new_positions,2000,7,E2,0,,timeout_other,,went to t1
+density5,new_positions,2000,8,E2,0,,timeout_other,,went to t1
+density5,new_positions,2000,9,E2,0,,timeout_other,,went to t1
+density5,new_positions,2000,10,E2,0,,timeout_other,,went to t1
+density5,new_positions,2000,11,E3,0,,timeout_other,,"went between T4 and E3, then to t3"
+density5,new_positions,2000,12,E3,0,,timeout_other,,went to t3
+density5,new_positions,2000,13,E3,0,,timeout_other,,went between t6 and E3 at first then to t3
+density5,new_positions,2000,14,E3,0,,timeout_other,,"went between T4 and E3, then to t3"
+density5,new_positions,2000,15,E3,0,,timeout_other,,"went between T4 and E3, then to t3"
+density5,new_positions,2000,16,E4,0,,timeout_other,,went between T9 and E4
+density5,new_positions,2000,17,E4,0,,timeout_other,,went between T9 and E4
+density5,new_positions,2000,18,E4,0,,timeout_other,,went between T9 and E4
+density5,new_positions,2000,19,E4,0,,contact_no_grasp,,"went towards cube, bumped it, then went up to T6"
+density5,new_positions,2000,20,E4,0,,timeout_other,,went between T9 and E4
+density5,new_positions,2000,21,E5,0,,timeout_other,,Aimed mainly at cube but went left to T7
+density5,new_positions,2000,22,E5,0,,timeout_other,,Aimed mainly at cube but went left to T7
+density5,new_positions,2000,23,E5,0,,timeout_other,,Aimed mainly at cube but went left to T7
+density5,new_positions,2000,24,E5,0,,timeout_other,,Aimed at T7
+density5,new_positions,2000,25,E5,0,,timeout_other,,Aimed mainly at cube but went left to T7
+density10,in_distribution,2000,1,-,1,,success,,
+density10,in_distribution,2000,2,-,1,,success,,
+density10,in_distribution,2000,3,-,1,,success,,
+density10,in_distribution,2000,4,-,0,,contact_no_grasp,,"tried to grab but pushed it, then went to middle"
+density10,in_distribution,2000,5,-,1,,success,,
+density10,in_distribution,2000,6,-,1,,success,,
+density10,in_distribution,2000,7,-,1,,success,,
+density10,in_distribution,2000,8,-,1,,success,,
+density10,in_distribution,2000,9,-,1,,success,,
+density10,in_distribution,2000,10,-,1,,success,,
+density10,in_distribution,2000,11,-,1,,success,,
+density10,in_distribution,2000,12,-,1,,success,,
+density10,in_distribution,2000,13,-,1,,success,,
+density10,in_distribution,2000,14,-,0,,contact_no_grasp,,"Aimed to the left of the cube, missed, yhen went to T3"
+density10,in_distribution,2000,15,-,1,,success,,
+density10,distractors,2000,1,-,1,,success,,
+density10,distractors,2000,2,-,0,,timeout_other,,"aimed left, missed cube and went up"
+density10,distractors,2000,3,-,1,,success,,didn't go back to prose
+density10,distractors,2000,4,-,0,,grasp_drop,,"Dropped it near the cup, almost picked it up agaain, it bumped it"
+density10,distractors,2000,5,-,0,,grasp_drop,,"Had cube, dropped it on cup edge but cube was within claws, it then grabbed the cube again, went to place it, accidentally grabbed cube and cup, and dropped both, cup remained standing and it failed to recover cube"
+density10,distractors,2000,6,-,0,confirm contact,timeout_other,,"Believe it missed the cube to the left, may have grazed it, to confirm"
+density10,distractors,2000,7,-,0,,contact_no_grasp,,"bumped cube, went to the top"
+density10,distractors,2000,8,-,0,,contact_no_grasp,,"bumped cube, went to the top"
+density10,distractors,2000,9,-,0,,contact_no_grasp,,"aimed left, barely hit. Cube"
+density10,distractors,2000,10,-,1,,success,,"Had cube on edge of cup, picked it up, put it back then it dropped"
+density10,distractors,2000,11,-,0,,grasp_drop,,"missed the cup and pushed the cup a bit, never recovered"
+density10,distractors,2000,12,-,0,,contact_no_grasp,,"bumped cube, went to the top"
+density10,distractors,2000,13,-,1,,success,,"didn’t go to prosed, aimed at T4 after dropping the cube"
+density10,distractors,2000,14,-,0,,contact_no_grasp,,"bumped cube, went to the top"
+density10,distractors,2000,15,-,1,,success,,
+density10,spot_check,2000,1,T1,1,,success,,
+density10,spot_check,2000,2,T1,1,,success,,
+density10,spot_check,2000,3,T3,1,,success,,
+density10,spot_check,2000,4,T3,1,,success,,
+density10,spot_check,2000,5,T10,1,,success,,
+density10,spot_check,2000,6,T10,1,,success,,
+density10,new_positions,2000,1,E1,0,,timeout_other,,"Went between t2, and T3 then towards T1"
+density10,new_positions,2000,2,E1,0,,contact_no_grasp,,went to t2 then rotated tp T1 and bumped the cube
+density10,new_positions,2000,3,E1,0,,timeout_other,,went to t2 then rotated to T1
+density10,new_positions,2000,4,E1,0,,timeout_other,,went to t2 then rotated to T1
+density10,new_positions,2000,5,E1,0,,timeout_other,,went to t2 then rotated to T1
+density10,new_positions,2000,6,E2,0,,timeout_other,,went to t1
+density10,new_positions,2000,7,E2,0,,timeout_other,,went to t1
+density10,new_positions,2000,8,E2,0,,timeout_other,,went to t1
+density10,new_positions,2000,9,E2,0,,timeout_other,,went to t1
+density10,new_positions,2000,10,E2,0,,timeout_other,,went to t1
+density10,new_positions,2000,11,E3,0,,contact_no_grasp,,"aimed at the cube, made contact three times"
+density10,new_positions,2000,12,E3,0,,contact_no_grasp,,"aimed to the right of cube, made contact"
+density10,new_positions,2000,13,E3,0,,timeout_other,,went between t6 and E3 at first then to t3
+density10,new_positions,2000,14,E3,0,,timeout_other,,"went between T4 and E3, then to t3"
+density10,new_positions,2000,15,E3,1,,success_after_missed_grasp,,"aimed at cube, pushed it to the left, then went to prose, went back for cube and got it"
+density10,new_positions,2000,16,E4,0,,timeout_other,,went between T9 and E4
+density10,new_positions,2000,17,E4,0,"error happened, following ones were appended",timeout_other,,went between T9 and E4
+density10,new_positions,2000,18,E4,0,,timeout_other,,went closer to t10 first
+density10,new_positions,2000,19,E4,0,,contact_no_grasp,,"went between E4 and T10, then up to t7"
+density10,new_positions,2000,20,E4,0,,timeout_other,,went to t9
+density10,new_positions,2000,21,E5,0,,timeout_other,,"went to t10, then to cube but not far enough"
+density10,new_positions,2000,22,E5,0,,contact_no_grasp,,"aimed at cube but didn't go far enough, grazed cube"
+density10,new_positions,2000,23,E5,0,,contact_no_grasp,,"aimed at cube but didn't go far enough, grazed cube"
+density10,new_positions,2000,24,E5,0,,timeout_other,,"aimed between t7 and e5, then t7"
+density10,new_positions,2000,25,E5,0,,contact_no_grasp,,"aimed at cube but didn't go far enough, grazed cube"
+density25,in_distribution,2000,1,-,1,,success,,
+density25,in_distribution,2000,2,-,1,,success,,
+density25,in_distribution,2000,3,-,1,,success,,
+density25,in_distribution,2000,4,-,1,,success,,
+density25,in_distribution,2000,5,-,1,,success,,
+density25,in_distribution,2000,6,-,1,,success,,
+density25,in_distribution,2000,7,-,1,,success,,
+density25,in_distribution,2000,8,-,1,,success,,
+density25,in_distribution,2000,9,-,1,,success,,
+density25,in_distribution,2000,10,-,1,,success,,
+density25,in_distribution,2000,11,-,1,,success,,
+density25,in_distribution,2000,12,-,1,,success,,
+density25,in_distribution,2000,13,-,1,,success,,
+density25,in_distribution,2000,14,-,1,,success,,
+density25,in_distribution,2000,15,-,1,,success,,
+density25,distractors,2000,1,-,0,,contact_no_grasp,,"aimed to the left, bumped cube and went to T3"
+density25,distractors,2000,2,-,1,,success,,
+density25,distractors,2000,3,-,1,,success,,"held cube over cup twice, pulling back each time. Then dropped in the third time"
+density25,distractors,2000,4,-,1,,success,,
+density25,distractors,2000,5,-,1,,success,,
+density25,distractors,2000,6,-,1,,success,,
+density25,distractors,2000,7,-,1,,success,,
+density25,distractors,2000,8,-,0,,contact_no_grasp,,"Didn’t fully grasp cube and moved up, then ended up missing"
+density25,distractors,2000,9,-,1,,success,,
+density25,distractors,2000,10,-,1,,success,,
+density25,distractors,2000,11,-,1,,success,,
+density25,distractors,2000,12,-,1,,success,,
+density25,distractors,2000,13,-,1,,success,,
+density25,distractors,2000,14,-,1,,success,,
+density25,distractors,2000,15,-,1,,success,,
+density25,spot_check,2000,1,T1,1,,success,,
+density25,spot_check,2000,2,T1,1,,success,,
+density25,spot_check,2000,3,T3,1,,success,,
+density25,spot_check,2000,4,T3,1,,success,,
+density25,spot_check,2000,5,T10,1,,success,,
+density25,spot_check,2000,6,T10,1,,success,,
+density25,new_positions,2000,1,E1,0,,timeout_other,,Went to t2 and rotated to t1
+density25,new_positions,2000,2,E1,0,,timeout_other,,"went to t2, then middle and up"
+density25,new_positions,2000,3,E1,0,,timeout_other,,went to t2
+density25,new_positions,2000,4,E1,0,,timeout_other,,went to t2
+density25,new_positions,2000,5,E1,0,,timeout_other,,went to t2
+density25,new_positions,2000,6,E2,0,,timeout_other,,went to T1
+density25,new_positions,2000,7,E2,0,,timeout_other,,went to T1
+density25,new_positions,2000,8,E2,0,,timeout_other,,went to T1
+density25,new_positions,2000,9,E2,0,,timeout_other,,went to T1
+density25,new_positions,2000,10,E2,0,,timeout_other,,went to T1
+density25,new_positions,2000,11,E3,0,,timeout_other,,went to t4
+density25,new_positions,2000,12,E3,0,,timeout_other,,went over cube to t4
+density25,new_positions,2000,13,E3,0,,timeout_other,,went past the cube at E3
+density25,new_positions,2000,14,E3,0,,timeout_other,,"went over cube to t4, bumped cup"
+density25,new_positions,2000,15,E3,0,,timeout_other,,"went over cube to t4, a bit to the right"
+density25,new_positions,2000,16,E4,0,,timeout_other,,"went to t6, then to t7"
+density25,new_positions,2000,17,E4,0,,timeout_other,,"went to t10, looked at the cube a bit first but kept moving"
+density25,new_positions,2000,18,E4,0,,timeout_other,,"went to t10, then to t7"
+density25,new_positions,2000,19,E4,0,,timeout_other,,"went between E4 and T9, then t10, then to t7"
+density25,new_positions,2000,20,E4,0,,timeout_other,,"aimed near cube, almost grazed it but then moved to T10"
+density25,new_positions,2000,21,E5,0,,contact_no_grasp,,"aimed at cube, bumped it, then went to T7"
+density25,new_positions,2000,22,E5,0,,contact_no_grasp,,"aimed at cube, bumped it, then went to T8"
+density25,new_positions,2000,23,E5,0,,timeout_other,,aimed between cube and T7
+density25,new_positions,2000,24,E5,0,,timeout_other,,"aimed at cube, didn't extedn far enough and went to T7"
+density25,new_positions,2000,25,E5,0,confirm contact,contact_no_grasp,,"aimed at cube, bumped it, then went to T8"
+density50,in_distribution,2000,1,-,1,,success,,
+density50,in_distribution,2000,2,-,1,,success,,
+density50,in_distribution,2000,3,-,1,,success,,
+density50,in_distribution,2000,4,-,1,,success,,
+density50,in_distribution,2000,5,-,1,,success,,
+density50,in_distribution,2000,6,-,1,,success,,
+density50,in_distribution,2000,7,-,1,,success,,
+density50,in_distribution,2000,8,-,1,,success,,
+density50,in_distribution,2000,9,-,1,,success,,
+density50,in_distribution,2000,10,-,1,,success,,
+density50,in_distribution,2000,11,-,1,,success,,
+density50,in_distribution,2000,12,-,1,,success,,
+density50,in_distribution,2000,13,-,1,,success,,
+density50,in_distribution,2000,14,-,1,,success,,
+density50,in_distribution,2000,15,-,1,,success,,
+density50,distractors,2000,1,-,1,,success,,
+density50,distractors,2000,2,-,1,,success,,
+density50,distractors,2000,3,-,1,,success,,
+density50,distractors,2000,4,-,1,,success,,
+density50,distractors,2000,5,-,1,,success,,
+density50,distractors,2000,6,-,1,,success,,
+density50,distractors,2000,7,-,1,,success,,
+density50,distractors,2000,8,-,0,,contact_no_grasp,,"went too high, bumped cube but didn't close all the way, then went to T4"
+density50,distractors,2000,9,-,0,,contact_no_grasp,,"didn't close on cube, kept going upwards"
+density50,distractors,2000,10,-,1,,success,,
+density50,distractors,2000,11,-,1,,success,,
+density50,distractors,2000,12,-,0,,contact_no_grasp,,"went too high, bumped cube but didn't close all the way, then went to T4"
+density50,distractors,2000,13,-,1,,success,,
+density50,distractors,2000,14,-,1,,success,,took a second to depart
+density50,distractors,2000,15,-,1,,success,,
+density50,spot_check,2000,1,T1,1,,success,,
+density50,spot_check,2000,2,T1,1,,success,,
+density50,spot_check,2000,3,T3,1,,success,,
+density50,spot_check,2000,4,T3,1,,success,,
+density50,spot_check,2000,5,T10,1,confirm,success,,
+density50,spot_check,2000,6,T10,1,confirm,success,,
+density50,new_positions,2000,1,E1,0,,timeout_other,,"went to T2, took a long time to depart"
+density50,new_positions,2000,2,E1,0,,timeout_other,,"went to T2, took a long time to depart, bumped cup, then went to t10"
+density50,new_positions,2000,3,E1,0,,timeout_other,,went to t7
+density50,new_positions,2000,4,E1,0,,timeout_other,,"went to t2, bumped cup"
+density50,new_positions,2000,5,E1,0,,timeout_other,,"went to t2, bumped cup, went to prose"
+density50,new_positions,2000,6,E2,0,"cup may have been shifted a bit, didn't seem to affect performance based on other videos",timeout_other,,went to t1
+density50,new_positions,2000,7,E2,0,,timeout_other,,went to t1
+density50,new_positions,2000,8,E2,0,,timeout_other,,went to t1
+density50,new_positions,2000,9,E2,0,,timeout_other,,went to t1
+density50,new_positions,2000,10,E2,0,,timeout_other,,went to t1
+density50,new_positions,2000,11,E3,0,,timeout_other,,went to t4
+density50,new_positions,2000,12,E3,0,,timeout_other,,aimed to the right of cube before going up to T3
+density50,new_positions,2000,13,E3,0,,timeout_other,,went above to t3
+density50,new_positions,2000,14,E3,0,,timeout_other,,went above to t4
+density50,new_positions,2000,15,E3,0,,timeout_other,,aimed to the right of cube before going up to T3
+density50,new_positions,2000,16,E4,0,,contact_no_grasp,,"aimed at cube, but bumped it twice, then went to T7"
+density50,new_positions,2000,17,E4,1,,success,,
+density50,new_positions,2000,18,E4,0,,timeout_other,,"went to t6, then t7 and t4"
+density50,new_positions,2000,19,E4,1,,success,,
+density50,new_positions,2000,20,E4,0,,timeout_other,,"took a second to depart, looked to move at cube then went to t10"
+density50,new_positions,2000,21,E5,0,,contact_no_grasp,,"aimed at cube, but didn't extend enough to grab, then went to t7"
+density50,new_positions,2000,22,E5,0,,contact_no_grasp,,"aimed at cube, but didn't extend enough to grab, then went to t7"
+density50,new_positions,2000,23,E5,0,,contact_no_grasp,,"aimed at t10, then shifted towards t7, grazing the cube"
+density50,new_positions,2000,24,E5,0,,timeout_other,,looked to aim between cube and T7
+density50,new_positions,2000,25,E5,0,,contact_no_grasp,,"aimed at cube, but didn't extend enough to grab, then went to t7"
+density25-fixedstep,in_distribution,1000,1,-,1,,success,,
+density25-fixedstep,in_distribution,1000,2,-,1,,success,,
+density25-fixedstep,in_distribution,1000,3,-,0,,contact_no_grasp,,"Basically had the cube, but let go as it was moving up, don't thik it ever fully clamped"
+density25-fixedstep,in_distribution,1000,4,-,1,,success,,
+density25-fixedstep,in_distribution,1000,5,-,0,,contact_no_grasp,,was a bit too high up and missed the grasp
+density25-fixedstep,in_distribution,1000,6,-,0,confirm if it bumped cube or not,timeout_other,,missed the cube slightly
+density25-fixedstep,in_distribution,1000,7,-,0,,contact_no_grasp,,"bumped cube, missed "
+density25-fixedstep,in_distribution,1000,8,-,1,,success,,
+density25-fixedstep,in_distribution,1000,9,-,0,,contact_no_grasp,,bumpred cube and missed
+density25-fixedstep,in_distribution,1000,10,-,1,,success,,
+density25-fixedstep,in_distribution,1000,11,-,1,,success,,
+density25-fixedstep,in_distribution,1000,12,-,1,,success,,
+density25-fixedstep,in_distribution,1000,13,-,1,,success,,
+density25-fixedstep,in_distribution,1000,14,-,0,,contact_no_grasp,,"almost had it, a bit to the left and never closed but bumped it"
+density25-fixedstep,in_distribution,1000,15,-,1,,success,,
+density25-fixedstep,distractors,1000,1,-,0,,timeout_other,,went towards the middle to T3
+density25-fixedstep,distractors,1000,2,-,0,,timeout_other,,went too high and missed the cube
+density25-fixedstep,distractors,1000,3,-,0,,timeout_other,,went to T3
+density25-fixedstep,distractors,1000,4,-,0,,timeout_other,,went high and middle to t3
+density25-fixedstep,distractors,1000,5,-,0,,timeout_other,,went high and middle to t3
+density25-fixedstep,distractors,1000,6,-,0,,timeout_other,,aimed left and missed
+density25-fixedstep,distractors,1000,7,-,0,,timeout_other,,aimed left and high and missed cube
+density25-fixedstep,distractors,1000,8,-,0,,timeout_other,,went high and middle to t4
+density25-fixedstep,distractors,1000,9,-,0,confirm contact,contact_no_grasp,,"aimed left, seems to have hit cube"
+density25-fixedstep,distractors,1000,10,-,0,,contact_no_grasp,,"aimed left, seems to have hit cube"
+density25-fixedstep,distractors,1000,11,-,0,,timeout_other,,"went middle, then to t4"
+density25-fixedstep,distractors,1000,12,-,0,,timeout_other,,went to t4
+density25-fixedstep,distractors,1000,13,-,0,confirm no contact,timeout_other,,"went middle, then to t4"
+density25-fixedstep,distractors,1000,14,-,0,,timeout_other,,went left then high
+density25-fixedstep,distractors,1000,15,-,0,,timeout_other,,
+density25-fixedstep,spot_check,1000,1,T1,1,,success,,
+density25-fixedstep,spot_check,1000,2,T1,0,,contact_no_grasp,,bumped cube out of the way
+density25-fixedstep,spot_check,1000,3,T3,1,,success,,
+density25-fixedstep,spot_check,1000,4,T3,1,,success,,
+density25-fixedstep,spot_check,1000,5,T10,1,,success,,
+density25-fixedstep,spot_check,1000,6,T10,1,,success,,
+density25-fixedstep,new_positions,1000,1,E1,0,,timeout_other,,"very jittery, went to t2, prose, hit the cup"
+density25-fixedstep,new_positions,1000,2,E1,0,,timeout_other,,"went to t6, then up"
+density25-fixedstep,new_positions,1000,3,E1,0,,timeout_other,,"went to t2, then t3, bumped cup"
+density25-fixedstep,new_positions,1000,4,E1,0,,timeout_other,,went to t3 and pushed cup a bit
+density25-fixedstep,new_positions,1000,5,E1,0,,timeout_other,,went to t1
+density25-fixedstep,new_positions,1000,6,E2,0,,timeout_other,,went to t1
+density25-fixedstep,new_positions,1000,7,E2,0,,timeout_other,,went to t1
+density25-fixedstep,new_positions,1000,8,E2,0,,timeout_other,,went to t1
+density25-fixedstep,new_positions,1000,9,E2,0,,timeout_other,,went to t1
+density25-fixedstep,new_positions,1000,10,E2,0,,timeout_other,,went to t1
+density25-fixedstep,new_positions,1000,11,E3,0,,timeout_other,,went towards t3
+density25-fixedstep,new_positions,1000,12,E3,0,,timeout_other,,went towards t3
+density25-fixedstep,new_positions,1000,13,E3,0,,timeout_other,,"aimed between E3 and T4, then moved and hit cup, and ended by T3"
+density25-fixedstep,new_positions,1000,14,E3,0,,timeout_other,,"went to t3, bumped into cube"
+density25-fixedstep,new_positions,1000,15,E3,0,,timeout_other,,"went towards t4 at end, initially closer to between t6 and e3"
+density25-fixedstep,new_positions,1000,16,E4,0,,timeout_other,,"went to t9, and rotated toward t10, and t7"
+density25-fixedstep,new_positions,1000,17,E4,0,,timeout_other,,"went to t9, and rotated toward t10, and t7"
+density25-fixedstep,new_positions,1000,18,E4,0,,timeout_other,,"went to t9, and rotated toward t10, and t7"
+density25-fixedstep,new_positions,1000,19,E4,0,,timeout_other,,went to t7
+density25-fixedstep,new_positions,1000,20,E4,0,,timeout_other,,"went to t9, and rotated toward t10, and t7"
+density25-fixedstep,new_positions,1000,21,E5,0,,timeout_other,,went to t7
+density25-fixedstep,new_positions,1000,22,E5,0,,timeout_other,,"aimed between E5 and t7, then went to t7"
+density25-fixedstep,new_positions,1000,23,E5,0,,timeout_other,,"aimed between E5 and t7, then went to t7"
+density25-fixedstep,new_positions,1000,24,E5,0,,contact_no_grasp,,"aimed at cube but didn't get far enough, bumped it"
+density25-fixedstep,new_positions,1000,25,E5,0,,timeout_other,,went to t7
+density50-fixedstep,in_distribution,1000,1,-,0,,contact_no_grasp,,"bumped cube and missed, ended at T4"
+density50-fixedstep,in_distribution,1000,2,-,0,,contact_no_grasp,,"bumped cube and missed, ended at T4"
+density50-fixedstep,in_distribution,1000,3,-,0,,contact_no_grasp,,"closed on cube but immediately opened, never actually grabbed, as with others above, failed near T4"
+density50-fixedstep,in_distribution,1000,4,-,1,,success,,
+density50-fixedstep,in_distribution,1000,5,-,1,,success,,
+density50-fixedstep,in_distribution,1000,6,-,1,,success,,
+density50-fixedstep,in_distribution,1000,7,-,1,,success,,
+density50-fixedstep,in_distribution,1000,8,-,1,,success,,
+density50-fixedstep,in_distribution,1000,9,-,0,,contact_no_grasp,,"bumped cube, missed, then went near T4"
+density50-fixedstep,in_distribution,1000,10,-,0,confirm no contact,timeout_other,,went to cube but passed over it
+density50-fixedstep,in_distribution,1000,11,-,1,,success,,
+density50-fixedstep,in_distribution,1000,12,-,0,confirm no contact,timeout_other,,went above the cube and then to T3
+density50-fixedstep,in_distribution,1000,13,-,1,,success,,
+density50-fixedstep,in_distribution,1000,14,-,1,,success,,"barely got cube, bumped it a few times and got it"
+density50-fixedstep,in_distribution,1000,15,-,0,,contact_no_grasp,,bumped cube then went to T3
+density50-fixedstep,distractors,1000,1,-,0,,timeout_other,,went left and high
+density50-fixedstep,distractors,1000,2,-,0,,contact_no_grasp,,went left bumped cube
+density50-fixedstep,distractors,1000,3,-,0,,timeout_other,,went to t4
+density50-fixedstep,distractors,1000,4,-,0,,contact_no_grasp,,went left and missed
+density50-fixedstep,distractors,1000,5,-,0,,timeout_other,,went high to t4
+density50-fixedstep,distractors,1000,6,-,0,,timeout_other,,went high to t4
+density50-fixedstep,distractors,1000,7,-,0,,timeout_other,,went high and middle
+density50-fixedstep,distractors,1000,8,-,0,,contact_no_grasp,,went to grab cube but didn't pick it up
+density50-fixedstep,distractors,1000,9,-,0,,contact_no_grasp,,went left and bumped cube
+density50-fixedstep,distractors,1000,10,-,1,,success,,
+density50-fixedstep,distractors,1000,11,-,0,,timeout_other,,went high and missed cube
+density50-fixedstep,distractors,1000,12,-,0,confirm no contact,timeout_other,,"went middle, confirm"
+density50-fixedstep,distractors,1000,13,-,0,confirm no contact,timeout_other,,"went middle, confirm"
+density50-fixedstep,distractors,1000,14,-,0,confirm contact,contact_no_grasp,,"went left of cube, bumped it"
+density50-fixedstep,distractors,1000,15,-,0,,timeout_other,,went high and missed cube
+density50-fixedstep,spot_check,1000,1,T1,1,,success,,
+density50-fixedstep,spot_check,1000,2,T1,1,,success,,
+density50-fixedstep,spot_check,1000,3,T3,1,,success,,
+density50-fixedstep,spot_check,1000,4,T3,1,,success,,
+density50-fixedstep,spot_check,1000,5,T10,1,,success,,
+density50-fixedstep,spot_check,1000,6,T10,1,,success,,
+density50-fixedstep,new_positions,1000,1,E1,0,,timeout_other,,"moved around a lot, settled at t2 for a bit then next to cup"
+density50-fixedstep,new_positions,1000,2,E1,0,,timeout_other,,"went to t2, hit cup, settled at t3"
+density50-fixedstep,new_positions,1000,3,E1,0,,timeout_other,,"went to t2, hit cup, settled at t3"
+density50-fixedstep,new_positions,1000,4,E1,0,,timeout_other,,"went next to cup and pushed, ended up by t3"
+density50-fixedstep,new_positions,1000,5,E1,0,,timeout_other,,"went next to cup and pushed, ended up by t3"
+density50-fixedstep,new_positions,1000,6,E2,0,,timeout_other,,went to t1
+density50-fixedstep,new_positions,1000,7,E2,0,,timeout_other,,went to t1
+density50-fixedstep,new_positions,1000,8,E2,0,,timeout_other,,went to t1
+density50-fixedstep,new_positions,1000,9,E2,0,,timeout_other,,went to t1
+density50-fixedstep,new_positions,1000,10,E2,0,,timeout_other,,went to t1
+density50-fixedstep,new_positions,1000,11,E3,0,,timeout_other,,went closer to between t6 and e3 but ended at t3
+density50-fixedstep,new_positions,1000,12,E3,0,,timeout_other,,went closer to between t6 and e3 but ended at t3
+density50-fixedstep,new_positions,1000,13,E3,0,,timeout_other,,ended by t4
+density50-fixedstep,new_positions,1000,14,E3,0,,timeout_other,,went closer to between t6 and e3 but ended at t3
+density50-fixedstep,new_positions,1000,15,E3,0,,timeout_other,,went over cube to t4
+density50-fixedstep,new_positions,1000,16,E4,0,,timeout_other,,"went towards t10, then ended by t7"
+density50-fixedstep,new_positions,1000,17,E4,0,,timeout_other,,"went towards t10, then ended by t7"
+density50-fixedstep,new_positions,1000,18,E4,0,,timeout_other,,"went towards t9, went to the edge of board (hit against wood post for gantry) and stayed there"
+density50-fixedstep,new_positions,1000,19,E4,0,,grasp_drop,,"Picked up cube but hit it against the cup, couldn't recover"
+density50-fixedstep,new_positions,1000,20,E4,0,,timeout_other,,"went towards t10, then ended by t7"
+density50-fixedstep,new_positions,1000,21,E5,0,,contact_no_grasp,,"aimed towards cube but didn't extedn enough, bumped it"
+density50-fixedstep,new_positions,1000,22,E5,0,,timeout_other,,went to t7
+density50-fixedstep,new_positions,1000,23,E5,0,,timeout_other,,"aimed near cube but didn't extedn enough, bumped it"
+density50-fixedstep,new_positions,1000,24,E5,0,,timeout_other,,went towards t7 and t4
+density50-fixedstep,new_positions,1000,25,E5,0,,timeout_other,,"went closer to t7, then to t4"

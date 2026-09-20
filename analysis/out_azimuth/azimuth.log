@@ -1,0 +1,332 @@
+ grasp detected in all 50 episodes
+--- Calibration ---
+Azimuth = 0.9485 * pan + 3.669 (n=50)
+leave-one-out | error |: median 0.86 deg, 90th percentile 2.22 deg, R2 0.9990
+
+--- Grasp coverage at held-out positions ---
+             policy  grasps  episodes  coverage
+           density5      20        25      0.80
+          density10      23        25      0.92
+          density25      24        25      0.96
+          density50      25        25      1.00
+  density5-seed2000      21        25      0.84
+ density10-seed2000      25        25      1.00
+ density25-seed2000      25        25      1.00
+ density50-seed2000      24        25      0.96
+density25-fixedstep      25        25      1.00
+density50-fixedstep      25        25      1.00
+
+validation: clean grasp azimuth at T6, true value 24.23 deg
+                 n  median
+policy                    
+clean           15   23.32
+clean-seed2000  15   24.27
+
+--- Clean trajectory envelope: furthest azimuth reached ---
+        policy            cell  n  median_max_az    q1    q3  required_az  episodes_reaching_target
+         clean in_distribution 15          27.04 26.31 27.50        24.23                        15
+         clean        near_1in  8          26.99 26.38 27.75        26.57                         6
+         clean        near_2in  8          27.71 27.00 27.91        29.36                         0
+clean-seed2000 in_distribution 15          27.09 26.74 27.33        24.23                        15
+clean-seed2000        near_1in  8          26.52 26.04 28.18        26.57                         4
+clean-seed2000        near_2in  8          27.46 26.30 27.76        29.36                         0
+
+clean: near_2in vs in_distribution max azimuth, median difference +0.67 deg (required +5.13), U=74, p=0.196
+clean-seed2000: near_2in vs in_distribution max azimuth, median difference +0.37 deg (required +5.13), U=69, p=0.295
+
+--- Randomized Aiming Error at Held-out Positions ---
+             policy  episode instance         split    az  true_az   err
+randomized-seed2000        1       E1 extrapolation -11.4    -50.2  38.8
+randomized-seed2000        5       E2 interpolation -58.8    -60.9   2.1
+randomized-seed2000        8       E3 interpolation   5.8      5.7   0.1
+randomized-seed2000       10       E4 interpolation  40.1     34.7   5.4
+randomized-seed2000       13       E5 extrapolation   1.1     32.2 -31.1
+randomized-seed2000       14       E5 extrapolation  25.7     32.2  -6.5
+         randomized        3       E1 extrapolation   1.4    -50.2  51.6
+         randomized        6       E2 interpolation -60.7    -60.9   0.2
+         randomized        9       E3 interpolation  13.9      5.7   8.2
+         randomized       10       E4 interpolation  38.2     34.7   3.5
+         randomized       12       E4 interpolation  36.1     34.7   1.5
+         randomized       13       E5 extrapolation  16.0     32.2 -16.2
+
+               n  mean_abs  median_abs
+split                                 
+extrapolation  5     28.84       31.14
+interpolation  7      2.99        2.12
+
+Mann-Whitney (extrapolation > interpolation): MannwhitneyuResult(statistic=np.float64(34.0), pvalue=np.float64(0.0025252525252525255))
+extrapolation signed errors: [38.8, -31.1, -6.5, 51.6, -16.2]
+               n  mean  median
+split                         
+extrapolation  5  6.70    7.94
+interpolation  7  0.44    0.20
+
+--- Commanded Azimuth by Cell (cube at T6 = 24.23 except new_positions) ---
+cell                 in_distribution  reduced_lighting  different_object  distractors  new_positions
+policy                                                                                              
+clean                           23.3              23.4              23.5         23.5           23.3
+clean-seed2000                  24.3              23.6              23.8         23.9           22.6
+color                           24.1              23.5              24.1         24.7           23.1
+color-seed2000                  24.3              24.4              24.5         24.4           23.2
+density                         24.1               NaN               NaN          NaN          -27.7
+density10                       25.4               NaN               NaN         22.2           -2.3
+density10-seed2000              25.5               NaN               NaN         16.9           -5.6
+density25                       25.5               NaN               NaN         21.0           -1.7
+density25-fixedstep             23.7               NaN               NaN          6.1           -2.0
+density25-seed2000              24.8               NaN               NaN         23.0            7.4
+density5                        24.4               NaN               NaN         22.1            7.0
+density5-seed2000               22.1               NaN               NaN         13.9           -0.5
+density50                       26.0               NaN               NaN         23.4           18.2
+density50-fixedstep             24.6               NaN               NaN          4.9            1.9
+density50-seed2000              25.5               NaN               NaN         23.8            9.9
+randomized                      24.1              23.7              22.9         21.8           14.9
+randomized-seed2000             25.4              24.5              24.2         17.0            3.4
+recovery                        23.9              24.2              24.4         22.2           22.5
+recovery-seed2000               24.7              24.3              24.3         23.3           22.5
+
+spread of cell medians within each policy, same-target cells only (deg)
+policy
+clean                   0.2
+clean-seed2000          0.7
+color                   1.2
+color-seed2000          0.1
+density                 0.0
+density10               3.2
+density10-seed2000      8.5
+density25               4.4
+density25-fixedstep    17.6
+density25-seed2000      1.8
+density5                2.3
+density5-seed2000       8.2
+density50               2.6
+density50-fixedstep    19.7
+density50-seed2000      1.7
+randomized              2.3
+randomized-seed2000     8.4
+recovery                2.3
+recovery-seed2000       1.4
+
+same, including new_positions (deg)
+policy
+clean                   0.2
+clean-seed2000          1.6
+color                   1.6
+color-seed2000          1.2
+density                51.8
+density10              27.6
+density10-seed2000     31.1
+density25              27.2
+density25-fixedstep    25.7
+density25-seed2000     17.4
+density5               17.4
+density5-seed2000      22.6
+density50               7.8
+density50-fixedstep    22.7
+density50-seed2000     15.6
+randomized              9.1
+randomized-seed2000    22.0
+recovery                2.3
+recovery-seed2000       2.1
+
+IQR width of commanded azimuth, same-target cells only (deg)
+cell                 in_distribution  reduced_lighting  different_object  distractors
+policy                                                                               
+clean                            0.9               0.6               0.2          0.5
+clean-seed2000                   0.7               0.8               0.3          0.7
+color                            0.8               1.1               1.5          1.0
+color-seed2000                   1.3               0.7               0.4          0.6
+density                          0.6               NaN               NaN          NaN
+density10                        2.0               NaN               NaN          2.8
+density10-seed2000               1.0               NaN               NaN          9.2
+density25                        0.5               NaN               NaN          4.2
+density25-fixedstep              3.7               NaN               NaN          4.6
+density25-seed2000               1.4               NaN               NaN          1.5
+density5                         1.7               NaN               NaN          7.4
+density5-seed2000                2.6               NaN               NaN         12.8
+density50                        0.9               NaN               NaN          6.6
+density50-fixedstep              1.9               NaN               NaN         11.9
+density50-seed2000               0.7               NaN               NaN          0.9
+randomized                       1.6               5.2               4.8          8.4
+randomized-seed2000              1.7               1.6               1.4          8.4
+recovery                         1.2               0.9               0.8          1.6
+recovery-seed2000                1.0               0.8               0.9          0.8
+
+--- Density: grasp azimuth at the two trained positions ---
+           cell  n  true_az  median_az   err
+in_distribution 15    24.23      24.14 -0.09
+     trained_t2 15   -30.96     -32.55 -1.58
+
+--- Density sweep aiming error at held-out positions ---
+                              n  median_az   true  median_abs_err  frac_obs  frac_true picked
+policy              instance                                                                 
+density10           E1        5     -49.74 -50.19            9.52      0.57       0.56     T1
+                    E2        4     -78.62 -60.95           17.68     -0.10       0.31     T1
+                    E3        4      -3.79   5.71            9.50     -0.59       0.12     T3
+                    E4        5      45.92  34.70           11.76      1.12       0.54    T10
+                    E5        5      23.85  32.20            8.34     -0.02       0.41     T6
+density10-seed2000  E1        5     -50.99 -50.19           21.32      0.54       0.56     T2
+                    E2        5     -73.67 -60.95           12.73      0.02       0.31     T1
+                    E3        5      -5.60   5.71           11.31     -0.72       0.12     T3
+                    E4        5      46.67  34.70           11.97      1.16       0.54    T10
+                    E5        5      34.62  32.20            2.67      0.54       0.41    T10
+density25           E1        5     -26.38 -50.19           23.81      1.11       0.56     T2
+                    E2        5     -72.99 -60.95           12.05      0.03       0.31     T1
+                    E3        5      -1.34   5.71            7.05     -0.40       0.12     T4
+                    E4        4      43.66  34.70           10.57      1.01       0.54    T10
+                    E5        5      21.45  32.20           10.74     -0.14       0.41     T6
+density25-fixedstep E1        5     -16.13 -50.19           34.07      1.34       0.56     T3
+                    E2        5     -77.98 -60.95           17.04     -0.08       0.31     T1
+                    E3        5      -6.81   5.71           12.52     -0.81       0.12     T3
+                    E4        5      45.61  34.70           11.68      1.11       0.54    T10
+                    E5        5      23.00  32.20            9.20     -0.06       0.41     T6
+density25-seed2000  E1        5     -27.28 -50.19           22.91      1.08       0.56     T2
+                    E2        5     -70.18 -60.95            9.24      0.10       0.31     T1
+                    E3        5       7.44   5.71            2.67      0.25       0.12     T4
+                    E4        5      44.29  34.70           10.26      1.04       0.54    T10
+                    E5        5      24.41  32.20            7.78      0.01       0.41     T6
+density5            E1        4     -27.23 -50.19           22.96      1.09       0.56     T2
+                    E2        2     -63.69 -60.95            5.49      0.25       0.31     T1
+                    E3        4      -2.65   5.71            8.36     -0.50       0.12     T3
+                    E4        5      40.46  34.70            5.77      0.84       0.54    T10
+                    E5        5      17.88  32.20           14.32     -0.33       0.41     T7
+density5-seed2000   E1        4     -21.16 -50.19           29.03      1.23       0.56     T2
+                    E2        3     -68.28 -60.95            7.33      0.14       0.31     T1
+                    E3        5      -4.00   5.71            9.72     -0.60       0.12     T3
+                    E4        4      29.45  34.70            5.24      0.27       0.54     T6
+                    E5        5      18.26  32.20           13.94     -0.31       0.41     T7
+density50           E1        5      18.18 -50.19           68.38      2.13       0.56     T6
+                    E2        5     -75.19 -60.95           14.25     -0.02       0.31     T1
+                    E3        5      -5.56   5.71           11.27     -0.72       0.12     T3
+                    E4        5      23.62  34.70           11.08     -0.03       0.54     T6
+                    E5        5      29.45  32.20            2.75      0.27       0.41     T6
+density50-fixedstep E1        5     -15.64 -50.19           34.55      1.35       0.56     T2
+                    E2        5     -75.75 -60.95           14.81     -0.03       0.31     T1
+                    E3        5       1.90   5.71            3.81     -0.16       0.12     T4
+                    E4        5      29.41  34.70           11.83      0.27       0.54     T6
+                    E5        5      22.45  32.20            9.75     -0.09       0.41     T6
+density50-seed2000  E1        4     -30.55 -50.19           19.64      1.01       0.56     T2
+                    E2        5     -75.64 -60.95           14.69     -0.03       0.31     T1
+                    E3        5       3.20   5.71            4.55     -0.07       0.12     T4
+                    E4        5      36.17  34.70            4.30      0.62       0.54    T10
+                    E5        5      30.16  32.20            2.03      0.31       0.41     T6
+
+Mann-Whitney (extrapolation > interpolation), exploratory, episodes pooled across policies: MannwhitneyuResult(statistic=np.float64(8706.0), pvalue=np.float64(0.00011172191662088161))
+
+spot_check instance values: ['T1', 'T10', 'T3']
+
+--- Sweep aim at trained positions ---
+                             n  median  median_abs
+policy              target                        
+density10           T1       2    2.03        2.03
+                    T10      2   -3.42        3.42
+                    T3       2    1.44        1.44
+                    T6      15    1.17        1.67
+density10-seed2000  T1       2    0.16        0.27
+                    T10      2   -1.35        1.63
+                    T3       2    1.44        1.44
+                    T6      15    1.25        1.28
+density25           T1       2    1.74        1.74
+                    T10      2    1.42        1.42
+                    T3       2    1.64        1.64
+                    T6      15    1.27        1.27
+density25-fixedstep T1       2    2.98        2.98
+                    T10      2    0.25        0.25
+                    T3       2   -0.60        0.60
+                    T6      15   -0.55        0.55
+density25-seed2000  T1       2    0.46        0.46
+                    T10      2    1.36        1.36
+                    T3       2    1.12        1.12
+                    T6      15    0.57        0.57
+density5            T1       2    1.67        1.67
+                    T10      2   -1.84        2.01
+                    T3       2    2.80        2.80
+                    T6      15    0.13        1.14
+density5-seed2000   T1       2    0.68        0.68
+                    T10      2   -7.77        7.77
+                    T3       2    2.28        2.28
+                    T6      15   -2.18        2.64
+density50           T1       2    0.92        0.92
+                    T10      2    0.79        0.79
+                    T3       2    1.53        1.53
+                    T6      15    1.78        1.78
+density50-fixedstep T1       2    1.63        2.64
+                    T10      2    0.39        0.39
+                    T3       2    1.02        1.02
+                    T6      15    0.38        1.01
+density50-seed2000  T1       2   -0.10        0.10
+                    T10      2    0.71        0.71
+                    T3       2    2.02        2.02
+                    T6      15    1.30        1.30
+
+dropping 3 successful episodes from the settled measure (delivery puts the cup bearing in the window)
+
+--- Settled bearing at held-out positions (density probe trained at T6 24.2 deg and T2 -31.0 deg, density sweep trained at all 10 training locations) ---
+                              n  settled  true  miss_vs_true picked
+policy              instance                                       
+density             E1        3    -27.8 -50.2          22.4     T2
+                    E2        3    -29.6 -60.9          31.4     T2
+                    E3        3     14.5   5.7           8.8     T6
+                    E4        3    -28.9  34.7          63.6     T2
+                    E5        3      9.6  32.2          22.5     T6
+density10           E1        5    -73.9 -50.2          23.7     T1
+                    E2        5    -78.1 -60.9          17.1     T1
+                    E3        5     -4.5   5.7          10.2     T3
+                    E4        5     23.4  34.7          11.3     T6
+                    E5        5     17.8  32.2          14.4     T7
+density10-seed2000  E1        5    -72.6 -50.2          23.0     T1
+                    E2        5    -75.6 -60.9          14.7     T1
+                    E3        4     -4.4   5.7          10.1     T3
+                    E4        5     25.3  34.7           9.4     T6
+                    E5        5     27.9  32.2           4.3     T6
+density25           E1        5    -54.0 -50.2          18.9     T1
+                    E2        5    -72.8 -60.9          11.8     T1
+                    E3        5     -2.1   5.7           7.9     T4
+                    E4        5     22.4  34.7          12.3    T10
+                    E5        5     20.5  32.2          11.7     T7
+density25-fixedstep E1        5     -9.6 -50.2          40.6     T3
+                    E2        5    -76.6 -60.9          15.6     T1
+                    E3        5     -5.5   5.7          11.2     T3
+                    E4        5     20.8  34.7          13.9     T7
+                    E5        5      8.1  32.2          24.1     T4
+density25-seed2000  E1        5    -28.3 -50.2          23.5     T1
+                    E2        5    -72.5 -60.9          11.5     T1
+                    E3        5     -4.5   5.7          10.2     T3
+                    E4        5     29.7  34.7           5.0     T6
+                    E5        5     20.3  32.2          11.9     T7
+density5            E1        5     -6.4 -50.2          43.8     T3
+                    E2        5    -76.9 -60.9          16.0     T1
+                    E3        5     -3.1   5.7           8.9     T3
+                    E4        5     25.5  34.7           9.2     T6
+                    E5        5     18.8  32.2          13.4     T7
+density5-seed2000   E1        5     -8.9 -50.2          41.3     T3
+                    E2        5    -76.1 -60.9          15.2     T1
+                    E3        5     -4.0   5.7           9.7     T3
+                    E4        5     19.7  34.7          15.0     T7
+                    E5        5      6.7  32.2          25.5     T4
+density50           E1        5     19.5 -50.2          69.7     T7
+                    E2        5    -75.3 -60.9          14.3     T1
+                    E3        5     -3.1   5.7           8.8     T3
+                    E4        5     22.4  34.7          12.3     T6
+                    E5        5     14.3  32.2          17.9     T7
+density50-fixedstep E1        5     -8.4 -50.2          41.8     T3
+                    E2        5    -77.9 -60.9          17.0     T1
+                    E3        5     -7.2   5.7          12.9     T3
+                    E4        5     12.0  34.7          22.7     T7
+                    E5        5      9.0  32.2          23.2     T4
+density50-seed2000  E1        5    -28.9 -50.2          21.3     T2
+                    E2        5    -75.8 -60.9          14.8     T1
+                    E3        5     -2.9   5.7           8.6     T3
+                    E4        3     19.9  34.7          14.7     T4
+                    E5        5     18.2  32.2          14.0     T7
+randomized          E1        3      5.8 -50.2          56.0     T4
+                    E2        3    -70.8 -60.9           9.8     T1
+                    E3        3     11.5   5.7           5.8     T7
+                    E4        3     36.1  34.7          10.4    T10
+                    E5        3      8.2  32.2          24.0     T4
+randomized-seed2000 E1        3      5.6 -50.2          55.8     T4
+                    E2        3    -52.8 -60.9           8.2     T1
+                    E3        3      0.6   5.7           5.1     T4
+                    E4        3      7.2  34.7          27.5     T4
+                    E5        3      5.1  32.2          27.1     T4
+
+Saved to analysis/out_azimuth/

@@ -52,4 +52,5 @@ tools/preview_*.jpg
 # documents/         raw scores, derived CSVs, training_loss.csv
 # figures/           tables and figures referenced by the paper and the README
 # configs/           the nine resolved training configs
-# media/             photographs and camera frames referenced by the docs
+# media/             photographs and camera frames referenced by the docs*.tar
+*.tar.gz

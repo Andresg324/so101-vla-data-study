@@ -22,7 +22,7 @@ from grasp import grasp_pose
 from rollout_paths import discover, parse_policy
 
 JOINTS = ["pan", "lift", "elbow", "wrist_flex", "wrist_roll"]
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
 
 def actions(root):
     f = sorted(glob.glob(os.path.join(root, "data", "**", "*.parquet"), recursive=True))
@@ -47,7 +47,7 @@ def main():
     for cell in args.cells:
         root = runs.get((args.policy, cell))
         if root is None:
-            print(f"skipping {cell}: no local dataset found")
+            print(f"skipping {cell}: no ({args.policy}, {cell}) in the rollout manifest")
             continue
         seen.append(cell)
         df = actions(root)
@@ -83,12 +83,18 @@ def main():
         print(f"no grasp detected in {len(no_grasp)} episodes: {no_grasp}")
 
     if multi:
-        print(f"WARNING: {len(multi)} episodes matched more than one tracker row "
-              f"(results_full.csv and exploratory.csv overlap): {multi}")
+        print(f"{len(multi)} episodes matched more than one tracker row "
+              f"(cell, episode, matches): {multi}")
+        raise SystemExit("ambiguous label join, nothing written")
 
     ep_df = pd.DataFrame(rows)
+
     if ep_df.empty:
         raise SystemExit("No grasp events found" + ("" if seen else f", no local dataset for any of {args.cells}"))
+
+    ep_df["group"] = np.where(ep_df.instance.isin(("-", "")) | ep_df.instance.isna(),
+                              ep_df.cell,
+                              ep_df.cell + ":" + ep_df.instance.astype(str))
 
     unmatched = int((ep_df.success == -1).sum())
     if unmatched:
@@ -103,6 +109,7 @@ def main():
 
         # calibrate_pose.py --apply writes these back in; drop them so the merged
         # file is not half-populated. Re-run --apply after this.
+
         prev = prev.drop(columns=[c for c in ("grasp_x", "grasp_y") if c in prev.columns])
         ep_df = pd.concat([prev, ep_df], ignore_index=True)
         ep_df = ep_df.sort_values(["cell", "episode"], kind="stable")
@@ -115,29 +122,34 @@ def main():
         print(ep_df.to_string(index=False))
 
     print("\nreleases vs a grasp with no releases:")
-    print(ep_df.groupby(["cell", "released"]).size().to_string())
-    print(f"\n--- median and IQRs of grasp pose by cell, {args.policy} ---")
-    print(ep_df.groupby("cell")[JOINTS].agg(["median", "count"]).round(2).to_string())
-    q = ep_df.groupby("cell")[JOINTS].quantile([0.25, 0.75]).round(2)
+    print(ep_df.groupby(["group", "released"]).size().to_string())
+    print(f"\n--- median and IQRs of grasp pose by instance, {args.policy} ---")
+    print(ep_df.groupby("group")[JOINTS].agg(["median", "count"]).round(2).to_string())
+    q = ep_df.groupby("group")[JOINTS].quantile([0.25, 0.75]).round(2)
     print(q.to_string())
 
-    if ep_df.cell.nunique() > 1:
-        med = ep_df.groupby("cell")[JOINTS].median()                
-        q1 = ep_df.groupby("cell")[JOINTS].quantile(0.25)
-        q3 = ep_df.groupby("cell")[JOINTS].quantile(0.75)                
+    if ep_df.group.nunique() > 1:
+        med = ep_df.groupby("group")[JOINTS].median()                
+        q1 = ep_df.groupby("group")[JOINTS].quantile(0.25)
+        q3 = ep_df.groupby("group")[JOINTS].quantile(0.75)                
         spread = ((q3 - q1) / 1.349).replace(0, np.nan) # IQRS rescaled to an SD equivalent
         base = args.shift_from
-        if base and base in med.index:
+
+        if base and base not in med.index:
+            raise SystemExit(f"--shift-from {base}: not a group in this run, got {sorted(med.index)}")
+        
+        if base and any(":" in str(c) for c in med.index):
+            raise SystemExit("--shift-from requires fixed-position cells only; "
+                             f"got multi-instance groups: {sorted(c for c in med.index if ':' in str(c))}")
+        
+        if base:
             print(f"\n--- shift from {base}: degrees, and in SDs of {base} ---")
             for c in med.index:
                 if c == base:
                     continue
-
                 d = med.loc[c] - med.loc[base]
                 z = d / spread.loc[base]
                 print(f"{c:16s} " + " ".join(f"{j}={d[j]:+6.2f} ({z[j]:+.1f}s)" for j in JOINTS))
-        elif base:
-            print(f"\n(no rows for --shift-from {base}, skipping shift table)")
 
     print(f"\nsaved {out}")
 

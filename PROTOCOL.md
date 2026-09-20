@@ -240,7 +240,8 @@ retained dataset is named in §8.
 ## 8. Amendments
 
 *1 to 13 predate all data collection. 14 to 17 fall between the seed 1000 and seed 2000 grids.
-18 to 29 are analysis-stage. 30 precedes the data it describes. Supporting measurements are in
+18 to 29 are analysis-stage. 30 precedes the data it describes; 31 to 35 are follow-on items dated individually.
+Supporting measurements are in
 `analysis/README.md`.*
 
 ### Before any data was collected (August 8, 2026)
@@ -530,6 +531,13 @@ retained dataset is named in §8.
       - *Off-diagonal criterion.* A change of 10% or more relative to the diagonal will be considered
         support for the dataset-difficulty hypothesis. No literature anchors this threshold, and this is
         stated here in advance.
+      - *Normalization control, cells fixed September 16.* Three cells are rescored with the scored
+        dataset's statistics: color_s2000 on clean, clean_s1000 on density, and randomized_s1000
+        on density. The first two bracket the observed range; the third tests the comparison the
+        hypothesis is about, since both surviving claims concern Randomized. Chosen after the matrix was
+        computed, which is why the rule is stated rather than inferred. Compared against the masked
+        quantity. make_pre_post_processors ignores dataset_stats when pretrained_path is supplied,
+        so the control drops it and the preprocessor step list is compared under both constructions.
       - *Compute.* A single A40, the same device for every cell. The loss is
         deterministic given fixed noise and timestep, so hardware affects only
         floating-point ordering. This differs from the single A100 per training run in
@@ -648,7 +656,9 @@ retained dataset is named in §8.
         trained harder per demonstration would not answer it. This is a stated limitation.
       - *Fixed-step controls.* The 250 and 500 demonstration cells are additionally trained at
         10,000 steps with warmup 333 and decay 10,000, identical to the August configuration, one
-        seed each, 2 extra runs. This makes the epoch confound measurable as well.
+        seed each, 2 extra runs. This makes the epoch confound measurable as well. Both controls are 
+        evaluated on the same four cells, 65 recorded and 61 scored each, at seed 1000,
+        in a later session. Across all ten policies: 650 recorded, 610 scored.
       - *Validation on held-out demonstrations.* The 20 held-out demonstrations are never trained
         on. For every checkpoint, the deterministic loss defined in item 31, with fixed timestep
         and noise draws, is computed on those 20. A validation loss still falling at the
@@ -668,16 +678,40 @@ retained dataset is named in §8.
         cells and on the 25-episode New Positions aggregate. Evaluations will be by cell, for each policy in seed 1000
         in the order: In-Distribution at T6, Distractors, Trained-position spot check, New Positions. After all
         of seed 1000 policies ran, seed 2000's will be run.
+      - *Aim measure at held-out positions, fixed September 19.* Grasp
+        bearing is the commanded base bearing at the first close-on-target event; settled bearing is the
+        median commanded bearing over the last quarter of the episode. Grasp bearing is primary for the
+        sweep, on coverage: a grasp was detected in 237 of 250 held-out episodes here against 12 of 30
+        for August Randomized. It is event-defined and cannot include delivery or return-to-rest motion.
+        Settled bearing is reported alongside, and is the only measure with coverage for the August
+        policies. The three successful held-out episodes are excluded from it, since delivery puts the
+        cup bearing in the window.
+      - *Nearest trained position, generalized.* §8.30 compared against T6 and T2. A sweep policy trained
+        on all ten, so the comparison is against the pair of trained bearings bracketing the held-out
+        position, reported as the nearer of the two and as the fraction between them. 0 is the lower
+        bearing, 1 the upper, outside that range means it aimed past the bracket. The nearer is a
+        per-episode mode and the bearing a median, so the two can disagree in a bimodal cell.
+      - *Held-out validation loss, downgraded September 11.* The instrument needs a trajectory across
+        checkpoints. tools/run_sweep.py uploads only the final checkpoint, and the intermediates were
+        lost when the A100 volume was deleted after training. What is computed instead is held-out loss
+        at the final checkpoint against that run's final training loss, a generalization gap at one
+        point, which cannot separate undertraining from overtraining. Recorded before the number was
+        computed. The fixed-step controls remain the evidence on step count.
+      - *Realized epochs and order.* 11.16 at every sweep cell, 11.17 at 50/position seed 2000, inside
+        §9's 9.9 to 12.9 range. Both fixed-step controls are seed 1000. §8.32 fixed the cell order but
+        not the policy order within a seed; both seeds ran 5, 10, 25, 50 in that order, so session drift
+        is collinear with density.
       - *Cross-condition comparison.* Comparison against Clean, Randomized and Density is made at T6
         with 15 scored episodes, matching the existing In-Distribution cells exactly, with a
         Newcombe hybrid score interval on the difference. For E1-E5 the prior conditions have 3
         episodes per position against 5 here, so the comparison uses their first 3 and the asymmetry is
         stated with the result.
       - *Seeds.* 2 seeds for the primary analysis, with a possible third depending on timing.
-      - *Analysis.* Primary test is a Cochran-Armitage trend test across the four ordered density
-        levels, testing whether success rises monotonically with density, using one degree of
-        freedom rather than pairwise comparisons. Fisher exact tests are used for pairwise
-        contrasts named in advance, with Holm correction across that family. Wilson intervals are
+      - *Analysis.* Primary test is a Cochran-Armitage trend test across the four ordered density levels, run
+        separately per seed and separately at T6 and at New Positions, with scores 5, 10, 25, 50. Four
+        tests, no correction across them, each reported with its own n. At New Positions the test is
+        degenerate when every cell is zero and that is reported as such rather than as a null. No
+        pairwise Fisher contrasts were named in advance, so none are run. Wilson intervals are
         reported per cell. Seeds are not pooled, consistent with prior analyses in this project;
         two seeds cannot support a between-seed variance estimate, so agreement between them is
         treated as a qualitative replication check rather than as a confidence interval on seed
@@ -767,6 +801,14 @@ retained dataset is named in §8.
 
       - *Versions.* Package versions and git revision are recorded in each `EvalLog`.
 
+35. **Reach at E5, exploratory.** Held-out failures at E5 read as correct bearing with
+    insufficient extension, and E5 is the furthest held-out position at 15.95 in from the base
+    against a trained maximum of 15.21 at T3. The cube is placed one inch inward along the
+    base-to-E5 ray, holding bearing fixed and shortening reach, 5 episodes per policy. Success
+    means reach was binding; the same failure means bearing novelty is. No directional
+    prediction. Bearing is measurable through the §8.23 fit but radius is not, since the 2D
+    joint-to-position map is too weak to use quantitatively (§8.23), so this probe is the only
+    available test of the reach claim and no radial number is reported without it.
 
 ## 9. Known limitations
 
@@ -864,3 +906,17 @@ retained dataset is named in §8.
   with torch 2.8.0 and torchcodec 0.7.0. The LeRobot commit and the video decoder family are the
   same in both. Frame decoding differences at this level are far below the resolution of any
   measure reported here, but the environments are not identical.
+- **A toolbox sat off the bench near T4 and T7 during the sweep evaluation,** outside the overhead
+  frame but inside the wrist view once the arm reached that side. Those are the two bearings the
+  distractor and held-out failures converge on. It was not present in August, and it doesn't come into 
+  view until the arm has already made it to that position (e.g., it doesn't appear to help guide the arm 
+  there). Within-session comparisons are unaffected, since density50 and density50-fixedstep ran in the 
+  same sessions with the same toolbox and differ by 18.5 degrees at distractors.
+- **Grasp bearing is conditioned on the gripper having closed.** Coverage at held-out positions
+  runs from 0.80 at 5/position to 1.00 at 50/position, so the conditioning is not independent of
+  the variable under test and the lower-density cells are summarized over their more decisive
+  episodes. E5 is unaffected at 5 of 5 everywhere; E2 carries most of the loss, at n = 2, 3 and 4 
+  in the three lowest-coverage cells.
+- **Closure does not mean the cube has been grabbed.** The gripper telemetry records an open-then-close 
+  event, not a cube in hand, so a high closure rate at a held-out position means the policy committed,
+  not that it grasped.

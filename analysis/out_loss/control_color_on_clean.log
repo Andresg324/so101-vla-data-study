@@ -1,0 +1,24 @@
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Reducing the number of VLM layers to 16 ...
+
+
+
+
+color_s2000/clean:   0%|          | 1/1747 [00:01<51:15,  1.76s/it]
+       color_s2000 on clean       masked 0.47672 ± 0.01476   reported 0.47176   (50 eps, 27947 frames)
+{
+ "policy": "color_s2000",
+ "dataset": "clean",
+ "norm_from": "clean",
+ "n_episodes": 50,
+ "n_frames": 27947,
+ "masked": 0.47672000527381897,
+ "masked_se": 0.014762628823518753,
+ "masked_ci": [
+  0.4482302665710449,
+  0.5062285661697388
+ ],
+ "reported": 0.4717562970467538
+}
