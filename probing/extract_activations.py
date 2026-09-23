@@ -44,7 +44,7 @@ from lerobot.policies.factory import make_pre_post_processors
 
 HF_USER = "Andresg324"
 CELLS = ["in_distribution", "new_positions", "reduced_lighting",
-         "different_object", "distractors", "near_1in", "near_2in"]
+         "different_object", "distractors", "near_1in", "near_2in", "spot_check"]
 
 TASK = "Pick up the cube and place it in the cup"  # This needs to be verbatim to the training
 CACHE = os.environ.get("LEROBOT_CACHE", os.path.expanduser(f"~/.cache/huggingface/lerobot/{HF_USER}"))
@@ -277,11 +277,53 @@ def merge(paths, out_path):
 
 # ----------------------------------------
 
+def match_episode_count(paths, per_position=3, cell="new_positions", outdir="probing/out_np"):
+    """Write a reduced copy of each activation file keeping only `per_position`
+    episodes at each held-out position.
+
+    The density sweep recorded 5 episodes at each of the five held-out positions
+    where the original grid recorded 3. A probe fitted on 25 episodes will beat 
+    one fitted on 15 based on volume, so any comparison between the two sets has to match.
+
+    Episodes in the density sweep run in consecutive blocks of five per position, E1-E5,
+    so the first `per_position` of each block gives an equal draw from every
+    position.
+
+    Output is written alongside the input with an `m15_` prefix, leaving the full
+    files in place.
+    """
+    for path in sorted(paths):
+        d = dict(np.load(path, allow_pickle=True))
+        mask = d["eval_cell"] == cell
+        if not mask.any():
+            print(f" skipping {os.path.basename(path)}: no {cell} rows")
+            continue
+
+        eps = sorted(set(d["ep_true"][mask].tolist()))
+        if len(eps) % 5:
+            print(f" warning {os.path.basename(path)}: {len(eps)} episodes in {cell},"
+                  f" not a multiple of 5; block structure may not hold")
+        block = len(eps) // 5
+        keep = {eps[b * block + i] for b in range(5) for i in range(per_position)}
+
+        sel = mask & np.isin(d["ep_true"], sorted(keep))
+        n = len(mask)
+        out = {k: (v[sel] if getattr(v, "shape", (0,))[:1] == (n,) else v)
+               for k, v in d.items()}
+
+        name = os.path.basename(path).replace("activations_", f"activations_m{per_position * 5}_")
+        out_path = os.path.join(outdir, name)
+        np.savez(out_path, **out)
+        print(f" wrote {name}: {int(sel.sum())} samples from {len(keep)} episodes"
+              f" ({sorted(keep)})")
+
+# ----------------------------------------------------------------------
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--policy", help="clean | randomized | recovery | color")
     ap.add_argument("--layer", help="module name from --list-layers")
-    ap.add_argument("--results", nargs="*", default=["documents/results_full.csv", "documents/exploratory.csv"])
+    ap.add_argument("--results", nargs="*", default=["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"])
     ap.add_argument("--device", default="mps", help="mps | cuda | cpu")
     ap.add_argument("--cells", nargs="*", default=CELLS)
     ap.add_argument("--rollout-repo", help="override the dataset name (gate test)")
@@ -289,6 +331,8 @@ def main():
     ap.add_argument("--outdir", default="probing/out_np")
     ap.add_argument("--list-layers", action="store_true")
     ap.add_argument("--merge", nargs="*")
+    ap.add_argument("--match-episodes", nargs="*", help="npz files to reduce to a matched episode count")
+    ap.add_argument("--per-position", type=int, default=3)
     ap.add_argument("--seed", type=int, default=0, help="torch seed for the policy's action-noise sampling")
     args = ap.parse_args()
 
@@ -302,8 +346,12 @@ def main():
         merge(paths, out)
         return
 
-    if not args.policy:
-        ap.error("--policy is required unless --merge is given")
+    if args.match_episodes:
+        match_episode_count(args.match_episodes, args.per_position, outdir=args.outdir)
+        return
+    
+    if not args.policy and not args.merge and not args.match_episodes:
+        ap.error("--policy is required unless --merge or --match-episodes is given")
 
     policy, pre, _ = load_policy(args.policy, args.device)
 

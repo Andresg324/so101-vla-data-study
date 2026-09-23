@@ -1,4 +1,10 @@
 condition,seed,cell,episode,policy,success,failure_mode,regrasp,kind,frame,az,n_events
+density10,2000,distractors,4,density10-seed2000,0,grasp_drop,,drop,296,-17.19,2
+density10,2000,distractors,5,density10-seed2000,0,grasp_drop,,drop,390,-19.27,2
+density10,2000,distractors,11,density10-seed2000,0,grasp_drop,,drop,291,-20.83,2
+density5,1000,distractors,8,density5,0,grasp_drop,,drop,434,-10.55,1
+density5,1000,distractors,11,density5,0,grasp_drop,,drop,307,-17.0,1
+density50-fixedstep,1000,new_positions,19,density50-fixedstep,0,grasp_drop,,drop,539,5.77,1
 randomized,1000,different_object,11,randomized,0,grasp_drop,,drop,542,-2.29,1
 randomized,1000,reduced_lighting,14,randomized,0,grasp_drop,,drop,371,-16.16,2
 recovery,1000,different_object,1,recovery,0,deliberate_drop,Failed,drop,497,-7.07,2

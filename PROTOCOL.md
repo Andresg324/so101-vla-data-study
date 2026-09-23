@@ -576,7 +576,7 @@ Supporting measurements are in
         Collection may span multiple sessions to limit operator fatigue. Pass index, session
         boundary, and timestamp are logged. If a session is interrupted, recording resumes at
         the next index with the cube at the position the cycle assigns, following §8.19. The
-        index-to-position mapping is verified after collection by `tools/calibrate_pose.py`,
+        index-to-position mapping is verified after collection by `tools/verify_pool_mapping.py`,
         which groups all demonstrations by position derived from index and reports
         within-position base rotation spread. The position last recorded will be noted before 
         the session is stopped.
@@ -906,12 +906,6 @@ Supporting measurements are in
   with torch 2.8.0 and torchcodec 0.7.0. The LeRobot commit and the video decoder family are the
   same in both. Frame decoding differences at this level are far below the resolution of any
   measure reported here, but the environments are not identical.
-- **A toolbox sat off the bench near T4 and T7 during the sweep evaluation,** outside the overhead
-  frame but inside the wrist view once the arm reached that side. Those are the two bearings the
-  distractor and held-out failures converge on. It was not present in August, and it doesn't come into 
-  view until the arm has already made it to that position (e.g., it doesn't appear to help guide the arm 
-  there). Within-session comparisons are unaffected, since density50 and density50-fixedstep ran in the 
-  same sessions with the same toolbox and differ by 18.5 degrees at distractors.
 - **Grasp bearing is conditioned on the gripper having closed.** Coverage at held-out positions
   runs from 0.80 at 5/position to 1.00 at 50/position, so the conditioning is not independent of
   the variable under test and the lower-density cells are summarized over their more decisive
@@ -920,3 +914,14 @@ Supporting measurements are in
 - **Closure does not mean the cube has been grabbed.** The gripper telemetry records an open-then-close 
   event, not a cube in hand, so a high closure rate at a held-out position means the policy committed,
   not that it grasped.
+- **The release detector under-detects sweep policies.** REL_THR was calibrated on human
+  demonstrations that open the gripper fully. 16 of 252 sweep successes contain no detected
+  release, against 0 of 362 August; the 16 peak at 12.2 to 17.6 degrees after the grasp. At
+  thresholds of 11, 10, 9 and 8, the sweep count falls to 13, 8, 5 and 4 while August stays at 0.
+  A coverage limit on screen 2; no label depends on the detector.
+- **The environment for the workbench changed between collections.** Wall color, boundary tape, and a toolbox near T4 and T7 all
+  differ, and all are visible in the wrist view. The overhead frame was matched on geometry and
+  luminosity (§8.32); the wrist view was not. Within-sweep comparisons are unaffected;
+  comparisons to the August policies carry it.
+- **Within-session comparisons are unaffected by toolbox**, since density50 and density50-fixedstep ran in the 
+  same sessions with the same toolbox and differ by 18.5 degrees at distractors.

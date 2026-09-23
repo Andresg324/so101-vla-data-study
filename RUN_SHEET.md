@@ -16,6 +16,7 @@ Companion to PROTOCOL.md. PROTOCOL.md is the source of truth if the two disagree
 - Density sweep collection: September 8, 2026
 - Density sweep training: September 9, 2026, single A100 per run
 - Loss matrix: September 9, 2026, single A40
+- Density sweep evaluation: September 10 to 11, 2026
 
 ---
 
@@ -131,11 +132,9 @@ tuned per condition.
 evaluated checkpoint is the final one at step 10000. The seed is the only setting that varies
 between replications.
 
-The resolved configuration for each run is committed at
-`configs/train_config_<condition>.json`. Diffing them shows that only `output_dir`, `seed`,
-`dataset.repo_id`, `job_name` and `wandb.run_id` differ. The default schedule is a cosine decay
-with 1000 warmup steps and `scheduler_decay_steps: 30000`, so at 10,000 steps the final
-checkpoint sits near 79% of peak learning rate rather than fully annealed.
+The configured schedule is a cosine decay with 1000 warmup steps and scheduler_decay_steps: 30000, which LeRobot rescales to 333 and 10,000 at construction when the run is shorter than
+the decay horizon, so every evaluated checkpoint is fully annealed (PROTOCOL.md §8.29). The
+resolved config files cannot show this; the train/lr series in W&B does.
 
 ### Seed 1000 (primary), trained August 9
 
@@ -181,8 +180,8 @@ live. Batched by cell across policies so each scene is configured once.
 | distractors | red | T6 | baseline, both LEDs | four objects, see below |
 
 **Held-out positions:** E1 (2.0, 7.5), E2 (6.5, 2.5), E3 (12.0, 10.0), E4 (15.5, 6.5),
-E5 (19.5, 13.5). Three episodes at each. The position identifier is recorded per episode. E2,
-E3 and E4 fall inside the convex hull of the ten training positions; E1 and E5 fall outside it.
+E5 (19.5, 13.5). Three episodes at each. The position identifier is recorded per episode.
+E3 and E4 fall inside the convex hull of the ten training positions, E2 is on the boundary and considered inside; E1 and E5 fall outside it.
 
 **Distractor placement, identical for all 15 episodes:** crumpled paper at T2 (6.5, 7.5),
 penny at T4 (12.0, 14.0), battery at E4 (15.5, 6.5), screw at T8 (20.5, 2.5).
@@ -326,7 +325,7 @@ All fifteen held-out failures scored `timeout_other`; none reached the cube. At 
 held-out positions the arm settled within 1.4 to 3.2 degrees of one of the two trained bearings
 while 22 to 64 degrees from the target.
 
-**Part D total: 45 rollouts. Grand total recorded and scored: 707.**
+**Part D total: 45 rollouts. Grand total recorded and scored through Part D: 707.**
 
 ---
 
@@ -338,24 +337,24 @@ while 22 to 64 degrees from the target.
       `tools/export_results.py` canonicalizes the two legacy labels and refuses to write
       anything if the vocabulary, the cell sizes or the success and label agreement fail.
 - [x] Ambiguous episodes re-scored from retained video.
-- [x] All 707 scored episodes screened by `tools/audit_labels.py` against two independent
+- [x] All 1317 scored episodes, 707 through part D and 610 from part E, screened by `tools/audit_labels.py` against two independent
       telemetry criteria; one transposed pair found and corrected (§8.27). The screens ran over
-      662 episodes on August 14 and were extended to 707 when Part D closed.
+      662 episodes on August 14 and were extended to 707 when Part D closed, and to 1317 when Part E closed.
 - [x] All 94 seed 1000 `timeout_other` episodes audited, since that code was assigned
       retrospectively at seed 1000 and covers a larger share of failures there than at
       seed 2000. Every one ran to the recording ceiling with substantial joint motion,
       confirming the timeout label; 85 were re-scored from video and **seven were recoded as
       `contact_no_grasp`**. The derived CSVs were regenerated afterward.
-- [x] Departure labels checked against telemetry in all 707 episodes, zero disagreements. The
+- [x] Departure labels checked against telemetry in all episodes, zero disagreements. The
       20 degree threshold separates the two label groups completely: the largest maximum joint
       deviation among `no_departure` episodes is 15.9 degrees and the smallest among departing
       episodes is 59.5 degrees.
 - [x] Release detector re-calibrated against the recovery demonstrations as part of
       `tools/drops.py` on every run.
 - [x] Every rollout dataset confirmed present on the Hub. The probing analysis replays these.
-      49 rollout datasets in total: 4 conditions x 5 cells x 2 seeds, plus Clean at
-      `near_1in` and `near_2in` at both seeds, plus the two slow pace cells, plus the three
-      density cells.
+      89 rollout datasets in total: 4 conditions x 5 cells x 2 seeds, Clean at
+      `near_1in` and `near_2in` at both seeds, the two slow pace cells, the three
+      density cells, and the ten policies in density sweep x 4 cells.
 - [x] No rollout dataset deleted.
 - [x] Bench left standing and the gantry mounted.
 
@@ -551,7 +550,10 @@ wandb removed.
 | 5/position | 10,000 | 333 | 10,000 | 0.0434 | 2.5318e-6 |
 | 10/position | 20,000 | 667 | 20,000 | 0.0279 | 2.508e-6 |
 | 25/position | 50,000 | 1,667 | 50,000 | 0.0470 | 2.5013e-6 |
-| 50/position | 100,000 | 3,333 | 100,000 | | |
+| 50/position | 100,000 | 3,333 | 100,000 | 0.0414 | 2.5003e-6 |
+
+Realized epochs 11.16 at every cell, 11.17 at 50/position seed 2000. Both fixed-step controls
+trained at seed 1000 and verified against their resolved configs before upload.
 
 Every run anneals to `decay_lr` of 2.5e-6, matching August, and no auto-scaling line appeared,
 so decay equalled steps in every cell as intended. The script asserts warmup, decay, steps,
@@ -565,8 +567,8 @@ against different targets, which is the confound §8.31 exists to untangle.
 - [x] 5/position, both seeds
 - [x] 10/position, both seeds
 - [x] 25/position, both seeds
-- [ ] 50/position, both seeds
-- [ ] Fixed-step controls at 250 and 500 demonstrations, one seed each
+- [x] 50/position, both seeds
+- [x] Fixed-step controls at 250 and 500 demonstrations, one seed each
 
 ### E4. Loss matrix (PROTOCOL.md §8.31)
 
@@ -581,17 +583,44 @@ against different targets, which is the confound §8.31 exists to untangle.
       subsampling was rejected and every cell uses all 50 demonstrations.
 - [x] Clean diagonal reproduces Table 7: reported 0.04755 against 0.0482, a 1.3% gap between
       two different estimators of the same quantity.
-- [ ] Ten diagonal cells, the validity gate
-- [ ] Full 60-cell matrix
-- [ ] Normalization control on a subset of cells
-- [ ] Validation loss on the 20 held-out demonstrations, per sweep checkpoint
+- [x] Ten diagonal cells, the validity gate
+- [x] Full 60-cell matrix
+- [ ] Normalization control, 3 cells, rerun without pretrained_path (first attempt was a no-op)
+- [ ] Held-out loss, all 10 sweep policies, final checkpoint only (§8.32)
+- [ ] Sweep matrix, 10 policies × 6 August datasets
+- [ ] Sharpness, after RHO calibration on clean_s1000
 
 ### E5. Evaluation
 
-Not yet run. Four cells per policy per §8.32: 15 at T6, 5 at each of E1 to E5, 15 with
-distractors, and 2 each at T1, T3 and T10 as a descriptive spot check. One warmup discarded per
-cell, so 65 recorded and 61 scored per policy, 520 recorded and 488 scored across the eight
-primary runs.
+Seed 1000 September 10, seed 2000 and the fixed-step controls September 10 to 11. Four cells per
+policy per §8.32, 65 recorded and 61 scored per policy, 610 scored across ten policies. Within
+each seed, policies ran in density order 5, 10, 25, 50, so session drift is collinear with
+density (PROTOCOL.md §8.32).
+
+Deviations:
+
+1. *Accidental right-arrow press, density5 distractors episode 11, seed 1000.* The episode
+ended early after the cube had already been released outside the cup, in a position where the arm previosuly didn't recover from. Scored grasp_drop and a failure, based on prior observations. 
+2. *Record-loop degradation.* Instantaneous rates as low as 0.5 Hz during the seed 1000
+density50 cells. Separately, density5
+new_positions seed 1000 episodes fell from 1128 frames at episode 1 to 919 at episode 17,
+about four fewer forward passes within the same window. All 25 were failures, so no label
+changes, but those episodes had differing frames.
+3. *Episodes run past delivery.* In both collections, successful episodes were left running
+until the arm returned to the home pose, though PROTOCOL.md §6.6 defines success at delivery.
+This accounts for 22 successes at the recording ceiling, 14 post-delivery release events
+detected in successful episodes, and gripper cycling visible after delivery. No label depends
+on it; success durations are comparable across collections (17.8 s August, 17.2 s sweep).
+4. *Cup displaced about one inch at density50-seed2000 new_positions episode 6 only.* Episodes
+1, 5, 7, 17, 19 and 25 have the cup in the correct position, confirmed by video, including both E4 successes.
+5. *Relabel.* density50-fixedstep distractors episode 12, timeout_other to
+contact_no_grasp, re-scored from video at low image quality.
+6. *Review.* 21 live-flagged and 6 audit-flagged episodes re-scored from video. One relabel
+above, no success value changed. A further 14 successes containing detected releases were
+reviewed; all were post-delivery gripper openings, not drops.
+7. *Re-recorded cells.* density5 in_distribution seed 1000 restarted after film was noticed on the
+workbench partway through; two failures had occurred under the film. density50 spot_check
+seed 1000 restarted after stopping at five of seven episodes. Both partials were deleted and both cells re-recorded in full.
 
 ---
 

@@ -39,7 +39,7 @@ MIN_TRAVEL = 10.0                # degrees of azimuth travelled since the previo
                                  # arm going anywhere. Rollouts only as demonstrations have no failed grasps.
 
 CUP_HALF_WIDTH = np.degrees(np.arctan(1.75 / np.hypot(5.0 - BASE_X, 12.5)))
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
 
 DEMO = "cube-pickup-recovery_20260809_141725"
 # 0-indexed episodes of the 20 deliberate-drop demonstrations: demos 2 and 4 of each
@@ -56,13 +56,13 @@ def episode_actions(root):
     df = pd.concat([pd.read_parquet(f) for f in files], ignore_index=True)
     return df.sort_values(["episode_index", "frame_index"], kind="stable")
 
-def releases(grip):
+def releases(grip, rel_thr=REL_THR):
     # (approach_end, [(start, end), ...]) for sustained openings after the approach-open
     approach = [r for r in _merge(_runs(grip > OPEN_THR)) if r[1] - r[0] >= MIN_RUN]
     if not approach:
         return None, []
     a_end = approach[0][1]
-    rel = [(s + a_end, e + a_end) for s, e in _merge(_runs(grip[a_end:] > REL_THR)) if e - s >= REL_MIN]
+    rel = [(s + a_end, e + a_end) for s, e in _merge(_runs(grip[a_end:] > rel_thr)) if e - s > REL_MIN]
     return a_end, rel
 
 def demo_check(to_az):

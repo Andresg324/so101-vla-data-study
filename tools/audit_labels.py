@@ -33,7 +33,7 @@ from rollout_paths import discover, parse_policy
 from drops import CUP_AZ, CUP_HALF_WIDTH, MIN_TRAVEL, episode_actions, releases
 
 OUTDIR = "analysis/out_audit"
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
 DROP_LABELS = {"deliberate_drop", "grasp_drop", "success_after_drop"}
 
 FPS = 30            # dataset.fps, PROTOCOL.md §4.12
@@ -42,6 +42,9 @@ WINDOW_S = 45.0     # episode_time_s, wall clock, PROTOCOL.md §4.10
 
 NEAR_CEILING = 2.0  # a success within this many seconds of the ceiling is flagged
 EARLY = 3.0         # a failure ending this many seconds before the ceiling is flagged
+
+DEPART_DEG = 20.0   # Defined threshold for max deviation of a joint from frame 0
+THRESHOLDS = [12.0, 11.0, 10.0, 9.0, 8.0]   # 12.0 is REL_THR, the registered value, doing a sweep tp check others
 
 
 def collect(to_az):
@@ -72,6 +75,7 @@ def collect(to_az):
             a_end, rel = releases(A[:, GRIPPER])
             if a_end is None:
                 near, max_travel, n_rel, n_kept = np.nan, np.nan, 0, 0
+                n_by_thr = {th: 0 for th in THRESHOLDS}
             else:
                 bounds = [a_end - 1] + [e - 1 for _, e in rel[:-1]]
                 # Deliberately not travel-filtered, unlike drops.py: the audit wants every
@@ -83,6 +87,7 @@ def collect(to_az):
                 max_travel = max(travel) if travel else np.nan
                 n_rel = len(rel)
                 n_kept = sum(1 for v in travel if v >= MIN_TRAVEL)
+                n_by_thr = {th: len(releases(A[:, GRIPPER], rel_thr=th)[1]) for th in THRESHOLDS}
 
             rows.append({
                 "policy": pol,
@@ -98,6 +103,7 @@ def collect(to_az):
                 "n_kept": n_kept,
                 "nearest_release_deg": near,
                 "max_travel_deg": max_travel,
+                **{f"n_rel_{th:g}": n_by_thr[th] for th in THRESHOLDS},
             })
 
     if unlabelled:
@@ -176,6 +182,21 @@ def misses(ep):
               f"threshold), so the misses are travel-filtered, not undetected openings")
     return md
 
+def release_sweep(ep):
+    print("\n=== release detection against threshold, secondary ===")
+    print(f"registered value is REL_THR = {THRESHOLDS[0]:g}; lower thresholds are a "
+          "sensitivity check on coverage")
+    s = ep[ep.success == 1].copy()
+    s["sweep"] = s.policy.str.contains("density") & (s.policy != "density")
+    rows = []
+    for th in THRESHOLDS:
+        c = s[f"n_rel_{th:g}"] == 0
+        rows.append({"threshold": th,
+                     "august_no_release": int(c[~s.sweep].sum()),
+                     "august_n": int((~s.sweep).sum()),
+                     "sweep_no_release": int(c[s.sweep].sum()),
+                     "sweep_n": int(s.sweep.sum())})
+    print(pd.DataFrame(rows).to_string(index=False))
 
 def main():
     os.makedirs(OUTDIR, exist_ok=True)
@@ -190,6 +211,7 @@ def main():
     hi, lo = screen_duration(ep)
     s_bad, f_hit = screen_cup(ep)
     md = misses(ep)
+    release_sweep(ep)
 
     flagged = pd.concat([
         hi.assign(screen="success at ceiling"),

@@ -1,13 +1,73 @@
-policy,condition,seed,cell,episode,success,failure_mode,frames,duration_s,n_releases,n_kept,nearest_release_deg,max_travel_deg,screen
-clean,clean,1000,different_object,2,1,success,1112,37.033,1,1,5.912503641824291,43.29463400180276,success at ceiling
-clean,clean,1000,different_object,10,1,success,1151,38.333,1,1,4.208000079432448,45.41496735128567,success at ceiling
-clean-seed2000,clean,2000,different_object,4,1,success,1151,38.333,1,1,2.4923338112529585,46.82214491780154,success at ceiling
-clean-seed2000,clean,2000,different_object,7,1,success,1151,38.333,1,1,2.6151760414435508,46.97378403421937,success at ceiling
-clean-seed2000,clean,2000,different_object,13,1,success,1150,38.3,1,1,4.2929542408053685,44.55562354307393,success at ceiling
-clean-seed2000,clean,2000,different_object,15,1,success,1101,36.667,1,1,2.6085417396407387,46.94025430547341,success at ceiling
-color-slowpace,color-slowpace,1000,different_object,4,1,success,1151,38.333,1,1,3.296187935637608,47.784612588233095,success at ceiling
-recovery,recovery,1000,different_object,7,1,success,1151,38.333,1,1,3.8903514459369184,46.50068251059444,success at ceiling
-recovery-seed2000,recovery,2000,different_object,6,1,success,1144,38.1,1,1,4.0122438510807505,46.04303871115908,success at ceiling
-recovery-seed2000,recovery,2000,reduced_lighting,14,1,success_after_drop,1148,38.233,5,3,3.147392866788355,39.135567224901884,success at ceiling
-clean,clean,1000,distractors,8,0,cube_out_of_bounds,408,13.567,0,0,,,failure ended early
-clean-seed2000,clean,2000,distractors,1,0,grasp_drop,449,14.933,1,0,44.70385607897036,5.090354857130748,failure ended early
+policy,condition,seed,cell,episode,success,failure_mode,frames,duration_s,n_releases,n_kept,nearest_release_deg,max_travel_deg,n_rel_12,n_rel_11,n_rel_10,n_rel_9,n_rel_8,screen
+clean-seed2000,clean,2000,different_object,4,1,success,1151,38.333,1,1,2.4923338112529585,46.82214491780154,1,1,1,1,1,success at ceiling
+clean-seed2000,clean,2000,different_object,7,1,success,1151,38.333,1,1,2.6151760414435508,46.97378403421937,1,1,1,1,1,success at ceiling
+clean-seed2000,clean,2000,different_object,13,1,success,1150,38.3,1,1,4.2929542408053685,44.55562354307393,1,1,1,1,1,success at ceiling
+clean-seed2000,clean,2000,different_object,15,1,success,1101,36.667,1,1,2.6085417396407387,46.94025430547341,1,1,1,1,1,success at ceiling
+clean,clean,1000,different_object,2,1,success,1112,37.033,1,1,5.912503641824291,43.29463400180276,1,1,1,1,1,success at ceiling
+clean,clean,1000,different_object,10,1,success,1151,38.333,1,1,4.208000079432448,45.41496735128567,1,1,1,1,1,success at ceiling
+color-slowpace,color-slowpace,1000,different_object,4,1,success,1151,38.333,1,1,3.296187935637608,47.784612588233095,1,1,1,1,2,success at ceiling
+density10-seed2000,density10,2000,distractors,3,1,success,1151,38.333,3,3,4.643995104563903,36.683337866222026,3,3,3,3,3,success at ceiling
+density10-seed2000,density10,2000,distractors,13,1,success,1122,37.367,2,2,5.002933085139798,39.54411501996778,2,2,2,2,3,success at ceiling
+density10,density10,1000,distractors,6,1,success,1151,38.333,2,2,4.528729764460618,45.92461452432886,2,2,2,2,2,success at ceiling
+density10,density10,1000,distractors,10,1,success,1151,38.333,2,2,7.975843870120368,45.31747188091436,2,2,2,2,2,success at ceiling
+density10,density10,1000,spot_check,6,1,success_after_missed_grasp,1151,38.333,6,1,2.4708026343358007,68.60087338000585,6,6,6,6,5,success at ceiling
+density5-seed2000,density5,2000,distractors,3,1,success,1151,38.333,3,3,5.07344990580194,41.131998158522954,3,3,3,4,3,success at ceiling
+density5-seed2000,density5,2000,distractors,4,1,success,1151,38.333,4,2,5.974736178888104,42.00733340214102,4,5,5,5,5,success at ceiling
+density5-seed2000,density5,2000,distractors,15,1,success,1148,38.233,2,2,6.751392741505196,42.588233736406416,2,2,2,2,2,success at ceiling
+density50,density50,1000,distractors,9,1,success,1150,38.3,2,2,3.051932735802975,45.652141379247865,2,3,3,3,3,success at ceiling
+density50,density50,1000,distractors,14,1,success,1149,38.267,3,2,2.7184138826689868,45.641253670426124,3,3,3,3,5,success at ceiling
+density5,density5,1000,distractors,1,1,success,1150,38.3,3,2,4.116429708162375,42.19475830793971,3,3,3,3,3,success at ceiling
+density5,density5,1000,distractors,12,1,success,1151,38.333,4,2,5.754284499320601,44.30335724741633,4,3,3,3,2,success at ceiling
+recovery-seed2000,recovery,2000,different_object,6,1,success,1144,38.1,1,1,4.0122438510807505,46.04303871115908,1,1,1,6,7,success at ceiling
+recovery-seed2000,recovery,2000,reduced_lighting,14,1,success_after_drop,1148,38.233,5,3,3.147392866788355,39.135567224901884,5,5,5,5,4,success at ceiling
+recovery,recovery,1000,different_object,7,1,success,1151,38.333,1,1,3.8903514459369184,46.50068251059444,1,1,3,6,5,success at ceiling
+clean-seed2000,clean,2000,distractors,1,0,grasp_drop,449,14.933,1,0,44.70385607897036,5.090354857130748,1,1,1,1,2,failure ended early
+clean,clean,1000,distractors,8,0,cube_out_of_bounds,408,13.567,0,0,,,0,0,0,0,0,failure ended early
+density25-fixedstep,density25-fixedstep,1000,distractors,12,0,timeout_other,1001,33.333,6,0,25.925200684298133,2.7614100757346907,6,5,4,5,5,failure ended early
+density25-fixedstep,density25-fixedstep,1000,distractors,13,0,timeout_other,1050,34.967,6,0,28.336653601422874,1.8471532631885377,6,6,6,6,5,failure ended early
+density25-fixedstep,density25-fixedstep,1000,distractors,14,0,timeout_other,1027,34.2,8,0,31.238003662785147,2.5133098936512432,8,7,7,6,6,failure ended early
+density25-fixedstep,density25-fixedstep,1000,distractors,15,0,timeout_other,1045,34.8,5,0,27.701446341662432,5.097880750659,5,5,5,3,2,failure ended early
+density25-seed2000,density25,2000,new_positions,10,0,timeout_other,1051,35.0,1,0,45.07943293454899,0.5406223247109949,1,1,1,1,1,failure ended early
+density50-fixedstep,density50-fixedstep,1000,distractors,3,0,timeout_other,1054,35.1,6,0,22.023692537755878,1.6616560499371427,6,6,6,5,5,failure ended early
+density50-fixedstep,density50-fixedstep,1000,distractors,7,0,timeout_other,1051,35.0,3,0,23.896177634941544,1.765718429762694,3,2,2,2,1,failure ended early
+density50-fixedstep,density50-fixedstep,1000,distractors,13,0,timeout_other,1056,35.167,2,0,28.158658649147974,2.467249937199108,2,2,2,2,1,failure ended early
+density50-fixedstep,density50-fixedstep,1000,distractors,15,0,timeout_other,1006,33.5,4,0,25.288809761610366,2.142679792898532,4,3,2,2,2,failure ended early
+density5,density5,1000,distractors,11,0,grasp_drop,358,11.9,1,1,8.64013160672916,41.40050013031319,1,1,1,1,1,failure ended early
+density5,density5,1000,new_positions,7,0,timeout_other,1053,35.067,2,0,43.207311484666945,0.8484814280579229,2,2,1,1,1,failure ended early
+density5,density5,1000,new_positions,9,0,timeout_other,1054,35.1,0,0,,,0,0,0,0,0,failure ended early
+density5,density5,1000,new_positions,10,0,timeout_other,1051,35.0,0,0,,,0,0,0,0,0,failure ended early
+density5,density5,1000,new_positions,11,0,timeout_other,1006,33.5,0,0,,,0,0,0,0,0,failure ended early
+density5,density5,1000,new_positions,12,0,timeout_other,984,32.767,1,0,20.949636254747283,0.11158182811241346,1,1,1,1,1,failure ended early
+density5,density5,1000,new_positions,13,0,timeout_other,994,33.1,2,0,23.247550251865643,1.0567599689070666,2,2,2,2,2,failure ended early
+density5,density5,1000,new_positions,14,0,timeout_other,940,31.3,1,0,25.172251754848205,0.8171059929775355,1,1,1,1,1,failure ended early
+density5,density5,1000,new_positions,15,0,timeout_other,938,31.233,3,0,24.889042420655322,1.8694836500379015,3,2,2,2,3,failure ended early
+density5,density5,1000,new_positions,16,0,timeout_other,925,30.8,1,0,68.17533922003572,0.49758891792573223,1,1,1,1,1,failure ended early
+density5,density5,1000,new_positions,17,0,timeout_other,919,30.6,2,0,49.61787455927691,4.115307884698936,2,2,2,2,2,failure ended early
+density5,density5,1000,new_positions,18,0,timeout_other,966,32.167,6,0,50.525299415951,2.0663235835381926,6,7,5,5,3,failure ended early
+density5,density5,1000,new_positions,19,0,timeout_other,964,32.1,2,0,51.56477890117398,3.3295167189178443,2,2,2,2,2,failure ended early
+density5,density5,1000,new_positions,20,0,timeout_other,954,31.767,2,0,48.23370446917944,3.3983093809712983,2,2,2,2,2,failure ended early
+density5,density5,1000,new_positions,21,0,timeout_other,980,32.633,3,0,45.12853642630668,3.288174905311088,3,3,2,2,2,failure ended early
+density5,density5,1000,new_positions,22,0,timeout_other,983,32.733,4,0,47.93227703829204,5.224104697239298,4,3,4,3,5,failure ended early
+density5,density5,1000,new_positions,23,0,timeout_other,1004,33.433,7,0,40.870449031387984,2.557417507334641,7,7,7,6,5,failure ended early
+density5,density5,1000,new_positions,24,0,timeout_other,1001,33.333,5,0,41.43908667200204,3.3660171385719693,5,5,5,6,3,failure ended early
+density5,density5,1000,new_positions,25,0,timeout_other,1007,33.533,6,0,43.94270608868811,4.1556510251136665,6,5,3,2,2,failure ended early
+density10-seed2000,density10,2000,new_positions,15,1,success_after_missed_grasp,751,25.0,1,0,32.795861248570446,3.9440637008694805,1,2,2,3,3,success without cup release
+density10,density10,1000,distractors,3,1,success,432,14.367,0,0,,,0,0,1,1,1,success without cup release
+density10,density10,1000,distractors,10,1,success,1151,38.333,2,2,7.975843870120368,45.31747188091436,2,2,2,2,2,success without cup release
+density25-fixedstep,density25-fixedstep,1000,in_distribution,8,1,success,441,14.667,0,0,,,0,0,0,0,0,success without cup release
+density25-seed2000,density25,2000,distractors,3,1,success,623,20.733,1,1,37.543739271632134,11.003031151341041,1,2,2,2,2,success without cup release
+density25-seed2000,density25,2000,distractors,7,1,success,389,12.933,0,0,,,0,1,1,1,1,success without cup release
+density25-seed2000,density25,2000,distractors,11,1,success,466,15.5,0,0,,,0,0,1,1,1,success without cup release
+density25-seed2000,density25,2000,distractors,12,1,success,390,12.967,0,0,,,0,0,1,2,2,success without cup release
+density25,density25,1000,distractors,1,1,success,595,19.8,0,0,,,0,0,1,1,2,success without cup release
+density25,density25,1000,in_distribution,4,1,success,401,13.333,0,0,,,0,1,1,1,1,success without cup release
+density5-seed2000,density5,2000,in_distribution,9,1,success,451,15.0,2,1,7.557651280151074,38.69800363155035,2,2,2,2,2,success without cup release
+density5-seed2000,density5,2000,spot_check,3,1,success,422,14.033,0,0,,,0,0,0,1,1,success without cup release
+density50-fixedstep,density50-fixedstep,1000,in_distribution,4,1,success,405,13.467,0,0,,,0,0,0,0,0,success without cup release
+density50-fixedstep,density50-fixedstep,1000,in_distribution,7,1,success,451,15.0,0,0,,,0,0,0,1,1,success without cup release
+density50-fixedstep,density50-fixedstep,1000,spot_check,1,1,success,472,15.7,0,0,,,0,0,0,0,0,success without cup release
+density50-fixedstep,density50-fixedstep,1000,spot_check,4,1,success,465,15.467,0,0,,,0,0,1,1,1,success without cup release
+density50-fixedstep,density50-fixedstep,1000,spot_check,5,1,success,473,15.733,0,0,,,0,0,0,1,2,success without cup release
+density50-seed2000,density50,2000,distractors,10,1,success,716,23.833,0,0,,,0,1,2,2,2,success without cup release
+density50-seed2000,density50,2000,distractors,13,1,success,507,16.867,0,0,,,0,0,0,0,1,success without cup release
+density50-seed2000,density50,2000,spot_check,1,1,success,471,15.667,0,0,,,0,0,0,0,0,success without cup release

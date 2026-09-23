@@ -37,7 +37,7 @@ INDIR = "probing/out_np"
 OUTDIR = "analysis/out_probe"
 BASE_X = 11.0
 POS = {"E1": (2.0, 7.5), "E2": (6.5, 2.5), "E3": (12.0, 10.0), "E4": (15.5, 6.5), "E5": (19.5, 13.5)}
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
 
 az = lambda x, y: np.degrees(np.arctan2(x - BASE_X, y))
 AZ = {k: az(*v) for k, v in POS.items()}

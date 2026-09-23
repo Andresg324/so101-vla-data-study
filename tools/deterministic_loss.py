@@ -72,6 +72,8 @@ POLICIES = {
     "density25_s2000":  "smolvla-cube-density25-seed2000",
     "density50_s1000":  "smolvla-cube-density50",
     "density50_s2000":  "smolvla-cube-density50-seed2000",
+    "density25_fixedstep": "smolvla-cube-density25-fixedstep",
+    "density50_fixedstep": "smolvla-cube-density50-fixedstep",
 }
 
 DATASETS = {
@@ -90,6 +92,8 @@ MATRIX_POLICIES = ["clean_s1000", "clean_s2000", "randomized_s1000", "randomized
 MATRIX_DATASETS = ["clean", "randomized", "recovery", "color", "slowpace", "density"]
 SWEEP_POLICIES = ["density5_s1000", "density5_s2000", "density10_s1000", "density10_s2000",
                   "density25_s1000", "density25_s2000", "density50_s1000", "density50_s2000"]
+
+ALL_SWEEP = SWEEP_POLICIES + ["density25_fixedstep", "density50_fixedstep"]
 
 NOISE_SEED   = 1000        # fixed across every cell; see the module docstring
 N_EPISODES = 50            # set from the --calibrate run before any cell is scored
@@ -118,25 +122,35 @@ def make_noise(n_frames, chunk, dim, device, seed=NOISE_SEED):
     return noise.to(device), time.to(device)
 
 def score(policy_key, dataset_key, device, n_episodes=N_EPISODES,
-          norm_from=None, verbose=True, episodes=None):
+          norm_from=None, verbose=True, episodes=None, policy=None):
     """One cell of the matrix. norm_from names the dataset whose normalization
     statistics to use; None means the checkpoint's own, which is the primary
     condition in §8.31."""
     prepo = f"{HF_USER}/{POLICIES[policy_key]}"
     drepo = f"{HF_USER}/{DATASETS[dataset_key]}"
 
-    policy = SmolVLAPolicy.from_pretrained(prepo)
-    policy.to(device).eval()
+    if policy is None:
+        policy = SmolVLAPolicy.from_pretrained(prepo)
+        policy.to(device).eval()
 
     stats = None
     if norm_from is not None:
         stats = LeRobotDatasetMetadata(f"{HF_USER}/{DATASETS[norm_from]}").stats
-    pre, _ = make_pre_post_processors(
-        policy_cfg=policy.config,
-        pretrained_path=prepo,
-        dataset_stats=stats,
-        preprocessor_overrides={"device_processor": {"device": device}},
-    )
+        pre, _ = make_pre_post_processors(
+            policy_cfg=policy.config,
+            dataset_stats=stats,
+            preprocessor_overrides={"device_processor": {"device": device}},
+        )
+    else:
+        pre, _ = make_pre_post_processors(
+            policy_cfg=policy.config,
+            pretrained_path=prepo,
+            dataset_stats=None,
+            preprocessor_overrides={"device_processor": {"device": device}},
+        )
+
+    if verbose or norm_from is not None:
+        print("  preprocessor steps:", [type(s).__name__ for s in pre.steps])
 
     if episodes is None:
         episodes, meta = pick_episodes(drepo, n_episodes)
@@ -203,7 +217,6 @@ def score(policy_key, dataset_key, device, n_episodes=N_EPISODES,
               f"masked {out['masked']:.5f} ± {out['masked_se']:.5f}   "
               f"reported {out['reported']:.5f}   "
               f"({out['n_episodes']} eps, {out['n_frames']} frames)")
-    del policy
     return out
 
 def held_out(device):
@@ -215,7 +228,7 @@ def held_out(device):
         eps = json.load(f)["held_out_episodes"]
     print(f"{len(eps)} held-out demonstrations\n")
     results = []
-    for p in SWEEP_POLICIES:
+    for p in ALL_SWEEP:
         results.append(score(p, "pool", device, episodes=eps))
         with open(f"{OUTDIR}/held_out.json", "w") as f:
             json.dump(results, f, indent=1)
@@ -247,6 +260,7 @@ def main():
     ap.add_argument("--norm-from", help="score with this dataset's normalization "
                                         "statistics instead of the checkpoint's own")
     ap.add_argument("--all", action="store_true")
+    ap.add_argument("--sweep-matrix", action="store_true")
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--episodes", type=int, default=N_EPISODES)
@@ -264,14 +278,14 @@ def main():
         calibrate(args.policy or "clean_s1000", args.device)
         return
 
-    if args.all:
+    if args.sweep_matrix:
         results = []
-        for p, d in itertools.product(MATRIX_POLICIES, MATRIX_DATASETS):
+        for p, d in itertools.product(ALL_SWEEP, MATRIX_DATASETS):
             results.append(score(p, d, args.device, args.episodes))
-            with open(f"{OUTDIR}/loss_matrix.json", "w") as f:
+            with open(f"{OUTDIR}/sweep_matrix.json", "w") as f:
                 json.dump(results, f, indent=1)
             
-        print(f"\nwrote {OUTDIR}/loss_matrix.json ({len(results)} cells)")
+        print(f"\nwrote {OUTDIR}/sweep_matrix.json ({len(results)} cells)")
         return
 
     if not (args.policy and args.dataset):
