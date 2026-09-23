@@ -30,16 +30,23 @@ def budget(key):
 
 def main():
     pool_repo = f"{HF_USER}/{DATASETS['pool']}"
-    pool_std = arr(LeRobotDatasetMetadata(pool_repo).stats["action"]["std"])
+    meta = LeRobotDatasetMetadata(pool_repo)
+    pool_std = arr(meta.stats["action"]["std"])
 
-    root = os.path.join(os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface")),
-                        "lerobot", HF_USER, DATASETS["pool"])
-    files = glob.glob(os.path.join(root, "data", "**", "*.parquet"), recursive=True)
+    root = str(meta.root)
+    pattern = os.path.join(root, "data", "**", "*.parquet")
+    files = glob.glob(pattern, recursive=True)
+    if not files:
+        from huggingface_hub import snapshot_download
+        snapshot_download(pool_repo, repo_type="dataset",
+                          allow_patterns=["data/**"], local_dir=root)
+        files = glob.glob(pattern, recursive=True)
     if not files:
         raise SystemExit(f"no pool parquet under {root}")
+
     df = pd.concat(pd.read_parquet(f, columns=["action", "episode_index"]) for f in files)
     subsets = json.load(open("analysis/subsets.json"))["subsets"]
-
+    
     rows = []
     for key in ALL_SWEEP:
         repo = f"{HF_USER}/{POLICIES[key]}"

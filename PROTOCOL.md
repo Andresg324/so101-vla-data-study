@@ -531,13 +531,14 @@ Supporting measurements are in
       - *Off-diagonal criterion.* A change of 10% or more relative to the diagonal will be considered
         support for the dataset-difficulty hypothesis. No literature anchors this threshold, and this is
         stated here in advance.
-      - *Normalization control, cells fixed September 16.* Three cells are rescored with the scored
-        dataset's statistics: color_s2000 on clean, clean_s1000 on density, and randomized_s1000
-        on density. The first two bracket the observed range; the third tests the comparison the
-        hypothesis is about, since both surviving claims concern Randomized. Chosen after the matrix was
-        computed, which is why the rule is stated rather than inferred. Compared against the masked
-        quantity. make_pre_post_processors ignores dataset_stats when pretrained_path is supplied,
-        so the control drops it and the preprocessor step list is compared under both constructions.
+      - *Normalization control, cells fixed September 16.* color_s2000 on clean, clean_s1000 on density,
+        and randomized_s1000 on density are rescored with the scored dataset's statistics. The first two
+        bracket the observed range; the third tests Randomized, which both surviving claims concern. Chosen
+        after the matrix was computed. Compared on the masked quantity. The full saved preprocessor is
+        loaded and only the normalizer's action and state statistics are replaced; images are
+        identity-normalized. The three cells showed normalization explains 14 to 92% of the off-diagonal
+        excess, too wide to bound, so the control is extended to every off-diagonal cell and both
+        versions are reported.
       - *Compute.* A single A40, the same device for every cell. The loss is
         deterministic given fixed noise and timestep, so hardware affects only
         floating-point ordering. This differs from the single A100 per training run in

@@ -1,0 +1,31 @@
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s1000/density:   0%|          | 1/1647 [00:11<5:09:04, 11.27s/it]
+randomized_s1000/density:   0%|          | 2/1647 [00:11<2:10:48,  4.77s/it]
+randomized_s1000/density:   0%|          | 3/1647 [00:11<1:13:43,  2.69s/it]
+randomized_s1000/density:   0%|          | 4/1647 [00:11<46:44,  1.71s/it]  
+randomized_s1000/density:   0%|          | 5/1647 [00:12<31:53,  1.17s/it]
+  randomized_s1000 on density     masked 0.34178 ± 0.01239   reported 0.33814   (50 eps, 26349 frames)
+{
+ "policy": "randomized_s1000",
+ "dataset": "density",
+ "norm_from": "density",
+ "n_episodes": 50,
+ "n_frames": 26349,
+ "masked": 0.3417759835720062,
+ "masked_se": 0.01239373255521059,
+ "masked_ci": [
+  0.31779995560646057,
+  0.3669065237045288
+ ],
+ "reported": 0.33814072432096914
+}

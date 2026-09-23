@@ -1,24 +1,30 @@
 Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
 `torch_dtype` is deprecated! Use `dtype` instead!
 
+Loading weights:   0%|          | 1/489 [00:01<08:23,  1.03s/it]
 Reducing the number of VLM layers to 16 ...
 
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
 
 
 
-color_s2000/clean:   0%|          | 1/1747 [00:01<51:15,  1.76s/it]
-       color_s2000 on clean       masked 0.47672 ± 0.01476   reported 0.47176   (50 eps, 27947 frames)
+color_s2000/clean:   0%|          | 1/1747 [00:05<2:51:05,  5.88s/it]
+color_s2000/clean:   0%|          | 2/1747 [00:06<1:14:20,  2.56s/it]
+color_s2000/clean:   0%|          | 3/1747 [00:06<43:08,  1.48s/it]  
+       color_s2000 on clean       masked 0.33555 ± 0.01429   reported 0.33283   (50 eps, 27947 frames)
 {
  "policy": "color_s2000",
  "dataset": "clean",
  "norm_from": "clean",
  "n_episodes": 50,
  "n_frames": 27947,
- "masked": 0.47672000527381897,
- "masked_se": 0.014762628823518753,
+ "masked": 0.33555087447166443,
+ "masked_se": 0.014288650825619698,
  "masked_ci": [
-  0.4482302665710449,
-  0.5062285661697388
+  0.3079797327518463,
+  0.36333906650543213
  ],
- "reported": 0.4717562970467538
+ "reported": 0.3328282787855765
 }

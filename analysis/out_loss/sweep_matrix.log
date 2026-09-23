@@ -1,0 +1,650 @@
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s1000/clean:   0%|          | 1/1747 [00:05<2:40:26,  5.51s/it]
+density5_s1000/clean:   0%|          | 2/1747 [00:05<1:09:46,  2.40s/it]
+density5_s1000/clean:   0%|          | 3/1747 [00:05<40:37,  1.40s/it]  
+    density5_s1000 on clean       masked 0.36466 ± 0.01255   reported 0.36291   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s1000/randomized:   0%|          | 1/1981 [00:02<1:32:36,  2.81s/it]
+density5_s1000/randomized:   0%|          | 2/1981 [00:03<44:13,  1.34s/it]  
+    density5_s1000 on randomized  masked 0.37625 ± 0.02860   reported 0.37511   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s1000/recovery:   0%|          | 1/2011 [00:02<1:37:23,  2.91s/it]
+density5_s1000/recovery:   0%|          | 2/2011 [00:03<44:02,  1.32s/it]  
+    density5_s1000 on recovery    masked 0.40462 ± 0.05447   reported 0.40318   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:36,  1.06s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s1000/color:   0%|          | 1/1553 [00:02<1:11:03,  2.75s/it]
+density5_s1000/color:   0%|          | 2/1553 [00:03<35:32,  1.37s/it]  
+    density5_s1000 on color       masked 0.27358 ± 0.01164   reported 0.27211   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s1000/slowpace:   0%|          | 1/2157 [00:03<1:50:30,  3.08s/it]
+density5_s1000/slowpace:   0%|          | 2/2157 [00:03<49:51,  1.39s/it]  
+    density5_s1000 on slowpace    masked 0.27778 ± 0.00908   reported 0.27695   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s1000/density:   0%|          | 1/1647 [00:03<1:23:01,  3.03s/it]
+density5_s1000/density:   0%|          | 2/1647 [00:03<37:21,  1.36s/it]  
+    density5_s1000 on density     masked 0.20562 ± 0.00697   reported 0.20366   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s2000/clean:   0%|          | 1/1747 [00:02<1:09:47,  2.40s/it]
+density5_s2000/clean:   0%|          | 2/1747 [00:02<34:00,  1.17s/it]  
+    density5_s2000 on clean       masked 0.37385 ± 0.01266   reported 0.37194   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s2000/randomized:   0%|          | 1/1981 [00:02<1:36:38,  2.93s/it]
+density5_s2000/randomized:   0%|          | 2/1981 [00:03<50:06,  1.52s/it]  
+    density5_s2000 on randomized  masked 0.37864 ± 0.02885   reported 0.37750   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s2000/recovery:   0%|          | 1/2011 [00:02<1:34:07,  2.81s/it]
+density5_s2000/recovery:   0%|          | 2/2011 [00:03<47:03,  1.41s/it]  
+    density5_s2000 on recovery    masked 0.40787 ± 0.05582   reported 0.40651   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s2000/color:   0%|          | 1/1553 [00:03<1:33:29,  3.61s/it]
+density5_s2000/color:   0%|          | 2/1553 [00:03<41:35,  1.61s/it]  
+    density5_s2000 on color       masked 0.26955 ± 0.01153   reported 0.26820   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s2000/slowpace:   0%|          | 1/2157 [00:03<2:03:07,  3.43s/it]
+density5_s2000/slowpace:   0%|          | 2/2157 [00:03<54:58,  1.53s/it]  
+    density5_s2000 on slowpace    masked 0.28084 ± 0.00940   reported 0.28000   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density5_s2000/density:   0%|          | 1/1647 [00:02<1:12:57,  2.66s/it]
+density5_s2000/density:   0%|          | 2/1647 [00:02<33:51,  1.24s/it]  
+    density5_s2000 on density     masked 0.20639 ± 0.00716   reported 0.20454   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s1000/clean:   0%|          | 1/1747 [00:02<1:17:01,  2.65s/it]
+density10_s1000/clean:   0%|          | 2/1747 [00:02<36:38,  1.26s/it]  
+   density10_s1000 on clean       masked 0.28785 ± 0.00903   reported 0.28627   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s1000/randomized:   0%|          | 1/1981 [00:03<2:11:08,  3.97s/it]
+density10_s1000/randomized:   0%|          | 2/1981 [00:04<57:50,  1.75s/it]  
+density10_s1000/randomized:   0%|          | 3/1981 [00:04<34:29,  1.05s/it]
+   density10_s1000 on randomized  masked 0.36011 ± 0.02764   reported 0.35905   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s1000/recovery:   0%|          | 1/2011 [00:05<2:49:54,  5.07s/it]
+density10_s1000/recovery:   0%|          | 2/2011 [00:05<1:21:08,  2.42s/it]
+density10_s1000/recovery:   0%|          | 3/2011 [00:05<47:10,  1.41s/it]  
+   density10_s1000 on recovery    masked 0.37728 ± 0.05964   reported 0.37598   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s1000/color:   0%|          | 1/1553 [00:03<1:17:46,  3.01s/it]
+density10_s1000/color:   0%|          | 2/1553 [00:03<35:03,  1.36s/it]  
+   density10_s1000 on color       masked 0.24195 ± 0.00918   reported 0.24071   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s1000/slowpace:   0%|          | 1/2157 [00:03<1:52:51,  3.14s/it]
+density10_s1000/slowpace:   0%|          | 2/2157 [00:03<51:15,  1.43s/it]  
+   density10_s1000 on slowpace    masked 0.23409 ± 0.00707   reported 0.23339   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s1000/density:   0%|          | 1/1647 [00:03<1:40:41,  3.67s/it]
+density10_s1000/density:   0%|          | 2/1647 [00:03<44:43,  1.63s/it]  
+   density10_s1000 on density     masked 0.18162 ± 0.00604   reported 0.17976   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s2000/clean:   0%|          | 1/1747 [00:04<2:04:41,  4.29s/it]
+density10_s2000/clean:   0%|          | 2/1747 [00:04<1:02:15,  2.14s/it]
+density10_s2000/clean:   0%|          | 3/1747 [00:05<36:29,  1.26s/it]  
+   density10_s2000 on clean       masked 0.29686 ± 0.00940   reported 0.29530   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s2000/randomized:   0%|          | 1/1981 [00:05<3:00:26,  5.47s/it]
+density10_s2000/randomized:   0%|          | 2/1981 [00:06<1:29:58,  2.73s/it]
+density10_s2000/randomized:   0%|          | 3/1981 [00:06<51:54,  1.57s/it]  
+density10_s2000/randomized:   0%|          | 4/1981 [00:06<34:09,  1.04s/it]
+   density10_s2000 on randomized  masked 0.36307 ± 0.02814   reported 0.36203   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:57,  1.10s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s2000/recovery:   0%|          | 1/2011 [00:05<2:51:32,  5.12s/it]
+density10_s2000/recovery:   0%|          | 2/2011 [00:05<1:14:34,  2.23s/it]
+density10_s2000/recovery:   0%|          | 3/2011 [00:05<43:51,  1.31s/it]  
+   density10_s2000 on recovery    masked 0.37348 ± 0.05845   reported 0.37207   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s2000/color:   0%|          | 1/1553 [00:04<1:51:39,  4.32s/it]
+density10_s2000/color:   0%|          | 2/1553 [00:04<53:01,  2.05s/it]  
+density10_s2000/color:   0%|          | 3/1553 [00:04<31:12,  1.21s/it]
+   density10_s2000 on color       masked 0.23997 ± 0.00901   reported 0.23875   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:35,  1.06s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s2000/slowpace:   0%|          | 1/2157 [00:04<2:43:57,  4.56s/it]
+density10_s2000/slowpace:   0%|          | 2/2157 [00:04<1:12:01,  2.01s/it]
+density10_s2000/slowpace:   0%|          | 3/2157 [00:04<42:36,  1.19s/it]  
+   density10_s2000 on slowpace    masked 0.23539 ± 0.00728   reported 0.23465   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density10_s2000/density:   0%|          | 1/1647 [00:05<2:32:04,  5.54s/it]
+density10_s2000/density:   0%|          | 2/1647 [00:06<1:19:17,  2.89s/it]
+density10_s2000/density:   0%|          | 3/1647 [00:06<45:43,  1.67s/it]  
+density10_s2000/density:   0%|          | 4/1647 [00:07<30:01,  1.10s/it]
+   density10_s2000 on density     masked 0.18402 ± 0.00592   reported 0.18201   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:29,  1.04s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s1000/clean:   0%|          | 1/1747 [00:03<1:52:12,  3.86s/it]
+density25_s1000/clean:   0%|          | 2/1747 [00:04<49:37,  1.71s/it]  
+density25_s1000/clean:   0%|          | 3/1747 [00:04<29:47,  1.02s/it]
+   density25_s1000 on clean       masked 0.29819 ± 0.00963   reported 0.29632   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s1000/randomized:   0%|          | 1/1981 [00:04<2:41:09,  4.88s/it]
+density25_s1000/randomized:   0%|          | 2/1981 [00:05<1:10:12,  2.13s/it]
+density25_s1000/randomized:   0%|          | 3/1981 [00:05<41:14,  1.25s/it]  
+   density25_s1000 on randomized  masked 0.33731 ± 0.02684   reported 0.33623   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s1000/recovery:   0%|          | 1/2011 [00:03<1:53:37,  3.39s/it]
+density25_s1000/recovery:   0%|          | 2/2011 [00:03<50:43,  1.51s/it]  
+   density25_s1000 on recovery    masked 0.33731 ± 0.05446   reported 0.33623   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s1000/color:   0%|          | 1/1553 [00:04<1:45:56,  4.10s/it]
+density25_s1000/color:   0%|          | 2/1553 [00:04<47:49,  1.85s/it]  
+density25_s1000/color:   0%|          | 3/1553 [00:04<28:29,  1.10s/it]
+   density25_s1000 on color       masked 0.22127 ± 0.00883   reported 0.22027   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<12:22,  1.52s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s1000/slowpace:   0%|          | 1/2157 [00:05<3:27:49,  5.78s/it]
+density25_s1000/slowpace:   0%|          | 2/2157 [00:06<1:31:54,  2.56s/it]
+density25_s1000/slowpace:   0%|          | 3/2157 [00:06<53:28,  1.49s/it]  
+   density25_s1000 on slowpace    masked 0.22327 ± 0.00808   reported 0.22259   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:55,  1.10s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s1000/density:   0%|          | 1/1647 [00:03<1:32:08,  3.36s/it]
+density25_s1000/density:   0%|          | 2/1647 [00:03<47:34,  1.74s/it]  
+density25_s1000/density:   0%|          | 3/1647 [00:04<28:21,  1.04s/it]
+   density25_s1000 on density     masked 0.17829 ± 0.00573   reported 0.17671   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:01,  1.11s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s2000/clean:   0%|          | 1/1747 [00:03<1:31:30,  3.14s/it]
+density25_s2000/clean:   0%|          | 2/1747 [00:03<41:17,  1.42s/it]  
+   density25_s2000 on clean       masked 0.28857 ± 0.00941   reported 0.28690   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s2000/randomized:   0%|          | 1/1981 [00:04<2:18:04,  4.18s/it]
+density25_s2000/randomized:   0%|          | 2/1981 [00:04<1:09:10,  2.10s/it]
+density25_s2000/randomized:   0%|          | 3/1981 [00:05<40:35,  1.23s/it]  
+   density25_s2000 on randomized  masked 0.32824 ± 0.02558   reported 0.32722   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:41,  1.19s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s2000/recovery:   0%|          | 1/2011 [00:03<2:13:29,  3.98s/it]
+density25_s2000/recovery:   0%|          | 2/2011 [00:04<1:11:54,  2.15s/it]
+density25_s2000/recovery:   0%|          | 3/2011 [00:05<42:09,  1.26s/it]  
+   density25_s2000 on recovery    masked 0.33915 ± 0.05309   reported 0.33807   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s2000/color:   0%|          | 1/1553 [00:03<1:30:28,  3.50s/it]
+density25_s2000/color:   0%|          | 2/1553 [00:03<40:16,  1.56s/it]  
+   density25_s2000 on color       masked 0.22473 ± 0.00896   reported 0.22365   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:29,  1.04s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s2000/slowpace:   0%|          | 1/2157 [00:03<1:59:18,  3.32s/it]
+density25_s2000/slowpace:   0%|          | 2/2157 [00:03<55:38,  1.55s/it]  
+   density25_s2000 on slowpace    masked 0.21784 ± 0.00730   reported 0.21722   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_s2000/density:   0%|          | 1/1647 [00:03<1:23:23,  3.04s/it]
+density25_s2000/density:   0%|          | 2/1647 [00:03<46:46,  1.71s/it]  
+density25_s2000/density:   0%|          | 3/1647 [00:04<27:58,  1.02s/it]
+   density25_s2000 on density     masked 0.17647 ± 0.00550   reported 0.17477   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:52,  1.21s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s1000/clean:   0%|          | 1/1747 [00:04<2:16:02,  4.67s/it]
+density50_s1000/clean:   0%|          | 2/1747 [00:05<1:10:54,  2.44s/it]
+density50_s1000/clean:   0%|          | 3/1747 [00:05<41:11,  1.42s/it]  
+   density50_s1000 on clean       masked 0.27738 ± 0.00720   reported 0.27576   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:24,  1.03s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s1000/randomized:   0%|          | 1/1981 [00:05<2:45:59,  5.03s/it]
+density50_s1000/randomized:   0%|          | 2/1981 [00:05<1:12:26,  2.20s/it]
+density50_s1000/randomized:   0%|          | 3/1981 [00:05<42:41,  1.30s/it]  
+   density50_s1000 on randomized  masked 0.31131 ± 0.02501   reported 0.31034   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s1000/recovery:   0%|          | 1/2011 [00:03<1:55:15,  3.44s/it]
+density50_s1000/recovery:   0%|          | 2/2011 [00:03<51:41,  1.54s/it]  
+   density50_s1000 on recovery    masked 0.32746 ± 0.05497   reported 0.32649   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:25,  1.04s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s1000/color:   0%|          | 1/1553 [00:02<1:16:33,  2.96s/it]
+density50_s1000/color:   0%|          | 2/1553 [00:03<37:01,  1.43s/it]  
+   density50_s1000 on color       masked 0.20622 ± 0.00873   reported 0.20532   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s1000/slowpace:   0%|          | 1/2157 [00:03<2:01:44,  3.39s/it]
+density50_s1000/slowpace:   0%|          | 2/2157 [00:03<54:20,  1.51s/it]  
+   density50_s1000 on slowpace    masked 0.20365 ± 0.00800   reported 0.20300   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s1000/density:   0%|          | 1/1647 [00:02<1:17:21,  2.82s/it]
+density50_s1000/density:   0%|          | 2/1647 [00:03<36:17,  1.32s/it]  
+   density50_s1000 on density     masked 0.16028 ± 0.00541   reported 0.15895   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s2000/clean:   0%|          | 1/1747 [00:02<1:13:49,  2.54s/it]
+density50_s2000/clean:   0%|          | 2/1747 [00:03<44:59,  1.55s/it]  
+   density50_s2000 on clean       masked 0.27173 ± 0.00725   reported 0.27016   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s2000/randomized:   0%|          | 1/1981 [00:03<1:46:19,  3.22s/it]
+density50_s2000/randomized:   0%|          | 2/1981 [00:03<47:42,  1.45s/it]  
+   density50_s2000 on randomized  masked 0.31187 ± 0.02426   reported 0.31089   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s2000/recovery:   0%|          | 1/2011 [00:03<1:52:00,  3.34s/it]
+density50_s2000/recovery:   0%|          | 2/2011 [00:03<55:40,  1.66s/it]  
+   density50_s2000 on recovery    masked 0.32063 ± 0.05203   reported 0.31960   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s2000/color:   0%|          | 1/1553 [00:03<1:19:50,  3.09s/it]
+density50_s2000/color:   0%|          | 2/1553 [00:03<40:06,  1.55s/it]  
+   density50_s2000 on color       masked 0.20628 ± 0.00857   reported 0.20533   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:09,  1.00s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s2000/slowpace:   0%|          | 1/2157 [00:03<1:51:59,  3.12s/it]
+density50_s2000/slowpace:   0%|          | 2/2157 [00:03<57:11,  1.59s/it]  
+   density50_s2000 on slowpace    masked 0.20290 ± 0.00710   reported 0.20225   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_s2000/density:   0%|          | 1/1647 [00:03<1:33:58,  3.43s/it]
+density50_s2000/density:   0%|          | 2/1647 [00:03<41:55,  1.53s/it]  
+   density50_s2000 on density     masked 0.15915 ± 0.00551   reported 0.15758   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_fixedstep/clean:   0%|          | 1/1747 [00:03<1:32:55,  3.19s/it]
+density25_fixedstep/clean:   0%|          | 2/1747 [00:03<48:17,  1.66s/it]  
+density25_fixedstep on clean       masked 0.16461 ± 0.00351   reported 0.16313   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:57,  1.10s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_fixedstep/randomized:   0%|          | 1/1981 [00:02<1:38:57,  3.00s/it]
+density25_fixedstep/randomized:   0%|          | 2/1981 [00:03<44:41,  1.35s/it]  
+density25_fixedstep on randomized  masked 0.18355 ± 0.00964   reported 0.18263   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_fixedstep/recovery:   0%|          | 1/2011 [00:05<3:04:44,  5.51s/it]
+density25_fixedstep/recovery:   0%|          | 2/2011 [00:05<1:20:02,  2.39s/it]
+density25_fixedstep/recovery:   0%|          | 3/2011 [00:05<46:38,  1.39s/it]  
+density25_fixedstep on recovery    masked 0.20434 ± 0.01967   reported 0.20325   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:43,  1.07s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_fixedstep/color:   0%|          | 1/1553 [00:04<1:56:11,  4.49s/it]
+density25_fixedstep/color:   0%|          | 2/1553 [00:05<1:02:53,  2.43s/it]
+density25_fixedstep/color:   0%|          | 3/1553 [00:05<36:33,  1.41s/it]  
+density25_fixedstep on color       masked 0.14968 ± 0.00469   reported 0.14857   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:13,  1.13s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_fixedstep/slowpace:   0%|          | 1/2157 [00:04<2:47:25,  4.66s/it]
+density25_fixedstep/slowpace:   0%|          | 2/2157 [00:04<1:13:14,  2.04s/it]
+density25_fixedstep/slowpace:   0%|          | 3/2157 [00:05<43:17,  1.21s/it]  
+density25_fixedstep on slowpace    masked 0.14876 ± 0.00302   reported 0.14811   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<10:59,  1.35s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density25_fixedstep/density:   0%|          | 1/1647 [00:04<2:07:16,  4.64s/it]
+density25_fixedstep/density:   0%|          | 2/1647 [00:04<55:38,  2.03s/it]  
+density25_fixedstep/density:   0%|          | 3/1647 [00:05<32:54,  1.20s/it]
+density25_fixedstep on density     masked 0.11956 ± 0.00276   reported 0.11792   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_fixedstep/clean:   0%|          | 1/1747 [00:05<2:47:25,  5.75s/it]
+density50_fixedstep/clean:   0%|          | 2/1747 [00:06<1:18:15,  2.69s/it]
+density50_fixedstep/clean:   0%|          | 3/1747 [00:06<45:11,  1.55s/it]  
+density50_fixedstep/clean:   0%|          | 4/1747 [00:06<30:00,  1.03s/it]
+density50_fixedstep on clean       masked 0.15376 ± 0.00271   reported 0.15225   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_fixedstep/randomized:   0%|          | 1/1981 [00:03<1:48:04,  3.28s/it]
+density50_fixedstep/randomized:   0%|          | 2/1981 [00:03<48:25,  1.47s/it]  
+density50_fixedstep on randomized  masked 0.16220 ± 0.00718   reported 0.16127   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_fixedstep/recovery:   0%|          | 1/2011 [00:03<1:42:18,  3.05s/it]
+density50_fixedstep/recovery:   0%|          | 2/2011 [00:03<48:53,  1.46s/it]  
+density50_fixedstep on recovery    masked 0.18525 ± 0.01442   reported 0.18420   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_fixedstep/color:   0%|          | 1/1553 [00:03<1:17:58,  3.01s/it]
+density50_fixedstep/color:   0%|          | 2/1553 [00:03<41:04,  1.59s/it]  
+density50_fixedstep on color       masked 0.14161 ± 0.00441   reported 0.14061   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_fixedstep/slowpace:   0%|          | 1/2157 [00:03<1:56:58,  3.26s/it]
+density50_fixedstep/slowpace:   0%|          | 2/2157 [00:03<52:28,  1.46s/it]  
+density50_fixedstep on slowpace    masked 0.13383 ± 0.00245   reported 0.13319   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:39,  1.07s/it]
+Reducing the number of VLM layers to 16 ...
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density50_fixedstep/density:   0%|          | 1/1647 [00:05<2:24:54,  5.28s/it]
+density50_fixedstep/density:   0%|          | 2/1647 [00:06<1:13:27,  2.68s/it]
+density50_fixedstep/density:   0%|          | 3/1647 [00:06<42:26,  1.55s/it]  
+density50_fixedstep/density:   0%|          | 4/1647 [00:06<27:59,  1.02s/it]
+density50_fixedstep on density     masked 0.11149 ± 0.00256   reported 0.10997   (50 eps, 26349 frames)
+
+wrote analysis/out_loss/sweep_matrix.json (60 cells)

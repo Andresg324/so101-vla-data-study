@@ -96,6 +96,12 @@ SWEEP_POLICIES = ["density5_s1000", "density5_s2000", "density10_s1000", "densit
 
 ALL_SWEEP = SWEEP_POLICIES + ["density25_fixedstep", "density50_fixedstep"]
 
+OWN = {"clean_s1000": "clean", "clean_s2000": "clean",
+       "randomized_s1000": "randomized", "randomized_s2000": "randomized",
+       "recovery_s1000": "recovery", "recovery_s2000": "recovery",
+       "color_s1000": "color", "color_s2000": "color",
+       "color_slowpace": "slowpace", "density": "density"}
+
 NOISE_SEED   = 1000        # fixed across every cell; see the module docstring
 N_EPISODES = 50            # set from the --calibrate run before any cell is scored
 BATCH_SIZE = 16
@@ -302,6 +308,7 @@ def main():
     ap.add_argument("--episodes", type=int, default=N_EPISODES)
     ap.add_argument("--held-out", action="store_true")
     ap.add_argument("--train-side", action="store_true")
+    ap.add_argument("--normalized-matrix", action="store_true")
     args = ap.parse_args()
 
     os.makedirs(OUTDIR, exist_ok=True)
@@ -324,10 +331,21 @@ def main():
             results.append(score(p, d, args.device, args.episodes))
             with open(f"{OUTDIR}/sweep_matrix.json", "w") as f:
                 json.dump(results, f, indent=1)
-            
+ 
         print(f"\nwrote {OUTDIR}/sweep_matrix.json ({len(results)} cells)")
         return
 
+    if args.normalized_matrix:
+        results = []
+        for p, d in itertools.product(MATRIX_POLICIES, MATRIX_DATASETS):
+            if OWN[p] == d:
+                continue
+            results.append(score(p, d, args.device, args.episodes, norm_from=d))
+            with open(f"{OUTDIR}/loss_matrix_normalized.json", "w") as f:
+                json.dump(results, f, indent=1)
+        print(f"\nwrote {OUTDIR}/loss_matrix_normalized.json ({len(results)} cells)")
+        return
+    
     if not (args.policy and args.dataset):
         ap.error("--policy and --dataset, or --all, or --calibrate")
     r = score(args.policy, args.dataset, args.device, args.episodes, args.norm_from)
