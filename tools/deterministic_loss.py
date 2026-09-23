@@ -41,6 +41,7 @@ import argparse
 import itertools
 import json
 import os
+import dataclasses
 
 import numpy as np
 import torch
@@ -133,21 +134,26 @@ def score(policy_key, dataset_key, device, n_episodes=N_EPISODES,
         policy = SmolVLAPolicy.from_pretrained(prepo)
         policy.to(device).eval()
 
-    stats = None
+    pre, _ = make_pre_post_processors(
+        policy_cfg=policy.config,
+        pretrained_path=prepo,
+        dataset_stats=None,
+        preprocessor_overrides={"device_processor": {"device": device}},
+    )
     if norm_from is not None:
-        stats = LeRobotDatasetMetadata(f"{HF_USER}/{DATASETS[norm_from]}").stats
-        pre, _ = make_pre_post_processors(
-            policy_cfg=policy.config,
-            dataset_stats=stats,
-            preprocessor_overrides={"device_processor": {"device": device}},
-        )
-    else:
-        pre, _ = make_pre_post_processors(
-            policy_cfg=policy.config,
-            pretrained_path=prepo,
-            dataset_stats=None,
-            preprocessor_overrides={"device_processor": {"device": device}},
-        )
+        new = LeRobotDatasetMetadata(f"{HF_USER}/{DATASETS[norm_from]}").stats
+        steps = list(pre.steps)
+        i = next(j for j, s in enumerate(steps) if type(s).__name__ == "NormalizerProcessorStep")
+        old = steps[i]
+        stats = dict(old.stats)
+        for k in ("action", "observation.state"):
+            stats[k] = new[k]
+        steps[i] = dataclasses.replace(old, stats=stats)
+        pre.steps = steps
+        show = lambda x: np.round(np.asarray(x.cpu() if hasattr(x, "cpu") else x)[:3], 3)
+        print("  norm_map:", getattr(old, "norm_map", "n/a"))
+        print("  action std, own", show(old.stats["action"]["std"]),
+              "| swapped", show(steps[i].stats["action"]["std"]))
 
     if verbose or norm_from is not None:
         print("  preprocessor steps:", [type(s).__name__ for s in pre.steps])
@@ -224,6 +230,7 @@ def held_out(device):
     every training subset (§8.32). These never entered any budget, so this measures fit
     to data the policy has not seen and is the instrument for whether the step count was
     appropriate."""
+
     with open("analysis/subsets.json") as f:
         eps = json.load(f)["held_out_episodes"]
     print(f"{len(eps)} held-out demonstrations\n")
@@ -238,6 +245,7 @@ def calibrate(policy_key, device):
     """How many episodes are enough. Runs the diagonal cell at increasing episode
     counts; the answer is where the value stops moving relative to the 10%
     criterion registered in §8.31."""
+
     dataset_key = policy_key.split("_")[0]
     if dataset_key not in DATASETS:
         dataset_key = "clean"
@@ -252,6 +260,34 @@ def calibrate(policy_key, device):
     print("\nPick the smallest count where the change is well inside 10%, "
           "the §8.31 criterion, and the standard error is a small fraction of it.")
 
+def train_side(device):
+    """Masked loss for every sweep checkpoint on 20 training episodes: the two
+    lowest-indexed density5 episodes at each position. Subsets are nested, so every
+    sweep and control policy trained on all 20. Same code, noise and episode count as
+    held_out(), so held-out over train-side is the generalization gap on one scale."""
+
+    with open("analysis/subsets.json") as f:
+        keep = sorted(json.load(f)["subsets"]["5"])
+    by_pos = {}
+    for e in keep:
+        by_pos.setdefault(e % 10, []).append(e)
+    eps = sorted(e for v in by_pos.values() for e in v[:2])
+    assert len(eps) == 20 and len(by_pos) == 10
+    print(f"training episodes: {eps}\n")
+    results = []
+    for p in ALL_SWEEP:
+        results.append(score(p, "pool", device, episodes=eps))
+        with open(f"{OUTDIR}/train_side.json", "w") as f:
+            json.dump(results, f, indent=1)
+    held = f"{OUTDIR}/held_out.json"
+    if os.path.exists(held):
+        ho = {r["policy"]: r["masked"] for r in json.load(open(held))}
+        print("\npolicy                train    held-out  ratio")
+        for r in results:
+            h = ho.get(r["policy"])
+            if h is not None:
+                print(f"{r['policy']:<20} {r['masked']:.5f}  {h:.5f}  {h / r['masked']:.2f}")
+    print(f"\nwrote {OUTDIR}/train_side.json")
 
 def main():
     ap = argparse.ArgumentParser()
@@ -265,6 +301,7 @@ def main():
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--episodes", type=int, default=N_EPISODES)
     ap.add_argument("--held-out", action="store_true")
+    ap.add_argument("--train-side", action="store_true")
     args = ap.parse_args()
 
     os.makedirs(OUTDIR, exist_ok=True)
@@ -273,6 +310,9 @@ def main():
         held_out(args.device)
         return
 
+    if args.train_side:
+        train_side(args.device)
+        return
 
     if args.calibrate:
         calibrate(args.policy or "clean_s1000", args.device)
