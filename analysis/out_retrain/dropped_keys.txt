@@ -1,0 +1,5 @@
+dropped dataset.repo_type = 'dataset'
+dropped dataset.depth_output_unit = 'mm'
+dropped dataloader_multiprocessing_context = 'spawn'
+dropped job = {'target': None, 'image': 'huggingface/lerobot-gpu:latest', 'timeout': '2d', 'detach': False, 'tags': []}
+dropped save_checkpoint_to_hub = False

@@ -615,14 +615,11 @@ Supporting measurements are in
       - *Calibration stability.* The §8.23 pan-to-bearing fit was not refit after the rebuild.
         Two checks were run through it, neither a validation of the fit itself: the furthest
         commanded bearing reached at T6, and the median base bearing at the gripper release.
-        Both shifted about half a degree (0.35 and 0.53) in the same direction. That pattern rules 
-        out a change in the fit's slope, since the two targets sit on opposite sides of the arm, but 
-        it is consistent with a small constant offset in the mapping, which base translation, base
-        rotation and ordinary session variation would all produce identically. Nothing measured
-        here separates them. The rebuilt bench is therefore not exactly the same as the August
-        bench; it carries an unresolved constant bearing offset of roughly half a degree, small
-        relative to the 2.9 deg the cube subtends at T6 and to the episode-to-episode spread of
-        either statistic, so no claim in this protocol depends on resolving it.
+        Both moved about half a degree toward the arm's forward axis (T6 from 27.04 to 26.70 deg, the
+        release from −23.00 to −22.47 deg). A rotated base would shift both the same way, so this is 
+        not a constant offset. Both are commanded by a policy that mostly repeats a fixed sweep, 
+        so this check is largely insensitive to a physical base rotation and says little about the bench's 
+        geometry. Both shifts are about one standard error, so no claim in this protocol depends on them.
       - *Bench confirmation.* `smolvla-cube-clean` seed 1000 on In-Distribution, 16 recorded and
         15 scored. Median furthest commanded bearing 26.70 deg against 27.04 in August, a margin
         of 2.47 over the 24.23 required at T6 against 2.81. The reference for that shift is the
@@ -835,6 +832,11 @@ Supporting measurements are in
     to the data, and 10 or more points to the training environment. The Newcombe interval against
     August's 6/15 is reported alongside. GPU training isn't exactly reproducible between runs, but
     both August seeds scored 6/15, which gives a sense of how much that variation matters.
+38. **Reach probe replication, seed 2000, September 24.** Added after seeing the seed 1000 reach results
+    (§8.35), the same probe runs on the four seed 2000 sweep policies, 5 scored each, in order 50, 25, 10, 5.
+    I predict that density25 and density50 succeed in at least 3 of 5, and density5 and density10 in at most 
+    1 of 5. The seed 1000 pattern is replicated if both hold; otherwise the counts are reported as a partial
+    or failed replication.
 
 ## 9. Known limitations
 
@@ -920,13 +922,10 @@ Supporting measurements are in
 - **The bench rebuild comparison rests on one session per bench.** It bounds a shift but cannot
   separate a bench change from ordinary session-to-session variation, since no second session
   exists at either bench to estimate that variation.
-- **A common-mode bearing offset of ~0.5 degrees between the August and rebuilt bench is unresolved.** 
-  Two stability checks through the August pan-to-bearing fit both shifted the
-  same direction by about that amount, which excludes a slope change but is observationally
-  identical to a base rotation or a shift in the fit's intercept. The clamp measurement
-  constrains translation only. The bound is below the episode-level dispersion of either
-  statistic and no claim depends on resolving it, but density sweep bearings carry it relative
-  to the August policies.
+- **A half-degree difference in commanded bearing between benches is unexplained.** It moved two 
+  checks in opposite directions, so it is not a base rotation, but those checks are largely blind 
+  to rotation. It affects bearing comparisons between August and sweep policies, not comparisons 
+  within the rebuilt bench.
 - **The August grid and the density sweep were trained in different environments.** The grid ran
   on Colab with a torch and torchcodec version that was not recorded; the sweep ran on RunPod
   with torch 2.8.0 and torchcodec 0.7.0. The LeRobot commit and the video decoder family are the

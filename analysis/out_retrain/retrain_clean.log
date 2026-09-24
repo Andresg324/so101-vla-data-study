@@ -1,0 +1,261 @@
+INFO 2026-09-24 17:39:47 ot_train.py:222 {'batch_size': 32,
+ 'checkpoint_path': None,
+ 'cudnn_deterministic': False,
+ 'dataset': {'episodes': None,
+             'eval_split': 0.0,
+             'image_transforms': {'enable': False,
+                                  'max_num_transforms': 3,
+                                  'random_order': False,
+                                  'tfs': {'affine': {'kwargs': {'degrees': [-5.0,
+                                                                            5.0],
+                                                                'translate': [0.05,
+                                                                              0.05]},
+                                                     'type': 'RandomAffine',
+                                                     'weight': 1.0},
+                                          'brightness': {'kwargs': {'brightness': [0.8,
+                                                                                   1.2]},
+                                                         'type': 'ColorJitter',
+                                                         'weight': 1.0},
+                                          'contrast': {'kwargs': {'contrast': [0.8,
+                                                                               1.2]},
+                                                       'type': 'ColorJitter',
+                                                       'weight': 1.0},
+                                          'hue': {'kwargs': {'hue': [-0.05,
+                                                                     0.05]},
+                                                  'type': 'ColorJitter',
+                                                  'weight': 1.0},
+                                          'saturation': {'kwargs': {'saturation': [0.5,
+                                                                                   1.5]},
+                                                         'type': 'ColorJitter',
+                                                         'weight': 1.0},
+                                          'sharpness': {'kwargs': {'sharpness': [0.5,
+                                                                                 1.5]},
+                                                        'type': 'SharpnessJitter',
+                                                        'weight': 1.0}}},
+             'repo_id': 'Andresg324/cube-pickup-randomized_20260809_115825',
+             'return_uint8': False,
+             'revision': None,
+             'root': None,
+             'streaming': False,
+             'use_imagenet_stats': True,
+             'video_backend': 'torchcodec'},
+ 'env': None,
+ 'env_eval_freq': 20000,
+ 'eval': {'batch_size': 8,
+          'n_episodes': 50,
+          'recording': False,
+          'recording_private': False,
+          'recording_repo_id': None,
+          'use_async_envs': True},
+ 'eval_steps': 0,
+ 'job_name': 'smolvla_randomized_runpod',
+ 'log_freq': 200,
+ 'max_eval_samples': 0,
+ 'num_workers': 4,
+ 'optimizer': {'betas': [0.9, 0.95],
+               'eps': 1e-08,
+               'grad_clip_norm': 10.0,
+               'lr': 0.0001,
+               'type': 'adamw',
+               'weight_decay': 1e-10},
+ 'output_dir': '/workspace/outputs/train/smolvla_randomized_runpod',
+ 'peft': None,
+ 'persistent_workers': True,
+ 'policy': {'adapt_to_pi_aloha': False,
+            'add_image_special_tokens': False,
+            'attention_mode': 'cross_attn',
+            'chunk_size': 50,
+            'compile_mode': 'max-autotune',
+            'compile_model': False,
+            'device': 'cuda',
+            'empty_cameras': 0,
+            'expert_width_multiplier': 0.75,
+            'freeze_vision_encoder': True,
+            'input_features': {'observation.images.camera1': {'shape': [3,
+                                                                        256,
+                                                                        256],
+                                                              'type': <FeatureType.VISUAL: 'VISUAL'>},
+                               'observation.images.camera2': {'shape': [3,
+                                                                        256,
+                                                                        256],
+                                                              'type': <FeatureType.VISUAL: 'VISUAL'>},
+                               'observation.images.camera3': {'shape': [3,
+                                                                        256,
+                                                                        256],
+                                                              'type': <FeatureType.VISUAL: 'VISUAL'>},
+                               'observation.state': {'shape': [6],
+                                                     'type': <FeatureType.STATE: 'STATE'>}},
+            'license': None,
+            'load_vlm_weights': True,
+            'max_action_dim': 32,
+            'max_period': 4.0,
+            'max_state_dim': 32,
+            'min_period': 0.004,
+            'n_action_steps': 50,
+            'n_obs_steps': 1,
+            'normalization_mapping': {'ACTION': <NormalizationMode.MEAN_STD: 'MEAN_STD'>,
+                                      'STATE': <NormalizationMode.MEAN_STD: 'MEAN_STD'>,
+                                      'VISUAL': <NormalizationMode.IDENTITY: 'IDENTITY'>},
+            'num_expert_layers': 0,
+            'num_steps': 10,
+            'num_vlm_layers': 16,
+            'optimizer_betas': [0.9, 0.95],
+            'optimizer_eps': 1e-08,
+            'optimizer_grad_clip_norm': 10.0,
+            'optimizer_lr': 0.0001,
+            'optimizer_weight_decay': 1e-10,
+            'output_features': {'action': {'shape': [6],
+                                           'type': <FeatureType.ACTION: 'ACTION'>}},
+            'pad_language_to': 'max_length',
+            'prefix_length': 0,
+            'pretrained_path': 'lerobot/smolvla_base',
+            'pretrained_revision': None,
+            'private': None,
+            'push_to_hub': True,
+            'repo_id': 'Andresg324/smolvla-cube-randomized-runpod',
+            'resize_imgs_with_padding': [512, 512],
+            'rtc_config': None,
+            'scheduler_decay_lr': 2.5e-06,
+            'scheduler_decay_steps': 30000,
+            'scheduler_warmup_steps': 1000,
+            'self_attn_every_n_layers': 2,
+            'tags': None,
+            'tokenizer_max_length': 48,
+            'train_expert_only': True,
+            'train_state_proj': True,
+            'type': 'smolvla',
+            'use_amp': False,
+            'use_cache': True,
+            'use_delta_joint_actions_aloha': False,
+            'use_peft': False,
+            'vlm_model_name': 'HuggingFaceTB/SmolVLM2-500M-Video-Instruct'},
+ 'prefetch_factor': 4,
+ 'rename_map': {'observation.images.overhead': 'observation.images.camera1',
+                'observation.images.wrist': 'observation.images.camera2'},
+ 'resume': False,
+ 'reward_model': None,
+ 'sample_weighting': None,
+ 'save_checkpoint': True,
+ 'save_freq': 2000,
+ 'scheduler': {'decay_lr': 2.5e-06,
+               'num_decay_steps': 30000,
+               'num_warmup_steps': 1000,
+               'peak_lr': 0.0001,
+               'type': 'cosine_decay_with_warmup'},
+ 'seed': 1000,
+ 'steps': 10000,
+ 'tolerance_s': 0.0001,
+ 'use_policy_training_preset': True,
+ 'wandb': {'add_tags': True,
+           'disable_artifact': False,
+           'enable': True,
+           'entity': None,
+           'mode': None,
+           'notes': None,
+           'project': 'lerobot',
+           'run_id': None}}
+INFO 2026-09-24 17:39:49 db_utils.py:121 Logs will be synced with wandb.
+INFO 2026-09-24 17:39:49 db_utils.py:122 Track this run --> https://wandb.ai/garcian-andres-n-a/lerobot/runs/2mbki55a
+INFO 2026-09-24 17:39:49 ot_train.py:248 Creating dataset
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:00,  4.70it/s]
+Fetching 5 files:  40%|████      | 2/5 [00:00<00:01,  2.04it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:04<00:00,  1.07it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:04<00:00,  1.18it/s]
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 1324.21it/s]
+
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]
+Fetching 13 files:  46%|████▌     | 6/13 [00:00<00:00, 27.31it/s]
+Fetching 13 files:  69%|██████▉   | 9/13 [00:00<00:00, 10.32it/s]
+Fetching 13 files:  85%|████████▍ | 11/13 [00:01<00:00,  4.40it/s]
+Fetching 13 files:  92%|█████████▏| 12/13 [00:02<00:00,  4.29it/s]
+Fetching 13 files: 100%|██████████| 13/13 [00:02<00:00,  4.17it/s]
+Fetching 13 files: 100%|██████████| 13/13 [00:02<00:00,  5.40it/s]
+INFO 2026-09-24 17:39:56 ot_train.py:282 Creating policy
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]
+Loading weights:  69%|██████▊   | 335/489 [00:00<00:00, 2795.24it/s]
+Loading weights: 100%|██████████| 489/489 [00:00<00:00, 3365.66it/s]
+Reducing the number of VLM layers to 16 ...
+INFO 2026-09-24 17:40:16 ot_train.py:355 Creating optimizer and scheduler
+INFO 2026-09-24 17:40:16 hedulers.py:111 Auto-scaling LR scheduler: num_training_steps (10000) < num_decay_steps (30000). Scaling warmup: 1000 → 333, decay: 30000 → 10000 (scale factor: 0.333)
+INFO 2026-09-24 17:40:16 ot_train.py:387 Output dir: /workspace/outputs/train/smolvla_randomized_runpod
+INFO 2026-09-24 17:40:16 ot_train.py:394 cfg.steps=10000 (10K)
+INFO 2026-09-24 17:40:16 ot_train.py:395 dataset.num_frames=31682 (32K)
+INFO 2026-09-24 17:40:16 ot_train.py:396 dataset.num_episodes=50
+INFO 2026-09-24 17:40:16 ot_train.py:399 Effective batch size: 32 x 1 = 32
+INFO 2026-09-24 17:40:16 ot_train.py:400 num_learnable_params=99880992 (100M)
+INFO 2026-09-24 17:40:16 ot_train.py:401 num_total_params=450046176 (450M)
+
+
+Training:   0%|          | 1/10000 [00:02<6:01:36,  2.17s/step]
+Training:   0%|          | 2/10000 [00:02<2:52:48,  1.04s/step]
+
+
+
+
+
+
+
+
+
+INFO 2026-09-24 17:48:24 ot_train.py:641 Checkpoint policy after step 2000
+
+Training:  20%|██        | 2001/10000 [08:11<2:44:50,  1.24s/step]
+
+
+
+
+
+
+
+
+
+INFO 2026-09-24 17:56:32 ot_train.py:641 Checkpoint policy after step 4000
+
+Training:  40%|████      | 4001/10000 [16:19<1:51:22,  1.11s/step]
+
+
+
+
+
+
+
+
+
+INFO 2026-09-24 18:04:41 ot_train.py:641 Checkpoint policy after step 6000
+
+Training:  60%|██████    | 6001/10000 [24:27<1:18:07,  1.17s/step]
+
+
+
+
+
+
+
+
+
+INFO 2026-09-24 18:12:49 ot_train.py:641 Checkpoint policy after step 8000
+
+Training:  80%|████████  | 8001/10000 [32:36<41:13,  1.24s/step]
+
+
+
+
+
+
+
+
+
+INFO 2026-09-24 18:20:58 ot_train.py:641 Checkpoint policy after step 10000
+
+INFO 2026-09-24 18:21:01 ot_train.py:721 End of training
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 1183.03it/s]
+INFO 2026-09-24 18:21:07 etrained.py:343 Model pushed to https://huggingface.co/Andresg324/smolvla-cube-randomized-runpod
