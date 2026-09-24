@@ -54,10 +54,14 @@ def trainable(policy):
     return [(n, p) for n, p in policy.named_parameters()
             if "vlm_with_expert.vlm." not in n and ".lm_expert.norm." not in n]
 
-def sharpness(key, device, rho):
+def sharpness(key, device, rho, common=False):
     prepo = f"{HF_USER}/{POLICIES[key]}"
-    eps = SWEEP_EPISODES if key in ALL_SWEEP else EPISODES
-    ds = DIAGONAL[key]
+    if common:
+        ds, eps, nf = "pool", SWEEP_EPISODES, "pool"
+    else:
+        ds = DIAGONAL[key]
+        eps = SWEEP_EPISODES if key in ALL_SWEEP else EPISODES
+        nf = None
 
     policy = SmolVLAPolicy.from_pretrained(prepo)
     policy.to(device).eval()
@@ -66,7 +70,7 @@ def sharpness(key, device, rho):
     base = {n: p.detach().clone() for n, p in params}
     wnorm = torch.sqrt(sum((v ** 2).sum() for v in base.values()))
 
-    ref = score(key, ds, device, episodes=eps, policy=policy, verbose=False)["masked"]
+    ref = score(key, ds, device, episodes=eps, policy=policy, verbose=False, norm_from=nf)["masked"]
 
     g = torch.Generator(device="cpu").manual_seed(DIR_SEED)
     ratios = []
@@ -77,35 +81,50 @@ def sharpness(key, device, rho):
         with torch.no_grad():
             for n, p in params:
                 p.copy_(base[n] + noise[n] * scale)
-        r = score(key, ds, device, episodes=eps, policy=policy, verbose=False)["masked"]
+        r = score(key, ds, device, episodes=eps, policy=policy, verbose=False, norm_from=nf)["masked"]
         ratios.append(r / ref)
         print(f"  {key} dir {d}: {r:.5f} / {ref:.5f} = {r/ref:.3f}")
 
     with torch.no_grad():
         for n, p in params:
             p.copy_(base[n])
-    return {"policy": key, "dataset": ds, "n_episodes": len(eps),
-            "ref_loss": ref, "mean_ratio": float(np.mean(ratios)),
-            "sd_ratio": float(np.std(ratios)), "ratios": [float(x) for x in ratios]}
+    return {"policy": key,
+            "dataset": ds,
+            "n_episodes": len(eps),
+            "ref_loss": ref,
+            "mean_ratio": float(np.mean(ratios)),
+            "sd_ratio": float(np.std(ratios)),
+            "ratios": [float(x) for x in ratios],
+            "common": common,
+            "rho": rho}
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--policy", help="one policy key; default all")
     ap.add_argument("--rho", type=float, default=RHO)
+    ap.add_argument("--common", action="store_true",
+                    help="all policies on the 20 held-out pool demos with pool statistics")
     args = ap.parse_args()
     os.makedirs(OUTDIR, exist_ok=True)
 
-    keys = [args.policy] if args.policy else list(DIAGONAL)
+    if args.policy:
+        keys = [args.policy]
+    elif args.common:
+        keys = [k for k in DIAGONAL if k not in ALL_SWEEP]
+    else:
+        keys = list(DIAGONAL)
+    tag = "_common" if args.common else ""
+
     rows = []
     for k in keys:
-        rows.append(sharpness(k, args.device, args.rho))
-        with open(f"{OUTDIR}/sharpness_rho{args.rho:g}.json", "w") as f:
+        rows.append(sharpness(k, args.device, args.rho, args.common))
+        with open(f"{OUTDIR}/sharpness_rho{args.rho:g}{tag}.json", "w") as f:
             json.dump(rows, f, indent=1)
     import pandas as pd
     t = pd.DataFrame(rows).drop(columns=["ratios"])
     print("\n" + t.round(4).to_string(index=False))
-    print(f"\nwrote {OUTDIR}/sharpness_rho{args.rho:g}.json")
+    print(f"\nwrote {OUTDIR}/sharpness_rho{args.rho:g}{tag}.json")
 
 
 if __name__ == "__main__":

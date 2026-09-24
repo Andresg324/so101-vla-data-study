@@ -558,6 +558,12 @@ Supporting measurements are in
         Randomized (1.096e-1) did not move less than Clean (1.071e-1). Distance travelled in
         weight space therefore does not distinguish the conditions. All ten show the same set of
         moved groups.
+      - *Sharpness, fixed September 22 to 24.* The step size (RHO) was chosen on clean_s1000 alone,
+        before other policies were scored. It was chosen as the smaller of 0.05 and 0.1 that raised its loss by more
+        than 10%, which ended up being in 0.1. The absolute increase in loss is reported as the main measure, since the
+        ratio depends on each policy's starting loss. Since each policy's loss is in the units of its own
+        normalizer, the ten August policies will also be scored on the 20 held-out pool demonstrations
+        with the pool's statistics, which puts them in the same units as the sweep policies.
       - *Scope limit.* All four measurements operate on the per-frame conditional loss. None of
         them can explain a rollout failure, since per-frame loss says nothing about how error
         compounds across a 50-step chunk. The available conclusion is whether the loss ordering
@@ -702,11 +708,11 @@ Supporting measurements are in
         §9's 9.9 to 12.9 range. Both fixed-step controls are seed 1000. §8.32 fixed the cell order but
         not the policy order within a seed; both seeds ran 5, 10, 25, 50 in that order, so session drift
         is collinear with density.
-      - *Cross-condition comparison.* Comparison against Clean, Randomized and Density is made at T6
-        with 15 scored episodes, matching the existing In-Distribution cells exactly, with a
-        Newcombe hybrid score interval on the difference. For E1-E5 the prior conditions have 3
-        episodes per position against 5 here, so the comparison uses their first 3 and the asymmetry is
-        stated with the result.
+      - *Cross-condition comparison.* The sweep policies will be compared against Clean, Randomized and
+        Density at T6, with 15 episodes each and a Newcombe interval on the difference. At New Positions
+        the earlier policies only have 3 episodes per position (against 5 here), so the comparison uses
+        the first 3 episodes at each position for the sweep policies, pooled across E1 to E5. Differences
+        between individual positions are reported through aim rather than success rate.
       - *Seeds.* 2 seeds for the primary analysis, with a possible third depending on timing.
       - *Analysis.* Primary test is a Cochran-Armitage trend test across the four ordered density levels, run
         separately per seed and separately at T6 and at New Positions, with scores 5, 10, 25, 50. Four
@@ -802,14 +808,33 @@ Supporting measurements are in
 
       - *Versions.* Package versions and git revision are recorded in each `EvalLog`.
 
-35. **Reach at E5, exploratory.** Held-out failures at E5 read as correct bearing with
-    insufficient extension, and E5 is the furthest held-out position at 15.95 in from the base
-    against a trained maximum of 15.21 at T3. The cube is placed one inch inward along the
-    base-to-E5 ray, holding bearing fixed and shortening reach, 5 episodes per policy. Success
-    means reach was binding; the same failure means bearing novelty is. No directional
-    prediction. Bearing is measurable through the §8.23 fit but radius is not, since the 2D
-    joint-to-position map is too weak to use quantitatively (§8.23), so this probe is the only
-    available test of the reach claim and no radial number is reported without it.
+35. **Reach at E5, exploratory.** Held-out failures at E5 look like correct aim with the arm not
+    reaching far enough, and E5 is the furthest held-out position from the base (15.95 in, against
+    15.21 at T3, the furthest trained position). The four seed 1000 sweep policies will be evaluated
+    with the cube moved closer to the base along the same line, at (19.0, 12.7), about 15.0 in from
+    the base, so the bearing stays the same and only the reach changes. Each policy gets 5 scored
+    episodes plus a warmup, logged as reach_e5. The mark will be made in light pencil and left in
+    place, since erasing the displacement probe marks in August scuffed the primer and made them
+    more visible. It is faint in the overhead frame, but it will be present in every later rollout.
+    If the policies succeed, reach was the problem; if they fail the same way, the new bearing is.
+36. **Randomized on the rebuilt bench, exploratory, September 24.** Every sweep policy outscored
+    August Randomized at T6 by 47 to 60 points, even though density5 uses the same configuration
+    (10 positions at 5 demonstrations each). To check whether the different environment explains this, the August
+    Randomized policy (seed 1000) will be evaluated on the rebuilt bench: T6 first, 15 scored
+    episodes (in_distribution_rebuilt), then New Positions, 25 scored at 5 per position
+    (new_positions_rebuilt), with one warmup per cell and the toolbox where it sat during the
+    sweep. If the Newcombe interval on the difference from August's 6/15 excludes zero in the
+    upward direction, the bench or session is implicated. If it includes zero, the bench is not
+    implicated, though 15 episodes can't rule out a smaller effect. Grasp bearing at E5 will be
+    reported next to density5's, without a threshold.
+37. **Conditional retrain, September 24.** This only runs if §8.36 does not implicate the bench. The
+    August Randomized dataset will be retrained at seed 1000 with the §4.7 settings, on RunPod in the
+    same environment as the sweep (§4.14), as smolvla-cube-randomized-runpod, and evaluated at T6
+    with 15 scored episodes. The data, seed and settings match August; only the software environment
+    differs. The cutoff is set halfway between August's 6/15 and density5's 13/15: 9 or fewer points
+    to the data, and 10 or more points to the training environment. The Newcombe interval against
+    August's 6/15 is reported alongside. GPU training isn't exactly reproducible between runs, but
+    both August seeds scored 6/15, which gives a sense of how much that variation matters.
 
 ## 9. Known limitations
 

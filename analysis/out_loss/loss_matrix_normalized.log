@@ -1,0 +1,747 @@
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s1000/randomized:   0%|          | 1/1981 [00:06<3:45:34,  6.84s/it]
+clean_s1000/randomized:   0%|          | 2/1981 [00:07<1:37:33,  2.96s/it]
+clean_s1000/randomized:   0%|          | 3/1981 [00:07<56:13,  1.71s/it]  
+clean_s1000/randomized:   0%|          | 4/1981 [00:07<36:56,  1.12s/it]
+       clean_s1000 on randomized  masked 0.51542 ± 0.03281   reported 0.51435   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s1000/recovery:   0%|          | 1/2011 [00:03<1:44:49,  3.13s/it]
+clean_s1000/recovery:   0%|          | 2/2011 [00:03<52:28,  1.57s/it]  
+       clean_s1000 on recovery    masked 0.46764 ± 0.03955   reported 0.46605   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s1000/color:   0%|          | 1/1553 [00:05<2:15:20,  5.23s/it]
+clean_s1000/color:   0%|          | 2/1553 [00:05<1:07:11,  2.60s/it]
+clean_s1000/color:   0%|          | 3/1553 [00:06<38:51,  1.50s/it]  
+       clean_s1000 on color       masked 0.35447 ± 0.01779   reported 0.35218   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s1000/slowpace:   0%|          | 1/2157 [00:04<2:28:11,  4.12s/it]
+clean_s1000/slowpace:   0%|          | 2/2157 [00:04<1:05:58,  1.84s/it]
+clean_s1000/slowpace:   0%|          | 3/2157 [00:04<39:33,  1.10s/it]  
+       clean_s1000 on slowpace    masked 0.30038 ± 0.01884   reported 0.29937   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:44,  1.08s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s1000/density:   0%|          | 1/1647 [00:05<2:31:28,  5.52s/it]
+clean_s1000/density:   0%|          | 2/1647 [00:05<1:05:37,  2.39s/it]
+clean_s1000/density:   0%|          | 3/1647 [00:05<38:22,  1.40s/it]  
+       clean_s1000 on density     masked 0.58914 ± 0.03437   reported 0.58490   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<13:51,  1.70s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s2000/randomized:   0%|          | 1/1981 [00:07<3:53:59,  7.09s/it]
+clean_s2000/randomized:   0%|          | 2/1981 [00:07<1:41:00,  3.06s/it]
+clean_s2000/randomized:   0%|          | 3/1981 [00:07<58:30,  1.77s/it]  
+clean_s2000/randomized:   0%|          | 4/1981 [00:07<38:28,  1.17s/it]
+       clean_s2000 on randomized  masked 0.49894 ± 0.03231   reported 0.49783   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:15,  1.14s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s2000/recovery:   0%|          | 1/2011 [00:05<3:20:32,  5.99s/it]
+clean_s2000/recovery:   0%|          | 2/2011 [00:06<1:27:39,  2.62s/it]
+clean_s2000/recovery:   0%|          | 3/2011 [00:06<50:48,  1.52s/it]  
+clean_s2000/recovery:   0%|          | 4/2011 [00:06<33:40,  1.01s/it]
+       clean_s2000 on recovery    masked 0.45517 ± 0.04025   reported 0.45352   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:33,  1.18s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s2000/color:   0%|          | 1/1553 [00:06<2:57:56,  6.88s/it]
+clean_s2000/color:   0%|          | 2/1553 [00:07<1:16:50,  2.97s/it]
+clean_s2000/color:   0%|          | 3/1553 [00:07<44:45,  1.73s/it]  
+clean_s2000/color:   0%|          | 4/1553 [00:07<29:29,  1.14s/it]
+       clean_s2000 on color       masked 0.35310 ± 0.01762   reported 0.35080   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<11:57,  1.47s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s2000/slowpace:   0%|          | 1/2157 [00:06<3:41:17,  6.16s/it]
+clean_s2000/slowpace:   0%|          | 2/2157 [00:06<1:35:54,  2.67s/it]
+clean_s2000/slowpace:   0%|          | 3/2157 [00:06<56:16,  1.57s/it]  
+clean_s2000/slowpace:   0%|          | 4/2157 [00:06<37:17,  1.04s/it]
+       clean_s2000 on slowpace    masked 0.29384 ± 0.01951   reported 0.29281   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.536 50.752 42.752] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+clean_s2000/density:   0%|          | 1/1647 [00:06<2:45:35,  6.04s/it]
+clean_s2000/density:   0%|          | 2/1647 [00:06<1:12:15,  2.64s/it]
+clean_s2000/density:   0%|          | 3/1647 [00:06<42:00,  1.53s/it]  
+clean_s2000/density:   0%|          | 4/1647 [00:06<27:50,  1.02s/it]
+       clean_s2000 on density     masked 0.58570 ± 0.03449   reported 0.58110   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s1000/clean:   0%|          | 1/1747 [00:02<1:20:55,  2.78s/it]
+randomized_s1000/clean:   0%|          | 2/1747 [00:02<36:54,  1.27s/it]  
+  randomized_s1000 on clean       masked 0.28194 ± 0.01245   reported 0.27989   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:56,  1.10s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s1000/recovery:   0%|          | 1/2011 [00:05<2:54:17,  5.20s/it]
+randomized_s1000/recovery:   0%|          | 2/2011 [00:05<1:16:03,  2.27s/it]
+randomized_s1000/recovery:   0%|          | 3/2011 [00:05<44:58,  1.34s/it]  
+  randomized_s1000 on recovery    masked 0.38173 ± 0.01705   reported 0.37950   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:31,  1.17s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s1000/color:   0%|          | 1/1553 [00:02<1:10:59,  2.74s/it]
+randomized_s1000/color:   0%|          | 2/1553 [00:03<36:10,  1.40s/it]  
+  randomized_s1000 on color       masked 0.43023 ± 0.01340   reported 0.42828   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s1000/slowpace:   0%|          | 1/2157 [00:03<1:49:26,  3.05s/it]
+randomized_s1000/slowpace:   0%|          | 2/2157 [00:03<57:02,  1.59s/it]  
+  randomized_s1000 on slowpace    masked 0.31855 ± 0.01342   reported 0.31755   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s1000/density:   0%|          | 1/1647 [00:02<1:19:01,  2.88s/it]
+randomized_s1000/density:   0%|          | 2/1647 [00:03<38:42,  1.41s/it]  
+  randomized_s1000 on density     masked 0.34178 ± 0.01239   reported 0.33814   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:34,  1.18s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s2000/clean:   0%|          | 1/1747 [00:04<2:10:43,  4.49s/it]
+randomized_s2000/clean:   0%|          | 2/1747 [00:04<57:20,  1.97s/it]  
+randomized_s2000/clean:   0%|          | 3/1747 [00:04<34:05,  1.17s/it]
+  randomized_s2000 on clean       masked 0.28218 ± 0.01249   reported 0.28014   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s2000/recovery:   0%|          | 1/2011 [00:04<2:41:42,  4.83s/it]
+randomized_s2000/recovery:   0%|          | 2/2011 [00:05<1:10:43,  2.11s/it]
+randomized_s2000/recovery:   0%|          | 3/2011 [00:05<41:48,  1.25s/it]  
+  randomized_s2000 on recovery    masked 0.37938 ± 0.01673   reported 0.37711   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:12,  1.01s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s2000/color:   0%|          | 1/1553 [00:07<3:10:40,  7.37s/it]
+randomized_s2000/color:   0%|          | 2/1553 [00:07<1:21:59,  3.17s/it]
+randomized_s2000/color:   0%|          | 3/1553 [00:07<47:22,  1.83s/it]  
+randomized_s2000/color:   0%|          | 4/1553 [00:08<31:00,  1.20s/it]
+  randomized_s2000 on color       masked 0.42878 ± 0.01295   reported 0.42674   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<14:21,  1.77s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s2000/slowpace:   0%|          | 1/2157 [00:05<3:28:29,  5.80s/it]
+randomized_s2000/slowpace:   0%|          | 2/2157 [00:06<1:40:19,  2.79s/it]
+randomized_s2000/slowpace:   0%|          | 3/2157 [00:06<58:09,  1.62s/it]  
+randomized_s2000/slowpace:   0%|          | 4/2157 [00:06<38:41,  1.08s/it]
+  randomized_s2000 on slowpace    masked 0.31869 ± 0.01280   reported 0.31765   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:02<18:18,  2.25s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [30.004 54.587 50.924] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+randomized_s2000/density:   0%|          | 1/1647 [00:05<2:28:22,  5.41s/it]
+randomized_s2000/density:   0%|          | 2/1647 [00:05<1:04:20,  2.35s/it]
+randomized_s2000/density:   0%|          | 3/1647 [00:05<37:43,  1.38s/it]  
+  randomized_s2000 on density     masked 0.33936 ± 0.01218   reported 0.33585   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<14:06,  1.73s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s1000/clean:   0%|          | 1/1747 [00:06<3:11:09,  6.57s/it]
+recovery_s1000/clean:   0%|          | 2/1747 [00:06<1:23:08,  2.86s/it]
+recovery_s1000/clean:   0%|          | 3/1747 [00:07<48:21,  1.66s/it]  
+recovery_s1000/clean:   0%|          | 4/1747 [00:07<32:02,  1.10s/it]
+    recovery_s1000 on clean       masked 0.27545 ± 0.00993   reported 0.27320   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<10:31,  1.29s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s1000/randomized:   0%|          | 1/1981 [00:06<3:24:36,  6.20s/it]
+recovery_s1000/randomized:   0%|          | 2/1981 [00:07<1:39:52,  3.03s/it]
+recovery_s1000/randomized:   0%|          | 3/1981 [00:07<57:42,  1.75s/it]  
+recovery_s1000/randomized:   0%|          | 4/1981 [00:07<38:11,  1.16s/it]
+    recovery_s1000 on randomized  masked 0.37363 ± 0.02254   reported 0.37195   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<10:06,  1.24s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s1000/color:   0%|          | 1/1553 [00:06<2:59:02,  6.92s/it]
+recovery_s1000/color:   0%|          | 2/1553 [00:07<1:23:01,  3.21s/it]
+recovery_s1000/color:   0%|          | 3/1553 [00:07<47:35,  1.84s/it]  
+recovery_s1000/color:   0%|          | 4/1553 [00:07<31:17,  1.21s/it]
+    recovery_s1000 on color       masked 0.27248 ± 0.00998   reported 0.27039   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<15:02,  1.85s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s1000/slowpace:   0%|          | 1/2157 [00:06<4:08:20,  6.91s/it]
+recovery_s1000/slowpace:   0%|          | 2/2157 [00:07<1:47:19,  2.99s/it]
+recovery_s1000/slowpace:   0%|          | 3/2157 [00:07<1:02:30,  1.74s/it]
+recovery_s1000/slowpace:   0%|          | 4/2157 [00:07<41:13,  1.15s/it]  
+    recovery_s1000 on slowpace    masked 0.23868 ± 0.01193   reported 0.23726   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<12:40,  1.56s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s1000/density:   0%|          | 1/1647 [00:06<2:48:18,  6.14s/it]
+recovery_s1000/density:   0%|          | 2/1647 [00:06<1:22:39,  3.01s/it]
+recovery_s1000/density:   0%|          | 3/1647 [00:07<48:00,  1.75s/it]  
+recovery_s1000/density:   0%|          | 4/1647 [00:07<31:58,  1.17s/it]
+    recovery_s1000 on density     masked 0.41801 ± 0.02497   reported 0.41313   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<13:09,  1.62s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s2000/clean:   0%|          | 1/1747 [00:06<2:57:28,  6.10s/it]
+recovery_s2000/clean:   0%|          | 2/1747 [00:06<1:25:51,  2.95s/it]
+recovery_s2000/clean:   0%|          | 3/1747 [00:07<49:41,  1.71s/it]  
+recovery_s2000/clean:   0%|          | 4/1747 [00:07<32:51,  1.13s/it]
+    recovery_s2000 on clean       masked 0.27349 ± 0.00952   reported 0.27121   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s2000/randomized:   0%|          | 1/1981 [00:05<2:58:30,  5.41s/it]
+recovery_s2000/randomized:   0%|          | 2/1981 [00:05<1:23:12,  2.52s/it]
+recovery_s2000/randomized:   0%|          | 3/1981 [00:06<48:23,  1.47s/it]  
+    recovery_s2000 on randomized  masked 0.36838 ± 0.02189   reported 0.36657   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<15:06,  1.86s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s2000/color:   0%|          | 1/1553 [00:05<2:11:15,  5.07s/it]
+recovery_s2000/color:   0%|          | 2/1553 [00:05<57:10,  2.21s/it]  
+recovery_s2000/color:   0%|          | 3/1553 [00:05<33:43,  1.31s/it]
+    recovery_s2000 on color       masked 0.27148 ± 0.00998   reported 0.26932   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s2000/slowpace:   0%|          | 1/2157 [00:03<2:17:36,  3.83s/it]
+recovery_s2000/slowpace:   0%|          | 2/2157 [00:05<1:21:54,  2.28s/it]
+recovery_s2000/slowpace:   0%|          | 3/2157 [00:05<47:48,  1.33s/it]  
+    recovery_s2000 on slowpace    masked 0.23757 ± 0.01196   reported 0.23618   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [19.067 52.133 47.352] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+recovery_s2000/density:   0%|          | 1/1647 [00:05<2:18:47,  5.06s/it]
+recovery_s2000/density:   0%|          | 2/1647 [00:05<1:00:23,  2.20s/it]
+recovery_s2000/density:   0%|          | 3/1647 [00:05<35:28,  1.29s/it]  
+    recovery_s2000 on density     masked 0.40641 ± 0.02335   reported 0.40129   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s1000/clean:   0%|          | 1/1747 [00:03<1:29:08,  3.06s/it]
+color_s1000/clean:   0%|          | 2/1747 [00:03<46:19,  1.59s/it]  
+       color_s1000 on clean       masked 0.33466 ± 0.01484   reported 0.33189   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s1000/randomized:   0%|          | 1/1981 [00:05<2:52:45,  5.24s/it]
+color_s1000/randomized:   0%|          | 2/1981 [00:05<1:17:11,  2.34s/it]
+color_s1000/randomized:   0%|          | 3/1981 [00:05<45:13,  1.37s/it]  
+       color_s1000 on randomized  masked 0.65729 ± 0.04029   reported 0.65589   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s1000/recovery:   0%|          | 1/2011 [00:05<2:57:05,  5.29s/it]
+color_s1000/recovery:   0%|          | 2/2011 [00:05<1:17:01,  2.30s/it]
+color_s1000/recovery:   0%|          | 3/2011 [00:05<45:17,  1.35s/it]  
+       color_s1000 on recovery    masked 0.47111 ± 0.03559   reported 0.46905   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<10:41,  1.32s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s1000/slowpace:   0%|          | 1/2157 [00:06<3:47:59,  6.34s/it]
+color_s1000/slowpace:   0%|          | 2/2157 [00:06<1:45:07,  2.93s/it]
+color_s1000/slowpace:   0%|          | 3/2157 [00:07<1:00:27,  1.68s/it]
+color_s1000/slowpace:   0%|          | 4/2157 [00:07<39:56,  1.11s/it]  
+       color_s1000 on slowpace    masked 0.31708 ± 0.01179   reported 0.31568   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<12:48,  1.58s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s1000/density:   0%|          | 1/1647 [00:06<3:00:47,  6.59s/it]
+color_s1000/density:   0%|          | 2/1647 [00:07<1:26:00,  3.14s/it]
+color_s1000/density:   0%|          | 3/1647 [00:07<49:31,  1.81s/it]  
+color_s1000/density:   0%|          | 4/1647 [00:07<32:32,  1.19s/it]
+       color_s1000 on density     masked 0.61931 ± 0.03656   reported 0.61553   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<14:26,  1.78s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s2000/clean:   0%|          | 1/1747 [00:06<3:21:39,  6.93s/it]
+color_s2000/clean:   0%|          | 2/1747 [00:07<1:26:41,  2.98s/it]
+color_s2000/clean:   0%|          | 3/1747 [00:07<50:26,  1.74s/it]  
+color_s2000/clean:   0%|          | 4/1747 [00:07<32:56,  1.13s/it]
+       color_s2000 on clean       masked 0.33555 ± 0.01429   reported 0.33283   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<12:39,  1.56s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s2000/randomized:   0%|          | 1/1981 [00:05<3:07:39,  5.69s/it]
+color_s2000/randomized:   0%|          | 2/1981 [00:06<1:34:50,  2.88s/it]
+color_s2000/randomized:   0%|          | 3/1981 [00:06<54:39,  1.66s/it]  
+color_s2000/randomized:   0%|          | 4/1981 [00:07<35:56,  1.09s/it]
+       color_s2000 on randomized  masked 0.64920 ± 0.03954   reported 0.64784   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<09:58,  1.23s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s2000/recovery:   0%|          | 1/2011 [00:03<1:49:38,  3.27s/it]
+color_s2000/recovery:   0%|          | 2/2011 [00:03<49:32,  1.48s/it]  
+       color_s2000 on recovery    masked 0.47481 ± 0.03608   reported 0.47268   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s2000/slowpace:   0%|          | 1/2157 [00:06<3:48:34,  6.36s/it]
+color_s2000/slowpace:   0%|          | 2/2157 [00:06<1:42:59,  2.87s/it]
+color_s2000/slowpace:   0%|          | 3/2157 [00:07<59:51,  1.67s/it]  
+color_s2000/slowpace:   0%|          | 4/2157 [00:07<39:31,  1.10s/it]
+       color_s2000 on slowpace    masked 0.32133 ± 0.01206   reported 0.32003   (50 eps, 34511 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<10:01,  1.23s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [16.921 56.121 53.273] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_s2000/density:   0%|          | 1/1647 [00:05<2:24:04,  5.25s/it]
+color_s2000/density:   0%|          | 2/1647 [00:05<1:03:00,  2.30s/it]
+color_s2000/density:   0%|          | 3/1647 [00:05<37:16,  1.36s/it]  
+       color_s2000 on density     masked 0.60956 ± 0.03545   reported 0.60568   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<12:02,  1.48s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [17.338 53.606 48.092] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_slowpace/clean:   0%|          | 1/1747 [00:04<2:12:09,  4.54s/it]
+color_slowpace/clean:   0%|          | 2/1747 [00:05<1:14:53,  2.57s/it]
+color_slowpace/clean:   0%|          | 3/1747 [00:05<43:37,  1.50s/it]  
+    color_slowpace on clean       masked 0.29289 ± 0.01370   reported 0.29048   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:02<18:36,  2.29s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [17.338 53.606 48.092] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_slowpace/randomized:   0%|          | 1/1981 [00:06<3:46:48,  6.87s/it]
+color_slowpace/randomized:   0%|          | 2/1981 [00:07<1:51:01,  3.37s/it]
+color_slowpace/randomized:   0%|          | 3/1981 [00:08<1:03:33,  1.93s/it]
+color_slowpace/randomized:   0%|          | 4/1981 [00:08<41:35,  1.26s/it]  
+    color_slowpace on randomized  masked 0.50196 ± 0.03152   reported 0.50022   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<15:39,  1.93s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [17.338 53.606 48.092] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_slowpace/recovery:   0%|          | 1/2011 [00:07<4:15:59,  7.64s/it]
+color_slowpace/recovery:   0%|          | 2/2011 [00:07<1:50:28,  3.30s/it]
+color_slowpace/recovery:   0%|          | 3/2011 [00:08<1:04:16,  1.92s/it]
+color_slowpace/recovery:   0%|          | 4/2011 [00:08<42:10,  1.26s/it]  
+    color_slowpace on recovery    masked 0.36862 ± 0.02878   reported 0.36667   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<11:03,  1.36s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [17.338 53.606 48.092] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_slowpace/color:   0%|          | 1/1553 [00:05<2:26:54,  5.68s/it]
+color_slowpace/color:   0%|          | 2/1553 [00:06<1:10:40,  2.73s/it]
+color_slowpace/color:   0%|          | 3/1553 [00:06<40:49,  1.58s/it]  
+color_slowpace/color:   0%|          | 4/1553 [00:06<27:02,  1.05s/it]
+    color_slowpace on color       masked 0.28786 ± 0.00949   reported 0.28596   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [17.338 53.606 48.092] | swapped [20.046 52.496 49.821]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+color_slowpace/density:   0%|          | 1/1647 [00:03<1:37:05,  3.54s/it]
+color_slowpace/density:   0%|          | 2/1647 [00:03<43:29,  1.59s/it]  
+    color_slowpace on density     masked 0.54049 ± 0.03093   reported 0.53698   (50 eps, 26349 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [20.046 52.496 49.821] | swapped [16.536 50.752 42.752]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density/clean:   0%|          | 1/1747 [00:05<2:36:33,  5.38s/it]
+density/clean:   0%|          | 2/1747 [00:06<1:18:59,  2.72s/it]
+density/clean:   0%|          | 3/1747 [00:06<45:36,  1.57s/it]  
+density/clean:   0%|          | 4/1747 [00:06<29:59,  1.03s/it]
+           density on clean       masked 0.42749 ± 0.02061   reported 0.42179   (50 eps, 27947 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [20.046 52.496 49.821] | swapped [30.004 54.587 50.924]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density/randomized:   0%|          | 1/1981 [00:05<3:00:50,  5.48s/it]
+density/randomized:   0%|          | 2/1981 [00:05<1:23:47,  2.54s/it]
+density/randomized:   0%|          | 3/1981 [00:06<48:37,  1.48s/it]  
+           density on randomized  masked 0.55322 ± 0.02914   reported 0.55131   (50 eps, 31682 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<08:14,  1.01s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [20.046 52.496 49.821] | swapped [19.067 52.133 47.352]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density/recovery:   0%|          | 1/2011 [00:04<2:36:07,  4.66s/it]
+density/recovery:   0%|          | 2/2011 [00:04<1:08:17,  2.04s/it]
+density/recovery:   0%|          | 3/2011 [00:05<40:22,  1.21s/it]  
+           density on recovery    masked 0.42930 ± 0.03028   reported 0.42564   (50 eps, 32170 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Loading weights:   0%|          | 1/489 [00:01<10:10,  1.25s/it]
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [20.046 52.496 49.821] | swapped [16.921 56.121 53.273]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density/color:   0%|          | 1/1553 [00:02<1:16:59,  2.98s/it]
+density/color:   0%|          | 2/1553 [00:03<43:57,  1.70s/it]  
+density/color:   0%|          | 3/1553 [00:03<26:16,  1.02s/it]
+           density on color       masked 0.37845 ± 0.01133   reported 0.37530   (50 eps, 24847 frames)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+
+Reducing the number of VLM layers to 16 ...
+
+  norm_map: {<FeatureType.VISUAL: 'VISUAL'>: <NormalizationMode.IDENTITY: 'IDENTITY'>, <FeatureType.STATE: 'STATE'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>, <FeatureType.ACTION: 'ACTION'>: <NormalizationMode.MEAN_STD: 'MEAN_STD'>}
+  action std, own [20.046 52.496 49.821] | swapped [17.338 53.606 48.092]
+  preprocessor steps: ['RenameObservationsProcessorStep', 'AddBatchDimensionProcessorStep', 'NewLineTaskProcessorStep', 'TokenizerProcessorStep', 'DeviceProcessorStep', 'NormalizerProcessorStep']
+
+
+
+density/slowpace:   0%|          | 1/2157 [00:03<1:56:07,  3.23s/it]
+density/slowpace:   0%|          | 2/2157 [00:03<52:02,  1.45s/it]  
+           density on slowpace    masked 0.35862 ± 0.01377   reported 0.35612   (50 eps, 34511 frames)
+
+wrote analysis/out_loss/loss_matrix_normalized.json (50 cells)
