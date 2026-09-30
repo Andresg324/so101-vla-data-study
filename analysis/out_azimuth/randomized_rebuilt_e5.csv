@@ -1,0 +1,16 @@
+cell,episode,frame,success,instance,released,pan,lift,elbow,wrist_flex,wrist_roll,grasp_x,grasp_y,policy,az,group,err
+new_positions,21,317,0,E5,True,20.36,50.16,-53.09,58.1,11.95,14.16,15.59,density5-seed2000,22.98,new_positions:E5,-9.21
+new_positions,22,279,0,E5,True,15.38,41.61,-46.38,60.73,11.38,12.81,15.2,density5-seed2000,18.26,new_positions:E5,-13.94
+new_positions,23,440,0,E5,True,15.16,49.67,-55.34,60.1,5.93,13.05,15.98,density5-seed2000,18.05,new_positions:E5,-14.15
+new_positions,24,292,0,E5,True,13.54,42.62,-40.49,52.5,10.14,13.16,14.52,density5-seed2000,16.51,new_positions:E5,-15.68
+new_positions,25,285,0,E5,True,22.04,45.72,-44.45,57.39,13.73,14.64,14.4,density5-seed2000,24.57,new_positions:E5,-7.62
+new_positions,21,319,0,E5,True,15.88,51.07,-57.1,55.42,12.37,13.13,16.68,density5,18.73,new_positions:E5,-13.46
+new_positions,22,288,0,E5,True,31.37,60.16,-63.17,58.86,21.36,16.47,16.21,density5,33.42,new_positions:E5,1.23
+new_positions,23,324,0,E5,True,12.18,48.01,-52.74,54.34,9.72,12.52,16.28,density5,15.22,new_positions:E5,-16.97
+new_positions,24,280,0,E5,True,14.98,49.01,-51.34,56.03,11.27,13.36,15.62,density5,17.88,new_positions:E5,-14.32
+new_positions,25,260,0,E5,True,14.95,49.18,-52.45,58.33,12.89,13.37,15.64,density5,17.85,new_positions:E5,-14.35
+new_positions_rebuilt,21,279,0,E5,True,7.01,54.24,-45.14,49.71,-1.87,13.58,13.95,randomized,10.32,new_positions_rebuilt:E5,-21.88
+new_positions_rebuilt,22,238,0,E5,True,3.91,50.32,-35.87,43.71,-0.58,13.39,13.09,randomized,7.38,new_positions_rebuilt:E5,-24.82
+new_positions_rebuilt,23,227,0,E5,True,7.26,53.69,-44.38,50.41,-4.43,13.58,13.77,randomized,10.56,new_positions_rebuilt:E5,-21.64
+new_positions_rebuilt,24,279,0,E5,True,5.95,47.36,-36.92,46.27,-2.68,13.02,13.52,randomized,9.31,new_positions_rebuilt:E5,-22.88
+new_positions_rebuilt,25,224,0,E5,True,4.49,49.95,-37.24,45.9,-0.67,13.31,13.24,randomized,7.93,new_positions_rebuilt:E5,-24.27

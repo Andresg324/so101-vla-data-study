@@ -1,0 +1,16 @@
+cell,episode,frame,success,instance,released,pan,lift,elbow,wrist_flex,wrist_roll,group,grasp_x,grasp_y
+in_distribution_rebuilt,1,195,0,-,True,6.76,35.68,-14.37,36.36,-7.4,in_distribution_rebuilt,13.27,11.16
+in_distribution_rebuilt,2,195,0,-,True,19.52,14.92,23.9,23.51,-8.52,in_distribution_rebuilt,15.31,6.87
+in_distribution_rebuilt,3,276,0,-,True,-2.13,42.92,-19.73,30.78,-8.82,in_distribution_rebuilt,12.55,11.85
+in_distribution_rebuilt,4,142,0,-,True,14.14,1.65,26.46,30.24,-10.32,in_distribution_rebuilt,12.61,7.77
+in_distribution_rebuilt,5,133,0,-,True,16.19,4.07,31.74,22.08,-1.52,in_distribution_rebuilt,13.88,7.05
+in_distribution_rebuilt,6,141,0,-,True,19.85,4.73,35.42,19.63,-0.87,in_distribution_rebuilt,14.87,6.32
+in_distribution_rebuilt,7,190,0,-,True,16.07,8.47,28.82,21.53,-4.61,in_distribution_rebuilt,14.25,7.04
+in_distribution_rebuilt,8,236,0,-,True,16.6,17.71,17.18,16.6,-4.94,in_distribution_rebuilt,14.4,8.71
+in_distribution_rebuilt,9,387,0,-,True,16.06,10.56,26.68,21.45,-7.61,in_distribution_rebuilt,14.31,7.18
+in_distribution_rebuilt,10,146,1,-,True,22.54,5.12,34.88,18.42,-0.95,in_distribution_rebuilt,15.18,6.47
+in_distribution_rebuilt,11,146,0,-,True,20.59,4.96,34.98,22.28,-0.1,in_distribution_rebuilt,15.08,6.12
+in_distribution_rebuilt,12,242,0,-,True,14.84,26.11,0.13,33.09,-6.43,in_distribution_rebuilt,14.23,9.63
+in_distribution_rebuilt,13,236,0,-,True,15.99,9.56,22.34,29.69,-3.63,in_distribution_rebuilt,13.96,7.55
+in_distribution_rebuilt,14,142,0,-,True,19.03,6.37,24.36,30.97,-8.72,in_distribution_rebuilt,13.96,7.39
+in_distribution_rebuilt,15,288,0,-,True,13.91,18.69,12.14,28.05,-7.11,in_distribution_rebuilt,14.0,8.57

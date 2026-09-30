@@ -51,6 +51,11 @@ density5,density5,1000,new_positions,22,0,timeout_other,983,32.733,4,0,47.932277
 density5,density5,1000,new_positions,23,0,timeout_other,1004,33.433,7,0,40.870449031387984,2.557417507334641,7,7,7,6,5,failure ended early
 density5,density5,1000,new_positions,24,0,timeout_other,1001,33.333,5,0,41.43908667200204,3.3660171385719693,5,5,5,6,3,failure ended early
 density5,density5,1000,new_positions,25,0,timeout_other,1007,33.533,6,0,43.94270608868811,4.1556510251136665,6,5,3,2,2,failure ended early
+randomized,randomized,1000,in_distribution_rebuilt,11,0,timeout_other,917,30.533,6,0,24.52607492039295,2.1089196467729208,6,7,6,6,6,failure ended early
+randomized,randomized,1000,in_distribution_rebuilt,12,0,contact_no_grasp,788,26.233,5,0,26.529019166197774,3.544232133649369,5,5,6,6,6,failure ended early
+randomized,randomized,1000,in_distribution_rebuilt,13,0,grasp_drop,1001,33.333,7,2,6.042779836047533,45.62987567096121,7,7,7,7,7,failure ended early
+randomized,randomized,1000,in_distribution_rebuilt,15,0,grasp_drop,1053,35.067,7,2,15.521312840287283,35.24560035727306,7,7,7,6,6,failure ended early
+randomized,randomized,1000,new_positions_rebuilt,24,0,timeout_other,1049,34.933,7,0,25.020463832506376,4.627623161528242,7,7,7,7,7,failure ended early
 density10-seed2000,density10,2000,new_positions,15,1,success_after_missed_grasp,751,25.0,1,0,32.795861248570446,3.9440637008694805,1,2,2,3,3,success without cup release
 density10,density10,1000,distractors,3,1,success,432,14.367,0,0,,,0,0,1,1,1,success without cup release
 density10,density10,1000,distractors,10,1,success,1151,38.333,2,2,7.975843870120368,45.31747188091436,2,2,2,2,2,success without cup release
@@ -59,8 +64,11 @@ density25-seed2000,density25,2000,distractors,3,1,success,623,20.733,1,1,37.5437
 density25-seed2000,density25,2000,distractors,7,1,success,389,12.933,0,0,,,0,1,1,1,1,success without cup release
 density25-seed2000,density25,2000,distractors,11,1,success,466,15.5,0,0,,,0,0,1,1,1,success without cup release
 density25-seed2000,density25,2000,distractors,12,1,success,390,12.967,0,0,,,0,0,1,2,2,success without cup release
+density25-seed2000,density25,2000,reach_e5,1,1,success,516,17.167,0,0,,,0,1,1,2,2,success without cup release
+density25-seed2000,density25,2000,reach_e5,3,1,success,571,19.0,1,0,58.45538511298183,0.1830249543439635,1,2,2,2,2,success without cup release
 density25,density25,1000,distractors,1,1,success,595,19.8,0,0,,,0,0,1,1,2,success without cup release
 density25,density25,1000,in_distribution,4,1,success,401,13.333,0,0,,,0,1,1,1,1,success without cup release
+density25,density25,1000,reach_e5,3,1,success,547,18.2,1,0,61.081948074530146,0.5475949451495197,1,1,2,2,2,success without cup release
 density5-seed2000,density5,2000,in_distribution,9,1,success,451,15.0,2,1,7.557651280151074,38.69800363155035,2,2,2,2,2,success without cup release
 density5-seed2000,density5,2000,spot_check,3,1,success,422,14.033,0,0,,,0,0,0,1,1,success without cup release
 density50-fixedstep,density50-fixedstep,1000,in_distribution,4,1,success,405,13.467,0,0,,,0,0,0,0,0,success without cup release
@@ -70,4 +78,6 @@ density50-fixedstep,density50-fixedstep,1000,spot_check,4,1,success,465,15.467,0
 density50-fixedstep,density50-fixedstep,1000,spot_check,5,1,success,473,15.733,0,0,,,0,0,0,1,2,success without cup release
 density50-seed2000,density50,2000,distractors,10,1,success,716,23.833,0,0,,,0,1,2,2,2,success without cup release
 density50-seed2000,density50,2000,distractors,13,1,success,507,16.867,0,0,,,0,0,0,0,1,success without cup release
+density50-seed2000,density50,2000,reach_e5,3,1,success,501,16.667,0,0,,,0,0,0,0,1,success without cup release
 density50-seed2000,density50,2000,spot_check,1,1,success,471,15.667,0,0,,,0,0,0,0,0,success without cup release
+randomized,randomized,1000,in_distribution_rebuilt,13,0,grasp_drop,1001,33.333,7,2,6.042779836047533,45.62987567096121,7,7,7,7,7,short failure with cup release

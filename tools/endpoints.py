@@ -22,7 +22,7 @@ from grasp import grasp_pose
 from rollout_paths import discover, parse_policy
 
 JOINTS = ["pan", "lift", "elbow", "wrist_flex", "wrist_roll"]
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv", "documents/followup.csv"]
 
 def actions(root):
     f = sorted(glob.glob(os.path.join(root, "data", "**", "*.parquet"), recursive=True))

@@ -1,0 +1,5 @@
+comparison,a,b,difference,diff_ci_low,diff_ci_high
+"§8.36 rebuilt vs August, T6",4/15,6/15,-0.1333,-0.4226,0.1901
+"§8.37 retrain vs August, T6",1/15,6/15,-0.3333,-0.582,-0.0263
+"not registered: retrain vs rebuilt, T6",1/15,4/15,-0.2,-0.4587,0.0801
+"rebuilt vs August, New Positions",0/25,0/15,0.0,-0.2039,0.1332

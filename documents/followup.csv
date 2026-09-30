@@ -1,0 +1,96 @@
+condition,eval_cell,seed,episode,instance,success,flagged,failure_mode,regrasp,notes
+randomized,in_distribution_rebuilt,1000,1,-,0,,timeout_other,,looked at cube for a second before going to top
+randomized,in_distribution_rebuilt,1000,2,-,1,,success,,
+randomized,in_distribution_rebuilt,1000,3,-,1,,success,,
+randomized,in_distribution_rebuilt,1000,4,-,0,,contact_no_grasp,,aimed left and bumped cube while opening
+randomized,in_distribution_rebuilt,1000,5,-,0,,grasp_drop,,"Missed the cup, dropped the cube to the right of it, went towards fallend cube but didn't get it"
+randomized,in_distribution_rebuilt,1000,6,-,0,,grasp_drop,,"Missed the cup, dropped the cube to the right of it by around an inch, went towards fallend cube but fifn't get it"
+randomized,in_distribution_rebuilt,1000,7,-,0,,timeout_other,,opened on the top of the cube but didn't touch it
+randomized,in_distribution_rebuilt,1000,8,-,0,,grasp_drop,,"had cube in the middle of the cup, but pulled a bit back and dropped"
+randomized,in_distribution_rebuilt,1000,9,-,1,,success,,
+randomized,in_distribution_rebuilt,1000,10,-,0,,contact_no_grasp,,aimed left and bumped cube while opening
+randomized,in_distribution_rebuilt,1000,11,-,0,,timeout_other,,missed the cube and went to the top
+randomized,in_distribution_rebuilt,1000,12,-,0,,contact_no_grasp,,aimed left and bumped cube while opening
+randomized,in_distribution_rebuilt,1000,13,-,0,,grasp_drop,,"Missed the cup, dropped the cube to the right of it, went towards fallend cube but didn't get it"
+randomized,in_distribution_rebuilt,1000,14,-,1,,success,,
+randomized,in_distribution_rebuilt,1000,15,-,0,,grasp_drop,,"Missed the cup, dropped the cube to the right of it by around an inch, went towards fallend cube but fifn't get it"
+randomized,new_positions_rebuilt,1000,1,E1,0,,timeout_other,,"Went to the middle, towards T3"
+randomized,new_positions_rebuilt,1000,2,E1,0,,timeout_other,,"Went to the middle, towards T3"
+randomized,new_positions_rebuilt,1000,3,E1,0,,timeout_other,,"Went to the middle, towards T3"
+randomized,new_positions_rebuilt,1000,4,E1,0,,timeout_other,,went towards T2 first
+randomized,new_positions_rebuilt,1000,5,E1,0,,timeout_other,,went to the middle towards T4 
+randomized,new_positions_rebuilt,1000,6,E2,0,,timeout_other,,"seemed to aim towards cube, ended near T1"
+randomized,new_positions_rebuilt,1000,7,E2,0,,timeout_other,,"seemed to aim towards cube, ended near T2, cup was shifted, confirm this was during episode"
+randomized,new_positions_rebuilt,1000,8,E2,0,,timeout_other,,"seems to aim towards cube, went to cup, bumped it, then to T2"
+randomized,new_positions_rebuilt,1000,9,E2,0,,timeout_other,,"seems to aim towards cube, went to cup, bumped it, then to T2"
+randomized,new_positions_rebuilt,1000,10,E2,0,,timeout_other,,"seems to aim towards cube, went to cup, bumped it, then to T2, ends up by E1 at certain points"
+randomized,new_positions_rebuilt,1000,11,E3,0,,timeout_other,,"goes past cube, between T4 and E3, then ends up at top of board"
+randomized,new_positions_rebuilt,1000,12,E3,0,,timeout_other,,"goes past cube, between T4 and E3, then ends up at top of board"
+randomized,new_positions_rebuilt,1000,13,E3,0,,timeout_other,,"goes past cube, between T4 and E3, then ends up at top of board"
+randomized,new_positions_rebuilt,1000,14,E3,0,,timeout_other,,"went towards t6, then t7, ended by t3"
+randomized,new_positions_rebuilt,1000,15,E3,0,,timeout_other,,"went towards t4, over the cube, went to t3"
+randomized,new_positions_rebuilt,1000,16,E4,0,,timeout_other,,"went towards the cube, but a bit over, then to t7, and ended by the top"
+randomized,new_positions_rebuilt,1000,17,E4,0,,timeout_other,,"went towards the cube, but a bit over, then to t7"
+randomized,new_positions_rebuilt,1000,18,E4,0,,timeout_other,,"aimed towards cube but went over, then to T7"
+randomized,new_positions_rebuilt,1000,19,E4,0,,timeout_other,,"initially looked at t6 but went towards the middle, and then towards the top of the board, near T4"
+randomized,new_positions_rebuilt,1000,20,E4,0,,timeout_other,,"ended up going to the middle, by t4 and t7"
+randomized,new_positions_rebuilt,1000,21,E5,0,,timeout_other,,"went between t6 and t7, ended near the tp, by t4"
+randomized,new_positions_rebuilt,1000,22,E5,0,,timeout_other,,"went towards t7, then t4 and near the top of the board"
+randomized,new_positions_rebuilt,1000,23,E5,0,,timeout_other,,"went towards t7, then t4 and near the top of the board"
+randomized,new_positions_rebuilt,1000,24,E5,0,,timeout_other,,"went towards t7, then t4 and near the top of the board"
+randomized,new_positions_rebuilt,1000,25,E5,0,,timeout_other,,"went towards t7, then t4 and near the top of the board"
+randomized-runpod,in_distribution_rebuilt,1000,1,-,0,,timeout_other,,aimed left of cube and ended towards the top of the board
+randomized-runpod,in_distribution_rebuilt,1000,2,-,0,,contact_no_grasp,,aimed left and bumped cube while opening
+randomized-runpod,in_distribution_rebuilt,1000,3,-,0,,timeout_other,,went to top of cube but didn't touch the cube
+randomized-runpod,in_distribution_rebuilt,1000,4,-,0,,contact_no_grasp,,"aimed to the left of the cube, opened gripper and bumped it trying to catch"
+randomized-runpod,in_distribution_rebuilt,1000,5,-,0,,contact_no_grasp,,"aimed to the left of the cube, opened gripper and bumped it trying to catch"
+randomized-runpod,in_distribution_rebuilt,1000,6,-,0,,contact_no_grasp,,"bumped cube trying to get it, then went to T4"
+randomized-runpod,in_distribution_rebuilt,1000,7,-,0,,contact_no_grasp,,"aimed to the left of the cube, opened gripper and bumped it trying to grab it"
+randomized-runpod,in_distribution_rebuilt,1000,8,-,0,,contact_no_grasp,,"aimed to the left of the cube, opened gripper and bumped it trying to grab it"
+randomized-runpod,in_distribution_rebuilt,1000,9,-,0,,contact_no_grasp,,"aimed to the left of the cube, opened gripper and bumped it trying to grab it"
+randomized-runpod,in_distribution_rebuilt,1000,10,-,1,,success,,
+randomized-runpod,in_distribution_rebuilt,1000,11,-,0,,contact_no_grasp,,"went to grab it, but didn't collect it, and bumped cube"
+randomized-runpod,in_distribution_rebuilt,1000,12,-,0,,contact_no_grasp,,"overshot the cube, slughtly bumped it then went up"
+randomized-runpod,in_distribution_rebuilt,1000,13,-,0,,contact_no_grasp,,"aimed to the left of the cube, opened gripper and bumped it trying to grab it"
+randomized-runpod,in_distribution_rebuilt,1000,14,-,0,,contact_no_grasp,,"aimed correctly, but missed, then went to the top"
+randomized-runpod,in_distribution_rebuilt,1000,15,-,0,,contact_no_grasp,,"went to the middle, then slightl corrected and bumped cube a bit, then ended up at the top"
+density5,reach_e5,1000,1,reach_e5,0,,contact_no_grasp,,"aimed close to cube, but to the left, bumped the cube slighly, ended at t7"
+density5,reach_e5,1000,2,reach_e5,0,,contact_no_grasp,,"aimed close to cube, but to the left, bumped the cube very slighly , ended at T7"
+density5,reach_e5,1000,3,reach_e5,0,,contact_no_grasp,,"aimed close to cube, but to the left, bumped the cube, ended at t7"
+density5,reach_e5,1000,4,reach_e5,0,,timeout_other,,was aiming to the left of the cube then went to T7
+density5,reach_e5,1000,5,reach_e5,0,,timeout_other,,was aiming to the left of the cube then went to T7
+density10,reach_e5,1000,1,reach_e5,0,,timeout_other,,"went between t6 and t7, ended by t7"
+density10,reach_e5,1000,2,reach_e5,0,,timeout_other,,"went between t6 and t7, ended by t7"
+density10,reach_e5,1000,3,reach_e5,0,,timeout_other,,"went between t6 and t7, ended by t7"
+density10,reach_e5,1000,4,reach_e5,0,,timeout_other,,"went between t6 and t7, ended at t7"
+density10,reach_e5,1000,5,reach_e5,0,,timeout_other,,"went between t6 and t7, ended by t7"
+density25,reach_e5,1000,1,reach_e5,1,,success,,
+density25,reach_e5,1000,2,reach_e5,1,,success,,
+density25,reach_e5,1000,3,reach_e5,1,,success,,
+density25,reach_e5,1000,4,reach_e5,0,,contact_no_grasp,,"slightly bumped cube as it approached it, moved it out of place and failed on the retry"
+density25,reach_e5,1000,5,reach_e5,1,,success,,
+density50,reach_e5,1000,1,reach_e5,1,,success,,
+density50,reach_e5,1000,2,reach_e5,1,,success,,
+density50,reach_e5,1000,3,reach_e5,1,,success,,
+density50,reach_e5,1000,4,reach_e5,1,,success,,
+density50,reach_e5,1000,5,reach_e5,0,,contact_no_grasp,,"slightly bumped cube as it approached it, moved it out of place and failed on the retry"
+density5,reach_e5,2000,1,reach_e5,0,,timeout_other,,"went towards t7, ended closer to t4"
+density5,reach_e5,2000,2,reach_e5,0,,timeout_other,,"went between t7 and t4, ended near t4"
+density5,reach_e5,2000,3,reach_e5,0,,timeout_other,,"went between t6 and t7, then to t7, ended near the top of the board, between t7 and t4"
+density5,reach_e5,2000,4,reach_e5,0,,timeout_other,,"went towards t7, ended closer to t4"
+density5,reach_e5,2000,5,reach_e5,0,,timeout_other,,"went between t7 and t4, ended near t4"
+density10,reach_e5,2000,1,reach_e5,0,,timeout_other,,"went between t6 and t7, ended by t7"
+density10,reach_e5,2000,2,reach_e5,0,,timeout_other,,"went between t6 and t7, closer to t6, but ended by t7"
+density10,reach_e5,2000,3,reach_e5,0,,timeout_other,,"went between t6 and t7, ended by t7"
+density10,reach_e5,2000,4,reach_e5,0,,timeout_other,,"went between t6 and t7, ended at t7"
+density10,reach_e5,2000,5,reach_e5,0,,timeout_other,,"went between t6 and t7, ended by t7"
+density25,reach_e5,2000,1,reach_e5,1,,success,,
+density25,reach_e5,2000,2,reach_e5,1,,success,,
+density25,reach_e5,2000,3,reach_e5,1,,success,,
+density25,reach_e5,2000,4,reach_e5,0,,contact_no_grasp,,"aimed differently, closed in front of the cube bumping it"
+density25,reach_e5,2000,5,reach_e5,0,,contact_no_grasp,,"aimed differently, closed on the cube but didn't grab it"
+density50,reach_e5,2000,1,reach_e5,1,,success,,"It didn't drop cube initially, but dropped it on the edge and it fell in"
+density50,reach_e5,2000,2,reach_e5,0,,contact_no_grasp,,"was a bit too to the left, and didn't pushed cube but didn't grab it"
+density50,reach_e5,2000,3,reach_e5,1,,success,,
+density50,reach_e5,2000,4,reach_e5,1,,success_after_missed_grasp,,"missed the first grab, but then got it"
+density50,reach_e5,2000,5,reach_e5,0,,contact_no_grasp,,"was a bit too to the left, and didn't pushed cube but didn't grab it"

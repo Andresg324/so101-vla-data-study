@@ -1,0 +1,5 @@
+group,n,median_az,err_vs_T6,q1,q3
+"randomized, August bench",14,24.09,-0.14,22.93,24.55
+"randomized-seed2000, August bench",15,25.37,1.14,24.12,25.83
+"randomized, rebuilt bench",15,24.21,-0.01,21.22,25.39
+"randomized-runpod, rebuilt bench",15,18.91,-5.32,17.41,21.95

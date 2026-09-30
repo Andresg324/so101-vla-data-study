@@ -1,0 +1,6 @@
+condition,eval_cell,contact_no_grasp,grasp_drop,no_departure,success,timeout_other
+randomized,in_distribution,4,0,1,6,4
+randomized,in_distribution_rebuilt,3,5,0,4,3
+randomized,new_positions,0,0,6,0,9
+randomized,new_positions_rebuilt,0,0,0,0,25
+randomized-runpod,in_distribution_rebuilt,12,0,0,1,2

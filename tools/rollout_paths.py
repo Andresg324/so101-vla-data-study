@@ -11,7 +11,8 @@ from export_results import ROLLOUTS
 
 CACHE = os.environ.get("LEROBOT_CACHE", os.path.expanduser("~/.cache/huggingface/lerobot/Andresg324"))
 CELLS = ["in_distribution", "new_positions", "reduced_lighting",
-         "different_object", "distractors", "near_1in", "near_2in", "trained_t2", "spot_check"]
+         "different_object", "distractors", "near_1in", "near_2in", "trained_t2", "spot_check",
+         "reach_e5", "in_distribution_rebuilt", "new_positions_rebuilt"]
 PATTERN = re.compile(r"^rollout_(?P<policy>.+?)_(?P<cell>" + "|".join(CELLS) + r")_(?P<stamp>\d{8}_\d{6})$")
 
 def parse_policy(policy):

@@ -26,6 +26,7 @@ import os
 
 import numpy as np
 import pandas as pd
+import argparse
 
 from sklearn.decomposition import PCA
 from sklearn.linear_model import RidgeCV
@@ -37,7 +38,7 @@ INDIR = "probing/out_np"
 OUTDIR = "analysis/out_probe"
 BASE_X = 11.0
 POS = {"E1": (2.0, 7.5), "E2": (6.5, 2.5), "E3": (12.0, 10.0), "E4": (15.5, 6.5), "E5": (19.5, 13.5)}
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv", "documents/followup.csv"]
 
 az = lambda x, y: np.degrees(np.arctan2(x - BASE_X, y))
 AZ = {k: az(*v) for k, v in POS.items()}
@@ -79,6 +80,12 @@ def cluster_bootstrap_ci(errors, groups, n_boot=2000, seed=0):
 def main():
     os.makedirs(OUTDIR, exist_ok = True)
     lab = pd.concat([pd.read_csv(p) for p in TRACKERS], ignore_index=True)
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--cell", default="new_positions",
+                    help="held-out cell to probe: new_positions or new_positions_rebuilt")
+    args = ap.parse_args()
+
     rows = []
 
     for path in sorted(glob.glob(os.path.join(INDIR, "activations_*.npz"))):
@@ -87,9 +94,9 @@ def main():
         if "ep_true" not in d:
             raise SystemExit(f"{path} has no ep_true; re-extract with the patch")
 
-        keep = d["eval_cell"] == "new_positions"
+        keep = d["eval_cell"] == args.cell
         if keep.sum() == 0:
-            print(f"{slug}: no new_positions activations, skipped")
+            print(f"{slug}: no {args.cell} activations, skipped")
             continue
 
         X = d["X"][keep].astype(np.float64)
@@ -99,7 +106,7 @@ def main():
         tfe = d["t_from_end"][keep].astype(float)
         cond, seed = str(d["condition"][keep][0]), int(d["seed"][keep][0])
 
-        m = lab[(lab.condition == cond) & (lab.seed == seed) & (lab.eval_cell == "new_positions")][["episode", "instance"]]
+        m = lab[(lab.condition == cond) & (lab.seed == seed) & (lab.eval_cell == args.cell)][["episode", "instance"]]
         inst = dict(zip(m.episode, m.instance))
         y = np.array([AZ.get(inst.get(int(e)), np.nan) for e in ep])
         ok = ~np.isnan(y)
@@ -138,7 +145,10 @@ def main():
 
     t = pd.DataFrame(rows)
     print("\n" + t.to_string(index=False))
-    t.to_csv(os.path.join(OUTDIR, "position_probe.csv"), index=False)
+
+    out = "position_probe.csv" if args.cell == "new_positions" else f"position_probe_{args.cell}.csv"
+    t.to_csv(os.path.join(OUTDIR, out), index=False)
+
     print(f"\nsaved to {OUTDIR}/")
 
 if __name__ == "__main__":

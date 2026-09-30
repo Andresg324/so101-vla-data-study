@@ -44,7 +44,8 @@ from lerobot.policies.factory import make_pre_post_processors
 
 HF_USER = "Andresg324"
 CELLS = ["in_distribution", "new_positions", "reduced_lighting",
-         "different_object", "distractors", "near_1in", "near_2in", "spot_check"]
+         "different_object", "distractors", "near_1in", "near_2in", "trained_t2", "spot_check",
+         "reach_e5", "in_distribution_rebuilt", "new_positions_rebuilt"]
 
 TASK = "Pick up the cube and place it in the cup"  # This needs to be verbatim to the training
 CACHE = os.environ.get("LEROBOT_CACHE", os.path.expanduser(f"~/.cache/huggingface/lerobot/{HF_USER}"))
@@ -323,7 +324,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--policy", help="clean | randomized | recovery | color")
     ap.add_argument("--layer", help="module name from --list-layers")
-    ap.add_argument("--results", nargs="*", default=["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"])
+    ap.add_argument("--results", nargs="*", default=["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv", "documents/followup.csv"])
     ap.add_argument("--device", default="mps", help="mps | cuda | cpu")
     ap.add_argument("--cells", nargs="*", default=CELLS)
     ap.add_argument("--rollout-repo", help="override the dataset name (gate test)")
@@ -334,6 +335,7 @@ def main():
     ap.add_argument("--match-episodes", nargs="*", help="npz files to reduce to a matched episode count")
     ap.add_argument("--per-position", type=int, default=3)
     ap.add_argument("--seed", type=int, default=0, help="torch seed for the policy's action-noise sampling")
+    ap.add_argument("--match-cell", default="new_positions")
     args = ap.parse_args()
 
     if args.merge:
@@ -347,7 +349,7 @@ def main():
         return
 
     if args.match_episodes:
-        match_episode_count(args.match_episodes, args.per_position, outdir=args.outdir)
+        match_episode_count(args.match_episodes, args.per_position, cell=args.match_cell, outdir=args.outdir)
         return
     
     if not args.policy and not args.merge and not args.match_episodes:

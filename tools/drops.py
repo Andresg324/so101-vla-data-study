@@ -39,7 +39,7 @@ MIN_TRAVEL = 10.0                # degrees of azimuth travelled since the previo
                                  # arm going anywhere. Rollouts only as demonstrations have no failed grasps.
 
 CUP_HALF_WIDTH = np.degrees(np.arctan(1.75 / np.hypot(5.0 - BASE_X, 12.5)))
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv", "documents/followup.csv"]
 
 DEMO = "cube-pickup-recovery_20260809_141725"
 # 0-indexed episodes of the 20 deliberate-drop demonstrations: demos 2 and 4 of each

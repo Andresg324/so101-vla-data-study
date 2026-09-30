@@ -1,1 +1,1 @@
-policy,condition,seed,cell,episode,n_frames,duration_s,max_dev_deg,departed,latency_s,deg_per_step,peak_deg_step,exec_s,success,failure_mode,regrasp,instance
+policy,condition,seed,cell,episode,n_frames,duration_s,max_dev_deg,departed,latency_s,deg_per_step,peak_deg_step,exec_s,start_pan,start_lift,start_elbow,start_wrist_flex,start_wrist_roll,start_gripper,success,failure_mode,regrasp,instance

@@ -351,59 +351,17 @@ while 22 to 64 degrees from the target.
       episodes is 59.5 degrees.
 - [x] Release detector re-calibrated against the recovery demonstrations as part of
       `tools/drops.py` on every run.
-- [x] Every rollout dataset confirmed present on the Hub. The probing analysis replays these.
-      89 rollout datasets in total: 4 conditions x 5 cells x 2 seeds, Clean at
-      `near_1in` and `near_2in` at both seeds, the two slow pace cells, the three
-      density cells, and the ten policies in density sweep x 4 cells.
+- [x] Every rollout dataset confirmed present on the Hub. 100 scored rollout datasets in total:
+      4 conditions x 5 cells x 2 seeds, Clean at `near_1in` and `near_2in` at both seeds, the
+      two slow pace cells, the three density cells, the ten sweep policies x 4 cells, the reach
+      probe for the eight epoch-matched sweep policies, the August Randomized policy's two
+      rebuilt-bench cells, and the retrain's T6 cell. The bench confirmation rollout
+      `rollout_clean_in_distribution_20260908_110904` is a 101st, scored by no analysis.
 - [x] No rollout dataset deleted.
 - [x] Bench left standing and the gantry mounted.
 
-Regenerate every derived CSV and every reported number from the workbook:
-
-```bash
-python tools/export_results.py                 # rebuild the derived CSVs; refuses to write on validation failure
-python tools/audit_labels.py                   # label screens, recording-window measurement
-
-# analyze_results refuses multi-seed input: PROTOCOL.md §4.7 does not allow pooling seeds
-python analysis/analyze_results.py documents/results_seed1000.csv --outdir analysis/out_seed1000
-python analysis/analyze_results.py documents/results_seed2000.csv --outdir analysis/out_seed2000
-python analysis/analyze_exploratory.py         # displacement, demonstration pace and sampling density probes
-python analysis/seed_variance.py               # the same condition compared across seeds
-
-# grasp poses, once per policy, then board coordinates onto the endpoint files
-for p in clean-seed2000 color color-seed2000 randomized randomized-seed2000 \
-         recovery recovery-seed2000; do
-  python tools/endpoints.py --policy "$p" --cells in_distribution new_positions \
-      reduced_lighting different_object distractors
-done
-python tools/endpoints.py --policy clean --cells in_distribution new_positions \
-    reduced_lighting different_object distractors near_1in near_2in
-python tools/endpoints.py --policy density --cells in_distribution trained_t2 new_positions
-python tools/calibrate_pose.py --apply
-
-python tools/rollout_motion.py                 # latency, velocity, no_departure validation
-python tools/drops.py                          # detector calibration, release events, drop locations
-python tools/azimuth_analysis.py               # calibration, envelope, aiming error, aim invariance, density bearings
-python tools/motion_stats.py \
-  cube-pickup-clean_20260809_105745 \
-  cube-pickup-randomized_20260809_115825 \
-  cube-pickup-recovery_20260809_141725 \
-  cube-pickup-color_20260809_183224 \
-  cube-pickup-color_20260809_130649 \
-  cube-pickup-density_20260822_194111
-
-# activations and probes; the slowest stage, and unchanged by the density probe
-for p in clean clean-seed2000 color color-seed2000 \
-         randomized randomized-seed2000 recovery recovery-seed2000; do
-  python probing/extract_activations.py --policy "$p" \
-    --layer model.vlm_with_expert.lm_expert.norm --device mps --seed 0
-done
-python probing/probe_position.py
-python probing/probe_success.py --sweep
-
-python tools/annotate_bench.py media/bench_wide.jpeg   # manual, only when the photo changes
-python analysis/make_figures.py                        # last: reads everything above
-```
+Regenerate every derived CSV and every reported number from the workbook with the run order in
+[analysis/README.md](analysis/README.md), which is the single copy of that sequence.
 
 ---
 
@@ -621,6 +579,33 @@ reviewed; all were post-delivery gripper openings, not drops.
 7. *Re-recorded cells.* density5 in_distribution seed 1000 restarted after film was noticed on the
 workbench partway through; two failures had occurred under the film. density50 spot_check
 seed 1000 restarted after stopping at five of seven episodes. Both partials were deleted and both cells re-recorded in full.
+
+---
+
+## Part F: follow-up session on the rebuilt bench (September 24, PROTOCOL.md §8.35 to §8.38)
+
+One session, four checks, each declared before it ran. 95 scored rollouts.
+
+| Order | Check | Policy and cell | Result |
+|---|---|---|---|
+| 1 | §8.36 re-evaluation | `randomized` seed 1000, `in_distribution_rebuilt`, 15 scored | 4/15; Newcombe against August's 6/15: −0.13, −0.42 to 0.19, bench not implicated |
+| 2 | §8.36 re-evaluation | `randomized` seed 1000, `new_positions_rebuilt`, 25 scored | 0/25 |
+| 3 | §8.37 retrain | `randomized-runpod` seed 1000, `in_distribution_rebuilt`, 15 scored | 1/15; 9 or fewer, points to the data |
+| 4 | §8.35 reach probe | density50, 25, 10, 5 at seed 1000, `reach_e5`, 5 scored each, 15:00 to 15:19 | 4, 4, 0, 0 of 5 |
+| 5 | §8.38 replication | density50, 25, 10, 5 at seed 2000, `reach_e5`, 5 scored each, 15:55 to 16:16 | 3, 3, 0, 0 of 5; prediction held at all four |
+
+Both reach sessions ran in descending density, the reverse of Part E's order within each seed.
+§8.38 was committed between the two sessions, before the first seed 2000 episode.
+
+- [x] Reach point marked in light pencil at (19.0, 12.7) after all registered cells, left in
+      place; faint in the overhead frame and present in every episode from check 4 onward
+- [x] Toolbox left where it sat during the sweep; frame luminosity within 0.7% of the August
+      baseline (`tools/bench_compare.py`)
+- [x] Retrain trained on RunPod in the §4.14 environment from the August dataset and config,
+      final loss 0.039 against August's 0.038; checkpoint and W&B run retained
+- [x] Tracker sheet `density_followup` exported to `documents/followup.csv` by
+      `tools/export_results.py`; 95 rows validated
+- [x] 1 live-flagged episode re-scored from video, no label changed
 
 ---
 

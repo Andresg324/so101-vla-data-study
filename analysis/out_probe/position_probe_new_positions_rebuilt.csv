@@ -1,0 +1,3 @@
+policy,episodes,samples,n_positions,chance_med_deg,probe_by_episode_deg,probe_by_episode_lo,probe_by_episode_hi,probe_by_position_deg,probe_by_position_lo,probe_by_position_hi,probe_mean_deg,control_tfe_med_steps,control_chance_steps
+m15_randomized-rebuilt,15,345,5,42.4,6.9,5.3,9.0,27.1,19.5,38.3,8.7,137.4,291.7
+randomized-rebuilt,25,572,5,42.3,16.4,12.9,20.5,35.9,26.0,48.3,18.7,151.0,290.0

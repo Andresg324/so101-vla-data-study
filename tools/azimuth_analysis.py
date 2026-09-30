@@ -16,6 +16,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from calibrate_pose import azimuth_fit, azimuth, BASE_X
 from rollout_paths import resolve, parse_policy
+from scipy.spatial import ConvexHull, Delaunay
+
 
 # ------------------------ Set up ---------------------------------------
 
@@ -102,7 +104,8 @@ ends = pd.concat(ends, ignore_index=True)
 
 LAB = pd.concat([pd.read_csv("documents/results_full.csv"),
                  pd.read_csv("documents/exploratory.csv"),
-                 pd.read_csv("documents/density.csv")], ignore_index=True)
+                 pd.read_csv("documents/density.csv"),
+                 pd.read_csv("documents/followup.csv")], ignore_index=True)
 
 cov = []
 for p in SWEEP:
@@ -159,7 +162,7 @@ for pol in CLEAN:
 
 # ----------------------- Randomized Aiming ----------------------------
 
-r = ends[ends.policy.str.startswith("randomized") & (ends.cell == "new_positions")].copy()
+r = ends[ends.policy.isin(["randomized", "randomized-seed2000"]) & (ends.cell == "new_positions")].copy()
 n_all = len(r)
 r = r[r.instance.isin(POS)]
 if len(r) < n_all:
@@ -346,5 +349,77 @@ if frames:
         miss_vs_true=("err", lambda s: s.abs().median()),
         picked=("near", lambda s: s.mode().iat[0]),
     ).round(1).to_string())
+
+# ------------------- Reach probe aim (PROTOCOL.md §8.35, §8.38) -------------------
+REACH_POS = {"reach_e5": (19.0, 12.7)}
+print(f"\nreach point azimuth {azimuth(*REACH_POS['reach_e5']):.2f} deg, "
+      f"E5 {azimuth(*POS['E5']):.2f} deg")
+
+rc = ends[ends.cell == "reach_e5"].copy()
+if len(rc):
+    rc["err"] = rc.az - azimuth(*REACH_POS["reach_e5"])
+    print("\n--- Grasp bearing error at the reach point ---")
+    print(rc.groupby("policy")["err"].agg(n="size", median="median",
+          median_abs=lambda s: s.abs().median()).round(2).to_string())
+    rc.round(2).to_csv(os.path.join(OUTDIR, "reach_aim.csv"), index=False)
+
+# ------------------- Randomized rebuilt, E5 beside density5 (§8.36) -------------------
+e5 = ends[(ends.instance == "E5") & (
+    ((ends.policy == "randomized") & (ends.cell == "new_positions_rebuilt"))
+    | (ends.policy.isin(["density5", "density5-seed2000"]) & (ends.cell == "new_positions")))].copy()
+if len(e5):
+    e5["err"] = e5.az - azimuth(*POS["E5"])
+    print("\n--- Grasp bearing error at E5, registered, no threshold (§8.36) ---")
+    print("caveat: E5 is beyond reach, so a close event there may follow a search rather than an aim")
+    print(e5.groupby(["policy", "cell"])["err"].agg(n="size", median="median").round(2).to_string())
+    e5.round(2).to_csv(os.path.join(OUTDIR, "randomized_rebuilt_e5.csv"), index=False)
+
+# ------------- Randomized T6 aim, August weights vs retrain (exploratory, §8.37) -------------
+T6_AZ = azimuth(15.5, 10.0)
+AIM_GROUPS = {
+    "randomized, August bench": ("randomized", "in_distribution"),
+    "randomized-seed2000, August bench": ("randomized-seed2000", "in_distribution"),
+    "randomized, rebuilt bench": ("randomized", "in_distribution_rebuilt"),
+    "randomized-runpod, rebuilt bench": ("randomized-runpod", "in_distribution_rebuilt"),
+}
+aim = {k: ends[(ends.policy == p) & (ends.cell == c)].az for k, (p, c) in AIM_GROUPS.items()}
+rows = [{"group": k, "n": len(v), "median_az": v.median(), "err_vs_T6": v.median() - T6_AZ,
+         "q1": v.quantile(0.25), "q3": v.quantile(0.75)} for k, v in aim.items()]
+t6 = pd.DataFrame(rows).round(2)
+u = mannwhitneyu(aim["randomized-runpod, rebuilt bench"], aim["randomized, rebuilt bench"],
+                 alternative="two-sided")
+print(f"\n--- Randomized T6 grasp bearing, true {T6_AZ:.2f} deg (exploratory, §8.37) ---")
+print(t6.to_string(index=False))
+print(f"retrain vs August weights, same bench: U={u.statistic:.0f}, p={u.pvalue:.3f}")
+t6.to_csv(os.path.join(OUTDIR, "randomized_t6_aim.csv"), index=False)
+
+
+# ------------------------- Geometry table ---------------------------
+
+E = {"E1": (2.0, 7.5), "E2": (6.5, 2.5), "E3": (12.0, 10.0), "E4": (15.5, 6.5),
+     "E5": (19.5, 13.5), "reach": REACH_POS["reach_e5"]}
+
+tb = {k: azimuth(*v) for k, v in TRAIN_POS.items()}
+tr = {k: np.hypot(v[0] - BASE_X, v[1]) for k, v in TRAIN_POS.items()}
+hull = Delaunay(np.array(list(TRAIN_POS.values())))
+
+out = []
+for name, (x, y) in E.items():
+    b, r = azimuth(x, y), np.hypot(x - BASE_X, y)
+    below = {k: v for k, v in tb.items() if v < b}; above = {k: v for k, v in tb.items() if v > b}
+    lo = max(below, key=below.get) if below else None; hi = min(above, key=above.get) if above else None
+    nb = min(tb, key=lambda k: abs(tb[k] - b))
+    npos = min(TRAIN_POS, key=lambda k: np.hypot(TRAIN_POS[k][0] - x, TRAIN_POS[k][1] - y))
+    out.append(dict(position=name, x=x, y=y, bearing=round(b, 1), radius=round(r, 2),
+                    bracket_low=lo, bracket_high=hi, nearest_bearing=nb,
+                    bearing_gap=round(abs(tb[nb] - b), 1), nearest_position=npos,
+                    distance=round(np.hypot(TRAIN_POS[npos][0] - x, TRAIN_POS[npos][1] - y), 2),
+                    radius_minus_max_trained=round(r - max(tr.values()), 2),
+                    inside_hull=bool(hull.find_simplex([x, y]) >= 0),
+                    cube_half_angle=round(np.degrees(np.arctan(0.5 / r)), 2)))
+geo = pd.DataFrame(out)
+geo.to_csv(os.path.join(OUTDIR, "geometry.csv"), index=False)
+print(geo.to_string(index=False))
+
 
 print(f"\nSaved to {OUTDIR}/")

@@ -6,6 +6,11 @@ density5,1000,distractors,8,density5,0,grasp_drop,,drop,434,-10.55,1
 density5,1000,distractors,11,density5,0,grasp_drop,,drop,307,-17.0,1
 density50-fixedstep,1000,new_positions,19,density50-fixedstep,0,grasp_drop,,drop,539,5.77,1
 randomized,1000,different_object,11,randomized,0,grasp_drop,,drop,542,-2.29,1
+randomized,1000,in_distribution_rebuilt,5,randomized,0,grasp_drop,,drop,285,-16.21,2
+randomized,1000,in_distribution_rebuilt,6,randomized,0,grasp_drop,,drop,290,-15.16,2
+randomized,1000,in_distribution_rebuilt,8,randomized,0,grasp_drop,,drop,273,-16.3,2
+randomized,1000,in_distribution_rebuilt,13,randomized,0,grasp_drop,,drop,277,-19.6,2
+randomized,1000,in_distribution_rebuilt,15,randomized,0,grasp_drop,,drop,378,-10.12,2
 randomized,1000,reduced_lighting,14,randomized,0,grasp_drop,,drop,371,-16.16,2
 recovery,1000,different_object,1,recovery,0,deliberate_drop,Failed,drop,497,-7.07,2
 recovery,1000,different_object,4,recovery,0,deliberate_drop,Failed,drop,742,-9.93,2

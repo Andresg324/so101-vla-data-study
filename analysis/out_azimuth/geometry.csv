@@ -1,0 +1,7 @@
+position,x,y,bearing,radius,bracket_low,bracket_high,nearest_bearing,bearing_gap,nearest_position,distance,radius_minus_max_trained,inside_hull,cube_half_angle
+E1,2.0,7.5,-50.2,11.72,T1,T2,T2,19.2,T2,4.5,-3.49,False,2.44
+E2,6.5,2.5,-60.9,5.15,T1,T2,T1,13.5,T1,4.5,-10.06,True,5.55
+E3,12.0,10.0,5.7,10.05,T4,T7,T4,1.6,T6,3.5,-5.16,True,2.85
+E4,15.5,6.5,34.7,7.91,T6,T10,T10,8.8,T6,3.5,-7.3,True,3.62
+E5,19.5,13.5,32.2,15.95,T6,T10,T6,8.0,T10,3.64,0.75,False,1.8
+reach,19.0,12.7,32.2,15.01,T6,T10,T6,8.0,T10,3.09,-0.2,False,1.91

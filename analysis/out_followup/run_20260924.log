@@ -1,0 +1,1819 @@
+/Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+ renamed 12 legacy failure_mode labels in sheet 'results' (per §8.21)
+/Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+ renamed 8 legacy failure_mode labels in sheet 'density_sweep' (per §8.21)
+/Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+ renamed 1 legacy failure_mode labels in sheet 'density_followup' (per §8.21)
+Registered Grid:
+  [ok ] 600 rows  got 600
+  [ok ] columns present  missing set()
+  [ok ] 20 cells x 2 seeds at 15 episodes  40 groups, sizes [np.int64(15)]
+  [ok ] conditions  {'recovery', 'clean', 'color', 'randomized'}
+  [ok ] cells  {'different_object', 'in_distribution', 'new_positions', 'reduced_lighting', 'distractors'}
+  [ok ] seeds  {1000, 2000}
+  [ok ] success is 0/1  {np.int64(0), np.int64(1)}
+  [ok ] episodes 1-15  [np.int64(1), np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(6), np.int64(7), np.int64(8), np.int64(9), np.int64(10), np.int64(11), np.int64(12), np.int64(13), np.int64(14), np.int64(15)]
+  [ok ] no duplicate (condition, cell, seed, episode)  0 rows
+  [ok ] failure_mode vocabulary  unknown: set()
+  [ok ] success agrees with failure_mode  0 disagreements
+  [ok ] new_positions instances are E1-E5  {'E2', 'E5', 'E4', 'E3', 'E1'}
+
+Exploratory:
+  [ok ] episodes contiguous ('clean', 'near_1in', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8]
+  [ok ] episodes contiguous ('clean', 'near_1in', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8]
+  [ok ] episodes contiguous ('clean', 'near_2in', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8]
+  [ok ] episodes contiguous ('clean', 'near_2in', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8]
+  [ok ] episodes contiguous ('color-slowpace', 'different_object', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('color-slowpace', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density', 'new_positions', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density', 'trained_t2', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] 107 rows  got 107
+  [ok ] cell sizes  got {('clean', 'near_1in', 1000): 8, ('clean', 'near_1in', 2000): 8, ('clean', 'near_2in', 1000): 8, ('clean', 'near_2in', 2000): 8, ('color-slowpace', 'different_object', 1000): 15, ('color-slowpace', 'in_distribution', 1000): 15, ('density', 'in_distribution', 1000): 15, ('density', 'new_positions', 1000): 15, ('density', 'trained_t2', 1000): 15}
+  [ok ] success is 0/1  {np.int64(0), np.int64(1)}
+  [ok ] no duplicate (condition, cell, seed, episode)  0 rows
+  [ok ] failure_mode vocabulary  unknown: set()
+  [ok ] success agrees with failure_mode  0 disagreements
+
+Density Sweep:
+  [ok ] episodes contiguous ('density10', 'distractors', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density10', 'distractors', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density10', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density10', 'in_distribution', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density10', 'new_positions', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density10', 'new_positions', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density10', 'spot_check', np.int64(1000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density10', 'spot_check', np.int64(2000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density25', 'distractors', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density25', 'distractors', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density25', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density25', 'in_distribution', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density25', 'new_positions', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density25', 'new_positions', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density25', 'spot_check', np.int64(1000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density25', 'spot_check', np.int64(2000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density25-fixedstep', 'distractors', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density25-fixedstep', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density25-fixedstep', 'new_positions', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density25-fixedstep', 'spot_check', np.int64(1000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density5', 'distractors', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density5', 'distractors', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density5', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density5', 'in_distribution', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density5', 'new_positions', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density5', 'new_positions', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density5', 'spot_check', np.int64(1000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density5', 'spot_check', np.int64(2000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density50', 'distractors', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density50', 'distractors', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density50', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density50', 'in_distribution', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density50', 'new_positions', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density50', 'new_positions', np.int64(2000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density50', 'spot_check', np.int64(1000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density50', 'spot_check', np.int64(2000))  [1, 2, 3, 4, 5, 6]
+  [ok ] episodes contiguous ('density50-fixedstep', 'distractors', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density50-fixedstep', 'in_distribution', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('density50-fixedstep', 'new_positions', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('density50-fixedstep', 'spot_check', np.int64(1000))  [1, 2, 3, 4, 5, 6]
+  [ok ] 610 rows  got 610
+  [ok ] cells  {'new_positions', 'distractors', 'in_distribution', 'spot_check'}
+  [ok ] cell sizes  got {('density10', 'distractors', 1000): 15, ('density10', 'distractors', 2000): 15, ('density10', 'in_distribution', 1000): 15, ('density10', 'in_distribution', 2000): 15, ('density10', 'new_positions', 1000): 25, ('density10', 'new_positions', 2000): 25, ('density10', 'spot_check', 1000): 6, ('density10', 'spot_check', 2000): 6, ('density25', 'distractors', 1000): 15, ('density25', 'distractors', 2000): 15, ('density25', 'in_distribution', 1000): 15, ('density25', 'in_distribution', 2000): 15, ('density25', 'new_positions', 1000): 25, ('density25', 'new_positions', 2000): 25, ('density25', 'spot_check', 1000): 6, ('density25', 'spot_check', 2000): 6, ('density25-fixedstep', 'distractors', 1000): 15, ('density25-fixedstep', 'in_distribution', 1000): 15, ('density25-fixedstep', 'new_positions', 1000): 25, ('density25-fixedstep', 'spot_check', 1000): 6, ('density5', 'distractors', 1000): 15, ('density5', 'distractors', 2000): 15, ('density5', 'in_distribution', 1000): 15, ('density5', 'in_distribution', 2000): 15, ('density5', 'new_positions', 1000): 25, ('density5', 'new_positions', 2000): 25, ('density5', 'spot_check', 1000): 6, ('density5', 'spot_check', 2000): 6, ('density50', 'distractors', 1000): 15, ('density50', 'distractors', 2000): 15, ('density50', 'in_distribution', 1000): 15, ('density50', 'in_distribution', 2000): 15, ('density50', 'new_positions', 1000): 25, ('density50', 'new_positions', 2000): 25, ('density50', 'spot_check', 1000): 6, ('density50', 'spot_check', 2000): 6, ('density50-fixedstep', 'distractors', 1000): 15, ('density50-fixedstep', 'in_distribution', 1000): 15, ('density50-fixedstep', 'new_positions', 1000): 25, ('density50-fixedstep', 'spot_check', 1000): 6}
+  [ok ] success is 0/1  {np.int64(0), np.int64(1)}
+  [ok ] no duplicate (condition, cell, seed, episode)  0 rows
+  [ok ] failure_mode vocabulary  unknown: set()
+  [ok ] success agrees with failure_mode  0 disagreements
+  [ok ] new_positions instances are E1-E5  {'E2', 'E5', 'E4', 'E3', 'E1'}
+  [ok ] spot_check instances are T1, T3, T10  {'T10', 'T1', 'T3'}
+  [ok ] spot_check is 2 per position  {'T1': 20, 'T10': 20, 'T3': 20}
+
+Follow-up:
+  [ok ] episodes contiguous ('density10', 'reach_e5', np.int64(1000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('density10', 'reach_e5', np.int64(2000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('density25', 'reach_e5', np.int64(1000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('density25', 'reach_e5', np.int64(2000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('density5', 'reach_e5', np.int64(1000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('density5', 'reach_e5', np.int64(2000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('density50', 'reach_e5', np.int64(1000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('density50', 'reach_e5', np.int64(2000))  [1, 2, 3, 4, 5]
+  [ok ] episodes contiguous ('randomized', 'in_distribution_rebuilt', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] episodes contiguous ('randomized', 'new_positions_rebuilt', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  [ok ] episodes contiguous ('randomized-runpod', 'in_distribution_rebuilt', np.int64(1000))  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  [ok ] 95 rows  got 95
+  [ok ] cells  {'reach_e5', 'new_positions_rebuilt', 'in_distribution_rebuilt'}
+  [ok ] cell sizes  got {('density10', 'reach_e5', 1000): 5, ('density10', 'reach_e5', 2000): 5, ('density25', 'reach_e5', 1000): 5, ('density25', 'reach_e5', 2000): 5, ('density5', 'reach_e5', 1000): 5, ('density5', 'reach_e5', 2000): 5, ('density50', 'reach_e5', 1000): 5, ('density50', 'reach_e5', 2000): 5, ('randomized', 'in_distribution_rebuilt', 1000): 15, ('randomized', 'new_positions_rebuilt', 1000): 25, ('randomized-runpod', 'in_distribution_rebuilt', 1000): 15}
+  [ok ] success is 0/1  {np.int64(0), np.int64(1)}
+  [ok ] no duplicate (condition, cell, seed, episode)  0 rows
+  [ok ] failure_mode vocabulary  unknown: set()
+  [ok ] success agrees with failure_mode  0 disagreements
+  [ok ] new_positions_rebuilt is E1-E5, 5 each  {'E1': 5, 'E2': 5, 'E3': 5, 'E4': 5, 'E5': 5}
+  [ok ] reach_e5 instance is reach_e5  {'reach_e5'}
+
+wrote results_full.csv, results.csv, results_seed1000.csv, results_seed2000.csv, exploratory.csv, density.csv, followup.csv, results_all.csv
+registered 600 rows, exploratory 107 rows, density 610 rows, followup 95 rows,combined 1317
+ grasp detected in all 50 episodes
+1412 scored episodes
+
+=== recording window (PROTOCOL.md §4.12) ===
+longest episode      1151 frames = 38.37 s of recorded motion at 30 fps
+chunks of 50         23.02
+episodes at ceiling  295 of 1412
+inference time       6.63 s over 23 passes = 288 ms each
+action-update rate   1.667 s recorded (0.600 Hz), 1.95 s wall clock (0.512 Hz)
+
+=== screen 1: duration ===
+         count  mean  std   min   25%   50%   75%   max
+success                                                
+0        779.0  37.7  1.9  11.9  37.8  38.3  38.3  38.3
+1        633.0  17.6  5.9  11.0  13.7  15.3  19.5  38.3
+
+22 successes within 2 s of the 38.3 s ceiling:
+            policy             cell  episode               failure_mode  duration_s
+    clean-seed2000 different_object        4                    success      38.333
+         density10      distractors        6                    success      38.333
+          density5      distractors       12                    success      38.333
+ density5-seed2000      distractors        4                    success      38.333
+ density5-seed2000      distractors        3                    success      38.333
+    clean-seed2000 different_object        7                    success      38.333
+         density10      distractors       10                    success      38.333
+         density10       spot_check        6 success_after_missed_grasp      38.333
+density10-seed2000      distractors        3                    success      38.333
+    color-slowpace different_object        4                    success      38.333
+             clean different_object       10                    success      38.333
+          recovery different_object        7                    success      38.333
+         density50      distractors        9                    success      38.300
+          density5      distractors        1                    success      38.300
+    clean-seed2000 different_object       13                    success      38.300
+         density50      distractors       14                    success      38.267
+ density5-seed2000      distractors       15                    success      38.233
+ recovery-seed2000 reduced_lighting       14         success_after_drop      38.233
+ recovery-seed2000 different_object        6                    success      38.100
+density10-seed2000      distractors       13                    success      37.367
+             clean different_object        2                    success      37.033
+    clean-seed2000 different_object       15                    success      36.667
+
+35 failures ending more than 3 s early:
+             policy                    cell  episode       failure_mode  duration_s
+           density5             distractors       11         grasp_drop      11.900
+              clean             distractors        8 cube_out_of_bounds      13.567
+     clean-seed2000             distractors        1         grasp_drop      14.933
+         randomized in_distribution_rebuilt       12   contact_no_grasp      26.233
+         randomized in_distribution_rebuilt       11      timeout_other      30.533
+           density5           new_positions       17      timeout_other      30.600
+           density5           new_positions       16      timeout_other      30.800
+           density5           new_positions       15      timeout_other      31.233
+           density5           new_positions       14      timeout_other      31.300
+           density5           new_positions       20      timeout_other      31.767
+           density5           new_positions       19      timeout_other      32.100
+           density5           new_positions       18      timeout_other      32.167
+           density5           new_positions       21      timeout_other      32.633
+           density5           new_positions       22      timeout_other      32.733
+           density5           new_positions       12      timeout_other      32.767
+           density5           new_positions       13      timeout_other      33.100
+         randomized in_distribution_rebuilt       13         grasp_drop      33.333
+density25-fixedstep             distractors       12      timeout_other      33.333
+           density5           new_positions       24      timeout_other      33.333
+           density5           new_positions       23      timeout_other      33.433
+density50-fixedstep             distractors       15      timeout_other      33.500
+           density5           new_positions       11      timeout_other      33.500
+           density5           new_positions       25      timeout_other      33.533
+density25-fixedstep             distractors       14      timeout_other      34.200
+density25-fixedstep             distractors       15      timeout_other      34.800
+         randomized   new_positions_rebuilt       24      timeout_other      34.933
+density25-fixedstep             distractors       13      timeout_other      34.967
+density50-fixedstep             distractors        7      timeout_other      35.000
+ density25-seed2000           new_positions       10      timeout_other      35.000
+           density5           new_positions       10      timeout_other      35.000
+           density5           new_positions        7      timeout_other      35.067
+         randomized in_distribution_rebuilt       15         grasp_drop      35.067
+density50-fixedstep             distractors        3      timeout_other      35.100
+           density5           new_positions        9      timeout_other      35.100
+density50-fixedstep             distractors       13      timeout_other      35.167
+
+=== screens 2 and 3: release inside the cup window (+/- 7.2 deg of -25.6) ===
+successes: 609 of 633 contain a cup release, median 2.6 deg from the cup centre (IQR 1.9 to 3.5)
+
+24 successes with NO cup release:
+             policy            cell  episode               failure_mode  nearest_release_deg  duration_s
+          density25        reach_e5        3                    success            61.081948      18.200
+ density25-seed2000        reach_e5        3                    success            58.455385      19.000
+ density25-seed2000     distractors        3                    success            37.543739      20.733
+ density10-seed2000   new_positions       15 success_after_missed_grasp            32.795861      25.000
+          density10     distractors       10                    success             7.975844      38.333
+  density5-seed2000 in_distribution        9                    success             7.557651      15.000
+          density10     distractors        3                    success                  NaN      14.367
+density25-fixedstep in_distribution        8                    success                  NaN      14.667
+ density25-seed2000     distractors        7                    success                  NaN      12.933
+ density25-seed2000     distractors       11                    success                  NaN      15.500
+ density25-seed2000     distractors       12                    success                  NaN      12.967
+ density25-seed2000        reach_e5        1                    success                  NaN      17.167
+          density25     distractors        1                    success                  NaN      19.800
+          density25 in_distribution        4                    success                  NaN      13.333
+  density5-seed2000      spot_check        3                    success                  NaN      14.033
+density50-fixedstep in_distribution        4                    success                  NaN      13.467
+density50-fixedstep in_distribution        7                    success                  NaN      15.000
+density50-fixedstep      spot_check        1                    success                  NaN      15.700
+density50-fixedstep      spot_check        4                    success                  NaN      15.467
+density50-fixedstep      spot_check        5                    success                  NaN      15.733
+ density50-seed2000     distractors       10                    success                  NaN      23.833
+ density50-seed2000     distractors       13                    success                  NaN      16.867
+ density50-seed2000        reach_e5        3                    success                  NaN      16.667
+ density50-seed2000      spot_check        1                    success                  NaN      15.667
+
+49 of 779 failures contain a cup release (48 ran to the ceiling, which §6.7 permits):
+             policy                    cell  episode    failure_mode  nearest_release_deg  duration_s
+         randomized in_distribution_rebuilt       13      grasp_drop             6.042780      33.333
+           density5           new_positions        3   timeout_other             1.588332      36.667
+           density5           new_positions        2   timeout_other             1.642247      36.667
+           density5           new_positions        5   timeout_other             5.480223      36.767
+  density5-seed2000           new_positions        5   timeout_other             0.297847      36.867
+            density           new_positions        4   timeout_other             3.784470      37.167
+            density           new_positions        2   timeout_other             0.990389      37.167
+            density           new_positions        5   timeout_other             0.441718      37.233
+ density25-seed2000           new_positions        1   timeout_other             3.573055      37.333
+ density25-seed2000           new_positions        3   timeout_other             2.644600      37.333
+ density25-seed2000           new_positions        2   timeout_other             0.291316      37.367
+ density25-seed2000           new_positions        4   timeout_other             0.626519      37.433
+            density           new_positions        6   timeout_other             1.078867      37.467
+           density5           new_positions        1   timeout_other             3.491428      37.567
+           recovery         in_distribution       13 deliberate_drop             1.021675      38.067
+           recovery        reduced_lighting        9 deliberate_drop             0.254171      38.100
+            density           new_positions        3   timeout_other             0.542338      38.100
+           recovery         in_distribution       12 deliberate_drop             7.011992      38.100
+            density           new_positions       11   timeout_other             0.273125      38.133
+           recovery         in_distribution        7      grasp_drop             3.002898      38.167
+  recovery-seed2000        different_object       15 deliberate_drop             4.234103      38.233
+            density           new_positions       10   timeout_other             0.838855      38.233
+  recovery-seed2000         in_distribution       14 deliberate_drop             1.137364      38.267
+  recovery-seed2000        different_object       12 deliberate_drop             7.011001      38.267
+           recovery        reduced_lighting       14 deliberate_drop             1.136430      38.267
+            density           new_positions        1   timeout_other             3.308342      38.267
+ density10-seed2000             distractors        5      grasp_drop             6.374276      38.300
+ density10-seed2000             distractors       11      grasp_drop             4.811342      38.300
+  recovery-seed2000        reduced_lighting       12 deliberate_drop             6.298209      38.300
+  recovery-seed2000         in_distribution        2 deliberate_drop             0.247563      38.300
+  recovery-seed2000         in_distribution       12 deliberate_drop             5.032752      38.300
+  recovery-seed2000         in_distribution       13 deliberate_drop             2.121661      38.300
+           recovery        reduced_lighting        6 deliberate_drop             0.336578      38.333
+           recovery        reduced_lighting        4      grasp_drop             6.672042      38.333
+density25-fixedstep           new_positions        1   timeout_other             3.211116      38.333
+          density25           new_positions        2   timeout_other             2.749403      38.333
+  recovery-seed2000        reduced_lighting       15 deliberate_drop             3.096330      38.333
+  recovery-seed2000        reduced_lighting        8 deliberate_drop             1.502077      38.333
+          density50           new_positions        4   timeout_other             2.263534      38.333
+  recovery-seed2000        reduced_lighting        3 deliberate_drop             2.981483      38.333
+          density25           new_positions        5   timeout_other             0.861981      38.333
+density50-fixedstep           new_positions        3   timeout_other             6.327410      38.333
+  recovery-seed2000        different_object        1      grasp_drop             4.985881      38.333
+density50-fixedstep           new_positions        5   timeout_other             0.512888      38.333
+ density50-seed2000           new_positions        2   timeout_other             0.902627      38.333
+ density50-seed2000           new_positions        4   timeout_other             4.001157      38.333
+ density50-seed2000           new_positions        5   timeout_other             0.803603      38.333
+  recovery-seed2000        reduced_lighting        6 deliberate_drop             1.601955      38.333
+          density25           new_positions        3   timeout_other             3.282498      38.333
+
+=== drop-labelled episodes the detector missed, and why ===
+4 of 70 drop-labelled episodes have no release surviving MIN_TRAVEL = 10.0
+             policy             cell  episode failure_mode  n_releases  max_travel_deg  duration_s
+         randomized      distractors        8   grasp_drop           4        6.580071      38.167
+randomized-seed2000 reduced_lighting       12   grasp_drop           1        5.800326      38.333
+     clean-seed2000      distractors        1   grasp_drop           1        5.090355      14.933
+              color  in_distribution       11   grasp_drop           5        3.757242      38.233
+
+all 4 produced a release; none travelled far enough (largest 6.6 deg against a 10.0 deg threshold), so the misses are travel-filtered, not undetected openings
+
+=== release detection against threshold, secondary ===
+registered value is REL_THR = 12; lower thresholds are a sensitivity check on coverage
+ threshold  august_no_release  august_n  september_no_release  september_n
+      12.0                  0       362                    18          271
+      11.0                  0       362                    14          271
+      10.0                  0       362                     9          271
+       9.0                  0       362                     6          271
+       8.0                  0       362                     4          271
+
+=== review queue: episodes flagged by more than one screen ===
+    policy                    cell  episode  n_screens
+ density10             distractors       10          2
+randomized in_distribution_rebuilt       13          2
+
+saved to analysis/out_audit/
+--- Reach probe, Wilson 95% ---
+condition  seed  successes  n  ci_low  ci_high
+ density5  1000          0  5   0.000    0.434
+density10  1000          0  5   0.000    0.434
+density25  1000          4  5   0.376    0.964
+density50  1000          4  5   0.376    0.964
+ density5  2000          0  5   0.000    0.434
+density10  2000          0  5   0.000    0.434
+density25  2000          3  5   0.231    0.882
+density50  2000          3  5   0.231    0.882
+
+§8.38 seed 2000 prediction held: True
+§8.37 cutoff: retrain 1/15, 9 or fewer, data
+
+--- Randomized follow-up, Newcombe ---
+                            comparison    a    b  difference  diff_ci_low  diff_ci_high
+           §8.36 rebuilt vs August, T6 4/15 6/15      -0.133       -0.423         0.190
+           §8.37 retrain vs August, T6 1/15 6/15      -0.333       -0.582        -0.026
+not registered: retrain vs rebuilt, T6 1/15 4/15      -0.200       -0.459         0.080
+      rebuilt vs August, New Positions 0/25 0/15       0.000       -0.204         0.133
+
+--- Randomized failure modes, seed 1000, exploratory ---
+failure_mode                               contact_no_grasp  grasp_drop  no_departure  success  timeout_other
+condition         eval_cell                                                                                  
+randomized        in_distribution                         4           0             1        6              4
+                  in_distribution_rebuilt                 3           5             0        4              3
+                  new_positions                           0           0             6        0              9
+                  new_positions_rebuilt                   0           0             0        0             25
+randomized-runpod in_distribution_rebuilt                12           0             0        1              2
+
+Saved to analysis/out_followup/
+cells now in endpoints_density5.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        False        2
+                   True        13
+in_distribution    False        1
+                   True        14
+new_positions:E1   True         4
+new_positions:E2   True         2
+new_positions:E3   True         4
+new_positions:E4   True         5
+new_positions:E5   True         5
+reach_e5:reach_e5  True         5
+spot_check:T1      True         2
+spot_check:T10     True         2
+spot_check:T3      True         2
+
+--- median and IQRs of grasp pose by instance, density5 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        19.40    15  22.12    15  -9.35    15      59.52    15      21.34    15
+in_distribution    21.81    15  16.97    15   1.73    15      57.60    15      25.84    15
+new_positions:E1  -32.58     4  -1.57     4  17.27     4      52.66     4     -20.83     4
+new_positions:E2  -71.02     2   6.90     2  -6.44     2      80.42     2      10.70     2
+new_positions:E3   -6.66     4  37.93     4 -33.47     4      38.34     4      -7.34     4
+new_positions:E4   38.79     5  53.96     5 -55.70     5      59.40     5      15.09     5
+new_positions:E5   14.98     5  49.18     5 -52.74     5      56.03     5      12.37     5
+reach_e5:reach_e5  21.22     5  47.81     5 -43.47     5      57.33     5      13.27     5
+spot_check:T1     -80.62     2  11.36     2   6.56     2      65.88     2      14.02     2
+spot_check:T10     40.08     2  35.86     2 -24.71     2      57.08     2      35.25     2
+spot_check:T3     -10.90     2  40.34     2 -22.56     2      27.92     2      -9.97     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25  14.04  19.58 -23.91       55.54       16.52
+                  0.75  21.80  33.97  -2.72       61.79       23.68
+in_distribution   0.25  21.18  15.92  -0.23       55.81       24.74
+                  0.75  22.98  19.30   4.98       59.99       28.04
+new_positions:E1  0.25 -33.60  -3.14  11.60       46.41      -24.55
+                  0.75 -30.20   1.03  19.37       58.17      -13.89
+new_positions:E2  0.25 -73.91   5.95  -6.67       79.71        7.30
+                  0.75 -68.12   7.86  -6.22       81.14       14.09
+new_positions:E3  0.25  -7.44  35.94 -34.94       37.00       -9.82
+                  0.75  -6.04  40.90 -31.11       42.31       -3.60
+new_positions:E4  0.25  38.64  49.70 -58.17       57.16        7.32
+                  0.75  40.88  56.88 -49.38       59.43       16.58
+new_positions:E5  0.25  14.95  49.01 -57.10       55.42       11.27
+                  0.75  15.88  51.07 -52.45       58.33       12.89
+reach_e5:reach_e5 0.25  16.29  46.78 -55.36       56.73        8.42
+                  0.75  22.21  53.06 -40.80       59.29       17.89
+spot_check:T1     0.25 -81.19   9.71   5.22       64.05       13.54
+                  0.75 -80.06  13.01   7.89       67.72       14.50
+spot_check:T10    0.25  39.03  35.02 -25.26       56.99       34.19
+                  0.75  41.14  36.70 -24.16       57.16       36.31
+spot_check:T3     0.25 -11.68  39.17 -23.90       27.36      -10.23
+                  0.75 -10.11  41.50 -21.23       28.48       -9.71
+
+saved analysis/out_endpoints/endpoints_density5.csv
+cells now in endpoints_density10.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        False        4
+                   True        11
+in_distribution    False        1
+                   True        14
+new_positions:E1   True         5
+new_positions:E2   True         4
+new_positions:E3   True         4
+new_positions:E4   True         5
+new_positions:E5   True         5
+reach_e5:reach_e5  True         5
+spot_check:T1      False        1
+                   True         1
+spot_check:T10     True         2
+spot_check:T3      False        1
+                   True         1
+
+--- median and IQRs of grasp pose by instance, density10 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        19.51    15  19.93    15  -4.30    15      59.70    15      19.29    15
+in_distribution    22.91    15  19.56    15  -1.05    15      61.24    15      26.65    15
+new_positions:E1  -56.31     5  14.09     5  -2.76     5      77.80     5      38.38     5
+new_positions:E2  -86.76     4  10.99     4   3.94     4      70.08     4      19.38     4
+new_positions:E3   -7.86     4  46.18     4 -43.18     4      51.82     4      -0.95     4
+new_positions:E4   44.54     5  50.83     5 -49.93     5      54.81     5      10.01     5
+new_positions:E5   21.28     5  51.55     5 -49.35     5      53.51     5      13.04     5
+reach_e5:reach_e5  18.24     5  48.25     5 -47.27     5      57.02     5      12.04     5
+spot_check:T1     -80.24     2  10.54     2   8.26     2      65.06     2       7.52     2
+spot_check:T10     38.42     2  33.90     2 -25.54     2      61.20     2      38.80     2
+spot_check:T3     -12.33     2  44.96     2 -36.28     2      36.49     2     -17.94     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25  17.48  17.38  -5.73       58.11       17.28
+                  0.75  20.46  22.33   1.52       62.98       21.98
+in_distribution   0.25  21.66  18.19  -5.49       59.11       25.26
+                  0.75  23.78  20.01   0.76       63.22       27.77
+new_positions:E1  0.25 -66.82  13.57  -5.06       76.84       32.22
+                  0.75 -55.20  18.40  -2.69       79.16       40.19
+new_positions:E2  0.25 -87.74  10.20   0.53       69.14       18.55
+                  0.75 -85.67  11.87   6.76       71.08       20.02
+new_positions:E3  0.25 -10.22  37.18 -45.03       44.10       -2.26
+                  0.75  -3.84  48.11 -30.71       61.55        3.56
+new_positions:E4  0.25  18.20  50.12 -51.08       53.34        7.12
+                  0.75  45.11  53.05 -44.88       57.72       11.71
+new_positions:E5  0.25  18.06  48.04 -49.83       53.08       12.80
+                  0.75  21.40  51.58 -44.47       54.10       15.78
+reach_e5:reach_e5 0.25  16.00  47.05 -52.42       56.26       10.82
+                  0.75  18.70  49.62 -44.23       59.80       18.91
+spot_check:T1     0.25 -80.32  10.48   7.23       64.45        7.41
+                  0.75 -80.17  10.60   9.29       65.66        7.62
+spot_check:T10    0.25  37.82  32.33 -27.72       60.65       38.56
+                  0.75  39.01  35.47 -23.35       61.76       39.03
+spot_check:T3     0.25 -12.69  44.92 -36.67       35.74      -18.13
+                  0.75 -11.97  44.99 -35.89       37.25      -17.76
+
+saved analysis/out_endpoints/endpoints_density10.csv
+cells now in endpoints_density25.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        False        1
+                   True        14
+in_distribution    False        2
+                   True        13
+new_positions:E1   True         5
+new_positions:E2   True         5
+new_positions:E3   True         5
+new_positions:E4   True         4
+new_positions:E5   True         5
+reach_e5:reach_e5  True         5
+spot_check:T1      True         2
+spot_check:T10     False        1
+                   True         1
+spot_check:T3      True         2
+
+--- median and IQRs of grasp pose by instance, density25 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        18.32    15  12.85    15   5.60    15      53.55    15      15.24    15
+in_distribution    23.01    15  15.23    15   7.22    15      51.65    15      23.67    15
+new_positions:E1  -31.68     5   2.19     5   4.92     5      72.38     5       0.98     5
+new_positions:E2  -80.82     5  11.00     5  -4.46     5      76.26     5       7.42     5
+new_positions:E3   -5.28     5  35.26     5 -15.93     5      27.62     5      -9.21     5
+new_positions:E4   42.16     4  55.31     4 -57.00     4      62.26     4      16.45     4
+new_positions:E5   18.75     5  55.22     5 -54.37     5      53.37     5      15.18     5
+reach_e5:reach_e5  30.28     5  47.51     5 -44.68     5      56.30     5      24.23     5
+spot_check:T1     -80.55     2  10.27     2  10.76     2      62.54     2       8.92     2
+spot_check:T10     43.53     2  43.55     2 -39.36     2      61.56     2      42.74     2
+spot_check:T3     -12.11     2  43.60     2 -27.71     2      30.87     2     -14.91     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25  14.46  11.64  -2.00       50.85       13.60
+                  0.75  18.90  19.40   8.46       56.26       17.14
+in_distribution   0.25  22.77  14.18   6.30       49.54       21.93
+                  0.75  23.33  16.73   9.14       52.76       25.03
+new_positions:E1  0.25 -41.83  -1.16   0.76       64.70      -27.42
+                  0.75 -14.34  11.89  23.21       73.06       37.15
+new_positions:E2  0.25 -80.86  10.97  -5.41       76.10        7.12
+                  0.75 -80.80  12.48  -3.58       77.04        8.49
+new_positions:E3  0.25  -6.00  32.21 -24.00       26.52      -11.04
+                  0.75  -2.25  39.72 -11.67       36.08       -6.94
+new_positions:E4  0.25  35.86  53.84 -58.09       59.74       -4.33
+                  0.75  43.06  56.96 -56.12       63.65       26.02
+new_positions:E5  0.25  17.64  53.23 -58.89       53.24       10.48
+                  0.75  18.82  55.42 -52.58       55.48       16.88
+reach_e5:reach_e5 0.25  30.24  45.98 -44.87       54.77       18.98
+                  0.75  30.81  49.03 -42.83       58.24       24.23
+spot_check:T1     0.25 -80.56   9.64  10.33       62.22        7.40
+                  0.75 -80.54  10.90  11.20       62.87       10.43
+spot_check:T10    0.25  43.18  43.46 -40.40       61.11       42.40
+                  0.75  43.87  43.64 -38.32       62.02       43.07
+spot_check:T3     0.25 -12.20  42.93 -28.80       30.86      -15.77
+                  0.75 -12.03  44.28 -26.62       30.88      -14.05
+
+saved analysis/out_endpoints/endpoints_density25.csv
+cells now in endpoints_density50.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        True        15
+in_distribution    True        15
+new_positions:E1   True         5
+new_positions:E2   True         5
+new_positions:E3   True         5
+new_positions:E4   True         5
+new_positions:E5   True         5
+reach_e5:reach_e5  True         5
+spot_check:T1      True         2
+spot_check:T10     True         2
+spot_check:T3      True         2
+
+--- median and IQRs of grasp pose by instance, density50 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        20.76    15  26.79    15 -12.88    15      63.93    15      20.45    15
+in_distribution    23.55    15  19.73    15  -0.70    15      58.74    15      25.17    15
+new_positions:E1   15.30     5  61.95     5 -65.22     5      60.92     5      13.25     5
+new_positions:E2  -83.14     5  13.63     5  -0.36     5      70.92     5       4.84     5
+new_positions:E3   -9.73     5  51.02     5 -44.90     5      46.47     5     -11.63     5
+new_positions:E4   21.03     5  62.71     5 -66.33     5      56.44     5      19.62     5
+new_positions:E5   27.18     5  55.42     5 -50.41     5      51.89     5      19.44     5
+reach_e5:reach_e5  30.42     5  50.67     5 -45.75     5      57.99     5      29.70     5
+spot_check:T1     -81.41     2   9.61     2  12.72     2      61.95     2       9.39     2
+spot_check:T10     42.86     2  46.60     2 -43.56     2      65.18     2      49.02     2
+spot_check:T3     -12.24     2  47.26     2 -36.31     2      37.42     2     -10.42     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25  14.28  23.38 -34.02       59.94       12.94
+                  0.75  21.27  42.70  -6.93       69.70       22.03
+in_distribution   0.25  22.93  18.80  -2.24       57.16       24.89
+                  0.75  23.84  20.65   2.04       61.35       26.88
+new_positions:E1  0.25  15.25  27.93 -70.49       59.79        8.87
+                  0.75  19.05  62.04 -25.91       61.58       19.46
+new_positions:E2  0.25 -83.55  13.63  -6.16       68.86        0.80
+                  0.75 -82.93  14.85   1.94       71.30        7.86
+new_positions:E3  0.25 -10.27  50.65 -46.73       41.77      -12.36
+                  0.75  -5.20  53.60 -43.21       46.95      -10.79
+new_positions:E4  0.25  20.70  62.03 -67.11       55.90       17.67
+                  0.75  21.96  65.35 -64.09       58.79       20.72
+new_positions:E5  0.25  26.32  54.77 -52.82       50.20       18.59
+                  0.75  27.56  55.45 -50.31       52.78       20.71
+reach_e5:reach_e5 0.25  30.10  49.19 -49.26       56.53       29.14
+                  0.75  30.48  50.85 -45.43       60.18       31.24
+spot_check:T1     0.25 -81.48   9.32  11.72       61.26        8.19
+                  0.75 -81.35   9.90  13.72       62.64       10.59
+spot_check:T10    0.25  42.78  46.45 -45.06       63.60       48.46
+                  0.75  42.94  46.74 -42.05       66.75       49.57
+spot_check:T3     0.25 -12.68  47.05 -36.95       36.63      -10.78
+                  0.75 -11.79  47.46 -35.66       38.20      -10.07
+
+saved analysis/out_endpoints/endpoints_density50.csv
+cells now in endpoints_density5-seed2000.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        False        1
+                   True        13
+in_distribution    False        2
+                   True        13
+new_positions:E1   True         4
+new_positions:E2   True         3
+new_positions:E3   True         5
+new_positions:E4   True         4
+new_positions:E5   True         5
+reach_e5:reach_e5  True         5
+spot_check:T1      False        1
+                   True         1
+spot_check:T10     True         2
+spot_check:T3      False        1
+                   True         1
+
+--- median and IQRs of grasp pose by instance, density5-seed2000 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        10.77    14  29.72    14 -20.61    14      55.98    14      11.88    14
+in_distribution    19.38    15  13.33    15   8.64    15      54.62    15      26.31    15
+new_positions:E1  -26.18     4  -5.68     4  23.70     4      43.24     4     -18.18     4
+new_positions:E2  -75.85     3   9.72     3  -6.38     3      80.71     3      14.48     3
+new_positions:E3   -8.09     5  36.53     5 -30.64     5      38.98     5      -3.34     5
+new_positions:E4   27.18     4  56.36     4 -59.16     4      58.96     4      12.71     4
+new_positions:E5   15.38     5  45.72     5 -46.38     5      58.10     5      11.38     5
+reach_e5:reach_e5  12.26     5  45.58     5 -47.20     5      56.74     5       5.06     5
+spot_check:T1     -81.67     2  11.92     2   8.83     2      63.80     2      15.92     2
+spot_check:T10     33.84     2  41.92     2 -38.86     2      59.07     2      28.20     2
+spot_check:T3     -11.44     2  39.80     2 -26.84     2      30.88     2     -11.60     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25   4.10  20.17 -36.16       47.38        5.77
+                  0.75  17.60  43.07  -4.41       63.79       18.25
+in_distribution   0.25  18.29  11.12   5.06       52.72       24.82
+                  0.75  20.99  15.46  10.96       57.18       27.16
+new_positions:E1  0.25 -31.86  -8.51  17.90       41.54      -22.32
+                  0.75 -21.74  -1.02  26.77       45.97      -13.50
+new_positions:E2  0.25 -77.00   8.54 -10.09       77.34        8.96
+                  0.75 -72.41  12.55  -4.54       81.56       15.14
+new_positions:E3  0.25  -8.47  34.26 -34.46       37.72      -10.49
+                  0.75  -4.44  41.23 -27.63       48.28        2.18
+new_positions:E4  0.25  26.47  55.60 -62.48       57.80       12.23
+                  0.75  27.79  57.84 -58.30       60.12       13.21
+new_positions:E5  0.25  15.16  42.62 -53.09       57.39       10.14
+                  0.75  20.36  49.67 -44.45       60.10       11.95
+reach_e5:reach_e5 0.25   9.41  42.35 -54.80       54.72        2.28
+                  0.75  14.27  47.21 -47.00       57.10        5.24
+spot_check:T1     0.25 -81.68  11.22   8.20       63.53       15.86
+                  0.75 -81.66  12.61   9.47       64.06       15.99
+spot_check:T10    0.25  33.52  41.82 -41.15       58.89       27.67
+                  0.75  34.15  42.01 -36.56       59.25       28.72
+spot_check:T3     0.25 -11.72  39.47 -27.23       29.96      -12.30
+                  0.75 -11.16  40.14 -26.44       31.80      -10.90
+
+saved analysis/out_endpoints/endpoints_density5-seed2000.csv
+cells now in endpoints_density10-seed2000.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        True        15
+in_distribution    False        1
+                   True        14
+new_positions:E1   True         5
+new_positions:E2   False        1
+                   True         4
+new_positions:E3   True         5
+new_positions:E4   True         5
+new_positions:E5   True         5
+reach_e5:reach_e5  True         5
+spot_check:T1      True         2
+spot_check:T10     True         2
+spot_check:T3      False        1
+                   True         1
+
+--- median and IQRs of grasp pose by instance, density10-seed2000 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        13.99    15  18.89    15  -2.29    15      57.79    15      19.35    15
+in_distribution    22.99    15  17.82    15   4.59    15      55.45    15      26.69    15
+new_positions:E1  -57.62     5  14.59     5  -1.92     5      79.46     5      29.50     5
+new_positions:E2  -81.54     5   6.50     5   1.97     5      68.59     5      10.16     5
+new_positions:E3   -9.77     5  39.98     5 -37.70     5      56.03     5       2.45     5
+new_positions:E4   45.33     5  43.65     5 -38.01     5      57.06     5     -19.88     5
+new_positions:E5   32.63     5  50.83     5 -48.63     5      53.65     5      11.57     5
+reach_e5:reach_e5  17.73     5  44.24     5 -38.97     5      56.32     5      23.39     5
+spot_check:T1     -82.22     2  14.48     2   4.41     2      68.54     2      10.94     2
+spot_check:T10     40.60     2  40.48     2 -34.12     2      61.85     2      40.95     2
+spot_check:T3     -12.33     2  46.44     2 -33.39     2      33.76     2     -15.96     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25   6.43  16.38 -40.78       54.68       13.94
+                  0.75  16.09  45.90   2.71       62.53       20.36
+in_distribution   0.25  22.41  15.87   1.54       53.26       24.66
+                  0.75  23.42  19.32   5.71       58.26       27.91
+new_positions:E1  0.25 -79.26  11.77  -4.45       75.35       24.53
+                  0.75 -54.36  19.29  -0.73       80.45       32.30
+new_positions:E2  0.25 -87.29   6.43  -4.58       66.97       10.03
+                  0.75 -81.23   7.06   6.44       73.56       13.18
+new_positions:E3  0.25  -9.91  17.83 -45.59       51.39       -1.05
+                  0.75  -5.05  49.82  -9.46       57.16        4.01
+new_positions:E4  0.25  44.76  43.60 -38.86       53.99      -24.29
+                  0.75  45.40  45.23 -37.98       57.65       -8.08
+new_positions:E5  0.25  32.04  50.63 -52.69       51.32        8.07
+                  0.75  32.89  54.70 -47.16       54.65       13.62
+reach_e5:reach_e5 0.25  14.61  44.08 -51.25       56.32       15.57
+                  0.75  21.29  48.92 -37.76       57.85       23.73
+spot_check:T1     0.25 -82.36  13.65   3.67       67.64       10.33
+                  0.75 -82.07  15.31   5.15       69.43       11.55
+spot_check:T10    0.25  39.74  39.91 -35.87       61.10       39.84
+                  0.75  41.46  41.05 -32.38       62.60       42.06
+spot_check:T3     0.25 -12.36  44.54 -36.58       32.06      -17.40
+                  0.75 -12.30  48.34 -30.20       35.46      -14.51
+
+saved analysis/out_endpoints/endpoints_density10-seed2000.csv
+cells now in endpoints_density25-seed2000.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        False        4
+                   True        11
+in_distribution    False        3
+                   True        12
+new_positions:E1   True         5
+new_positions:E2   True         5
+new_positions:E3   True         5
+new_positions:E4   True         5
+new_positions:E5   True         5
+reach_e5:reach_e5  False        2
+                   True         3
+spot_check:T1      True         2
+spot_check:T10     False        1
+                   True         1
+spot_check:T3      True         2
+
+--- median and IQRs of grasp pose by instance, density25-seed2000 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        20.38    15  15.19    15   4.70    15      54.87    15      18.30    15
+in_distribution    22.28    15  17.33    15   3.52    15      56.98    15      24.69    15
+new_positions:E1  -32.63     5  -2.69     5  22.28     5      63.67     5     -37.59     5
+new_positions:E2  -77.86     5   2.05     5   0.83     5      72.34     5       4.99     5
+new_positions:E3    3.98     5  36.58     5 -22.96     5      45.80     5       2.18     5
+new_positions:E4   42.82     5  54.89     5 -60.86     5      64.13     5     -42.11     5
+new_positions:E5   21.87     5  53.06     5 -51.61     5      52.83     5      18.05     5
+reach_e5:reach_e5  30.21     5  50.53     5 -51.17     5      59.37     5      21.74     5
+spot_check:T1     -81.90     2  10.13     2   9.75     2      62.04     2       9.59     2
+spot_check:T10     43.46     2  42.74     2 -37.86     2      61.06     2      40.47     2
+spot_check:T3     -12.66     2  43.91     2 -29.25     2      28.26     2     -13.06     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25  19.47  14.08   1.64       54.06       16.40
+                  0.75  21.06  16.20   7.23       58.38       20.80
+in_distribution   0.25  21.63  16.38   0.07       54.35       23.55
+                  0.75  23.12  19.23   4.69       59.12       27.35
+new_positions:E1  0.25 -35.90  -3.70  11.66       57.82      -38.76
+                  0.75 -29.61  -0.37  22.80       64.26      -34.74
+new_positions:E2  0.25 -77.98   1.63  -0.49       72.23        2.50
+                  0.75 -75.94   4.46   2.61       76.49        7.04
+new_positions:E3  0.25  -0.33  32.63 -33.78       40.08        1.36
+                  0.75   4.97  43.65 -16.78       50.01        7.11
+new_positions:E4  0.25  42.08  53.48 -61.56       62.97      -48.09
+                  0.75  43.53  55.25 -58.23       65.26      -41.59
+new_positions:E5  0.25  21.56  52.24 -53.93       52.10       17.76
+                  0.75  23.36  53.11 -50.17       57.57       18.21
+reach_e5:reach_e5 0.25  29.90  49.61 -63.78       55.77      -32.00
+                  0.75  30.53  59.67 -47.95       61.76       25.99
+spot_check:T1     0.25 -82.11   9.56   9.52       61.43        8.98
+                  0.75 -81.68  10.70   9.98       62.66       10.21
+spot_check:T10    0.25  43.36  42.64 -38.41       60.98       40.23
+                  0.75  43.55  42.84 -37.32       61.15       40.70
+spot_check:T3     0.25 -12.96  43.24 -30.92       27.11      -13.68
+                  0.75 -12.36  44.58 -27.58       29.40      -12.43
+
+saved analysis/out_endpoints/endpoints_density25-seed2000.csv
+cells now in endpoints_density50-seed2000.csv: ['distractors', 'in_distribution', 'new_positions', 'reach_e5', 'spot_check']
+
+releases vs a grasp with no releases:
+group              released
+distractors        False        2
+                   True        13
+in_distribution    True        15
+new_positions:E1   True         4
+new_positions:E2   True         5
+new_positions:E3   True         5
+new_positions:E4   True         5
+new_positions:E5   True         5
+reach_e5:reach_e5  False        1
+                   True         4
+spot_check:T1      False        1
+                   True         1
+spot_check:T10     True         2
+spot_check:T3      False        1
+                   True         1
+
+--- median and IQRs of grasp pose by instance, density50-seed2000 ---
+                     pan         lift        elbow       wrist_flex       wrist_roll      
+                  median count median count median count     median count     median count
+group                                                                                     
+distractors        21.27    15  22.73    15  -6.04    15      61.82    15      18.56    15
+in_distribution    23.05    15  20.49    15  -1.51    15      61.37    15      25.66    15
+new_positions:E1  -36.08     4  13.56     4  -1.62     4      69.78     4     -35.53     4
+new_positions:E2  -83.61     5  17.28     5  -6.63     5      78.53     5      10.50     5
+new_positions:E3   -0.49     5  45.56     5 -40.33     5      51.63     5      -3.70     5
+new_positions:E4   34.26     5   3.12     5  19.78     5      62.06     5     -38.18     5
+new_positions:E5   27.93     5  57.10     5 -58.63     5      56.80     5      25.83     5
+reach_e5:reach_e5  29.07     5  50.18     5 -46.30     5      54.55     5      23.97     5
+spot_check:T1     -82.48     2  10.60     2  10.49     2      64.22     2       8.12     2
+spot_check:T10     42.77     2  49.53     2 -47.62     2      68.24     2      46.16     2
+spot_check:T3     -11.71     2  44.82     2 -33.00     2      33.36     2     -11.44     2
+                          pan   lift  elbow  wrist_flex  wrist_roll
+group                                                              
+distractors       0.25  20.66  19.33 -14.75       56.13       16.68
+                  0.75  21.64  26.54  -1.95       65.91       21.86
+in_distribution   0.25  22.64  17.92  -5.37       57.05       25.08
+                  0.75  23.41  22.17   2.81       62.61       28.34
+new_positions:E1  0.25 -36.70   9.88  -8.70       66.55      -38.41
+                  0.75 -21.56  16.71   2.38       72.08      -19.01
+new_positions:E2  0.25 -85.34  16.38  -7.69       73.54        9.13
+                  0.75 -82.45  19.74  -6.60       80.84       11.43
+new_positions:E3  0.25  -2.64  40.41 -41.20       50.26       -4.09
+                  0.75   2.95  49.38 -30.49       52.28       -2.40
+new_positions:E4  0.25  34.08   0.74 -55.64       59.43      -40.57
+                  0.75  37.24  56.04  20.63       64.58       13.80
+new_positions:E5  0.25  25.60  56.91 -59.20       56.58       23.43
+                  0.75  28.02  58.23 -58.24       57.15       27.58
+reach_e5:reach_e5 0.25  26.80  45.97 -49.44       54.33       21.38
+                  0.75  29.20  50.27 -39.63       59.73       26.27
+spot_check:T1     0.25 -82.49   9.19   9.06       63.33        8.04
+                  0.75 -82.48  12.00  11.92       65.11        8.20
+spot_check:T10    0.25  42.70  49.08 -48.05       67.89       45.63
+                  0.75  42.84  49.98 -47.19       68.58       46.68
+spot_check:T3     0.25 -11.80  44.64 -33.90       32.66      -12.12
+                  0.75 -11.62  45.00 -32.09       34.06      -10.76
+
+saved analysis/out_endpoints/endpoints_density50-seed2000.csv
+cells now in endpoints_randomized.csv: ['different_object', 'distractors', 'in_distribution', 'in_distribution_rebuilt', 'new_positions', 'new_positions_rebuilt', 'reduced_lighting']
+
+releases vs a grasp with no releases:
+group                     released
+in_distribution_rebuilt   True        15
+new_positions_rebuilt:E1  False        1
+                          True         4
+new_positions_rebuilt:E2  False        1
+                          True         4
+new_positions_rebuilt:E3  True         5
+new_positions_rebuilt:E4  True         5
+new_positions_rebuilt:E5  True         5
+
+--- median and IQRs of grasp pose by instance, randomized ---
+                            pan         lift        elbow       wrist_flex       wrist_roll      
+                         median count median count median count     median count     median count
+group                                                                                            
+in_distribution_rebuilt   21.66    15   7.05    15  29.18    15      24.05    15      -1.60    15
+new_positions_rebuilt:E1 -14.22     5  18.18     5   4.37     5      31.65     5      -6.78     5
+new_positions_rebuilt:E2 -56.95     5  11.05     5  -1.50     5      57.65     5      -1.56     5
+new_positions_rebuilt:E3  -0.28     5  30.48     5  -8.92     5      35.19     5      -8.88     5
+new_positions_rebuilt:E4  27.26     5  28.32     5  -1.27     5      26.19     5      -7.85     5
+new_positions_rebuilt:E5   5.95     5  50.32     5 -37.24     5      46.27     5      -1.87     5
+                                 pan   lift  elbow  wrist_flex  wrist_roll
+group                                                                     
+in_distribution_rebuilt  0.25  18.51   4.89  25.88       21.27       -4.33
+                         0.75  22.90  11.22  33.52       26.10       -0.60
+new_positions_rebuilt:E1 0.25 -14.99  11.24  -3.38       31.14       -7.94
+                         0.75 -11.46  29.41  19.57       36.29       -6.74
+new_positions_rebuilt:E2 0.25 -59.41  -0.58  -4.59       43.27       -2.11
+                         0.75 -54.05  16.20  28.34       57.99       -1.03
+new_positions_rebuilt:E3 0.25  -1.87  29.43 -14.49       33.74      -11.84
+                         0.75  -0.03  34.19  -8.10       36.15       -8.88
+new_positions_rebuilt:E4 0.25   7.00  17.64 -10.90       25.96      -14.34
+                         0.75  36.61  36.64  10.90       29.91       -6.42
+new_positions_rebuilt:E5 0.25   4.49  49.95 -44.38       45.90       -2.68
+                         0.75   7.01  53.69 -36.92       49.71       -0.67
+
+saved analysis/out_endpoints/endpoints_randomized.csv
+cells now in endpoints_randomized-runpod.csv: ['in_distribution_rebuilt']
+
+releases vs a grasp with no releases:
+group                    released
+in_distribution_rebuilt  True        15
+
+--- median and IQRs of grasp pose by instance, randomized-runpod ---
+                           pan         lift        elbow       wrist_flex       wrist_roll      
+                        median count median count median count     median count     median count
+group                                                                                           
+in_distribution_rebuilt  16.07    15   9.56    15  24.36    15      23.51    15      -6.43    15
+                                pan   lift  elbow  wrist_flex  wrist_roll
+group                                                                    
+in_distribution_rebuilt 0.25  14.49   5.04  14.66       21.49       -8.06
+                        0.75  19.27  18.20  30.28       30.51       -2.58
+
+saved analysis/out_endpoints/endpoints_randomized-runpod.csv
+ grasp detected in all 50 episodes
+shape: (50, 5)
+         pan   lift  elbow  wrist_flex  wrist_roll
+count  50.00  50.00  50.00       50.00       50.00
+mean   13.66  16.91   7.77       42.22       -4.21
+std    46.53  32.48  40.91       16.60       11.27
+min   -83.52 -62.95 -68.97        3.16      -38.90
+25%   -13.54   1.05 -30.42       33.21      -10.44
+50%    19.25  15.43  10.77       46.95       -2.77
+75%    54.97  44.70  34.00       54.31        1.74
+max    77.01  68.40  84.53       68.92       18.07
+
+within-position spread (std of the 5 demos at each T):
+              pan   lift  elbow  wrist_flex  wrist_roll
+pos                                                    
+12.0, 14.0   0.85   7.03  15.62       14.60        2.72
+15.5, 10.0   0.60   7.72  15.03       14.87        6.64
+15.5, 14.25  0.71   6.79  15.61       14.35        6.91
+15.5, 2.5    1.30   7.92   5.03        3.36        4.80
+2.0, 2.5     1.93   8.85  17.65       19.15        1.90
+20.5, 10.0   0.55  10.68  23.88       20.90        7.16
+20.5, 2.5    1.37   7.70  16.40       19.52        5.87
+20.5, 6.5    1.36   6.97  16.65       17.67       13.26
+6.5, 7.5     1.86   4.30   7.31        9.86       15.37
+8.5, 15.0    0.38   7.30  19.41       18.88        4.81
+
+50 training grasps at 10 distinct positions
+leave-one-out error (degree 1): median 2.79 in, mean 2.80 in, 90th percentile 4.58 in
+(this is the xy model used by --apply; the bearing calibration the paper reports is azimuth_fit(), whose LOO is printed by azimuth_analysis.py)
+per-axis MAE: x 1.21 in, y 2.28 in
+
+endpoints_clean-seed2000.csv
+                           grasp_x  grasp_y
+cell             instance                  
+different_object -           15.28     6.67
+distractors      -           15.25     6.75
+in_distribution  -           15.10     7.02
+near_1in         -           15.04     6.60
+near_2in         -           14.80     6.64
+new_positions    E1          15.36     6.35
+                 E3          15.02     6.20
+                 E4          14.79     6.34
+                 E5          14.96     6.52
+reduced_lighting -           14.95     6.86
+
+endpoints_clean.csv
+                           grasp_x  grasp_y
+cell             instance                  
+different_object -           15.20     6.90
+distractors      -           15.03     6.89
+in_distribution  -           15.23     6.84
+near_1in         -           14.75     6.87
+near_2in         -           14.73     6.68
+new_positions    E1          15.60     6.17
+                 E2          14.96     6.73
+                 E3          14.29     7.40
+                 E4          14.92     6.61
+                 E5          14.38     7.03
+reduced_lighting -           14.88     7.01
+
+endpoints_color-seed2000.csv
+                           grasp_x  grasp_y
+cell             instance                  
+different_object -           15.63     8.71
+distractors      -           15.47     8.94
+in_distribution  -           15.35     8.68
+new_positions    E1          15.35     8.11
+                 E2          14.81     8.18
+                 E3          14.74     9.03
+                 E4          14.43     9.02
+                 E5          14.36     7.93
+reduced_lighting -           15.24     8.84
+
+endpoints_color.csv
+                           grasp_x  grasp_y
+cell             instance                  
+different_object -           15.37     8.57
+distractors      -           15.84     8.83
+in_distribution  -           15.47     8.58
+new_positions    E1          15.26     8.93
+                 E2          14.98     8.98
+                 E3          14.77     8.63
+                 E4          14.59     8.91
+                 E5          14.72     8.60
+reduced_lighting -           15.19     8.54
+
+endpoints_density.csv
+                          grasp_x  grasp_y
+cell            instance                  
+in_distribution -           15.44     8.49
+new_positions   E1           5.72     6.15
+                E2           5.74     6.19
+                E3          14.08     8.48
+                E4           6.17     7.15
+                E5          13.96     8.71
+trained_t2      -            6.08     6.16
+
+endpoints_density10-seed2000.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           14.28     8.56
+in_distribution -           15.69     8.13
+new_positions   E1           4.88     8.52
+                E2          -0.44    10.51
+                E3          10.32    14.00
+                E4          17.56    12.87
+                E5          16.40    15.19
+reach_e5        reach_e5    14.62    13.64
+spot_check      T1           1.56     8.02
+                T10         18.14    12.50
+                T3          10.11    14.15
+
+endpoints_density10.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           15.07     8.72
+in_distribution -           15.52     8.55
+new_positions   E1           5.51     8.92
+                E2           0.34     8.84
+                E3          10.58    14.32
+                E4          17.89    14.55
+                E5          14.77    14.71
+reach_e5        reach_e5    14.47    14.48
+spot_check      T1           1.34     8.07
+                T10         17.62    11.65
+                T3           9.52    14.76
+
+endpoints_density25-fixedstep.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           11.87    15.65
+in_distribution -           14.99     8.80
+new_positions   E1           7.24    16.02
+                E2           0.14     9.14
+                E3           9.83    13.53
+                E4          16.02    14.62
+                E5          14.09    15.38
+spot_check      T1           1.58     8.49
+                T10         18.19    12.77
+                T3           9.84    14.42
+
+endpoints_density25-seed2000.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           14.89     8.31
+in_distribution -           15.49     8.24
+new_positions   E1           5.59     6.88
+                E2          -0.20    10.08
+                E3          12.69    12.92
+                E4          16.23    15.18
+                E5          14.87    15.36
+reach_e5        reach_e5    16.08    15.00
+spot_check      T1           1.16     8.12
+                T10         18.43    13.04
+                T3           9.94    14.18
+
+endpoints_density25.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           14.14     8.40
+in_distribution -           15.59     8.07
+new_positions   E1           4.90     8.49
+                E2           0.22     9.76
+                E3          11.04    12.65
+                E4          17.49    15.08
+                E5          14.53    15.57
+reach_e5        reach_e5    16.11    14.38
+spot_check      T1           1.50     7.80
+                T10         18.47    13.23
+                T3          10.22    13.60
+
+endpoints_density5-seed2000.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           13.30    11.32
+in_distribution -           15.18     8.06
+new_positions   E1           5.74     8.83
+                E2           0.46    10.23
+                E3           9.69    14.38
+                E4          15.36    16.00
+                E5          13.16    15.20
+reach_e5        reach_e5    12.34    15.75
+spot_check      T1           1.61     7.93
+                T10         16.55    13.58
+                T3           9.76    14.03
+
+endpoints_density5.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           14.90     9.59
+in_distribution -           15.45     8.47
+new_positions   E1           5.44     8.78
+                E2           0.66    10.42
+                E3           9.93    14.50
+                E4          17.09    15.35
+                E5          13.36    16.21
+reach_e5        reach_e5    14.55    13.70
+spot_check      T1           1.40     8.30
+                T10         18.08    11.52
+                T3          10.40    13.27
+
+endpoints_density50-fixedstep.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           11.28    16.06
+in_distribution -           15.24    10.24
+new_positions   E1           4.22    12.77
+                E2           0.38     9.83
+                E3          10.42    15.56
+                E4          14.57    16.99
+                E5          14.29    15.83
+spot_check      T1           1.70     8.64
+                T10         17.94    13.63
+                T3          10.27    14.68
+
+endpoints_density50-seed2000.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           15.27     9.07
+in_distribution -           15.73     8.38
+new_positions   E1           5.49     9.04
+                E2           0.57     9.33
+                E3          11.90    14.45
+                E4          15.34     5.53
+                E5          16.00    15.82
+reach_e5        reach_e5    16.01    14.40
+spot_check      T1           1.32     7.65
+                T10         18.80    13.54
+                T3          10.01    14.40
+
+endpoints_density50.csv
+                          grasp_x  grasp_y
+cell            instance                  
+distractors     -           15.24     9.35
+in_distribution -           15.77     8.33
+new_positions   E1          14.25    16.52
+                E2           0.42     8.94
+                E3          10.22    15.33
+                E4          15.55    16.65
+                E5          15.99    15.23
+reach_e5        reach_e5    16.45    14.07
+spot_check      T1           1.49     7.53
+                T10         18.71    13.40
+                T3          10.16    14.37
+
+endpoints_randomized-runpod.csv
+                                  grasp_x  grasp_y
+cell                    instance                  
+in_distribution_rebuilt -           14.23     7.39
+
+endpoints_randomized-seed2000.csv
+                           grasp_x  grasp_y
+cell             instance                  
+different_object -           14.62     8.97
+distractors      -           13.68    11.78
+in_distribution  -           15.17     8.91
+new_positions    E1           9.07     6.61
+                 E2           1.79     8.12
+                 E3          10.88     9.05
+                 E4          16.69    13.34
+                 E5          13.12    14.02
+reduced_lighting -           15.04     8.19
+
+endpoints_randomized.csv
+                                  grasp_x  grasp_y
+cell                    instance                  
+different_object        -           14.69    12.40
+distractors             -           14.42    12.07
+in_distribution         -           15.14     8.42
+in_distribution_rebuilt -           14.81     6.75
+new_positions           E1           9.23     7.30
+                        E2           2.08     5.73
+                        E3          13.23    10.84
+                        E4          16.56    13.56
+                        E5          13.08    12.03
+new_positions_rebuilt   E1           9.85     9.67
+                        E2           3.70     9.42
+                        E3          11.34    11.59
+                        E4          15.05    10.02
+                        E5          13.39    13.52
+reduced_lighting        -           14.98     8.70
+
+endpoints_recovery-seed2000.csv
+                           grasp_x  grasp_y
+cell             instance                  
+different_object -           15.59     8.76
+distractors      -           15.39     8.53
+in_distribution  -           15.48     8.08
+new_positions    E1          14.63    10.55
+                 E3          14.65     9.76
+                 E4          15.12     9.47
+                 E5          14.62     9.66
+reduced_lighting -           15.77     7.86
+
+endpoints_recovery.csv
+                           grasp_x  grasp_y
+cell             instance                  
+different_object -           15.65     8.68
+distractors      -           15.19     8.78
+in_distribution  -           15.50     8.51
+new_positions    E1          15.05     8.93
+                 E2          15.65     9.73
+                 E3          14.95    10.09
+                 E4          15.28     9.13
+                 E5          14.36     9.61
+reduced_lighting -           15.65     8.38
+
+--- Per Condition, Seed, and Cell ---
+          condition  seed                    cell    n  never_departed  latency_median_s  latency_p90_s  deg_step_all  deg_step_success  duration_success_s  n_success
+              clean  1000        different_object 15.0             0.0             7.300         18.890         0.759             0.759              22.416       15.0
+              clean  1000             distractors 15.0             0.0             3.330          8.174         0.787             0.788              17.890       13.0
+              clean  1000         in_distribution 15.0             0.0             2.530          6.594         0.778             0.778              16.749       15.0
+              clean  1000                near_1in  8.0             1.0            11.430         29.710         0.768               NaN                 NaN        0.0
+              clean  1000                near_2in  8.0             1.0            10.170         23.608         0.779               NaN                 NaN        0.0
+              clean  1000           new_positions 15.0             2.0             9.770         19.756         0.760               NaN                 NaN        0.0
+              clean  1000        reduced_lighting 15.0             0.0             6.900         18.786         0.776             0.783              21.725       12.0
+              clean  2000        different_object 15.0             2.0            15.700         28.550         0.780             0.777              29.139       12.0
+              clean  2000             distractors 15.0             0.0             2.430          5.008         0.788             0.790              17.590       10.0
+              clean  2000         in_distribution 15.0             0.0             4.070          7.886         0.780             0.780              17.524       15.0
+              clean  2000                near_1in  8.0             0.0             4.800          7.770         0.733             0.786              18.400        3.0
+              clean  2000                near_2in  8.0             0.0            12.135         34.671         0.783               NaN                 NaN        0.0
+              clean  2000           new_positions 15.0             4.0            15.700         29.430         0.734               NaN                 NaN        0.0
+              clean  2000        reduced_lighting 15.0             1.0             8.415         27.140         0.756             0.761              23.456        9.0
+              color  1000        different_object 15.0             0.0             1.570          2.514         0.895             0.895              12.976       15.0
+              color  1000             distractors 15.0             0.0             0.900          1.566         0.869             0.902              13.667       13.0
+              color  1000         in_distribution 15.0             0.0             0.830          1.812         0.851             0.875              13.892       13.0
+              color  1000           new_positions 15.0             0.0             2.370          9.612         0.597               NaN                 NaN        0.0
+              color  1000        reduced_lighting 15.0             0.0             0.700          1.188         0.834             0.875              13.125       12.0
+              color  2000        different_object 15.0             0.0             1.470          2.034         0.881             0.881              12.878       15.0
+              color  2000             distractors 15.0             0.0             2.070          3.250         0.889             0.889              14.531       15.0
+              color  2000         in_distribution 15.0             0.0             1.200          2.110         0.851             0.888              13.511       12.0
+              color  2000           new_positions 15.0             0.0             2.270          4.048         0.610               NaN                 NaN        0.0
+              color  2000        reduced_lighting 15.0             0.0             1.230          2.530         0.872             0.892              12.974       14.0
+     color-slowpace  1000        different_object 15.0             0.0             4.230         17.412         0.839             0.837              22.079       14.0
+     color-slowpace  1000         in_distribution 15.0             2.0             7.430         26.502         0.830             0.817              22.790       10.0
+            density  1000         in_distribution 15.0             0.0             0.470          0.670         0.938             0.938              13.500       15.0
+            density  1000           new_positions 15.0             0.0             0.970          2.188         0.881               NaN                 NaN        0.0
+            density  1000              trained_t2 15.0             0.0             0.600          0.718         0.948             0.948              13.222       15.0
+          density10  1000             distractors 15.0             0.0             0.470          0.600         0.675             0.751              20.819        9.0
+          density10  1000         in_distribution 15.0             0.0             0.530          0.618         0.734             0.766              14.879       13.0
+          density10  1000           new_positions 25.0             0.0             1.270          2.292         0.566               NaN                 NaN        0.0
+          density10  1000                reach_e5  5.0             0.0             0.500          0.932         0.612               NaN                 NaN        0.0
+          density10  1000              spot_check  6.0             0.0             0.570          0.750         0.712             0.712              20.789        6.0
+          density10  2000             distractors 15.0             0.0             0.730          1.186         0.566             0.663              25.347        5.0
+          density10  2000         in_distribution 15.0             0.0             0.800          1.102         0.716             0.739              14.077       13.0
+          density10  2000           new_positions 25.0             0.0             1.030          2.114         0.586             0.705              25.000        1.0
+          density10  2000                reach_e5  5.0             0.0             0.630          0.994         0.597               NaN                 NaN        0.0
+          density10  2000              spot_check  6.0             0.0             0.715          0.785         0.713             0.713              17.750        6.0
+          density25  1000             distractors 15.0             0.0             0.570          0.688         0.514             0.658              15.827        5.0
+          density25  1000         in_distribution 15.0             0.0             0.530          0.588         0.638             0.638              14.071       15.0
+          density25  1000           new_positions 25.0             0.0             1.670          7.750         0.478               NaN                 NaN        0.0
+          density25  1000                reach_e5  5.0             0.0             1.900          3.308         0.654             0.681              17.592        4.0
+          density25  1000              spot_check  6.0             0.0             1.600          2.200         0.635             0.635              17.322        6.0
+          density25  2000             distractors 15.0             0.0             0.730          1.048         0.651             0.686              13.908       13.0
+          density25  2000         in_distribution 15.0             0.0             1.030          2.094         0.655             0.655              14.344       15.0
+          density25  2000           new_positions 25.0             0.0             1.500          2.572         0.464               NaN                 NaN        0.0
+          density25  2000                reach_e5  5.0             0.0             2.170          2.962         0.569             0.630              18.089        3.0
+          density25  2000              spot_check  6.0             0.0             0.820          1.280         0.655             0.655              15.767        6.0
+density25-fixedstep  1000             distractors 15.0             0.0             1.430          2.348         0.837               NaN                 NaN        0.0
+density25-fixedstep  1000         in_distribution 15.0             0.0             1.970          2.792         1.013             1.096              15.537        9.0
+density25-fixedstep  1000           new_positions 25.0             0.0             1.600          3.154         0.978               NaN                 NaN        0.0
+density25-fixedstep  1000              spot_check  6.0             0.0             1.030          1.550         1.110             1.135              14.967        5.0
+           density5  1000             distractors 15.0             0.0             0.430          0.530         0.815             0.956              31.133        4.0
+           density5  1000         in_distribution 15.0             0.0             0.500          0.630         0.954             0.983              14.177       13.0
+           density5  1000           new_positions 25.0             0.0             1.630          2.522         0.843               NaN                 NaN        0.0
+           density5  1000                reach_e5  5.0             0.0             1.100          1.280         0.945               NaN                 NaN        0.0
+           density5  1000              spot_check  6.0             0.0             0.680          0.770         0.889             0.927              20.408        4.0
+           density5  2000             distractors 15.0             0.0             0.670          0.818         0.752             0.881              32.058        4.0
+           density5  2000         in_distribution 15.0             0.0             0.930          1.088         0.927             0.927              15.098       15.0
+           density5  2000           new_positions 25.0             0.0             1.800          3.766         0.846               NaN                 NaN        0.0
+           density5  2000                reach_e5  5.0             0.0             1.600          2.058         0.920               NaN                 NaN        0.0
+           density5  2000              spot_check  6.0             0.0             0.915          1.630         0.876             0.928              16.975        4.0
+          density50  1000             distractors 15.0             0.0             0.570          1.370         0.553             0.611              20.488       11.0
+          density50  1000         in_distribution 15.0             0.0             3.730         14.626         0.627             0.641              19.405       14.0
+          density50  1000           new_positions 25.0             0.0             1.830          3.660         0.496               NaN                 NaN        0.0
+          density50  1000                reach_e5  5.0             0.0             1.970          2.186         0.649             0.665              19.375        4.0
+          density50  1000              spot_check  6.0             0.0             5.765         13.750         0.638             0.638              22.189        6.0
+          density50  2000             distractors 15.0             0.0             0.930          4.102         0.596             0.643              16.561       12.0
+          density50  2000         in_distribution 15.0             0.0             3.400          7.670         0.637             0.637              18.629       15.0
+          density50  2000           new_positions 25.0             0.0             3.030          8.580         0.514             0.706              16.033        2.0
+          density50  2000                reach_e5  5.0             0.0             0.630          1.966         0.592             0.619              20.689        3.0
+          density50  2000              spot_check  6.0             0.0             1.150          1.500         0.665             0.665              15.272        6.0
+density50-fixedstep  1000             distractors 15.0             0.0             1.470          1.960         0.843             1.144              14.767        1.0
+density50-fixedstep  1000         in_distribution 15.0             0.0             1.770          3.172         1.024             1.132              15.642        8.0
+density50-fixedstep  1000           new_positions 25.0             0.0             1.400          2.220         1.005               NaN                 NaN        0.0
+density50-fixedstep  1000              spot_check  6.0             0.0             1.585          2.115         1.154             1.154              17.144        6.0
+         randomized  1000        different_object 15.0             4.0             5.800         12.470         0.827               NaN                 NaN        0.0
+         randomized  1000             distractors 15.0             0.0             4.500          8.772         0.786             0.846              23.333        1.0
+         randomized  1000         in_distribution 15.0             1.0             6.235         11.421         0.889             0.915              22.028        6.0
+         randomized  1000 in_distribution_rebuilt 15.0             0.0             0.700          0.930         0.855             0.855              13.525        4.0
+         randomized  1000           new_positions 15.0             6.0            13.830         26.350         0.872               NaN                 NaN        0.0
+         randomized  1000   new_positions_rebuilt 25.0             0.0             0.900          1.148         0.831               NaN                 NaN        0.0
+         randomized  1000        reduced_lighting 15.0             0.0             4.770         11.170         0.851             0.891              20.647        5.0
+         randomized  2000        different_object 15.0             8.0            30.930         35.958         1.069             0.938              24.283        2.0
+         randomized  2000             distractors 15.0             0.0             2.830          4.754         0.799               NaN                 NaN        0.0
+         randomized  2000         in_distribution 15.0             0.0             8.770         16.120         0.888             0.919              20.983        6.0
+         randomized  2000           new_positions 15.0             8.0            17.730         20.702         0.842               NaN                 NaN        0.0
+         randomized  2000        reduced_lighting 15.0             2.0            13.870         27.660         0.863             0.869              25.273        5.0
+  randomized-runpod  1000 in_distribution_rebuilt 15.0             0.0             0.830          0.918         0.853             0.798              16.267        1.0
+           recovery  1000        different_object 15.0             0.0             5.200         12.298         0.881             0.920              21.324       11.0
+           recovery  1000             distractors 15.0             0.0             1.670          4.838         0.876             0.903              16.841       13.0
+           recovery  1000         in_distribution 15.0             0.0             1.370          5.330         0.866             0.917              14.896        8.0
+           recovery  1000           new_positions 15.0             3.0             3.985         11.883         0.800               NaN                 NaN        0.0
+           recovery  1000        reduced_lighting 15.0             0.0             3.970          5.472         0.876             0.926              17.010        7.0
+           recovery  2000        different_object 15.0             0.0             6.170         15.742         0.814             0.884              28.333        5.0
+           recovery  2000             distractors 15.0             0.0             1.970          3.248         0.859             0.888              17.583       12.0
+           recovery  2000         in_distribution 15.0             0.0             1.500          2.532         0.794             0.855              19.193        9.0
+           recovery  2000           new_positions 15.0             5.0             4.215         24.557         0.781               NaN                 NaN        0.0
+           recovery  2000        reduced_lighting 15.0             0.0             1.200          2.568         0.782             0.818              25.827        5.0
+
+--- Pooled over cells ---
+          condition  seed     n  never_departed  latency_median_s  latency_p90_s  deg_step_all  deg_step_success  duration_success_s  n_success
+              clean  1000  91.0             4.0             6.630         18.768         0.773             0.776              19.650       55.0
+              clean  2000  91.0             7.0             6.885         26.478         0.767             0.778              21.525       49.0
+              color  1000  75.0             0.0             1.030          2.726         0.809             0.887              13.404       53.0
+              color  2000  75.0             0.0             1.570          3.018         0.821             0.887              13.480       56.0
+     color-slowpace  1000  30.0             2.0             5.165         24.951         0.835             0.829              22.375       24.0
+            density  1000  45.0             0.0             0.630          1.220         0.923             0.943              13.361       30.0
+          density10  1000  66.0             0.0             0.600          1.765         0.645             0.750              18.055       28.0
+          density10  2000  66.0             0.0             0.785          1.465         0.624             0.716              17.649       25.0
+          density25  1000  66.0             0.0             1.170          3.050         0.550             0.647              15.483       30.0
+          density25  2000  66.0             0.0             1.185          2.450         0.575             0.664              14.725       37.0
+density25-fixedstep  1000  61.0             0.0             1.630          2.730         0.965             1.110              15.333       14.0
+           density5  1000  66.0             0.0             0.715          2.035         0.874             0.967              18.594       21.0
+           density5  2000  66.0             0.0             1.000          2.250         0.852             0.919              18.374       23.0
+          density50  1000  66.0             0.0             1.930          6.715         0.563             0.634              20.219       35.0
+          density50  2000  66.0             0.0             2.065          6.585         0.580             0.646              17.472       38.0
+density50-fixedstep  1000  61.0             0.0             1.500          2.300         0.984             1.142              16.184       15.0
+         randomized  1000 115.0            11.0             2.620         12.069         0.842             0.888              19.552       16.0
+         randomized  2000  75.0            18.0             8.130         28.252         0.876             0.903              23.141       13.0
+  randomized-runpod  1000  15.0             0.0             0.830          0.918         0.853             0.798              16.267        1.0
+           recovery  1000  75.0             3.0             3.215         10.010         0.862             0.915              17.737       39.0
+           recovery  2000  75.0             5.0             2.150         11.557         0.808             0.867              21.114       31.0
+
+--- No Departure Label Check (threshold 20.0 deg) ---
+ labeled no departure:          50
+ ...but measured as departing:  0
+ labeled something else:        1362
+ ...but measured as stationary: 0
+
+Saved to analysis/out_motion
+ grasp detected in all 50 episodes
+--- detector calibration on the recovery demonstration ---
+cube-pickup-recovery_20260809_141725: 50 episodes, 20 with a deliberate drop
+recall 20/20, false positives 0/30
+demonstrated drop location: n=20, median -10.8 deg, IQR -13.3 to -9.2
+ 20/20 clear MIN_TRAVEL (minimum travel 29.1 deg), so the rollout-side filter is a no-op on the demonstrations
+
+838 release events over 754 episodes
+
+episodes skipped: {'no_label': 0, 'no_approach': 57, 'no_release': 60, 'below_travel': 541}
+
+--- drops per episode, by condition and seed ---
+                                                  episodes_with_drops  total_drops
+condition           seed cell                                                     
+clean               1000 near_1in                                   1            1
+                         near_2in                                   1            1
+                         new_positions                              1            1
+                    2000 near_1in                                   1            1
+                         near_2in                                   1            2
+                         reduced_lighting                           2            2
+color               1000 distractors                                1            1
+                         in_distribution                            1            2
+                         new_positions                              1            1
+                         reduced_lighting                           1            1
+                    2000 in_distribution                            2            4
+density10           1000 distractors                                4            5
+                         in_distribution                            1            1
+                    2000 distractors                                6           10
+                         in_distribution                            2            2
+density25           1000 distractors                                6            6
+                         new_positions                              5            6
+                         reach_e5                                   1            1
+                    2000 distractors                                4            4
+                         new_positions                              5            6
+                         reach_e5                                   1            1
+density25-fixedstep 1000 in_distribution                            1            1
+                         new_positions                              2            2
+density5            1000 distractors                                4            5
+                         in_distribution                            1            1
+                         new_positions                              1            1
+                         spot_check                                 1            1
+                    2000 distractors                                5            6
+                         in_distribution                            1            1
+                         new_positions                              2            2
+density50           1000 distractors                                2            2
+                         in_distribution                            1            1
+                         new_positions                              4            4
+                         reach_e5                                   1            1
+                    2000 distractors                                1            1
+                         new_positions                              6            6
+                         reach_e5                                   2            2
+density50-fixedstep 1000 distractors                                1            1
+                         new_positions                              2            2
+randomized          1000 different_object                           2            2
+                         distractors                                1            1
+                         in_distribution                            7            7
+                         in_distribution_rebuilt                    8           13
+                         new_positions_rebuilt                      2            2
+                         reduced_lighting                           2            3
+                    2000 distractors                                1            1
+                         in_distribution                            3            3
+                         reduced_lighting                           2            2
+randomized-runpod   1000 in_distribution_rebuilt                    5            5
+recovery            1000 different_object                           4            7
+                         distractors                                2            2
+                         in_distribution                            7           13
+                         new_positions                              2            2
+                         reduced_lighting                           8           15
+                    2000 different_object                          11           19
+                         distractors                                2            3
+                         in_distribution                            8           18
+                         new_positions                              1            1
+                         reduced_lighting                          13           25
+
+--- label agreement: episodes with at least 1 detected drop, by scored failure mode ---
+has_drop                    False  True 
+failure_mode                            
+contact_no_grasp                0     61
+deliberate_drop                 0     43
+grasp_drop                      0     17
+success                       564     15
+success_after_drop              0      6
+success_after_missed_grasp     13      1
+timeout_other                   0     34
+
+--- recovery drop location, azimuth ---
+cup -25.6 deg, cube T6 24.2 deg, midpoint of the carry -3.8 deg
+
+                        n  median    q1    q3
+seed cell                                    
+1000 different_object   4    -8.5 -10.4  -5.8
+     in_distribution    7    -7.3 -13.1  -6.2
+     reduced_lighting   8   -14.1 -14.6 -13.0
+2000 different_object  11    -9.4 -11.9  -8.4
+     distractors        2   -13.4 -14.3 -12.5
+     in_distribution    8   -11.5 -12.5 -11.3
+     reduced_lighting  13   -13.6 -14.6 -12.0
+
+all recovery drops: n=53, median -11.7 deg, IQR -14.4 to -9.4. median distance from the carry midpoint 7.9 deg
+
+saved to analysis/out_drops/
+ grasp detected in all 50 episodes
+--- Calibration ---
+Azimuth = 0.9485 * pan + 3.669 (n=50)
+leave-one-out | error |: median 0.86 deg, 90th percentile 2.22 deg, R2 0.9990
+
+--- Grasp coverage at held-out positions ---
+             policy  grasps  episodes  coverage
+           density5      20        25      0.80
+          density10      23        25      0.92
+          density25      24        25      0.96
+          density50      25        25      1.00
+  density5-seed2000      21        25      0.84
+ density10-seed2000      25        25      1.00
+ density25-seed2000      25        25      1.00
+ density50-seed2000      24        25      0.96
+density25-fixedstep      25        25      1.00
+density50-fixedstep      25        25      1.00
+
+validation: clean grasp azimuth at T6, true value 24.23 deg
+                 n  median
+policy                    
+clean           15   23.32
+clean-seed2000  15   24.27
+
+--- Clean trajectory envelope: furthest azimuth reached ---
+        policy            cell  n  median_max_az    q1    q3  required_az  episodes_reaching_target
+         clean in_distribution 15          27.04 26.31 27.50        24.23                        15
+         clean        near_1in  8          26.99 26.38 27.75        26.57                         6
+         clean        near_2in  8          27.71 27.00 27.91        29.36                         0
+clean-seed2000 in_distribution 15          27.09 26.74 27.33        24.23                        15
+clean-seed2000        near_1in  8          26.52 26.04 28.18        26.57                         4
+clean-seed2000        near_2in  8          27.46 26.30 27.76        29.36                         0
+
+clean: near_2in vs in_distribution max azimuth, median difference +0.67 deg (required +5.13), U=74, p=0.196
+clean-seed2000: near_2in vs in_distribution max azimuth, median difference +0.37 deg (required +5.13), U=69, p=0.295
+
+--- Randomized Aiming Error at Held-out Positions ---
+             policy  episode instance         split    az  true_az   err
+randomized-seed2000        1       E1 extrapolation -11.4    -50.2  38.8
+randomized-seed2000        5       E2 interpolation -58.8    -60.9   2.1
+randomized-seed2000        8       E3 interpolation   5.8      5.7   0.1
+randomized-seed2000       10       E4 interpolation  40.1     34.7   5.4
+randomized-seed2000       13       E5 extrapolation   1.1     32.2 -31.1
+randomized-seed2000       14       E5 extrapolation  25.7     32.2  -6.5
+         randomized        3       E1 extrapolation   1.4    -50.2  51.6
+         randomized        6       E2 interpolation -60.7    -60.9   0.2
+         randomized        9       E3 interpolation  13.9      5.7   8.2
+         randomized       10       E4 interpolation  38.2     34.7   3.5
+         randomized       12       E4 interpolation  36.1     34.7   1.5
+         randomized       13       E5 extrapolation  16.0     32.2 -16.2
+
+               n  mean_abs  median_abs
+split                                 
+extrapolation  5     28.84       31.14
+interpolation  7      2.99        2.12
+
+Mann-Whitney (extrapolation > interpolation): MannwhitneyuResult(statistic=np.float64(34.0), pvalue=np.float64(0.0025252525252525255))
+extrapolation signed errors: [38.8, -31.1, -6.5, 51.6, -16.2]
+               n  mean  median
+split                         
+extrapolation  5  6.70    7.94
+interpolation  7  0.44    0.20
+
+--- Commanded Azimuth by Cell (cube at T6 = 24.23 except new_positions) ---
+cell                 in_distribution  reduced_lighting  different_object  distractors  new_positions
+policy                                                                                              
+clean                           23.3              23.4              23.5         23.5           23.3
+clean-seed2000                  24.3              23.6              23.8         23.9           22.6
+color                           24.1              23.5              24.1         24.7           23.1
+color-seed2000                  24.3              24.4              24.5         24.4           23.2
+density                         24.1               NaN               NaN          NaN          -27.7
+density10                       25.4               NaN               NaN         22.2           -2.3
+density10-seed2000              25.5               NaN               NaN         16.9           -5.6
+density25                       25.5               NaN               NaN         21.0           -1.7
+density25-fixedstep             23.7               NaN               NaN          6.1           -2.0
+density25-seed2000              24.8               NaN               NaN         23.0            7.4
+density5                        24.4               NaN               NaN         22.1            7.0
+density5-seed2000               22.1               NaN               NaN         13.9           -0.5
+density50                       26.0               NaN               NaN         23.4           18.2
+density50-fixedstep             24.6               NaN               NaN          4.9            1.9
+density50-seed2000              25.5               NaN               NaN         23.8            9.9
+randomized                      24.1              23.7              22.9         21.8           14.9
+randomized-runpod                NaN               NaN               NaN          NaN            NaN
+randomized-seed2000             25.4              24.5              24.2         17.0            3.4
+recovery                        23.9              24.2              24.4         22.2           22.5
+recovery-seed2000               24.7              24.3              24.3         23.3           22.5
+
+spread of cell medians within each policy, same-target cells only (deg)
+policy
+clean                   0.2
+clean-seed2000          0.7
+color                   1.2
+color-seed2000          0.1
+density                 0.0
+density10               3.2
+density10-seed2000      8.5
+density25               4.4
+density25-fixedstep    17.6
+density25-seed2000      1.8
+density5                2.3
+density5-seed2000       8.2
+density50               2.6
+density50-fixedstep    19.7
+density50-seed2000      1.7
+randomized              2.3
+randomized-runpod       NaN
+randomized-seed2000     8.4
+recovery                2.3
+recovery-seed2000       1.4
+
+same, including new_positions (deg)
+policy
+clean                   0.2
+clean-seed2000          1.6
+color                   1.6
+color-seed2000          1.2
+density                51.8
+density10              27.6
+density10-seed2000     31.1
+density25              27.2
+density25-fixedstep    25.7
+density25-seed2000     17.4
+density5               17.4
+density5-seed2000      22.6
+density50               7.8
+density50-fixedstep    22.7
+density50-seed2000     15.6
+randomized              9.1
+randomized-runpod       NaN
+randomized-seed2000    22.0
+recovery                2.3
+recovery-seed2000       2.1
+
+IQR width of commanded azimuth, same-target cells only (deg)
+cell                 in_distribution  reduced_lighting  different_object  distractors
+policy                                                                               
+clean                            0.9               0.6               0.2          0.5
+clean-seed2000                   0.7               0.8               0.3          0.7
+color                            0.8               1.1               1.5          1.0
+color-seed2000                   1.3               0.7               0.4          0.6
+density                          0.6               NaN               NaN          NaN
+density10                        2.0               NaN               NaN          2.8
+density10-seed2000               1.0               NaN               NaN          9.2
+density25                        0.5               NaN               NaN          4.2
+density25-fixedstep              3.7               NaN               NaN          4.6
+density25-seed2000               1.4               NaN               NaN          1.5
+density5                         1.7               NaN               NaN          7.4
+density5-seed2000                2.6               NaN               NaN         12.8
+density50                        0.9               NaN               NaN          6.6
+density50-fixedstep              1.9               NaN               NaN         11.9
+density50-seed2000               0.7               NaN               NaN          0.9
+randomized                       1.6               5.2               4.8          8.4
+randomized-runpod                NaN               NaN               NaN          NaN
+randomized-seed2000              1.7               1.6               1.4          8.4
+recovery                         1.2               0.9               0.8          1.6
+recovery-seed2000                1.0               0.8               0.9          0.8
+
+--- Density: grasp azimuth at the two trained positions ---
+           cell  n  true_az  median_az   err
+in_distribution 15    24.23      24.14 -0.09
+     trained_t2 15   -30.96     -32.55 -1.58
+
+--- Density sweep aiming error at held-out positions ---
+                              n  median_az   true  median_abs_err  frac_obs  frac_true picked
+policy              instance                                                                 
+density10           E1        5     -49.74 -50.19            9.52      0.57       0.56     T1
+                    E2        4     -78.62 -60.95           17.68     -0.10       0.31     T1
+                    E3        4      -3.79   5.71            9.50     -0.59       0.12     T3
+                    E4        5      45.92  34.70           11.76      1.12       0.54    T10
+                    E5        5      23.85  32.20            8.34     -0.02       0.41     T6
+density10-seed2000  E1        5     -50.99 -50.19           21.32      0.54       0.56     T2
+                    E2        5     -73.67 -60.95           12.73      0.02       0.31     T1
+                    E3        5      -5.60   5.71           11.31     -0.72       0.12     T3
+                    E4        5      46.67  34.70           11.97      1.16       0.54    T10
+                    E5        5      34.62  32.20            2.67      0.54       0.41    T10
+density25           E1        5     -26.38 -50.19           23.81      1.11       0.56     T2
+                    E2        5     -72.99 -60.95           12.05      0.03       0.31     T1
+                    E3        5      -1.34   5.71            7.05     -0.40       0.12     T4
+                    E4        4      43.66  34.70           10.57      1.01       0.54    T10
+                    E5        5      21.45  32.20           10.74     -0.14       0.41     T6
+density25-fixedstep E1        5     -16.13 -50.19           34.07      1.34       0.56     T3
+                    E2        5     -77.98 -60.95           17.04     -0.08       0.31     T1
+                    E3        5      -6.81   5.71           12.52     -0.81       0.12     T3
+                    E4        5      45.61  34.70           11.68      1.11       0.54    T10
+                    E5        5      23.00  32.20            9.20     -0.06       0.41     T6
+density25-seed2000  E1        5     -27.28 -50.19           22.91      1.08       0.56     T2
+                    E2        5     -70.18 -60.95            9.24      0.10       0.31     T1
+                    E3        5       7.44   5.71            2.67      0.25       0.12     T4
+                    E4        5      44.29  34.70           10.26      1.04       0.54    T10
+                    E5        5      24.41  32.20            7.78      0.01       0.41     T6
+density5            E1        4     -27.23 -50.19           22.96      1.09       0.56     T2
+                    E2        2     -63.69 -60.95            5.49      0.25       0.31     T1
+                    E3        4      -2.65   5.71            8.36     -0.50       0.12     T3
+                    E4        5      40.46  34.70            5.77      0.84       0.54    T10
+                    E5        5      17.88  32.20           14.32     -0.33       0.41     T7
+density5-seed2000   E1        4     -21.16 -50.19           29.03      1.23       0.56     T2
+                    E2        3     -68.28 -60.95            7.33      0.14       0.31     T1
+                    E3        5      -4.00   5.71            9.72     -0.60       0.12     T3
+                    E4        4      29.45  34.70            5.24      0.27       0.54     T6
+                    E5        5      18.26  32.20           13.94     -0.31       0.41     T7
+density50           E1        5      18.18 -50.19           68.38      2.13       0.56     T6
+                    E2        5     -75.19 -60.95           14.25     -0.02       0.31     T1
+                    E3        5      -5.56   5.71           11.27     -0.72       0.12     T3
+                    E4        5      23.62  34.70           11.08     -0.03       0.54     T6
+                    E5        5      29.45  32.20            2.75      0.27       0.41     T6
+density50-fixedstep E1        5     -15.64 -50.19           34.55      1.35       0.56     T2
+                    E2        5     -75.75 -60.95           14.81     -0.03       0.31     T1
+                    E3        5       1.90   5.71            3.81     -0.16       0.12     T4
+                    E4        5      29.41  34.70           11.83      0.27       0.54     T6
+                    E5        5      22.45  32.20            9.75     -0.09       0.41     T6
+density50-seed2000  E1        4     -30.55 -50.19           19.64      1.01       0.56     T2
+                    E2        5     -75.64 -60.95           14.69     -0.03       0.31     T1
+                    E3        5       3.20   5.71            4.55     -0.07       0.12     T4
+                    E4        5      36.17  34.70            4.30      0.62       0.54    T10
+                    E5        5      30.16  32.20            2.03      0.31       0.41     T6
+
+Mann-Whitney (extrapolation > interpolation), exploratory, episodes pooled across policies: MannwhitneyuResult(statistic=np.float64(8706.0), pvalue=np.float64(0.00011172191662088161))
+
+spot_check instance values: ['T1', 'T10', 'T3']
+
+--- Sweep aim at trained positions ---
+                             n  median  median_abs
+policy              target                        
+density10           T1       2    2.03        2.03
+                    T10      2   -3.42        3.42
+                    T3       2    1.44        1.44
+                    T6      15    1.17        1.67
+density10-seed2000  T1       2    0.16        0.27
+                    T10      2   -1.35        1.63
+                    T3       2    1.44        1.44
+                    T6      15    1.25        1.28
+density25           T1       2    1.74        1.74
+                    T10      2    1.42        1.42
+                    T3       2    1.64        1.64
+                    T6      15    1.27        1.27
+density25-fixedstep T1       2    2.98        2.98
+                    T10      2    0.25        0.25
+                    T3       2   -0.60        0.60
+                    T6      15   -0.55        0.55
+density25-seed2000  T1       2    0.46        0.46
+                    T10      2    1.36        1.36
+                    T3       2    1.12        1.12
+                    T6      15    0.57        0.57
+density5            T1       2    1.67        1.67
+                    T10      2   -1.84        2.01
+                    T3       2    2.80        2.80
+                    T6      15    0.13        1.14
+density5-seed2000   T1       2    0.68        0.68
+                    T10      2   -7.77        7.77
+                    T3       2    2.28        2.28
+                    T6      15   -2.18        2.64
+density50           T1       2    0.92        0.92
+                    T10      2    0.79        0.79
+                    T3       2    1.53        1.53
+                    T6      15    1.78        1.78
+density50-fixedstep T1       2    1.63        2.64
+                    T10      2    0.39        0.39
+                    T3       2    1.02        1.02
+                    T6      15    0.38        1.01
+density50-seed2000  T1       2   -0.10        0.10
+                    T10      2    0.71        0.71
+                    T3       2    2.02        2.02
+                    T6      15    1.30        1.30
+
+dropping 3 successful episodes from the settled measure (delivery puts the cup bearing in the window)
+
+--- Settled bearing at held-out positions (density probe trained at T6 24.2 deg and T2 -31.0 deg, density sweep trained at all 10 training locations) ---
+                              n  settled  true  miss_vs_true picked
+policy              instance                                       
+density             E1        3    -27.8 -50.2          22.4     T2
+                    E2        3    -29.6 -60.9          31.4     T2
+                    E3        3     14.5   5.7           8.8     T6
+                    E4        3    -28.9  34.7          63.6     T2
+                    E5        3      9.6  32.2          22.5     T6
+density10           E1        5    -73.9 -50.2          23.7     T1
+                    E2        5    -78.1 -60.9          17.1     T1
+                    E3        5     -4.5   5.7          10.2     T3
+                    E4        5     23.4  34.7          11.3     T6
+                    E5        5     17.8  32.2          14.4     T7
+density10-seed2000  E1        5    -72.6 -50.2          23.0     T1
+                    E2        5    -75.6 -60.9          14.7     T1
+                    E3        4     -4.4   5.7          10.1     T3
+                    E4        5     25.3  34.7           9.4     T6
+                    E5        5     27.9  32.2           4.3     T6
+density25           E1        5    -54.0 -50.2          18.9     T1
+                    E2        5    -72.8 -60.9          11.8     T1
+                    E3        5     -2.1   5.7           7.9     T4
+                    E4        5     22.4  34.7          12.3    T10
+                    E5        5     20.5  32.2          11.7     T7
+density25-fixedstep E1        5     -9.6 -50.2          40.6     T3
+                    E2        5    -76.6 -60.9          15.6     T1
+                    E3        5     -5.5   5.7          11.2     T3
+                    E4        5     20.8  34.7          13.9     T7
+                    E5        5      8.1  32.2          24.1     T4
+density25-seed2000  E1        5    -28.3 -50.2          23.5     T1
+                    E2        5    -72.5 -60.9          11.5     T1
+                    E3        5     -4.5   5.7          10.2     T3
+                    E4        5     29.7  34.7           5.0     T6
+                    E5        5     20.3  32.2          11.9     T7
+density5            E1        5     -6.4 -50.2          43.8     T3
+                    E2        5    -76.9 -60.9          16.0     T1
+                    E3        5     -3.1   5.7           8.9     T3
+                    E4        5     25.5  34.7           9.2     T6
+                    E5        5     18.8  32.2          13.4     T7
+density5-seed2000   E1        5     -8.9 -50.2          41.3     T3
+                    E2        5    -76.1 -60.9          15.2     T1
+                    E3        5     -4.0   5.7           9.7     T3
+                    E4        5     19.7  34.7          15.0     T7
+                    E5        5      6.7  32.2          25.5     T4
+density50           E1        5     19.5 -50.2          69.7     T7
+                    E2        5    -75.3 -60.9          14.3     T1
+                    E3        5     -3.1   5.7           8.8     T3
+                    E4        5     22.4  34.7          12.3     T6
+                    E5        5     14.3  32.2          17.9     T7
+density50-fixedstep E1        5     -8.4 -50.2          41.8     T3
+                    E2        5    -77.9 -60.9          17.0     T1
+                    E3        5     -7.2   5.7          12.9     T3
+                    E4        5     12.0  34.7          22.7     T7
+                    E5        5      9.0  32.2          23.2     T4
+density50-seed2000  E1        5    -28.9 -50.2          21.3     T2
+                    E2        5    -75.8 -60.9          14.8     T1
+                    E3        5     -2.9   5.7           8.6     T3
+                    E4        3     19.9  34.7          14.7     T4
+                    E5        5     18.2  32.2          14.0     T7
+randomized          E1        3      5.8 -50.2          56.0     T4
+                    E2        3    -70.8 -60.9           9.8     T1
+                    E3        3     11.5   5.7           5.8     T7
+                    E4        3     36.1  34.7          10.4    T10
+                    E5        3      8.2  32.2          24.0     T4
+randomized-seed2000 E1        3      5.6 -50.2          55.8     T4
+                    E2        3    -52.8 -60.9           8.2     T1
+                    E3        3      0.6   5.7           5.1     T4
+                    E4        3      7.2  34.7          27.5     T4
+                    E5        3      5.1  32.2          27.1     T4
+
+reach point azimuth 32.21 deg, E5 32.20 deg
+
+--- Grasp bearing error at the reach point ---
+                    n  median  median_abs
+policy                                   
+density10           5  -11.24       11.24
+density10-seed2000  5  -11.72       11.72
+density25           5    0.18        0.69
+density25-seed2000  5    0.12        0.42
+density5            5   -8.41        8.41
+density5-seed2000   5  -16.91       16.91
+density50           5    0.32        0.32
+density50-seed2000  5   -0.96        0.96
+
+--- Grasp bearing error at E5, registered, no threshold (§8.36) ---
+caveat: E5 is beyond reach, so a close event there may follow a search rather than an aim
+                                         n  median
+policy            cell                            
+density5          new_positions          5  -14.32
+density5-seed2000 new_positions          5  -13.94
+randomized        new_positions_rebuilt  5  -22.88
+
+Saved to analysis/out_azimuth/
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+WARNING:lerobot.configs.policies:Device 'cuda' is not available. Switching to 'mps'.
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:   0%|          | 1/489 [00:00<03:23,  2.39it/s]Loading weights:  21%|██▏       | 104/489 [00:00<00:01, 258.71it/s]Loading weights:  33%|███▎      | 160/489 [00:00<00:01, 307.13it/s]Loading weights:  43%|████▎     | 209/489 [00:00<00:00, 330.22it/s]Loading weights:  52%|█████▏    | 254/489 [00:00<00:00, 292.03it/s]Loading weights:  60%|█████▉    | 292/489 [00:01<00:00, 258.11it/s]Loading weights:  70%|██████▉   | 341/489 [00:01<00:00, 307.11it/s]Loading weights:  78%|███████▊  | 381/489 [00:01<00:00, 324.63it/s]Loading weights:  88%|████████▊ | 429/489 [00:01<00:00, 343.24it/s]Loading weights: 100%|██████████| 489/489 [00:01<00:00, 308.78it/s]
+Reducing the number of VLM layers to 16 ...
+hooking layer: model.vlm_with_expert.lm_expert.norm
+ Andresg324/rollout_randomized_new_positions_rebuilt_20260924_134653
+objc[28341]: Class AVFFrameReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x136be03a8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x16fe107a8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+objc[28341]: Class AVFAudioReceiver is implemented in both /Users/Nagc2/miniforge3/envs/lerobot/lib/python3.12/site-packages/av/.dylibs/libavdevice.61.3.100.dylib (0x136be03f8) and /Users/Nagc2/miniforge3/envs/lerobot/lib/libavdevice.62.3.102.dylib (0x16fe107f8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+ 572 activations from 25 episodes
+
+wrote probing/out_np_rebuilt/activations_randomized.npz X = (572, 720)
+ wrote activations_m15_randomized-rebuilt.npz: 345 samples from 15 episodes ([1, 2, 3, 6, 7, 8, 11, 12, 13, 16, 17, 18, 21, 22, 23])
+clean-seed2000: no new_positions_rebuilt activations, skipped
+clean: no new_positions_rebuilt activations, skipped
+color-seed2000: no new_positions_rebuilt activations, skipped
+color: no new_positions_rebuilt activations, skipped
+density10-seed2000: no new_positions_rebuilt activations, skipped
+density10: no new_positions_rebuilt activations, skipped
+density25-fixedstep: no new_positions_rebuilt activations, skipped
+density25-seed2000: no new_positions_rebuilt activations, skipped
+density25: no new_positions_rebuilt activations, skipped
+density5-seed2000: no new_positions_rebuilt activations, skipped
+density5: no new_positions_rebuilt activations, skipped
+density50-fixedstep: no new_positions_rebuilt activations, skipped
+density50-seed2000: no new_positions_rebuilt activations, skipped
+density50: no new_positions_rebuilt activations, skipped
+m15_density10-seed2000: no new_positions_rebuilt activations, skipped
+m15_density10: no new_positions_rebuilt activations, skipped
+m15_density25-fixedstep: no new_positions_rebuilt activations, skipped
+m15_density25-seed2000: no new_positions_rebuilt activations, skipped
+m15_density25: no new_positions_rebuilt activations, skipped
+m15_density5-seed2000: no new_positions_rebuilt activations, skipped
+m15_density5: no new_positions_rebuilt activations, skipped
+m15_density50-fixedstep: no new_positions_rebuilt activations, skipped
+m15_density50-seed2000: no new_positions_rebuilt activations, skipped
+m15_density50: no new_positions_rebuilt activations, skipped
+m15_randomized-rebuilt: 15 episodes, 345 samples, by-episode 6.9 [5.3, 9.0], by-position 27.1 [19.5, 38.3], chance 42.4 deg
+randomized-rebuilt: 25 episodes, 572 samples, by-episode 16.4 [12.9, 20.5], by-position 35.9 [26.0, 48.3], chance 42.3 deg
+randomized-seed2000: no new_positions_rebuilt activations, skipped
+randomized: no new_positions_rebuilt activations, skipped
+recovery-seed2000: no new_positions_rebuilt activations, skipped
+recovery: no new_positions_rebuilt activations, skipped
+
+                policy  episodes  samples  n_positions  chance_med_deg  probe_by_episode_deg  probe_by_episode_lo  probe_by_episode_hi  probe_by_position_deg  probe_by_position_lo  probe_by_position_hi  probe_mean_deg  control_tfe_med_steps  control_chance_steps
+m15_randomized-rebuilt        15      345            5            42.4                   6.9                  5.3                  9.0                   27.1                  19.5                  38.3             8.7                  137.4                 291.7
+    randomized-rebuilt        25      572            5            42.3                  16.4                 12.9                 20.5                   35.9                  26.0                  48.3            18.7                  151.0                 290.0
+
+saved to analysis/out_probe/

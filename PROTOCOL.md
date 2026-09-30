@@ -814,6 +814,9 @@ Supporting measurements are in
     place, since erasing the displacement probe marks in August scuffed the primer and made them
     more visible. It is faint in the overhead frame, but it will be present in every later rollout.
     If the policies succeed, reach was the problem; if they fail the same way, the new bearing is.
+    - *As run, September 24.* The four seed 1000 policies ran in the order 50, 25, 10, 5,
+      the reverse of the sweep's evaluation order within each seed (§8.32); the seed 2000
+      replication in §8.38 ran in the same order. Dataset timestamps record both sessions.
 36. **Randomized on the rebuilt bench, exploratory, September 24.** Every sweep policy outscored
     August Randomized at T6 by 47 to 60 points, even though density5 uses the same configuration
     (10 positions at 5 demonstrations each). To check whether the different environment explains this, the August

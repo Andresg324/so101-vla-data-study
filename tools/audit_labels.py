@@ -33,7 +33,7 @@ from rollout_paths import discover, parse_policy
 from drops import CUP_AZ, CUP_HALF_WIDTH, MIN_TRAVEL, episode_actions, releases
 
 OUTDIR = "analysis/out_audit"
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv", "documents/followup.csv"]
 DROP_LABELS = {"deliberate_drop", "grasp_drop", "success_after_drop"}
 
 FPS = 30            # dataset.fps, PROTOCOL.md §4.12
@@ -187,15 +187,16 @@ def release_sweep(ep):
     print(f"registered value is REL_THR = {THRESHOLDS[0]:g}; lower thresholds are a "
           "sensitivity check on coverage")
     s = ep[ep.success == 1].copy()
-    s["sweep"] = s.policy.str.contains("density") & (s.policy != "density")
+    s["september"] = (s.policy.str.contains("density") & (s.policy != "density")) | s.cell.isin(
+        ["in_distribution_rebuilt", "new_positions_rebuilt", "reach_e5"])
     rows = []
     for th in THRESHOLDS:
         c = s[f"n_rel_{th:g}"] == 0
         rows.append({"threshold": th,
-                     "august_no_release": int(c[~s.sweep].sum()),
-                     "august_n": int((~s.sweep).sum()),
-                     "sweep_no_release": int(c[s.sweep].sum()),
-                     "sweep_n": int(s.sweep.sum())})
+                     "august_no_release": int(c[~s.september].sum()),
+                     "august_n": int((~s.september).sum()),
+                     "september_no_release": int(c[s.september].sum()),
+                     "september_n": int(s.september.sum())})
     print(pd.DataFrame(rows).to_string(index=False))
 
 def main():

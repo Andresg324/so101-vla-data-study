@@ -7,14 +7,14 @@ the only file that should ever be edited by hand; everything under documents/
 that ends in .csv is produced here.
 
     documents/results_raw_two_seeds.xlsx
-    ├── sheet "results"              -> results_full.csv     600 rows, all columns
-    │                                -> results.csv          600 rows, 5 columns
-    │                                -> results_seed1000.csv
-    │                                -> results_seed2000.csv
-    └── sheet "exploratory results"  -> exploratory.csv      107 rows
-    └── sheet "desnity results"      -> density.csv      610 rows
-
-                                     -> results_all.csv      707 rows, both concatenated
+    ├── sheet "results"                  -> results_full.csv     600 rows, all columns
+    │                                    -> results.csv          600 rows, 5 columns
+    │                                    -> results_seed1000.csv
+    │                                    -> results_seed2000.csv
+    └── sheet "exploratory results"      -> exploratory.csv      107 rows
+    └── sheet "density results"          -> density.csv          610 rows
+    └── sheet "density_followup results" -> followup.csv          95 rows
+                                         -> results_all.csv     1412 rows, both concatenated
 
 Validation runs before anything is written. If a check fails nothing is
 overwritten, so a bad hand edit cannot propagate.
@@ -38,8 +38,26 @@ OUT = "documents"
 SHEET_REG = "results"
 SHEET_EXP = "exploratory results"
 SHEET_DEN = "density_sweep"
+SHEET_FOL = "density_followup"
 
 ROLLOUTS = [
+    # Reach E5 probes seed 2000
+    "density5-seed2000_reach_e5_20260924_161643"            ,
+    "density10-seed2000_reach_e5_20260924_160919"           ,
+    "density25-seed2000_reach_e5_20260924_160243"           ,
+    "density50-seed2000_reach_e5_20260924_155549"           ,
+
+    # Reach E5 probes seed 1000
+    "density5_reach_e5_20260924_151945"                     ,
+    "density10_reach_e5_20260924_151219"                    ,
+    "density25_reach_e5_20260924_150610"                    ,
+    "density50_reach_e5_20260924_150022"                    ,
+
+    # Density follow-on probes
+    "randomized-runpod_in_distribution_rebuilt_20260924_143149",
+    "randomized_new_positions_rebuilt_20260924_134653"         ,
+    "randomized_in_distribution_rebuilt_20260924_130900"       ,
+
     # Fixed Step Rollouts
     "density50-fixedstep_new_positions_20260911_013555"     ,
     "density25-fixedstep_new_positions_20260911_010438"     ,
@@ -176,7 +194,7 @@ EXPLORATORY_TRAININGS = {
     "density_sweep": "cube-pickup-densitypool_20260908_125700"   ,
     "density_probe": "cube-pickup-density_20260822_194111"       ,
     # Slowpace
-    "slowpace":       "cube-pickup-color_20260809_130649"        , 
+    "slowpace":       "cube-pickup-color_20260809_130649"        ,
 }
 
 FIVE = ["condition", "eval_cell", "seed", "episode", "success"]
@@ -187,6 +205,8 @@ CELLS = {"in_distribution", "new_positions", "reduced_lighting",
          "different_object", "distractors"}
 
 CELLS_DEN = {"in_distribution", "new_positions", "distractors", "spot_check"}
+
+CELLS_FOL = {"in_distribution_rebuilt", "new_positions_rebuilt", "reach_e5"}
 
 SEEDS = {1000, 2000}
 
@@ -392,17 +412,58 @@ def validate_density(df):
             
     return good
 
+def validate_followup(df):
+    print("Follow-up:")
+    good = True
+    for k, g in df.groupby(["condition", "eval_cell", "seed"]):
+        good &= check(f"episodes contiguous {k}", sorted(g.episode) == list(range(1, len(g) + 1)),
+                      str(sorted(g.episode)))
+    good &= check("95 rows", len(df) == 95, f"got {len(df)}")
+    good &= check("cells", set(df.eval_cell) == CELLS_FOL, str(set(df.eval_cell)))
+
+    expected = {("randomized", "in_distribution_rebuilt", 1000): 15,
+                ("randomized", "new_positions_rebuilt", 1000): 25,
+                ("randomized-runpod", "in_distribution_rebuilt", 1000): 15}
+    for c in ["density5", "density10", "density25", "density50"]:
+        for s in (1000, 2000):
+            expected[(c, "reach_e5", s)] = 5
+    counts = df.groupby(["condition", "eval_cell", "seed"]).size().to_dict()
+    good &= check("cell sizes", counts == expected, f"got {counts}")
+    good &= check("success is 0/1", set(df.success.unique()) <= {0, 1}, str(set(df.success.unique())))
+
+    dup = df[df.duplicated(["condition", "eval_cell", "seed", "episode"], keep=False)]
+    good &= check("no duplicate (condition, cell, seed, episode)", len(dup) == 0, f"{len(dup)} rows")
+
+    if "failure_mode" in df:
+        bad = set(df.failure_mode.dropna()) - VOCAB
+        good &= check("failure_mode vocabulary", not bad, f"unknown: {bad}")
+        mism = df[(df.success == 1) != df.failure_mode.isin(SUCCESS_LABELS)]
+        good &= check("success agrees with failure_mode", len(mism) == 0, f"{len(mism)} disagreements")
+        if len(mism):
+            print(mism[["condition", "eval_cell", "seed", "episode", "success", "failure_mode"]].to_string(index=False))
+
+    if "instance" in df:
+        np_rows = df[df.eval_cell == "new_positions_rebuilt"]
+        good &= check("new_positions_rebuilt is E1-E5, 5 each",
+                      np_rows.instance.value_counts().to_dict() == {f"E{i}": 5 for i in range(1, 6)},
+                      str(np_rows.instance.value_counts().to_dict()))
+        r_rows = df[df.eval_cell == "reach_e5"]
+        good &= check("reach_e5 instance is reach_e5", set(r_rows.instance) == {"reach_e5"},
+                      str(set(r_rows.instance)))
+    return good
 
 def main():
     if not os.path.exists(XL):
         sys.exit(f"missing {XL}")
 
-    reg, exp, den = load(SHEET_REG), load(SHEET_EXP), load(SHEET_DEN)
+    reg, exp, den, fol = load(SHEET_REG), load(SHEET_EXP), load(SHEET_DEN), load(SHEET_FOL)
     ok = validate_registered(reg)
     print()
     ok &= validate_exploratory(exp)
     print()
     ok &= validate_density(den)
+    print()
+    ok &= validate_followup(fol)
 
     if not ok:
         sys.exit("\nvalidation failed, nothing written")
@@ -413,13 +474,14 @@ def main():
         reg[reg.seed == s][FIVE].to_csv(f"{OUT}/results_seed{s}.csv", index=False)
     exp.to_csv(f"{OUT}/exploratory.csv", index=False)
     den.to_csv(f"{OUT}/density.csv", index=False)
+    fol.to_csv(f"{OUT}/followup.csv", index=False)
 
-    pd.concat([reg.assign(source="registered"), exp.assign(source="exploratory"), den.assign(source="density")], ignore_index=True).to_csv(f"{OUT}/results_all.csv", index=False)
+    pd.concat([reg.assign(source="registered"), exp.assign(source="exploratory"), den.assign(source="density"), fol.assign(source="followup")], ignore_index=True).to_csv(f"{OUT}/results_all.csv", index=False)
 
     print("\nwrote results_full.csv, results.csv, results_seed1000.csv, "
-          "results_seed2000.csv, exploratory.csv, density.csv, results_all.csv")
-    print(f"registered {len(reg)} rows, exploratory {len(exp)} rows, density {len(den)} rows, "
-          f"combined {len(reg) + len(exp) + len(den)}")
+          "results_seed2000.csv, exploratory.csv, density.csv, followup.csv, results_all.csv")
+    print(f"registered {len(reg)} rows, exploratory {len(exp)} rows, density {len(den)} rows, followup {len(fol)} rows,"
+          f"combined {len(reg) + len(exp) + len(den) + len(fol)}")
 
 
 if __name__ == "__main__":

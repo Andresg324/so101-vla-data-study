@@ -27,8 +27,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from rollout_paths import CACHE, discover, parse_policy
 
-TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv"]
+TRACKERS = ["documents/results_full.csv", "documents/exploratory.csv", "documents/density.csv", "documents/followup.csv"]
 OUTDIR = "analysis/out_motion"
+
+STATE_NAMES = ["pan", "lift", "elbow", "wrist_flex", "wrist_roll", "gripper"]
 
 def read_actions(root):
     files = sorted(glob.glob(os.path.join(root, "data", "**", "*.parquet"), recursive=True))
@@ -62,6 +64,11 @@ def episode_stats(df, min_dev):
             "peak_deg_step": np.nan,
             "exec_s": np.nan,
         }
+
+        if "observation.state" in g:
+            s0 = np.asarray(g["observation.state"].iloc[0], dtype=float)
+            row.update({f"start_{k}": round(float(v), 2) for k, v in zip(STATE_NAMES, s0)})
+
         if len(idx):
             i0 = idx[0]
             steps = np.abs(np.diff(A[i0:, :5], axis=0))
@@ -156,6 +163,11 @@ def main():
             "deg_step_success": s.deg_per_step.mean(),
             "duration_success_s": s.duration_s.mean(),
             "n_success": len(s),
+            "start_pan": g.start_pan.median(),
+            "start_wrist_flex": g.start_wrist_flex.median(),
+            "start_gripper": g.start_gripper.median(),
+            "fail_frames_min": g[g.success == 0].n_frames.min(),
+            "fail_frames_median": g[g.success == 0].n_frames.median(),
         })
 
     summary = ep.groupby(["condition", "seed", "cell"]).apply(agg, include_groups=False).round(3).reset_index()
