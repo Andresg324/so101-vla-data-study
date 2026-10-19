@@ -18,6 +18,10 @@ end-to-end from demonstrations, with no hand-coded perception or inverse kinemat
 project asks: how does the way you collect demonstrations affect how well the learned policy
 generalizes to conditions it never saw?
 
+This also became a question about evaluations. Success rate by itself left both pre-registered comparisons
+null, while the logged trajectories showed what each policy actually did and how it failed. 
+This relates to a broader line of work arguing that robot policies should be scored on how they move as well as whether they succeed ([RoboEval](https://arxiv.org/abs/2507.00435); [Snyder et al., RSS 2026](https://roboticsproceedings.org/rss22/p076.html)).
+
 ## Demo
 
 The clip above is the **overhead camera view** during autonomous inference. The leader is
@@ -62,7 +66,7 @@ never pooled into the four-condition grid.
 hull of the training set drawn. E2, E3 and E4 fall inside it, E1 and E5 outside.*
 
 All four policies are then evaluated on the same five cells: one in-distribution reference plus
-four held-out (new positions, reduced lighting, unseen object color, distractors), at 15 scored
+four held-out (new positions, reduced lighting, different object, distractors), at 15 scored
 episodes each (16 recorded, index 0 discarded as warmup), for 300 rollouts per seed and 600
 registered rollouts across two training seeds. A further 107 rollouts were recorded for three
 exploratory probes (displacement, demonstration pace and sampling density) and are reported
@@ -105,8 +109,8 @@ Every quantity below regenerates from the raw scores with the commands in
 
 Across 600 registered rollouts **both pre-registered comparisons are null, for opposite
 reasons**. New Positions is 0/15 for every policy at both seeds, 0 of 120, so that
-comparison sits on a floor; on the held-out color both compared policies sat at or near
-ceiling. Success rate reported no effect anywhere, but the telemetry did.
+comparison sits on a floor; on the Different Object cell both compared policies sat at or near
+ceiling. Success rate reported no effect on either registered comparison, but the telemetry did.
 
 Ranking the four conditions depends entirely on which measure you use, which is the
 study's central point in one picture.
@@ -150,9 +154,9 @@ by 8.4 degrees against at most 1.7 elsewhere. The aim does not land on the distr
 is destabilization rather than capture: the one policy trained to look around is the one clutter
 unsettles.
 
-**Position is in the representation either way.** A linear probe reads cube bearing from every
+**Position is in the representation by episode.** A linear probe reads the cube bearing from every
 policy's final hidden state at 8.6 to 11.4 degrees, including the policies whose aim never
-moves, and holding out whole positions rather than episodes gives 26 to 42 degrees. The
+moves. Holding out whole positions gives 26 to 42 degrees, and whether that clears chance is being tested. The
 42-degree chance line in the figure is the error of the mean bearing, which is not the
 strongest constant predictor under the median absolute error the probe is scored by. The chance
 baselines for both splits are being recalculated in `probing/probe_position.py` (see
@@ -181,10 +185,9 @@ and 4 episodes in the minority outcome.
  <img src="figures/fig_success_sweep.png" width="480" alt="Outcome decoding swept across the episode">
 </p>
 
-**Position diversity cost execution outright.** The randomized policy never left the home pose in
-11 and 18 of 75 episodes across the two seeds, against 4 and 7 of 91 for Clean, and posted the
-lowest grid totals in the study at 12/75 and 13/75. Fifty demonstrations spread across ten
-positions left too few at each to specify an action confidently.
+**Position diversity cost execution.** The randomized policy never left the home pose in
+11 and 18 of 75 episodes across the two seeds, against 2 and 7 of 75 for Clean, and posted the
+lowest grid totals in the study at 12/75 and 13/75. This may be due to fifty demonstrations spread across ten positions leaving too few at each, though this hasn't been isolated.
 
 **Twenty-five demonstrations at a position buys that position and nothing else.** The
 exploratory Density policy ([§8.30](PROTOCOL.md#8-amendments)) split the same 50-demonstration
@@ -396,9 +399,9 @@ separately by `analysis/make_figures.py`.
 
 ## Limitations & observed failure modes
 
-1. **No position generalization:** trained only on the clean (fixed-position) condition, the
-   policy reliably fails to grasp when the cube starts outside its trained pose. This is the
-   motivating observation for the four-condition study.
+1. **Floor and ceiling results:** Both registered comparisons landed at either the floor or the ceiling.
+   The New Positions cell was 0 of 120 across policies, and the Different Object cell was at or near ceiling.
+   A short pilot of each cell may have flagged these prior to registering them.
 2. **Setup-tied:** the policy is bound to the exact camera framing, lighting, background and work
    surface it trained on. This is not incidental, it is why the pilot data was discarded rather
    than reused when the workstation was rebuilt, and why all four conditions are collected on the

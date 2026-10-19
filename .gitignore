@@ -55,3 +55,7 @@ tools/preview_*.jpg
 # media/             photographs and camera frames referenced by the docs*.tar
 *.tar.gz
 paper/
+
+# Inspect Robots
+logs/
+inspect/

@@ -294,13 +294,13 @@ def fig_reach_probe(to_az, lab, name="reach_probe"):
     for seed, off in SEED_OFFSET.items():
         # E5 as a hollow ring slightly left, the reach point as a filled dot slightly right, so the
         # two stay visible when both sit at zero
-        for cell, fc, ec, sz, nudge, z in (("E5", "white", GREY, 60, 0.985, 4), ("reach", ORANGE, ORANGE, 34, 1.015, 3)):
+        for cell, fc, ec, sz, nudge, z in (("E5", "none", GREY, 60, 0.97, 4), ("reach", ORANGE, ORANGE, 34, 1.03, 3)):
             s = succ[(succ.seed == seed) & (succ.cell == cell)].sort_values("density")
             xs = s.density.to_numpy() * off * nudge
             a1.vlines(xs, s.ci_low, s.ci_high, color=ec, lw=0.9, zorder=2)
             a1.scatter(xs, s.rate, s=sz, facecolors=fc, edgecolors=ec, linewidths=1.2, zorder=z)
     a1.set_ylim(-0.04, 1.04)
-    a1.set_ylabel("Success rate, 5 episodes (Wilson 95 %)", fontsize=8)
+    a1.set_ylabel("Success rate", fontsize=8)
     a1.set_title("E5 against the reach point", fontsize=9)
     a1.legend(handles=[
         Line2D([], [], marker="o", ls="", markerfacecolor="white", markeredgecolor=GREY, label="E5 (registered cell)"),
@@ -312,18 +312,20 @@ def fig_reach_probe(to_az, lab, name="reach_probe"):
     a2.axhline(0, ls="--", color=DARK, lw=1.0, zorder=1)
     for seed, off in SEED_OFFSET.items():
         g = aim[aim.seed == seed]
-        xs = g.density.to_numpy() * off
+        jit = 1 + 0.03 * (g.groupby("density").cumcount().to_numpy() - 2)
+        xs = g.density.to_numpy() * off * jit
         fail, win = g.success != 1, g.success == 1
-        a2.scatter(xs[fail.to_numpy()], g.err[fail], s=18, facecolors="white", edgecolors=GREY, linewidths=0.9, zorder=2)
-        a2.scatter(xs[win.to_numpy()], g.err[win], s=18, color=GREEN, zorder=2)
+        a2.scatter(xs[fail.to_numpy()], g.err[fail], s=18, facecolors="white", edgecolors=GREY, linewidths=0.9, zorder=3)
+        a2.scatter(xs[win.to_numpy()], g.err[win], s=18, color=GREEN, zorder=3)
         med = g.groupby("density").err.median()
-        a2.scatter(med.index.to_numpy() * off, med.to_numpy(), marker="D", s=52, color=ORANGE, zorder=4)
-    a2.set_ylabel("Grasp bearing minus cube bearing (deg)", fontsize=8)
+        a2.scatter(med.index.to_numpy() * off, med.to_numpy(), marker="D", s=52, facecolors="none",
+                   edgecolors=ORANGE, linewidths=1.4, zorder=4)
+    a2.set_ylabel("Bearing error (deg)", fontsize=8)
     a2.set_title("Aim at the reach point", fontsize=9)
     a2.legend(handles=[
+        Line2D([], [], marker="D", ls="", markerfacecolor="none", markeredgecolor=ORANGE, markeredgewidth=1.4, label="median"),
         Line2D([], [], marker="o", ls="", markerfacecolor="white", markeredgecolor=GREY, label="episode, failed"),
         Line2D([], [], marker="o", ls="", color=GREEN, label="episode, succeeded"),
-        Line2D([], [], marker="D", ls="", color=ORANGE, label="median"),
     ], loc="lower right", fontsize=7, frameon=False)
 
     for ax in (a1, a2):
