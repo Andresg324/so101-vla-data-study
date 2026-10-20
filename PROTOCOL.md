@@ -239,8 +239,7 @@ retained dataset is named in §8.
 
 ## 8. Amendments
 
-*1 to 13 predate all data collection. 14 to 17 fall between the seed 1000 and seed 2000 grids.
-18 to 29 are analysis-stage. 30 precedes the data it describes; 31 to 35 are follow-on items dated individually.
+*1 to 13 predate all data collection. 14 to 17 fall between the seed 1000 and seed 2000 grids. 18 to 29 are analysis-stage. 30 precedes the data it describes; 31 to 39 are follow-on items dated individually. 34 was superseded by 39 on October 19, 2026, before any data.
 Supporting measurements are in
 `analysis/README.md`.*
 
@@ -778,32 +777,33 @@ Supporting measurements are in
         effect is an artifact of small models.
 
 34. **Inspect Robots evaluation.** Inspect Robots is a third-party evaluation harness for
-    physical AI. Its `inspect-robots-so101` plugin provides a `so_arm` embodiment for
-    SO-ARM followers and a `lerobot` policy wrapper that loads any LeRobot checkpoint, including 
-    the SmolVLA checkpoints used in this project. This is exploratory, a first pass to establish 
-    whether the harness runs on this bench and what it captures. Design and code will be maintained 
-    in `inspect/` in this repository.
+    embodied policies. Its `inspect-robots-so101` plugin provides a `so_arm` embodiment for
+    SO-ARM hardware and a `lerobot` policy wrapper that loads any LeRobot checkpoint,
+    including the SmolVLA checkpoints used in this project. This item registered a first
+    pass to establish whether the harness runs on this bench and what it captures: a
+    reproduction check with the Clean policy, and two scorers ported from this study's
+    analysis tools. Design and code are maintained in `inspect/`.
 
-      - *Reproduction check.* `Andresg324/smolvla-cube-clean`, seed 1000, In-Distribution
-        cell only, 15 scored episodes plus a warmup at index 0. In-Distribution is chosen
-        because it scores 15/15 at both seeds, so harness-induced degradation is clear. 
-        Success is recorded by the harness rather than by the original labeling, so this is 
-        not a like-for-like comparison. Two or more failures will be recorded as a discrepancy 
-        and looked into. These are new rollouts, using a gantry that was rebuilt and through a 
-        different control loop, so a discrepancy has several possible causes and this is not a 
-        test of the original result.
+      - *Reproduction check, as registered.* `Andresg324/smolvla-cube-clean`, seed 1000,
+        In-Distribution only, 15 scored episodes plus a warm-up. Chosen because Clean
+        scores 15/15 at both seeds, so harness-induced degradation would be clear. Two or
+        more failures would be recorded as a discrepancy and looked into.
 
-      - *Scorer port.* Two measures are implemented as Inspect Robots scorers over the recorded
-        `TrialRecord`: the no-departure flag, and the furthest commanded bearing reached against
-        the bearing the cube requires, which is the statistic §5.2 uses. An earlier draft
-        specified settled bearing over the last quarter of the episode; that window is dominated
-        by delivery to the cup rather than aim at the cube and is not a statistic this paper
-        uses. Validated offline against `rollout_clean_in_distribution_20260810_120038` and
-        required to agree with `tools/azimuth_analysis.py` and `tools/rollout_motion.py` to
-        within floating-point precision, since both read the same `action` column and a larger
-        discrepancy is a reimplementation error rather than a tolerance.
+      - *Scorer port, as registered.* The no-departure flag, and the furthest commanded
+        bearing reached against the bearing the cube requires (the §5.2 statistic), as
+        Inspect Robots scorers, validated offline against
+        `rollout_clean_in_distribution_20260810_120038` to within floating-point
+        precision.
 
-      - *Versions.* Package versions and git revision are recorded in each `EvalLog`.
+      - *Revised October 19, 2026, before any data.* Not run as registered; superseded by
+        §8.39. The furthest-bearing statistic measures whether Clean's fixed sweep covers
+        the cube, which only applies to single-position policies. The density sweep's aim
+        measure is grasp bearing (§8.32), and its central result, correct aim at E5 with
+        zero success, needs a policy and a position where the two separate. Clean at T6
+        succeeds in every episode, so it cannot show that. §8.39 keeps this item's
+        no-departure scorer, replaces the aim statistic with grasp bearing, and uses
+        density50 at T6, which serves as the same harness check (14/15 and 15/15 in the
+        sweep), and at E5.
 
 35. **Reach at E5, exploratory.** Held-out failures at E5 look like correct aim with the arm not
     reaching far enough, and E5 is the furthest held-out position from the base (15.95 in, against
@@ -840,6 +840,13 @@ Supporting measurements are in
     I predict that density25 and density50 succeed in at least 3 of 5, and density5 and density10 in at most 
     1 of 5. The seed 1000 pattern is replicated if both hold; otherwise the counts are reported as a partial
     or failed replication.
+
+39. **Trajectory scorers in Inspect Robots, October 19, 2026.** Supersedes §8.34 before
+    any data was collected. Grasp bearing error and departure, defined as in §8.32 and
+    `tools/rollout_motion.py`, are implemented as Inspect Robots scorers, validated first
+    on archival rollouts and then on new episodes of density50 seed 1000 at T6 and E5,
+    after a calibration spot check at T1, T3 and T10. Exploratory; no result here updates
+    the paper. Full design, setup checks and predictions in `inspect/PROTOCOL.md`, frozen at commit (Oct 19th, 2026) before Stage A.
 
 ## 9. Known limitations
 
